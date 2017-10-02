@@ -13,12 +13,12 @@ public class TaskA {
         double p3=log(abs((a-1.12*x)/4));
         double res=p1-p2-p3;
         double res2=cos(pow((x*x+PI/6),5))-pow(x*pow(a,3),1/2)-log(abs((a-1.12*x)/4));
-        System.out.println("TaskA1: Несколькими частями "+res+" Одним выражением: "+res2);
+        System.out.println("Несколькими частями "+res+" Одним выражением: "+res2);
     }
 
     static void SolveA2(){
         Scanner in=new Scanner(System.in);
-        System.out.println("TaskA2: Введите а");
+        System.out.println("Введите а");
         double a = in.nextDouble();
         double b = 0.371;
         double y = tan(pow((a+b),2))-pow((a+1.5),1/3)+a*pow(b,5)-b/log(a*a);
@@ -27,7 +27,6 @@ public class TaskA {
 
     static void SolveA3(){
       double x=1.21;
-        System.out.println("TaskA3");
         System.out.printf("%11s%11s","Значение a","Значение f");
         System.out.println();
       for (double a=-5; a<=12; a=a+3.75)
