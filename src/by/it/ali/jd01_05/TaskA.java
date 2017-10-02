@@ -1,10 +1,8 @@
 package by.it.ali.jd01_05;
 import java.util.Scanner;
 import static java.lang.Math.*;
-/**
- * Created by user on 02.10.2017.
- */
-public class TaskA {
+
+class TaskA {
     static void SolveA1(){
         double a=756.13;
         double x=0.3;
