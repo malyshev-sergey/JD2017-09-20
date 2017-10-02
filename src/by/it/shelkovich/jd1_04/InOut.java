@@ -68,7 +68,7 @@ class InOut {
      */
     static void printArray(double[][] array) {
         for (double[] arrayLine : array) {
-            printArray("v", arrayLine, arrayLine.length);
+            printArray("", arrayLine, arrayLine.length);
         }
     }
 
