@@ -25,7 +25,7 @@ public class TaskA {
         InOut.printArray("sorted", oneLineArray, 4);
 
         System.out.printf("\nПосле сортировки первый символ (%4.2f) находится" +
-                "в позиции %d, а последний (%4.2f) на позиции %d", first, Arrays.binarySearch(oneLineArray, first), last, Arrays.binarySearch(oneLineArray, last));
+                "в позиции %d, а последний (%4.2f) на позиции %d\n", first, Arrays.binarySearch(oneLineArray, first), last, Arrays.binarySearch(oneLineArray, last));
     }
 
 
