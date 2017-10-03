@@ -7,8 +7,8 @@ class InOut {
      * @return Одномерный массив double
      */
     static double[] readArray() {
-        System.out.println("Enter line of array elements divided by space");
-        return readArrayLine(Util.readLine());
+        System.out.println("Введите несколько чисел через пробел:");
+        return readArrayLine(Util.readLine().trim());
     }
 
     /**
