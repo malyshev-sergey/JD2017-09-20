@@ -20,8 +20,8 @@ class TaskA {
             if (strArr[longest].length() < strArr[i].length()) longest = i;
             if (strArr[shortest].length() > strArr[i].length()) shortest = i;
         }
-        System.out.println("Longest: " + strArr[longest]);
-        System.out.println("Shortest: " + strArr[shortest]);
+        System.out.println("Самое длинное: " + strArr[longest]);
+        System.out.println("Самое короткое: " + strArr[shortest]);
     }
 
     void printLessThanAverage() {
@@ -31,17 +31,17 @@ class TaskA {
         }
 
         average = average / intArr.length;
-        System.out.println("Average: " + String.valueOf(average));
+        System.out.println("Среднее: " + String.valueOf(average));
 
         for (int i = 0; i < intArr.length; i++) {
-            if (intArr[i] < average) System.out.println(String.valueOf(intArr[i]) + " less than average");
+            if (intArr[i] < average) System.out.println(String.valueOf(intArr[i]) + " меньше чем среднее");
         }
     }
 
     void printDiffDigitNumber() {
         for (int i = 0; i < intArr.length; i++) {
             if (isAllDigitsUnique(intArr[i])) {
-                System.out.println("Contains only unique digits: " + strArr[i]);
+                System.out.println("Содержит только неповторяющиеся цифры: " + strArr[i]);
                 break;
             }
         }
