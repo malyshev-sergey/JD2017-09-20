@@ -14,16 +14,16 @@ public class Runner04 {
 
         //A.2.1. выполняет ввод, а затем вывод в 5 колонок одномерного
         //    массива с названием и индексами
-        //double[] arr1 = InOut.createOneMass();
-        //InOut.printOneMass(arr1);
+        double[] arr1 = InOut.createOneMass();
+        InOut.printOneMass(arr1);
 
         //A.2.2. сортирует этот массив по возрастанию и выводит его в 4 колонки
-        //Util.quickSort(arr1);
-        //InOut.printOneMass(arr1, 4);
+        Util.quickSort(arr1);
+        InOut.printOneMass(arr1, 4);
 
         //A.2.3. выполняет вычисление новых (после сортировки) индексов
         //       первого и последнего элемента исходного массива.
-        //TaskA.searchFirstLasstElements();
+        TaskA.searchFirstLasstElements();
 
         //B     Введите N число людей и одномерный массив их фамилий.
         //      Введите двумерный массив их зарплат за 4 квартала (N строк и 4 столбца).
