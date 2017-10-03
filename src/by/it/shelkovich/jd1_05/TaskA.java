@@ -5,8 +5,8 @@ import java.util.Scanner;
 import static java.lang.Math.*;
 
 public class TaskA {
-    static void one() {
-        System.out.println("Задание 1");
+    static void part1() {
+        System.out.println("\nЧасть 1");
         double a = 756.13;
         double x = 0.3;
 
@@ -20,8 +20,8 @@ public class TaskA {
         System.out.printf("Результат расчёта выражения, записанного одной строкой: %f\n", sameResult);
     }
 
-    static void two(){
-        System.out.println("Задание 2");
+    static void part2(){
+        System.out.println("\nЧасть 2");
         System.out.println("Введите параметр а (1,21 по заданию):");
         Scanner scanner = new Scanner(System.in);
         double a = scanner.nextDouble();
@@ -31,8 +31,8 @@ public class TaskA {
         System.out.printf("Результат расчёта выражения: %f\n", y);
     }
 
-    static void three(){
-        System.out.println("Задание 3");
+    static void part3(){
+        System.out.println("\nЧасть 3");
         double x = 12.1;
         for (double a = -5; a <= 12; a+=3.75) {
             double f = exp(a*x) - 3.45*a;
