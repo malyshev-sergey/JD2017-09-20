@@ -1,7 +1,7 @@
-package by.it.akhmelev.jd01_06.Level_A;
+package by.it.akhmelev.jd01_06.classwork;
 
 class Data {
-    static String lukomor =
+    static final String TXT=
             "У лукоморья дуб зелёный;\n" +
             "Златая цепь на дубе том:\n" +
             "И днём и ночью кот учёный\n" +
@@ -35,4 +35,5 @@ class Data {
             "У моря видел дуб зелёный;\n" +
             "Под ним сидел, и кот учёный\n" +
             "Свои мне сказки говорил.";
+
 }
