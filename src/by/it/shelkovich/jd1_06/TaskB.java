@@ -14,9 +14,10 @@ public class TaskB {
             count++;
             //System.out.println(matcher.group(1));
         }
-        System.out.printf("Количество слов, которое начинается и заканчивается гласными: %-3d",count);
+        System.out.printf("\nКоличество слов, которое начинается и заканчивается гласными: %-3d",count);
     }
     static void part2(){
+        System.out.println();
         StringBuilder sb = new StringBuilder(Source.sourceText);
         Pattern pattern = Pattern.compile("\n");
         Matcher matcher = pattern.matcher(sb);
