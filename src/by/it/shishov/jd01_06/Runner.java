@@ -5,7 +5,7 @@ package by.it.shishov.jd01_06;
  */
 public class Runner {
     public static void main(String[] args){
-        //TaskA1.solveTask1();
+        TaskA1.solveTask1();
         TaskA2.solveTaskA2();
     }
 }
