@@ -15,7 +15,7 @@ public class Runner {
     //    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     //    String line =  br.readLine();
 
-        String line = "5 5 12 4565 33 75 12 1 4 -4 3"; // Это введенные символы, если убрать закоментированный выше код
+        String line = "5 5 12 4565 33 75 12 1 4 -4 3 87654"; // Это введенные символы, если убрать закоментированный выше код
      // создали массив
         String[] arrayS = line.split(" ");
 
