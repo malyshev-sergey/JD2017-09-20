@@ -11,6 +11,7 @@ public class inOut {
      * @return возвращает строку, введенную с клавиатуры
      */
     public static String consoleReadLine(){
+        System.out.println("Введите массив через пробел: ");
         String line = new Scanner(System.in).nextLine();
         return line;
     }
@@ -39,11 +40,10 @@ public class inOut {
     public static void printArr(double[] arr, String name, int cols){
 
         int col = 0;
-        System.out.println();
-
+        System.out.println("\nВывод одномерного массива: ");
         for (int i = 0; i < arr.length; i++) {
             System.out.print(name);
-            System.out.printf("[%-1d] = % -9.1f", i, arr[i]);
+            System.out.printf("[%-2d] = % -9.1f", i, arr[i]);
             col++;
             if ((0 == col%cols) || (arr.length - 1 ==i)){
                 System.out.println();
@@ -68,6 +68,7 @@ public class inOut {
 
     public static void printMultiplicationTable(){
         int col = 0;
+        System.out.println("\nТаблица умножения : ");
         for (int i = 2; i < 10; i++) {
             for (int j = 2; j < 10; j++) {
                 System.out.printf("%1d*%1d=%2d ", i,j,i*j);

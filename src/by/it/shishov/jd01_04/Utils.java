@@ -37,37 +37,41 @@ public class Utils {
      */
     public static double[] sortArr(double[] arr, boolean direction) {
         double buf;
+        double[] newArr = new double[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            newArr[i] = arr[i];
+        }
         String result = " ";
         if (direction) {
             result = "по возрастанию";
-            for (int i = 0; i < arr.length; i++) {
-                for (int j = i + 1; j < arr.length; j++) {
-                    if (arr[i] > arr[j]) {
-                        buf = arr[j];
-                        arr[j] = arr[i];
-                        arr[i] = buf;
+            for (int i = 0; i < newArr.length; i++) {
+                for (int j = i + 1; j < newArr.length; j++) {
+                    if (newArr[i] > newArr[j]) {
+                        buf = newArr[j];
+                        newArr[j] = newArr[i];
+                        newArr[i] = buf;
                     }
                 }
             }
         } else if (!direction) {
             result = "по убыванию";
-            for (int i = 0; i < arr.length; i++) {
-                for (int j = i + 1; j < arr.length; j++) {
-                    if (arr[i] < arr[j]) {
-                        buf = arr[j];
-                        arr[j] = arr[i];
-                        arr[i] = buf;
+            for (int i = 0; i < newArr.length; i++) {
+                for (int j = i + 1; j < newArr.length; j++) {
+                    if (newArr[i] < newArr[j]) {
+                        buf = newArr[j];
+                        newArr[j] = newArr[i];
+                        newArr[i] = buf;
                     }
                 }
             }
         }
 
         System.out.println("\n" + "Отсортированный массив " + result + ": ");
-        for (double elem : arr
+        for (double elem : newArr
                 ) {
             System.out.printf("->%2.1f", elem);
         }
-        return arr;
+        return newArr;
 
     }
 
@@ -75,13 +79,12 @@ public class Utils {
      *
      * @param arr входной массив
      */
-    public static void findIndexes(double[] arr) {
+    public static void findIndexes(double[] arr, double[] sortedArr) {
         double firstIndex = arr[0], secondIndex = arr[arr.length - 1];
-        Utils.sortArr(arr, true);
         for (int i = 0; i < arr.length; i++) {
-            if (arr[i] == firstIndex)
+            if (sortedArr[i] == firstIndex)
                 System.out.println("\n" + "Новый индекс первого элемента массива = " + i);
-            else if (arr[i] == secondIndex)
+            else if (sortedArr[i] == secondIndex)
                 System.out.println("\n" + "Новый индекс последнего элемента массива = " + i);
         }
 
