@@ -36,7 +36,6 @@ public class Runner {
         System.out.println("");
         int r = Arrays.binarySearch(arr, b);//поиск новой позиции последнего элемента после сортировки из первоначального массива
         System.out.print("новая позиция последнего элемента " + b + " = " + r);
-        Utils.sortArray2(arr, true);//сортирую массив по возрастанию
 
     }
 }

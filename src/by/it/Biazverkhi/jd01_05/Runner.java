@@ -1,6 +1,5 @@
 package by.it.Biazverkhi.jd01_05;
 
-import java.io.EOFException;
 
 public class Runner {
     public static void main(String[] args) {
