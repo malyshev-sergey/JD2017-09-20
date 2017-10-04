@@ -17,7 +17,7 @@ class Utils {
     }
 
     //сортируем массив
-    static int[] sortArray(int array[], boolean upDirection) {
+    static void sortArray(int[] array, boolean upDirection) {
         for (int i = 0; i < array.length - 1; i++){
             for (int j = i + 1; j < array.length; j++){
                 if ((upDirection && array[i] > array[j]) || (!upDirection && array[i] < array[j])) {
@@ -25,7 +25,6 @@ class Utils {
                     array[i] = array[j];
                     array[j] = r;
                 }}}
-        return array;
     }
 
 

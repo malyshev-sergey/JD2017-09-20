@@ -28,6 +28,8 @@ public class Runner {
         System.out.println("");
         Utils.sortArray(arr, true);//сортирую массив по возрастанию
         System.out.print("Печать сортированного массива в 4 колоноки");
+        Utils.sortArray(arr, false);//сортирую массив по возрастанию
+        System.out.print("Печать сортированного массива в 4 колоноки");
         InOut.printArray(arr, 4);//печатаю сортированный массив в 4 колонки
         System.out.println("");
         System.out.println("");
