@@ -1,4 +1,4 @@
-package by.it.uuu.jd01_01;
+package by.it.biazverkhi.jd01_01;
 //подключение класса не требуется, т.к. класс main
 // и класс MyFirstClass находятся в одной папке
 public class Main {

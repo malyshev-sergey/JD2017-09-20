@@ -1,4 +1,4 @@
-package by.it.uuu.jd01_01;
+package by.it.biazverkhi.jd01_01;
 
 import java.util.Arrays;
 

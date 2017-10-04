@@ -1,4 +1,4 @@
-package by.it.uuu.jd01_04;
+package by.it.biazverkhi.jd01_04;
 import java.io.IOException;
 import java.util.Arrays;
 

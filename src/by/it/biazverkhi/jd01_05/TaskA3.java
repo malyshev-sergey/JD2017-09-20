@@ -1,4 +1,4 @@
-package by.it.uuu.jd01_05;
+package by.it.biazverkhi.jd01_05;
 
 import static java.lang.Math.exp;
 

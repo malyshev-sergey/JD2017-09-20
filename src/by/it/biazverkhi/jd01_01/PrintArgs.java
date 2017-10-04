@@ -1,4 +1,4 @@
-package by.it.uuu.jd01_01;
+package by.it.biazverkhi.jd01_01;
 
 public class PrintArgs {
     public void showArgs(String[] args) {
