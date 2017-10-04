@@ -4,6 +4,7 @@ public class TaskA2 {
 
     void fingGlassnye() {
 
+
     }
 
 }
