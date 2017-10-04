@@ -6,6 +6,9 @@ public class Runner {
         //TaskA.part2();
 
         //TaskB.part1();
-        TaskB.part2();
+        //TaskB.part2();
+
+        //TaskC.part1();
+
     }
 }
