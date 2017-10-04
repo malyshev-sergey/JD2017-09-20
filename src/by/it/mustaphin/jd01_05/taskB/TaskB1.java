@@ -2,7 +2,7 @@ package by.it.mustaphin.jd01_05.taskB;
 
 import static java.lang.Math.pow;
 
-public class TaskB1 {
+class TaskB1 {
 
     void solveTaskB1() {
         double y = 0.0;
