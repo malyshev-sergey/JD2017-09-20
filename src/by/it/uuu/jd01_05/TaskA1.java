@@ -1,4 +1,4 @@
-package by.it.Biazverkhi.jd01_05;
+package by.it.uuu.jd01_05;
 import static java.lang.Math.*;
 class TaskA1 {
     static void solveTaskA1(){

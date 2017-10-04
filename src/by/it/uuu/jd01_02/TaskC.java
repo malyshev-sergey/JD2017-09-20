@@ -1,4 +1,4 @@
-package by.it.Biazverkhi.jd01_02;
+package by.it.uuu.jd01_02;
 
 class TaskC {
     //создаю матрицу с рандомными числами

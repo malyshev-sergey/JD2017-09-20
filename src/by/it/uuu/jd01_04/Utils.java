@@ -1,4 +1,4 @@
-package by.it.Biazverkhi.jd01_04;
+package by.it.uuu.jd01_04;
 
 
 class Utils {

@@ -1,4 +1,4 @@
-package by.it.Biazverkhi.jd01_01;
+package by.it.uuu.jd01_01;
 
 class MyFirstClass {
     // объявление члена класса , который хранит содержимое слогана

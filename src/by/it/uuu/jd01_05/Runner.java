@@ -1,4 +1,4 @@
-package by.it.Biazverkhi.jd01_05;
+package by.it.uuu.jd01_05;
 
 
 public class Runner {
