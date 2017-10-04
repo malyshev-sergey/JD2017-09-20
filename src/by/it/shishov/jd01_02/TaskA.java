@@ -16,13 +16,12 @@ class TaskA {
 
     static int[] ParseLine(String line) {
 
-        String[] strMas = line.split("\\D");
+        String[] strMas = line.split(" ");
         int[] intMas = new int[strMas.length];
 
-        System.out.println("Преобразованная строка:");
+
         for (int i = 0; i < strMas.length; i++) {
             intMas[i] = Integer.parseInt(strMas[i]);
-            System.out.print(intMas[i] + " ");
         }
         return intMas;
 
@@ -62,7 +61,7 @@ class TaskA {
             average += intMas[i];
         }
         result = average / (intMas.length);
-        System.out.println("\n" + "Следующие числа являются меньше среднего арифметического: ");
+        System.out.println("\n" + "Следующие числа меньше среднего арифметического: ");
         for (int i = 0; i < intMas.length; i++) {
             if (intMas[i] < result)
                 System.out.print(intMas[i] + " ");
@@ -71,21 +70,27 @@ class TaskA {
 
     static void checkUniqueDigits(int[] intMas) {
 
-        boolean flag = false;
+        boolean flag;
 
         for (int i = 0; i < intMas.length; i++) {
             char[] digit = String.valueOf(intMas[i]).toCharArray();
-            for (int j = 0; j < digit.length - 1; j++) {
-                if (digit.length != 1) {
-                    if (digit[j] == digit[j + 1]) {
-                        flag = true;
-                        System.out.println("\n" + "Число с одинаковыми цифрами - это " + intMas[i]);
-                        break;
+            flag = true;
+            if (digit.length != 1) {
+                for (int k = 0; k < digit.length - 1; k++) {
+                    for (int j = k + 1; j < digit.length; j++) {
+                        if (digit[k] == digit[j]) {
+                            flag = false;
+                            break;
+                        }
                     }
                 }
+
+            }
+            if (flag) {
+                System.out.println("\n" + "Число с неодинаковыми цифрами - это " + intMas[i]);
+                break;
             }
         }
-        if (!flag)
-            System.out.println("\n" + "Нет чисел с одинаковыми цифрами");
     }
 }
+

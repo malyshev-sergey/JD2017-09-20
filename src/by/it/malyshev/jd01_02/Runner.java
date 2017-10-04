@@ -12,7 +12,7 @@ public class Runner {
 
         int arr[] = Utils.lineToIntArray(line);
 
-        //TaskA.solveTaskA1(line);
+        //TaskA1.solveTaskA1(line);
 
         //TaskA1 вывести самое длинное и самое короткое число и его длину
         System.out.println("Задание A1:");

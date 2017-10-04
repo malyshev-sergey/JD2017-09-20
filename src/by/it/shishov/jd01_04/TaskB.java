@@ -11,37 +11,41 @@ public class TaskB {
     private static int[][] salaryArr;
 
     public static void getSurnames() {
+        System.out.println("Введите количество Фамилий: ");
+        number = new Scanner(System.in).nextInt();
         System.out.println("Введите строку фамилий через пробел: ");
         surnames = new Scanner(System.in).nextLine().split(" ");
     }
 
-    public static void getNumber() {
 
-        System.out.println("Введите количество фамилий: ");
-        number = Integer.parseInt(new Scanner(System.in).nextLine());
-    }
-
-    public static int[][] getSalary() {
-
-        salaryArr = new int[4][number];
-        int count = 0;
-        for (int i = 0; i < surnames.length; i++) {
-            System.out.println("Введите зарплаты за 4 квартала человека с фамилий " + surnames[i]);
+    public static void getSalary() {
+        salaryArr = new int[number][4];
+        for (int i = 0; i < number; i++) {
+            System.out.println("Введите зарплаты за 4 квартала человека с фамилией " + surnames[i]);
+            String personSalary = new Scanner(System.in).nextLine();
             for (int j = 0; j < 4; j++) {
-                salaryArr[count][j] = Integer.parseInt(new Scanner(System.in).nextLine().split(" ")[count]);
-                count++;
+                salaryArr[i][j] = Integer.parseInt(personSalary.split(" ")[j]);
             }
 
         }
-        return salaryArr;
     }
 
     public static void printSalaryTable() {
-        System.out.printf("%7s  %9s  %9s  %9s  %9s  %5s", "Фамилия", "1 квартал", "2 квартал", "3 квартал", "4 квартал", "Итого");
-        for (int i = 0; i < number; i++) {
-            System.out.printf("\n" + "%12s  %9s  %9s  %9s  %9s  %5s", surnames[i], salaryArr[0][i], salaryArr[1][i], salaryArr[2][i], salaryArr[3][i], salaryArr[0][i] + salaryArr[1][i] + salaryArr[2][i] + salaryArr[3][i]);
+        System.out.printf("%12s  %9s  %9s  %9s  %9s  %5s", "Фамилия", "1 квартал", "2 квартал", "3 квартал", "4 квартал", "Итого\n ");
+        System.out.printf("%5s", "-");
+        int summ = 0;
+        for (int i = 0; i < 60; i++) {
+            System.out.printf("%1s","-");
         }
-
+        for (int i = 0; i < number; i++) {
+            summ += (salaryArr[i][0] + salaryArr[i][1] + salaryArr[i][2] + salaryArr[i][3]);
+            System.out.printf("\n%12s  %9d  %9d  %9d  %9d  %5d ", surnames[i], salaryArr[i][0], salaryArr[i][1], salaryArr[i][2], salaryArr[i][3], salaryArr[i][0] + salaryArr[i][1] + salaryArr[i][2] + salaryArr[i][3]);
+        }
+        System.out.printf("\n%5s", "-");
+        for (int i = 0; i < 60; i++) {
+            System.out.printf("%1s","-");
+        }
+        System.out.printf("\n%29s %3d","Итоговая сумма зарплат =", summ);
 
     }
 }

@@ -8,9 +8,10 @@ import static java.lang.Math.*;
  */
 public class TaskA2 {
     static  void solveTask2(){
-        double b = new Scanner(System.in).nextDouble();
-        double a = 0.371;
+        double a = new Scanner(System.in).nextDouble();
+        double b = 0.371;
         double res = tan(pow(a+b,2)) - cbrt(a+1.5) + a*pow(b,5) - b/log(a*a);
         System.out.println("Task A2 results = " + res);
+
     }
 }

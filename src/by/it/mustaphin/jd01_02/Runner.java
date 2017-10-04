@@ -4,7 +4,7 @@ public class Runner {
 
     public static void main(String[] args) {
 
-//        TaskA tA = new TaskA();
+//        TaskA1 tA = new TaskA1();
 //        int mas[] = Utils.getMas();
 //        tA.shortLong(mas, false);
 //        tA.mediumAr(mas);
