@@ -6,7 +6,7 @@ import static java.lang.Math.*;
  * Created by Сергей on 02.10.2017.
  */
 public class TaskA3 {
-    static void solveTask3(){
+    static void solveTaskA3(){
         double x = 12.1;
         for (double a = -5; a <= 12; a+=3.75) {
             double f = exp(a*x) - 3.45*a;
