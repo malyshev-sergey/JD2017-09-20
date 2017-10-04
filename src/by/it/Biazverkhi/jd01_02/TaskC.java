@@ -14,12 +14,12 @@ class TaskC {
 
     // печатаю матрицу
     static void printArray(int array[][]) {
-        for (int i = 0; i < array.length; i++) {
+        for (int[] anArray : array) {
             for (int j = 0; j < array.length; j++) {
 
                 // if (j % cols == 0)
                 // System.out.println("");
-                System.out.printf("%5d ", array[i][j]);
+                System.out.printf("%5d ", anArray[j]);
             }
             System.out.println("");
 
@@ -99,7 +99,7 @@ class TaskC {
 
     //поиск максимального элемента в матрице и удаление строк и столбоцов, его содержащие.
     // Оперирую над повернутой на 90 градусов матрицей.
-    static void searchAndDelArray(int array[][], int cols_string) {
+    static void searchAndDelArray(int array[][]) {
         int Max = 0;
         int I = 0;
         int J = 0;

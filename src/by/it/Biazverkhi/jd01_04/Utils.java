@@ -1,6 +1,8 @@
 package by.it.Biazverkhi.jd01_04;
 
-public class Utils {
+import com.sun.scenario.effect.Merge;
+
+class Utils {
 
 
     //преобразование одной строки в массив чисел

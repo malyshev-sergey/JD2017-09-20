@@ -4,13 +4,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class Utils {
+class Utils {
     //чтение одной строки с консоли
     static String getOneLine() throws IOException {
         BufferedReader stin = new BufferedReader(new InputStreamReader(System.in));
-        String line = stin.readLine();
         //stin.close();
-        return line;
+        return stin.readLine();
     }
 
     //преобразование одной строки в массив чисел
@@ -29,9 +28,8 @@ public class Utils {
         //чтение значения с командной строки
         static String getOneInt() throws IOException {
             BufferedReader stin = new BufferedReader(new InputStreamReader(System.in));
-            String line = stin.readLine();
             //stin.close();
-            return line;
+            return stin.readLine();
         }
 
 

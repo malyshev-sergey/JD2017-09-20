@@ -39,12 +39,10 @@ public class Runner {
             if (TaskA.uniqueDigits(i)) {
                 System.out.printf("%d, ", i);
             }
-//            if (TaskA.uniqueDigits(i)) {
-//            }
 
             // break; //больше ничего не идем
         }
-        //4. Задание на B
+        //4. Задание B
         System.out.println("");
         System.out.println("Ведите любое число, из которого возможно извлечение корня без остатка");
         String i = Utils.getOneInt();
@@ -56,7 +54,7 @@ public class Runner {
         int[][] array = TaskC.Array(M);
         TaskC.printArray(array);
 
-       //вывожу ссумы двух первых положительных элементов в строках
+        //вывожу суммы двух первых положительных элементов в строках
         TaskC.sumArray(array);
 
         System.out.println(" ");
@@ -74,7 +72,7 @@ public class Runner {
 
 //ищу максимальное число для удаления
 //  и вывожу массив без заданных строк и столбцов
-TaskC.searchAndDelArray(rotate, M);
+        TaskC.searchAndDelArray(rotate);
 
 
 

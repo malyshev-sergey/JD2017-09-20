@@ -24,11 +24,11 @@ public class Runner {
         System.out.println("");
         System.out.println(Arrays.toString(arr));//печатаю введенную строку в виде массива для проверки
         System.out.print("Печать несортированного массива в 5 колонок");//вызываю на печать массив с именем V и в 5 колонок
-        InOut.printArray(arr, "V", 5);
+        InOut.printArray(arr, 5);
         System.out.println("");
         Utils.sortArray(arr, true);//сортирую массив по возрастанию
         System.out.print("Печать сортированного массива в 4 колоноки");
-        InOut.printArray(arr, "V", 4);//печатаю сортированный массив в 4 колонки
+        InOut.printArray(arr, 4);//печатаю сортированный массив в 4 колонки
         System.out.println("");
         System.out.println("");
         int x = Arrays.binarySearch(arr, a);//поиск новой позиции 1 элемента после сортировки из первоначального массива
@@ -36,5 +36,7 @@ public class Runner {
         System.out.println("");
         int r = Arrays.binarySearch(arr, b);//поиск новой позиции последнего элемента после сортировки из первоначального массива
         System.out.print("новая позиция последнего элемента " + b + " = " + r);
+        Utils.sortArray2(arr, true);//сортирую массив по возрастанию
+
     }
 }

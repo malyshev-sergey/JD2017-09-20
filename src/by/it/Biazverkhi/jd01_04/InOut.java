@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class InOut {
+class InOut {
 //ввод строки с клавиатуры
     static String getOneLine() throws IOException {
         BufferedReader stin = new BufferedReader(new InputStreamReader(System.in));
@@ -14,12 +14,12 @@ public class InOut {
     }
 
     // вывод массива
-    static void printArray (int array[], String name, int cols){
+    static void printArray(int[] array, int cols) {
 
         for (int i = 0; i < array.length; i++) {
             if(i%cols==0)
                 System.out.println("");
-            System.out.printf("%s[%-2d]=%-4d ", name, i, array[i]);
+            System.out.printf("%s[%-2d]=%-4d ", "V", i, array[i]);
 
 
         }
