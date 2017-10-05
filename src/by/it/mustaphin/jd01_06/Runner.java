@@ -9,7 +9,6 @@ public class Runner {
 //        tA2.countLetter(Util.TXT);
 
 	TaskB1 tB1 = new TaskB1();
-//	tB1.findVowel(Util.TXT);
-	tB1.findVowel2(Util.TXT);
+	tB1.findVowel(Util.TXT);
     }
 }
