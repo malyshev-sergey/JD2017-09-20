@@ -69,7 +69,7 @@ private static double[][] create2DArrayFromString(String... s){
         int slen = tmp.length;
         d[i] = new double[slen]; // создание новго элемента, пздц
 
-        d[i] = tmp.clone();// этот метод можно использовать в обход циклов! И варнинги не вылазят
+        d[i] = tmp.clone();// этот метод можно использовать в обход циклов! И варнинги не вылазят!!
 
         //for (int j = 0; j < slen; j++){// 2 мерность
         //    d[i][j] = tmp[j];
@@ -77,7 +77,7 @@ private static double[][] create2DArrayFromString(String... s){
         //}
 //System.out.println();
     }
-// правильно ли происходит присвоение ссылки на двумерный массив???
+// правильно ли происходит присвоение ссылки на двумерный массив??? - Да
     return d;
 }
 
