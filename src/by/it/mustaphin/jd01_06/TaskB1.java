@@ -18,20 +18,18 @@ public class TaskB1 {
 	String textMas[] = text.split("[^а-яА-ЯёЁ]");
 	Pattern pattern = Pattern.compile("[^а-яА-ЯёЁ][ауоиэяюёеАУОИЭЮЯЮЁЕ][а-яА-ЯёЁ]*[ауоиэяюёеыАУОИЭЮЯЮЁЕЫ][^а-яА-ЯёЁ]|[^а-яА-ЯёЁ][ауоиэяюёеАУОИЭЮЯЮЁЕ][^а-яА-ЯёЁ]");
 	Matcher matcher = pattern.matcher(text);
-	while (matcher.find()) {
-	    int counter = 0;
-	    for (int i = 0; i < textMas.length; i++) {
-		if (textMas[i].isEmpty()) {
-		    continue;
-		}
-		if (textMas[i].equalsIgnoreCase(matcher.group().trim())) {
-		    textMas[i] = "";
-		    counter++;
-		}
+	for (int i = 0; i < textMas.length; i++) {
+	    if (textMas[i].isEmpty()) {
+		continue;
 	    }
-	    System.out.printf("%-7s : %-2d\n", matcher.group().trim(), --counter);
+	    int count = 0;
+	    while (matcher.find()) {
+		if (matcher.group().equalsIgnoreCase(textMas[i])) {
+		    textMas[i] = "";
+		}
+		System.out.printf("%s : %-2d\n", matcher.group(), ++count);
+	    }
 	}
-
     }
 
 }
