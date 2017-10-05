@@ -46,6 +46,8 @@ public class RunnerSix {
         TaskB.taskB1();
         TaskB.taskB2();
 
+        TaskC.taskC1();
+
     }
 
 
