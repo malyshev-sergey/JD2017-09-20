@@ -1,4 +1,4 @@
-package by.it.akhmelev.jd01_06.Level_A;
+package by.it.akhmelev.jd01_06.levelA_with_comments;
 
 public class A2 {
     public static void main(String[ ] args) {

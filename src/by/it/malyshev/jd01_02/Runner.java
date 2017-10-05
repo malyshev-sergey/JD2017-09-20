@@ -32,7 +32,7 @@ public class Runner {
         }
         System.out.println();
 
-        System.out.println("Задание A3:");
+        System.out.println("Задание B1:");
         //найти первое из чисел, состоящих из разных цифр
         for (int i : arr) {
             if (TaskA.uniqueDigits(i)) {
