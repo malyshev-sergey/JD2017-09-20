@@ -19,4 +19,30 @@ public class TaskB {
             i++;
         }
     }
+
+    public static void sentenceASC(String str){
+        Pattern sentence = Pattern.compile("[\\.!]{1,}");
+        Pattern p = Pattern.compile("\\n");
+        String[] words = str.split(sentence.pattern());
+        StringBuilder[] sb = new StringBuilder[words.length];
+        //int[] arr = new int[words.length];
+        int i = 0;
+        while (i < sb.length) {
+            //arr[i] = words[i].length();
+            sb[i] = new StringBuilder(words[i]);
+            i++;
+        }
+        Util.sortByLengthLines(sb);
+        i = 0;
+        while (i < sb.length) {
+            Matcher m = p.matcher(sb[i]);
+            while (m.find()){
+                sb[i].setCharAt(m.start(),' ');
+            }
+            System.out.printf("%s \n", sb[i]);
+            i++;
+        }
+    }
+
+
 }
