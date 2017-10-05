@@ -8,8 +8,9 @@ public class TaskB1 {
     void findVowel(String text) {
 	Pattern pattern = Pattern.compile("[^а-яА-ЯёЁ][ауоиэяюёеАУОИЭЮЯЮЁЕ][а-яА-ЯёЁ]*[ауоиэяюёеыАУОИЭЮЯЮЁЕЫ][^а-яА-ЯёЁ]");
 	Matcher matcher = pattern.matcher(text);
+	int count = 0;
 	while (matcher.find()) {
-	    System.out.printf("%-8s\n",matcher.group());
+	    System.out.printf("%-8s : %-2d\n",matcher.group(), ++count);
 	}
     }
 
