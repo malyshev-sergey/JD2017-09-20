@@ -36,11 +36,11 @@ public class TaskB {
 
         StringBuilder sb = new StringBuilder(RunnerSix.LUKOMOR);
 
-        Pattern p1 = Pattern.compile("[^\n]+(\n|\\.)");
+        Pattern p1 = Pattern.compile("[^\n]+[\n\\.]");
         Matcher m1 = p1.matcher(sb);
         while (m1.find()){
             sb.setCharAt(m1.start(),m1.group().toLowerCase().charAt(0));
-         }
+        }
 
         Pattern p2 = Pattern.compile("\n");
         Matcher m2 = p2.matcher(sb);
@@ -77,8 +77,8 @@ public class TaskB {
         }
 
         int min = wordsQ[0];
-        for (int i = 0; i < wordsQ.length; i++) {
-            if (wordsQ[i] < min) min = wordsQ[i];
+        for (int value:wordsQ) {
+            if (value < min) min = value;
         }
 
         int[] wordsQSorted = Arrays.copyOfRange(wordsQ,0,wordsQ.length);
