@@ -2,7 +2,7 @@ package by.it.mustaphin.jd01_04;
 
 public class Runner {
     public static void main(String[] args) {
-//        TaskA1 tA = new TaskA1();
+//        TaskA tA = new TaskA();
 //        tA.multiple();
 
 //        InOut io = new InOut();
