@@ -67,7 +67,7 @@ public class TaskB {
             for (int j = i + 1; j < sentences.length; j++) {
                 String[] s1 = sentences[i].split(" ");
                 String[] s2 = sentences[j].split(" ");
-                if (s2.length > s1.length) {
+                if (s2.length < s1.length) {
                     String s = sentences[i];
                     sentences[i] = sentences[j];
                     sentences[j] = s;
