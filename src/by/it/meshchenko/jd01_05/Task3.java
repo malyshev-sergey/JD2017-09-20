@@ -1,7 +1,7 @@
 package by.it.meshchenko.jd01_05;
 
 public class Task3 {
-    public static void calculate(double x, double min, double max, double step){
+    public static void calculate(double min, double max, double x, double step){
         System.out.println("\nTask3");
         double a = min;
         System.out.println("f = Math.pow(Math.E,(a*x)) - 3.45*a");

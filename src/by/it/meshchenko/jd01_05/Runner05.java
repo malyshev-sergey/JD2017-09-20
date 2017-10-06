@@ -19,8 +19,12 @@ public class Runner05 {
         Task2.main();
 
         //Task3
-        // x=12.1, -5<=a>=12, delta a = 3.75
-        Task3.calculate(12.1, -5, 12, 3.75);
+        // x=12.1, -5<=a<=12, delta a = 3.75
+        Task3.calculate(-5, 12, 12.1, 3.75);
+
+        //Task4
+        // 1<=x<=8, delta x = 1, i=6..11
+        Task4.calculate(1, 8, 1, new double[]{6, 7, 8, 9, 10, 11});
 
     }
 }
