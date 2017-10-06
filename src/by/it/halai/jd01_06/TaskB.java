@@ -36,7 +36,7 @@ public class TaskB {
     }
 
     static void solveTaskB2() {
-        Pattern p = Pattern.compile("[.!?]");
+        Pattern p = Pattern.compile("(?<!\\.)\\.(?!\\.)|\\!");
         String[] sentences = Data.TXT.split(p.pattern());
         System.out.println("Предложения до сортировки");
         for (int i = 0; i < sentences.length; i++) {
