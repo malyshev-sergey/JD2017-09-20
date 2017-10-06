@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
  * Created by Сергей on 04.10.2017.
  */
 public class TaskA1 {
-    public static void solveTask1() {
+    public static void solveTaskA1() {
 
         StringBuilder sb = new StringBuilder(Data.TXT);
         Pattern p = Pattern.compile("[а-яА-ЯёЁ]{4,}");
