@@ -21,7 +21,7 @@ public class TaskB {
         StringBuilder sb = new StringBuilder(Source.sourceText);
         Pattern pattern = Pattern.compile("\n");
         Matcher matcher = pattern.matcher(sb);
-        String[] sentences = matcher.replaceAll(" ").split("(?<!\\.)\\.(?!\\.)|\\!");
+        String[] sentences = matcher.replaceAll(" ").split("(?<!\\.)\\.(?!\\.)|!");
 
         for (int i = 0; i < sentences.length-1; i++) {
             for (int j = i+1; j < sentences.length; j++) {
