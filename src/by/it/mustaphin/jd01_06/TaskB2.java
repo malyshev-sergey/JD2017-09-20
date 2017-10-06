@@ -1,17 +1,39 @@
 package by.it.mustaphin.jd01_06;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class TaskB2 {
+class TaskB2 {
 
-    Pattern pattern = Pattern.compile("[\\.!]{1,}");
-    Matcher matcher = pattern.matcher(Util.TXT);
-    String text[];
+    void seekLengthParts(String text) {
+        Pattern pat = Pattern.compile("[\\.!]{1,}");
+        Matcher mat = pat.matcher(text);
+        while (mat.find()) {
 
-    void seekLengthParts() {
-        while (matcher.find()) {
-            System.out.println(matcher.group());
+        }
+    }
+
+    void seekLengthParts2(String text) {
+        String textMas[] = text.split("[\\.!]{1,}");
+        int lengthMas[] = new int[textMas.length];
+        Map<Integer, List<String>> allParts = new HashMap<>();
+        int numb = 1;
+        for (String textPart : textMas) {
+            String[] innerMas = textPart.split("[^а-яА-ЯёЁ]");
+            List<String> listWords = new ArrayList<>();
+            for (String singleWord : innerMas) {
+                listWords.add(singleWord);
+            }
+            allParts.put(numb++, listWords);
+        }
+        int placeNumb = 0;
+        for (Map.Entry<Integer, List<String>> entry : allParts.entrySet()) {
+            lengthMas[placeNumb] = entry.getValue().size();
+            placeNumb++;
         }
     }
 

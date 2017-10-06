@@ -11,6 +11,6 @@ public class Runner {
 //	TaskB1 tB1 = new TaskB1();
 //	tB1.findVowel(Util.TXT);
         TaskB2 tB2 = new TaskB2();
-        tB2.seekLengthParts();
+        tB2.seekLengthParts(Util.TXT);
     }
 }
