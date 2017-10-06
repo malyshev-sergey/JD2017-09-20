@@ -7,9 +7,9 @@ public class Runner {
         System.out.println("\nЗадание№1\n");
         TaskA.solveTaskA1();
 
-        System.out.println("\nЗадание№2\n");
-        System.out.println("ввести a=1.21");
-        TaskA.solveTaskA2();
+//        System.out.println("\nЗадание№2\n");
+//        System.out.println("ввести a=1.21");
+//        TaskA.solveTaskA2();
 
         System.out.println("\nЗадание№3\n");
         TaskA.sovleTaskA3();
@@ -19,6 +19,9 @@ public class Runner {
 
         System.out.println("\nЗадание№5\n");
         TaskB.functionFive(-2, 15, 1.5, 0.491E4);
+
+        System.out.println("\nЗадание№6\n");
+        TaskC.functionSeven(5.33,9,3.5);
 
     }
 }
