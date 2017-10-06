@@ -58,5 +58,4 @@ public class Runner06 {
         System.out.println("B.2");
         TaskB.sentenceASC(text);
     }
-
 }
