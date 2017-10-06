@@ -47,6 +47,9 @@ public class RunnerSix {
         TaskB.taskB2();
 
         TaskC.taskC1();
+        int length=1000000;
+        TaskC.taskC2a(length);
+        TaskC.taskC2b(length);
 
     }
 
