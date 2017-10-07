@@ -12,9 +12,16 @@ public class TaskA {
         System.out.println(myFormula2(a,x));
 
         /***** Второе задание *****/
-
+        a = 1.21;
+        double b = 0.371;
+        System.out.println(myFormula3(a,b));
     }
 
+
+    public static double myFormula3(double a, double b){
+        double z = tan(pow((a + b),2)) - /*это куб корень*/pow(a + 1.5, 1/3) - a*pow(b,5) - b/(log(a*a));
+        return z;
+    }
 
 
     public static double myFormula1(double a, double x){
