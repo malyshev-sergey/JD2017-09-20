@@ -5,9 +5,7 @@ import java.util.Scanner;
 import static java.lang.Math.*;
 import static java.lang.Math.abs;
 
-/**
- * Created by NotePad.by on 07.10.2017.
- */
+
 public class TaskA {
 
     static void writeDownArithmeticExpression() {

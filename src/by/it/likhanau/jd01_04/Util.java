@@ -85,16 +85,16 @@ public class Util {
 
     }
 
-    static int binarySearch(double[] array, double toFind){
+    static int binarySearch(double[] array, double toFind) {
         int leftPos = 0;
         int rightPos = array.length;
 
-        while(leftPos<=rightPos){
-            int midPos = (rightPos+leftPos)/2;
-            if(toFind == array[midPos]) return midPos;
-            else{
-                if(toFind < array[midPos]) rightPos = midPos-1;
-                else leftPos = midPos+1;
+        while (leftPos <= rightPos) {
+            int midPos = (rightPos + leftPos) / 2;
+            if (toFind == array[midPos]) return midPos;
+            else {
+                if (toFind < array[midPos]) rightPos = midPos - 1;
+                else leftPos = midPos + 1;
             }
         }
 

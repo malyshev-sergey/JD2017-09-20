@@ -1,6 +1,5 @@
 package by.it.likhanau.jd01_04;
 
-
 public class InOut {
     static double[] readArray() {
         System.out.println("Enter the numbers: ");

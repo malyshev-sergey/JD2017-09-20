@@ -1,6 +1,5 @@
 package by.it.likhanau.jd01_02;
 
-
 public class TaskA {
 
     int[] intArray;
