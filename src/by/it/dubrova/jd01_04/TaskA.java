@@ -52,6 +52,8 @@ public class TaskA {
             System.out.println();
         }
 
+        /*****Работа с первым и последним индексом массива*****/
+        System.out.printf("Первый индекс %d, последний индекс %d. first + last = %d",array[0],array[array.length-1],array[0]+array[array.length-1] );
 
     }
 
@@ -71,7 +73,7 @@ public class TaskA {
             //    System.out.printf("%d*%d=%d\t",i, j, mt[i][j]);
             }
 
-        //    System.out.println();
+        ///    System.out.println();
         }
         return mt;
     }
