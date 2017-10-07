@@ -19,8 +19,12 @@ class TaskB2 {
 	for (int i = 0; i < senses.length; i++) {
 	    words[i] = senses[i].split(patWord.pattern());// [^а-яА-ЯёЁ:;-]
 	}
-	for (int i = words.length - 1; i > 0; i--) {
+	for (int i = words.length - 1; i >= 0; i--) {
 	    for (int k = 0; k < i; k++) {
+		if (words[i][0].equals(" ")) {
+//		    System.out.printf("символ: \"%s\"\n", words[i][0]);
+		    continue;
+		}
 		if (words[k].length > words[k + 1].length) {
 		    String swap[] = words[k];
 		    words[k] = words[k + 1];
