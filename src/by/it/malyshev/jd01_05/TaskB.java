@@ -7,13 +7,13 @@ public class TaskB {
     static void functionFour(double start, double finish, double step) {
 
         double sumY = 0;
-        double mulY = 1;
+        double mulZ = 1;
         for (double x = start; x <= finish; x += step) {
             for (int i = 1; i <= 11; i++) {
                 sumY += pow(x + 2, 1.3 * i);
-                mulY *= pow(x + 2, 1.3 * i);
+                mulZ *= pow(x + 2, 1.3 * i);
             }
-            System.out.printf("Сумма y = %3.2e   Произведение y = %3.2e\n", sumY, mulY);
+            System.out.printf("Сумма y = %3.2e   Произведение z = %3.2e\n", sumY, mulZ);
         }
     }
 

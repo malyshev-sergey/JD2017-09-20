@@ -20,5 +20,12 @@ public class Runner {
         System.out.println("\nЗадание№5\n");
         TaskB.functionFive(-2, 15, 1.5, 0.491E4);
 
+        System.out.println("\nЗадание№6\n");
+        TaskC.functionSix(5.33,9,3.5);
+
+        System.out.println("\nЗадание№7\n");
+        TaskC.functionSeven(103,450,31,10,5);
+
+
     }
 }
