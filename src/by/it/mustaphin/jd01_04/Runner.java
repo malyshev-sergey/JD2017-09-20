@@ -5,16 +5,16 @@ public class Runner {
 //        TaskA tA = new TaskA();
 //        tA.multiple();
 
-//        InOut io = new InOut();
-//        int[] mas = io.in1D();
-//        int[] masCopy = mas;
-//        io.boubleSort1D(mas);
-//        io.showNewPlaces(masCopy, mas);
-//        io.out1D(mas, 5, "mas");
+        InOut io = new InOut();
+        int[] mas = io.in1D();
+        int[] masCopy = mas;
+        io.boubleSort1D(mas);
+        io.showNewPlaces(masCopy, mas);
+        io.out1D(mas, 5, "mas");
 
-        TaskB tB = new TaskB();
-        String lastNames[] = tB.setLastnames();
-        int salary[][] = tB.setSalaryPetQuart(lastNames);
-        tB.getSalaryTable(lastNames, salary);
+//        TaskB tB = new TaskB();
+//        String lastNames[] = tB.setLastnames();
+//        int salary[][] = tB.setSalaryPetQuart(lastNames);
+//        tB.getSalaryTable(lastNames, salary);
     }
 }
