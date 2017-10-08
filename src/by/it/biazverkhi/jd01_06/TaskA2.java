@@ -3,7 +3,7 @@ package by.it.biazverkhi.jd01_06;
 
 public class TaskA2 {
     public static void main(String[] args) {
-        String TEXT = new String(Data.Text);
+        String TEXT = Data.Text;
         String[] arr = TEXT.split("[^а-яА-ЯёЁ]");
 
         for (int i = 0; i < arr.length; i++) {
