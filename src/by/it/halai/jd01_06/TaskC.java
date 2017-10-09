@@ -15,7 +15,8 @@ public class TaskC {
         for (int i = 0; i < lines.length; i++) {
             System.out.println(lines[i]);
         }
-        System.out.println(lines[0].length());
+        System.out.println(lines[0].length());//выдает длину строки))
+        
 
 
     }
