@@ -35,8 +35,8 @@ public class TaskC {
         } else {
             rowsNumber = array.length / columnsNumber;
         }
-        System.out.println(array.length);
-        System.out.println(rowsNumber);
+//        System.out.println(array.length);
+//        System.out.println(rowsNumber);
         System.out.print("\u2554");
         for (int i = 0; i < columnsNumber - 1; i++) {
             System.out.print("\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2566");
