@@ -17,7 +17,7 @@ public class Util {
     //Преобразование строки в массив
     static int[] lineToInArray(String line){
         //дедение строки на элементы массива по пробелам
-        String[] strArray = line.split(" ");
+        String[] strArray = line.trim().split(" ");
         //создаём и заполняем массив чисел
         int[] array = new int[strArray.length];
         for(int i = 0; i < strArray.length; i++){
