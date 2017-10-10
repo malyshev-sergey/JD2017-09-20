@@ -1,4 +1,4 @@
-package by.it.mustaphin.jd01_05.taskB;
+package by.it.mustaphin.jd01_05;
 
 import static java.lang.Math.pow;
 
