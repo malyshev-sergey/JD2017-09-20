@@ -7,7 +7,7 @@ package by.it.govor.jd_01_06.taskB;
 
 public class Task2 {
      static void task() {
-
+/*
 
         String s = by.it.govor.jd_01_06.Date.STR;
         String[] str = s.split("//.!");
@@ -29,7 +29,9 @@ public class Task2 {
             }
         }
         System.out.println(Arrays.asList(str));
-    }
+    
+    */
+     }
 
 }
 
