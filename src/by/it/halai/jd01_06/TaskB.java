@@ -36,7 +36,7 @@ public class TaskB {
     }
 
     static void solveTaskB2() {
-        Pattern p = Pattern.compile("[.!?]");
+        Pattern p = Pattern.compile("(?<!\\.)\\.(?!\\.)|\\!");
         String[] sentences = Data.TXT.split(p.pattern());
         System.out.println("Предложения до сортировки");
         for (int i = 0; i < sentences.length; i++) {
@@ -67,7 +67,7 @@ public class TaskB {
             for (int j = i + 1; j < sentences.length; j++) {
                 String[] s1 = sentences[i].split(" ");
                 String[] s2 = sentences[j].split(" ");
-                if (s2.length > s1.length) {
+                if (s2.length < s1.length) {
                     String s = sentences[i];
                     sentences[i] = sentences[j];
                     sentences[j] = s;
