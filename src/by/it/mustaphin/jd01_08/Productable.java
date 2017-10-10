@@ -2,16 +2,18 @@ package by.it.mustaphin.jd01_08;
 
 public interface Productable {
 
-    int calcBudget();
+    int calcBudget();//dollars
 
-    String[] invateActors();
+    String[] invatedActors();
 
-    int timeWork();
+    int timeWork();//days
 
-    int honorariumsTotal();
+    int honorarsTotal();//dollars
 
-    String region();
+    String country();
 
+    String getRights();
 
+    int ageLimit();
 
 }
