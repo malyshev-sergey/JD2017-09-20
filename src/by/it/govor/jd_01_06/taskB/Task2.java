@@ -7,10 +7,10 @@ package by.it.govor.jd_01_06.taskB;
 
 public class Task2 {
      static void task() {
-
+/*
 
         String s = by.it.govor.jd_01_06.Date.STR;
-        String[] str = s.split("//.");
+        String[] str = s.split("//.!");
 
 
         for (int j = 0; j < str.length; j++) {
@@ -29,7 +29,9 @@ public class Task2 {
             }
         }
         System.out.println(Arrays.asList(str));
-    }
+    
+    */
+     }
 
 }
 
