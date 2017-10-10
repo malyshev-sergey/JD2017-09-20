@@ -1,8 +1,29 @@
 package by.it.govor.jd01_08;
 
-/**
- * Created by User on 10.10.2017.
- */
-public class BuildingTheater {
 
+public class BuildingTheater extends Building {
+    private String s;
+ public void showState(){
+
+     if (this.isPlay1()){
+         System.out.println("Играет Драма");
+         s="Play1";
+     }
+     if (this.isPlay2()){
+         System.out.println("Играет Комедия");
+         s="Play2";
+     }
+     if (this.isPlay3()){
+         System.out.println("Играет Мистерия");
+         s="Play3";
+     }
+
+ }
+    public String toString()
+    {
+        return "Все топчик";
+    }
+    public void coolic(){
+        super.col();
+    }
 }
