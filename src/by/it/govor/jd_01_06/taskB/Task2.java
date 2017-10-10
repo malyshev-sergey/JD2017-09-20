@@ -10,7 +10,7 @@ public class Task2 {
 
 
         String s = by.it.govor.jd_01_06.Date.STR;
-        String[] str = s.split("//.");
+        String[] str = s.split("//.!");
 
 
         for (int j = 0; j < str.length; j++) {
