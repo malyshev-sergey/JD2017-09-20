@@ -1,6 +1,6 @@
 package by.it.akhmelev.calc;
 
-public interface Patterns {
+interface Patterns {
     //возможные примеры регулярных выражений (конечно лучше составить свои).
     String exVal="((-?)([0-9.])+)";                       //числа
     String exVec="\\{((-?([0-9.])+),?)+}";                //вектора
