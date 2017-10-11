@@ -1,6 +1,6 @@
 package by.it.akhmelev.calc;
 
-public interface IOperation {
+interface IOperation {
     Var add(Var var);
     Var sub(Var var);
     Var mul(Var var);
