@@ -2,116 +2,140 @@ package by.it.malyshev.jd01_08;
 
 import java.util.Random;
 
-public abstract class Surgeon implements Doctor {
+public abstract class Surgeon implements IDoctor {
 
     private boolean stateDisease;
     private boolean stateCognac;
     private boolean stateRest;
     private boolean stateNeedOperation;
     private boolean stateDiagnose;
+    private String doctorName;
 
     Surgeon() {
-        this.stateDisease=false;
+        this.stateDisease = false;
         this.stateCognac = false;
         this.stateRest = true;
-        this.stateDiagnose=false;
+        this.stateDiagnose = false;
+        this.doctorName = "Хирург";
     }
 
-    Surgeon(boolean stateDisease){
-        this();
-        this.setStateDisease(stateDisease);
-    }
-
-    public void setStateDisease(boolean stateDisease) {
+    void setStateDisease(boolean stateDisease) {
         this.stateDisease = stateDisease;
+        this.stateRest = false;
+        this.stateDiagnose = false;
+        this.stateNeedOperation = false;
     }
 
-    private static boolean randomBoolean() {
-        Random random = new Random();
-        return random.nextBoolean();
+    void setDoctorName(String doctorName) {
+        this.doctorName = doctorName;
     }
+
 
     @Override
     public void diagnoseDisease() {
-        if (stateDisease) {
+        if (this.stateDisease) {
             System.out.println("Пациент болен");
-            stateDiagnose=true;
-            stateRest=false;
+            this.stateDiagnose = true;
+            this.stateRest = false;
+            this.stateNeedOperation = false;
         } else {
-             System.out.println("Пациент здоров");
-             stateDiagnose=false;
-             stateRest=true;
+            System.out.println("Пациент здоров");
+            this.stateDiagnose = false;
+            this.stateRest = true;
+            this.stateNeedOperation = false;
         }
     }
 
     @Override
     public boolean treatDisease() {
-        if (stateDiagnose) {
-            stateNeedOperation = true;
-            System.out.println("Делаю хирургическую операцию");
-        } else System.out.println("Хирургическое вмешательство не требуется");
+        if (this.stateDiagnose) {
+            this.stateNeedOperation = true;
+            System.out.println("Нужна хирургическая операция");
+        } else {
+            System.out.println("Сперва нужен диагноз");
+        }
         return stateNeedOperation;
 
     }
 
     @Override
     public void writeReport() {
-        System.out.println("Пишем отчет");
+        System.out.println("Пишу отчет");
     }
 
     @Override
     public void haveARest() {
-        if(!stateDisease) {
-            stateRest = true;
+        if (!this.stateDisease) {
+            this.stateRest = true;
             System.out.println("Отдыхаю");
             drinkCognac();
         } else System.out.println("Нет отдыха.Есть больной пациент");
     }
 
     @Override
-    public void receiveSalary() {
-        System.out.println("Получаю зарплату");
+    public String getDoctorName() {
+        return this.doctorName;
     }
 
     @Override
     public void receiveCognac() {
-        stateCognac = true;
+        this.stateCognac = true;
         System.out.println("Получен коньяк в подарок");
 
     }
 
     @Override
     public void drinkCognac() {
-        if (stateCognac) {
+        if (this.stateDisease) {
+            System.out.println("Нет, не пью на работе");
+        } else if (this.stateCognac) {
             System.out.println("Пью коньяк");
-            stateCognac = false;
+            this.stateCognac = false;
         } else System.out.println("Коньяка нет, сижу на воде");
 
     }
-    public boolean makeOperation() {
-        boolean res=false;
-        if (stateNeedOperation) {
-            if (randomBoolean()) {
-                System.out.println("Операция прошла удачно.");
-                res= true;
-             } else {
-                System.out.println("Операция прошла неудачно.");
-            }
+
+    public int makeOperation() {
+        int res = 0;
+        if (!this.stateNeedOperation) {
+            System.out.println("Пациенту не назначена операция");
+        } else if (randomBoolean()) {
+            System.out.println("Операция прошла удачно.");
+            res = 1;
+        } else {
+            System.out.println("Операция прошла неудачно.");
+            res=2;
         }
+        this.stateDisease = false;
+        this.stateNeedOperation = false;
+        this.stateDiagnose = false;
+        this.stateRest = true;
         return res;
     }
 
 
     public abstract String showState();
 
-    public boolean isStateDisease() {
-        return stateDisease;
+    boolean isStateRest() {
+        return this.stateRest;
     }
 
-    public boolean isStateRest() {
-        return stateRest;
+    boolean isStateDisease() {
+        return this.stateDisease;
     }
 
+    boolean isStateDiagnose() {
+        return this.stateDiagnose;
+    }
+
+    boolean isStateNeedOperation() {
+        return this.stateNeedOperation;
+    }
+
+    private boolean randomBoolean() {
+        Random random = new Random();
+        return random.nextBoolean();
+    }
 
 
 }

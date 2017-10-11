@@ -1,6 +1,6 @@
 package by.it.malyshev.jd01_08;
 
-public interface Doctor {
+public interface IDoctor {
 
     void diagnoseDisease();
 
@@ -10,7 +10,7 @@ public interface Doctor {
 
     void writeReport();
 
-    void receiveSalary();
+    String getDoctorName();
 
     void receiveCognac();
 
