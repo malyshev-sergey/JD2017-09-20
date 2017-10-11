@@ -9,5 +9,9 @@ public class Runner {
         System.out.println(catalog.showState());
     catalog.pr();
         System.out.println(catalog.showState());
+    Book b = new Encyclopedia();
+    b.edit();
+    b.isAdvertising();
+    b.pr();
     }
 }

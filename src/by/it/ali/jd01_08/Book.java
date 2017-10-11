@@ -16,23 +16,21 @@ public abstract class Book implements Izdan {
     @Override
     public void adv() {
         adv = true;
-        edit = true;
+        edit = false;
         print = false;
     }
 
     @Override
     public void pr() {
-        adv = true;
+        adv = false;
         edit = false;
         print = true;
     }
 
     public abstract String showState();
-    public boolean isEditing(){return edit;}
-    public boolean isAdvertising(){return adv;}
-    public boolean isPrinting(boolean print){
-        this.print = print;
-        return print;}
+    boolean isEditing(){return edit;}
+    boolean isAdvertising(){return adv;}
+    boolean isPrinting(){ return print;}
 }
 
 
