@@ -3,16 +3,16 @@ package by.it.shelkovich.calc;
 public class CalcRunner {
     public static void main(String[] args) {
 
-        VarD v1 = new VarD(1.5);
-        VarD v2 = new VarD(1.5);
-        VarV v3 = new VarV("");
-        VarM v4 = new VarM("");
+        Var v1 = new VarD(1.5);
+        Var v2 = new VarD(1.5);
+        Var v3 = new VarV("");
+        Var v4 = new VarM("");
 
-        v1.div(v4);
-        v1.mul(v3);
-        v2.mul(v4);
-        v4.add(v3);
-        v4.mul(v3);
+        //v1.sub(v2);
+       // v1.mul(v3);
+        v3.div(v1);
+        //v4.add(v3);
+        //v4.mul(v3);
 
         //System.out.println(v1.getClass().getCanonicalName());
 

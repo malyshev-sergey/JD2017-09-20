@@ -7,6 +7,14 @@ public abstract class Var implements IAdd, IMul, ISub, IDiv {
         return used;
     }
 
+    void setUsed(boolean used) {
+        this.used = used;
+    }
+
+    Var getVar() {
+        return this;
+    }
+
     //########################################.Сложение.##################################################
     @Override
     public Var add(VarD v1) {
@@ -106,8 +114,17 @@ public abstract class Var implements IAdd, IMul, ISub, IDiv {
 
     @Override
     public Var sub(Var v1) {
-        if (!used) System.out.println("Операция разности невозможна");
-        return null;
+        Var result;
+        if (!used) {
+            v1.setUsed(true);
+            result = v1.sub(this);
+        } else result = defaultSub(v1);
+
+        if (result != null) return result;
+        else {
+            if (!used) System.out.println("Операция разности невозможна");
+            return null;
+        }
     }
 
     @Override
@@ -122,6 +139,10 @@ public abstract class Var implements IAdd, IMul, ISub, IDiv {
         return null;
     }
 
+    Var defaultSub(Var v) {
+        return null;
+    }
+
     //########################################.Деление.##################################################
     @Override
     public Var div(VarD v1) {
@@ -131,8 +152,17 @@ public abstract class Var implements IAdd, IMul, ISub, IDiv {
 
     @Override
     public Var div(Var v1) {
-        if (!used) System.out.println("Операция деления невозможна");
-        return null;
+        Var result;
+        if (!used) {
+            v1.setUsed(true);
+            result = v1.div(this);
+        } else result = defaultDiv(v1);
+
+        if (result != null) return result;
+        else {
+            if (!used) System.out.println("Операция деления невозможна");
+            return null;
+        }
     }
 
     @Override
@@ -144,6 +174,10 @@ public abstract class Var implements IAdd, IMul, ISub, IDiv {
     @Override
     public Var div(VarM v1) {
         if (!used) System.out.println("Операция деления невозможна");
+        return null;
+    }
+
+    Var defaultDiv(Var v) {
         return null;
     }
 

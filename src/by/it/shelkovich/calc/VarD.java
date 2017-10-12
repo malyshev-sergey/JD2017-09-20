@@ -21,6 +21,7 @@ public class VarD extends Var {
         return new VarD(value + v1.getValue());
     }
 
+
     @Override
     public Var mul(VarD v1) {
         System.out.println("Сложение числа с числом");
@@ -54,6 +55,24 @@ public class VarD extends Var {
         if (!v.isUsed()) {
             used = true;
             return v.mul(this);
+        } else
+            return null;
+    }
+
+    @Override
+    public Var defaultSub(Var v) {
+        if (!v.isUsed()) {
+            used = true;
+            return v.sub(this);
+        } else
+            return null;
+    }
+
+    @Override
+    public Var defaultDiv(Var v) {
+        if (!v.isUsed()) {
+            used = true;
+            return v.div(this);
         } else
             return null;
     }

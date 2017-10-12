@@ -79,4 +79,22 @@ public class VarV extends Var {
             return null;
     }
 
+    @Override
+    public Var defaultSub(Var v) {
+        if (!v.isUsed()) {
+            used = true;
+            return v.sub(this);
+        } else
+            return null;
+    }
+
+    @Override
+    public Var defaultDiv(Var v) {
+        if (!v.isUsed()) {
+            used = true;
+            return v.div(this);
+        } else
+            return null;
+    }
+
 }
