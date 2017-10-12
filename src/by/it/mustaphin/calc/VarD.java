@@ -35,7 +35,7 @@ public class VarD extends Var {
 
     @Override
     public Var sub(Var var) {
-        if (var instanceof VarD)
+        if (var instanceof VarD && ((VarD) var).value != 0)
             return new VarD(this.value - ((VarD) var).value);
         else return super.sub(var);
     }
