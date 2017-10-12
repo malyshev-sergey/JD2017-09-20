@@ -8,10 +8,11 @@ public class CalcRunner {
         VarV v3 = new VarV("");
         VarM v4 = new VarM("");
 
-        //v1.div(v4);
-       //v1.mul(v3);
-       // v2.mul(v4);
-        //v4.add(v3);
+        v1.div(v4);
+        v1.mul(v3);
+        v2.mul(v4);
+        v4.add(v3);
+        v4.mul(v3);
 
         //System.out.println(v1.getClass().getCanonicalName());
 
