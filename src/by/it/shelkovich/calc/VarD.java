@@ -40,7 +40,7 @@ public class VarD extends Var{
     @Override
     public Var sub(Var arg) {
         if (arg instanceof VarD) return sub((VarD) arg);
-        else return arg.add(this);
+        else return super.sub(arg);
     }
 
     @Override
@@ -52,6 +52,6 @@ public class VarD extends Var{
     @Override
     public Var div(Var arg) {
         if (arg instanceof VarD) return div((VarD) arg);
-        else return arg.add(this);
+        else return super.div(arg);
     }
 }

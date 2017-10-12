@@ -1,11 +1,6 @@
 package by.it.shelkovich.calc;
 
 public abstract class Var implements IOperation{
-    public final AbstractOperator op;
-
-    Var(AbstractOperator op){
-        this.op = op;
-    }
 
     @Override
     public Var add(Var arg){
