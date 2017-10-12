@@ -12,7 +12,6 @@ public class VarV extends Var {
     }
 
     VarV(double[] value) {
-        super('V');
         this.value = value;
     }
 
@@ -32,8 +31,8 @@ public class VarV extends Var {
 
     @Override
     public Var add(Var arg) {
-        if(arg.getType() == 'D') return add((VarD) arg);
-        else if (arg.getType() == 'V') return add((VarV) arg);
+        if(arg instanceof VarD) return add((VarD) arg);
+        else if (arg instanceof VarV) return add((VarV) arg);
         else return arg.add(this);
     }
 }

@@ -7,11 +7,9 @@ public class VarM extends Var{
     }
 
     VarM(String value) {
-        super('M');
         //this.value = Double.parseDouble(value);
     }
     VarM(double[][] value) {
-        super('M');
         this.value = value;
     }
 
@@ -32,9 +30,9 @@ public class VarM extends Var{
 
     @Override
     public Var add(Var arg) {
-        if(arg.getType() == 'D') return add((VarD) arg);
-        else if (arg.getType() == 'V') return add((VarV) arg);
-        else if (arg.getType() == 'M') return add((VarM) arg);
+        if(arg instanceof VarD) return add((VarD) arg);
+        else if (arg instanceof VarV) return add((VarV) arg);
+        else if (arg instanceof VarM) return add((VarM) arg);
         else return arg.add(this);
 
     }

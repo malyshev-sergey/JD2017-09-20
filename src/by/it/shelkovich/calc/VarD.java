@@ -11,7 +11,7 @@ public class VarD extends Var{
         this(Double.parseDouble(value));
     }
     VarD(double value) {
-        super('D');
+
         this.value = value;
     }
 
@@ -22,8 +22,19 @@ public class VarD extends Var{
 
     @Override
     public Var add(Var arg) {
-        if (arg.getType() == 'D') return add((VarD) arg);
+        if (arg instanceof VarD) return sub((VarD) arg);
         else return arg.add(this);
     }
 
+
+    public VarD sub(VarD arg) {
+        System.out.println("Разность даблов");
+        return new VarD(value - arg.getValue());
+    }
+
+    @Override
+    public Var sub(Var arg) {
+        if (arg instanceof VarD) return sub((VarD) arg);
+        else return arg.add(this);
+    }
 }

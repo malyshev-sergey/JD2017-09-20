@@ -1,15 +1,6 @@
 package by.it.shelkovich.calc;
 
 public abstract class Var implements IOperation{
-    private char type;
-
-    char getType (){
-        return type;
-    }
-
-    Var (char type){
-        this.type = type;
-    }
 
     @Override
     public Var add(Var arg){
