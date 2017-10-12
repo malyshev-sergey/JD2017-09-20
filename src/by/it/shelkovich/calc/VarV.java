@@ -15,39 +15,26 @@ public class VarV extends Var {
         this.value = value;
     }
 
-    public VarV add(VarD arg) {//сложение вектора с числом
-        return null;
+    
+
+
+    @Override
+    public Var defaultAdd(Var v) {
+        if (!v.isUsed()){
+            used = true;
+            return v.add(this);
+        }else
+            return null;
+
     }
 
-    public VarV add(VarV arg) {//сложение вектора с вектором
-        return null;
+    @Override
+    public Var defaultMul(Var v) {
+        if (!v.isUsed()){
+            used = true;
+            return v.mul(this);
+        }else
+            return null;
     }
-
-    public VarV sub(VarD arg) {//разность вектора с числом
-        return null;
-    }
-
-    public VarV sub(VarV arg) {//разность вектора с вектором
-        return null;
-    }
-
-    public VarV mul(VarD arg) {//умножение вектора на число
-        return null;
-    }
-
-    public VarV mul(VarV arg) {//умножение вектора на вектор
-        return null;
-    }
-
-    public VarV div(VarD arg) {//деление вектора на число
-        return null;
-    }
-
-    public VarV div(VarV arg) {//деление вектора на вектор
-        return null;
-    }
-
-
-
 
 }
