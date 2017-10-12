@@ -49,30 +49,5 @@ public class VarV extends Var {
 
 
 
-    @Override
-    public Var add(Var arg) {
-        if(arg instanceof VarD) return add((VarD) arg);
-        else if (arg instanceof VarV) return add((VarV) arg);
-        else return arg.add(this);
-    }
 
-    @Override
-    public Var sub(Var arg) {
-        if(arg instanceof VarD) return sub((VarD) arg);
-        else if (arg instanceof VarV) return sub((VarV) arg);
-        else return arg.sub(this);
-    }
-
-    @Override
-    public Var mul(Var arg) {
-        if(arg instanceof VarD) return add((VarD) arg);
-        else if (arg instanceof VarV) return add((VarV) arg);
-        else return arg.add(this);
-    }
-
-    @Override
-    public Var div(Var arg) {
-        if(arg instanceof VarD) return add((VarD) arg);
-        else return super.div(arg);
-    }
 }
