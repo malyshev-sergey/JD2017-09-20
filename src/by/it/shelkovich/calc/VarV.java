@@ -58,18 +58,19 @@ public class VarV extends Var {
         return new VarV("");
     }
 
-    public Var defaultOp(String type, Var v){
+    @Override
+    public Var defaultOp(String type, Var v, boolean setUsed){
         if (!v.isUsed()) {
-            used = true;
+            if (setUsed) used = true;
             if("add".equals(type)) return v.add(this);
             else if ("mul".equals(type)) return v.mul(this);
             else if ("sub".equals(type)) return v.sub(this);
             else if ("div".equals(type)) return v.div(this);
             return null;
         } else
-            return null;
+            v.setUsed(false);
+        return null;
     }
-    public Var recall(String op, Var v){
-        return v.defaultOp(op, this);
-    }
+
+
 }
