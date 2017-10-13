@@ -15,6 +15,10 @@ public class VarD extends Var {
         this.value = value;
     }
 
+    VarD(VarD value) {
+        this.value = value.getValue();
+    }
+
     @Override
     public Var add(VarD v1) {
         System.out.println("Сложение числа с числом");

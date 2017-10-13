@@ -10,7 +10,7 @@ public class CalcRunner {
 
         //v1.sub(v2);
         //v1.mul(v3);
-        v1.div(v3);
+        v3.div(v1);
         //v4.add(v3);
         //v4.mul(v3);
 
