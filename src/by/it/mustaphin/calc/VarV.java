@@ -58,7 +58,7 @@ public class VarV extends Var {
     @Override
     public Var sub(Var var) {
         VarV result = new VarV(this.value);
-        if (var instanceof VarV) {
+        if (var instanceof VarV && ((VarV) var).value.length == this.value.length) {
             for (int i = 0; i < this.value.length; i++) {
                 result.value[i] -= ((VarV) var).value[i];
             }
@@ -92,7 +92,7 @@ public class VarV extends Var {
     @Override
     public Var div(Var var) {
         VarV result = new VarV(this.value);
-        if (var instanceof VarV) {
+        if (var instanceof VarV && ((VarV) var).value.length == this.value.length) {
             if (((VarV) var).value.length == this.value.length) {
                 for (int i = 0; i < this.value.length; i++) {
                     result.value[i] /= ((VarV) var).value[i];

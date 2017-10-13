@@ -8,11 +8,6 @@ class VarD extends Var implements IVariable {
         return value;
     }
 
-    @Override
-    public void fromString(String strValue) {
-        this.value = Double.parseDouble(strValue);
-    }
-
     VarD(double value) {
         this.value = value;
     }
@@ -21,11 +16,19 @@ class VarD extends Var implements IVariable {
         fromString(strValue);
     }
 
+    // implementation IVarable
+
+    @Override
+    public void fromString(String strValue) {
+        this.value = Double.parseDouble(strValue);
+    }
+
     @Override
     public String toString() {
         return Double.toString(value);
     }
 
+    // implementation IOperation
 
     @Override
     public Var add(Var var) {
