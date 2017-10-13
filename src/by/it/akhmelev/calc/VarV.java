@@ -7,6 +7,15 @@ class VarV extends Var implements IVariable {
 
     private double[] value;
 
+    private VarV(double[] value) {
+        this.value = value;
+    }
+
+    // implementation IVarable
+
+    VarV(String strVector) {
+        fromString(strVector);
+    }
     @Override
     public void fromString(String strVector) {
         Pattern p = Pattern.compile(Patterns.exVal);
@@ -15,14 +24,6 @@ class VarV extends Var implements IVariable {
         int i = 0;
         while (m.find())
             value[i++] = Double.parseDouble(m.group());
-    }
-
-    VarV(double[] value) {
-        this.value = value;
-    }
-
-    VarV(String strVector) {
-        fromString(strVector);
     }
 
     @Override
@@ -37,7 +38,7 @@ class VarV extends Var implements IVariable {
         return sb.toString();
     }
 
-    // impl IVarable
+    // implementation IOperation
 
     @Override
     public Var add(Var var) {
