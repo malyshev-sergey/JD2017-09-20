@@ -1,4 +1,4 @@
-package by.it.ali.Calc;
+package by.it.ali.calc;
 
 
 abstract class Var implements Func{
