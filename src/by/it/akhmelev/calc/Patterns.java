@@ -10,5 +10,4 @@ interface Patterns {
     String exFull= "("+exAny+")"+
                    "(" +exOper+")"+
                    "(" +exAny +")"; //выражение целиком
-
 }

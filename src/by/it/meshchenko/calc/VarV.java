@@ -15,6 +15,10 @@ public class VarV extends Var implements IVariable, IVarVisitor{
         fromString(strVector);
     }
 
+    // get set
+    public double[] getValue() {
+        return value;
+    }
 
     // extends Var
     @Override

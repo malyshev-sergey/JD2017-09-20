@@ -49,24 +49,33 @@ public class VarD extends Var implements IVariable, IVarVisitor {
     }
     @Override
     public Var sub(Var var) {
+        return var.accept(this, Operation.SUB);
+        /*
         if (var instanceof VarD)
             return new VarD(this.value - ((VarD) var).value);
         else
             return super.sub(var);
+            */
     }
     @Override
     public Var mul(Var var) {
+        return var.accept(this, Operation.MUL);
+        /*
         if (var instanceof VarD)
             return new VarD(this.value * ((VarD) var).value);
         else
             return var.mul(this);
+            */
     }
     @Override
     public Var div(Var var) {
+        return var.accept(this, Operation.DIV);
+        /*
         if (var instanceof VarD)
             return new VarD(this.value / ((VarD) var).value);
         else
             return super.sub(var);
+            */
     }
 
     // implements IVariable
@@ -87,7 +96,12 @@ public class VarD extends Var implements IVariable, IVarVisitor {
     }
     @Override
     public Var visitAdd(VarV varV) {
-        return null;
+        VarV result = new VarV(varV.getValue());
+        double[] resultVal = result.getValue();
+        double operand2 = this.value;
+        for (int i = 0; i < resultVal.length; i++)
+            resultVal[i] += operand2;
+        return result;
     }
     @Override
     public Var visitAdd(VarM varM) {
@@ -95,15 +109,15 @@ public class VarD extends Var implements IVariable, IVarVisitor {
     }
     @Override
     public Var visitSub(VarD varD) {
-        return null;
+        return new VarD(this.value - varD.value);
     }
     @Override
     public Var visitSub(VarV varV) {
-        return null;
+        return super.sub(varOperand2);
     }
     @Override
     public Var visitSub(VarM varM) {
-        return null;
+        return super.sub(varOperand2);
     }
     @Override
     public Var visitMul(VarD varD) {
@@ -119,15 +133,15 @@ public class VarD extends Var implements IVariable, IVarVisitor {
     }
     @Override
     public Var visitDiv(VarD varD) {
-        return null;
+        return new VarD(this.value / varD.value);
     }
     @Override
     public Var visitDiv(VarV varV) {
-        return null;
+        return super.div(varOperand2);
     }
     @Override
     public Var visitDiv(VarM varM) {
-        return null;
+        return super.div(varOperand2);
     }
 
 }
