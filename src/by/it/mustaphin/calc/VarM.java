@@ -1,5 +1,6 @@
 package by.it.mustaphin.calc;
 
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class VarM extends Var {
@@ -12,6 +13,9 @@ public class VarM extends Var {
 
     @Override
     public void fromString(String str) {
+        Pattern pat = Pattern.compile(str);
+        Matcher mat = pat.matcher(str);
+        String mas[] = str.split(pat.pattern());
 
     }
 
