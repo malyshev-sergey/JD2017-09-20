@@ -31,8 +31,23 @@ public class VarM extends Var {
         return sb.toString();
     }
 
+    public VarM(double[][] value) {
+        this.value = value;
+    }
+
+    public VarM(String str) {
+        this.fromString(str);
+    }
+
     @Override
     public Var add(Var var) {
+        if (var instanceof VarM) {
+            System.out.println("Здесь должно выполняться сложение матрицы с матрицией");
+        } else if (var instanceof VarV) {
+            return super.add(var);
+        } else if (var instanceof VarD) {
+            System.out.println("Здесь должно выполняться сложение матрицы со скалярной величиной");
+        }
         return super.add(var);
     }
 
@@ -43,6 +58,13 @@ public class VarM extends Var {
 
     @Override
     public Var mul(Var var) {
+        if (var instanceof VarM) {
+            System.out.println("Здесь должно выполняться умножение матрицы с матрицией");
+        } else if (var instanceof VarV) {
+            return super.add(var);
+        } else if (var instanceof VarD) {
+            System.out.println("Здесь должно выполняться умножение матрицы со скалярной величиной");
+        }
         return super.mul(var);
     }
 
