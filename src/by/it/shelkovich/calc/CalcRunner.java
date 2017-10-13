@@ -9,9 +9,9 @@ public class CalcRunner {
         Var v4 = new VarM("");
 
         //v1.sub(v2);
-       // v1.mul(v3);
-        v3.div(v1);
-        //v4.add(v3);
+        //v1.mul(v3);
+        //v3.div(v1);
+        v4.add(v2);
         //v4.mul(v3);
 
         //System.out.println(v1.getClass().getCanonicalName());

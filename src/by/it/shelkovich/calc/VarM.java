@@ -33,8 +33,6 @@ public class VarM extends Var {
         return new VarM("");
     }
 
-
-
     public VarM mul(VarV arg) {
         System.out.println("Умножение матрицы на вектор");
         return new VarM("");
@@ -52,40 +50,19 @@ public class VarM extends Var {
     }
 
     @Override
-    public Var defaultAdd(Var v) {
-        if (!v.isUsed()){
-            used = true;
-            return v.add(this);
-        }else
-            return null;
-
-    }
-
-    @Override
-    public Var defaultMul(Var v) {
-        if (!v.isUsed()){
-            used = true;
-            return v.mul(this);
-        }else
-            return null;
-    }
-
-    @Override
-    public Var defaultSub(Var v) {
+    public Var defaultOp(String type, Var v){
         if (!v.isUsed()) {
             used = true;
-            return v.sub(this);
+            if("add".equals(type)) return v.add(this);
+            else if ("mul".equals(type)) return v.mul(this);
+            else if ("sub".equals(type)) return v.sub(this);
+            else if ("div".equals(type)) return v.div(this);
+            return null;
         } else
             return null;
     }
 
-    @Override
-    public Var defaultDiv(Var v) {
-        if (!v.isUsed()) {
-            used = true;
-            return v.div(this);
-        } else
-            return null;
+    public Var recall(String op, Var v){
+        return v.defaultOp(op, this);
     }
-
 }
