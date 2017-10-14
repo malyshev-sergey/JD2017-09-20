@@ -13,10 +13,9 @@ public class VarM extends Var {
 
     @Override
     public void fromString(String str) {
-        Pattern pat = Pattern.compile(str);
-        Matcher mat = pat.matcher(str);
-        String mas[] = str.split(pat.pattern());
-
+        Pattern pat1 = Pattern.compile("[{]?[{][},{]?");
+        Matcher mat1 = pat1.matcher(str);
+        String strMas[] = str.split(pat1.pattern());
     }
 
     @Override
