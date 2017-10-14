@@ -2,17 +2,7 @@ package by.it.shelkovich.calc;
 
 public class CalcRunner {
     public static void main(String[] args) {
-
-        Var v1 = new VarD(1.5);
-        Var v2 = new VarD(1.5);
-        Var v3 = new VarV("");
-        Var v4 = new VarM("");
-
-        //v1.sub(v2);
-        //v1.mul(v3);
-        //v3.div(v1);
-        //v4.add(v3);
-        //v4.mul(v3);
+        
         System.out.println("Оперции с числами");
         System.out.println(((Var) new VarD("3.8")).add((Var) new VarD("26.2")).toString());
         System.out.println(new VarD("87.4").sub(new VarD("23.1")).toString());
