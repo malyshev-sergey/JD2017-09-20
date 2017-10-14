@@ -60,6 +60,7 @@ public class OperationCore {
         return result;
     }
 
+
     // Div: VarF / VarF
     public static Var div_FF(VarF v1, VarF v2) {
         return new VarF(v1.getValue() / v2.getValue());
@@ -86,6 +87,8 @@ public class OperationCore {
         }
         return result;
     }
+
+
     // Mul: VarF * VarF
     public static Var mul_FF(VarF v1, VarF v2) {
         return new VarF(v1.getValue() * v2.getValue());
@@ -113,7 +116,6 @@ public class OperationCore {
         return result;
     }
     // Mul: VarV * VarV - не реализовано необходимо менять класс VarV
-
     // Mul: VarV * VarM
     public static Var mul_VM(VarV v1, VarM v2){
         double[] size = v1.getValue();
@@ -123,7 +125,6 @@ public class OperationCore {
         }
         return mul_MM(new VarM(operator), v2);
     }
-
     // Mul: VarM * VarV
     public static Var mul_MV(VarM v1, VarV v2){
         double[] size = v2.getValue();
@@ -133,7 +134,6 @@ public class OperationCore {
         }
         return mul_MM(v1, new VarM(operator));
     }
-
     // Mul: VarM * VarM
     public static Var mul_MM(VarM v1, VarM v2){
         VarM result = null;
@@ -158,6 +158,8 @@ public class OperationCore {
         }
         return result;
     }
+
+
     // Sub: VarF - VarF
     public static Var sub_FF(VarF v1, VarF v2){
         return add_FF(v1, new VarF(-v2.getValue()));
@@ -170,6 +172,5 @@ public class OperationCore {
     public static Var sub_MF(VarM v1, VarF v2){
         return add_MF(v1, new VarF(-v2.getValue()));
     }
-
     // Sub: VarV - VarV - не реализовано необходимо менять класс VarV
 }
