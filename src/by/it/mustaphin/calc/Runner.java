@@ -30,7 +30,7 @@ public class Runner {
         System.out.println(varV1.mul(varD2));
         System.out.println(varV1.sub(varD2));
         System.out.println("=========================");
-        VarM varM1 = new VarM(new double[][]{{1, 2, 3}, {5, 6, 7}});
+        VarM varM1 = new VarM("{{1, 2.6, 3}, {5, 6, 7.1}}");
         VarM varM2 = new VarM(new double[][]{{5, 6, 7}, {8, 9, 11}});
         System.out.println("Операции с матрицами");
         System.out.println(varM1.add(varM2));

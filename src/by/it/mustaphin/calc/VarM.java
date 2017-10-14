@@ -1,5 +1,6 @@
 package by.it.mustaphin.calc;
 
+import java.util.LinkedHashSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -13,9 +14,24 @@ public class VarM extends Var {
 
     @Override
     public void fromString(String str) {
-        Pattern pat1 = Pattern.compile("[{]?[{][},{]?");
-        Matcher mat1 = pat1.matcher(str);
-        String strMas[] = str.split(pat1.pattern());
+        Pattern pat = Pattern.compile("((-?([0-9.])+),?)+");
+        Matcher mat = pat.matcher(str);
+        LinkedHashSet<double[]> setStr = new LinkedHashSet<>();
+        while (mat.find()) {
+            String tmp[] = mat.group().split("[,]");
+            double var[] = new double[tmp.length];
+            for (int i = 0; i < tmp.length; i++) {
+                var[i] = Double.parseDouble(tmp[i]);
+            }
+            setStr.add(var);
+        }
+        double value[][] = new double[setStr.size()][];
+        int count = 0;
+        for (double[] var : setStr) {
+            value[count] = var;
+            count++;
+        }
+        this.value = value;
     }
 
     @Override
@@ -46,10 +62,12 @@ public class VarM extends Var {
     public Var add(Var var) {
         if (var instanceof VarM) {
             System.out.println("Здесь должно выполняться сложение матрицы с матрицией");
+            return null;
         } else if (var instanceof VarV) {
             return super.add(var);
         } else if (var instanceof VarD) {
             System.out.println("Здесь должно выполняться сложение матрицы со скалярной величиной");
+            return null;
         }
         return super.add(var);
     }
@@ -63,10 +81,12 @@ public class VarM extends Var {
     public Var mul(Var var) {
         if (var instanceof VarM) {
             System.out.println("Здесь должно выполняться умножение матрицы с матрицией");
+            return null;
         } else if (var instanceof VarV) {
             return super.add(var);
         } else if (var instanceof VarD) {
             System.out.println("Здесь должно выполняться умножение матрицы со скалярной величиной");
+            return null;
         }
         return super.mul(var);
     }
