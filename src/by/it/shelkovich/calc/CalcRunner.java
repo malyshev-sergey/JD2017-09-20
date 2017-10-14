@@ -10,18 +10,32 @@ public class CalcRunner {
 
         //v1.sub(v2);
         //v1.mul(v3);
-        v3.div(v1);
+        //v3.div(v1);
         //v4.add(v3);
         //v4.mul(v3);
+        System.out.println("Оперции с числами");
+        System.out.println(((Var) new VarD("3.8")).add((Var) new VarD("26.2")).toString());
+        System.out.println(new VarD("87.4").sub(new VarD("23.1")).toString());
+        System.out.println(new VarD("1.04").mul(new VarD("5.9")).toString());
+        System.out.println(new VarD("12.7").mul(new VarD("5")).toString());
+        System.out.println(new VarD("-6").add(new VarD("12")).toString());
+        System.out.println(new VarD("-7").mul(new VarD("3.1")).toString());
+        System.out.println(new VarD("4").div(new VarD("8")).toString());
+        System.out.println(new VarD("-9").sub(new VarD("0.9")).toString());
 
-        //System.out.println(v1.getClass().getCanonicalName());
+        System.out.println("\n\nОперации с векторами");
 
-        /*Var v1 = new VarD(1.5);
-        VarD v3 = new VarD(1.5);
-        Var v2 = new VarV("");
-        v1.add(v2);*/
+        System.out.println(((Var) new VarV("{2,3,4}")).mul((Var) new VarD("2")).toString());
+        System.out.println(new VarV("{2,3,4}").div(new VarD("3")).toString());
+        System.out.println(new VarV("{2,3,4}").sub(new VarD("5")).toString());
+        System.out.println(((Var)new VarD("-4")).add((Var)new VarV("{2,3,4}")).toString());
+        System.out.println(new VarV("{2,3,4}").add(new VarV("{5,6,7}")).toString());
+        System.out.println(new VarV("{2,3,4}").sub(new VarV("{5,6,7}")).toString());
 
-
-        //System.out.println(v1.getClass());
+        System.out.println("\n\nОперации с матрицами");
+        System.out.println(((Var) new VarM("{{1,2},{8,3}}")).sub((Var) new VarD("2")).toString());
+        System.out.println(new VarM("{{1,2},{8,3}}").mul(new VarV("{1,2}")).toString());
+        System.out.println(new VarM("{{1,2},{8,3}}").mul(new VarM("{{1,2},{8,3}}")).toString());
+        System.out.println(new VarM("{{1,2},{8,3}}").add(new VarM("{{1,2},{8,3}}")).toString());
     }
 }

@@ -1,5 +1,10 @@
 package by.it.shelkovich.calc;
 
+import by.it.shelkovich.calc.interfaces.Patterns;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class VarV extends Var {
     private double[] value;
 
@@ -8,7 +13,7 @@ public class VarV extends Var {
     }
 
     VarV(String value) {
-        this(new double[1]);
+        setFrom(value);
     }
 
     VarV(double[] value) {
@@ -18,6 +23,26 @@ public class VarV extends Var {
 
     VarV(VarV v) {
         this(v.value);
+    }
+
+    public String toString(){
+        StringBuilder result = new StringBuilder(value.length*2+2);
+        result.append('{');
+        String delimiter = "";
+        for(double val: value){
+            result.append(delimiter).append(String.valueOf(val));
+            delimiter = ",";
+        }
+        result.append('}');
+        return result.toString();
+    }
+    public void setFrom(String str){
+        Pattern p = Pattern.compile(Patterns.exVal);
+        value = new double[str.split(",").length];
+        Matcher m = p.matcher(str);
+        int i = 0;
+        while (m.find())
+            value[i++] = Double.parseDouble(m.group());
     }
 
     @Override

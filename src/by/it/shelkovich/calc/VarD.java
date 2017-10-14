@@ -8,7 +8,7 @@ public class VarD extends Var {
     }
 
     VarD(String value) {
-        this(Double.parseDouble(value));
+        setFrom(value);
     }
 
     VarD(double value) {
@@ -19,6 +19,13 @@ public class VarD extends Var {
         this.value = value.getValue();
     }
 
+    public String toString(){
+        return String.valueOf(value);
+    }
+    public void setFrom(String str){
+        this.value = Double.parseDouble(str);
+    }
+
     @Override
     public Var add(VarD v1) {
         System.out.println("Сложение числа с числом");
@@ -27,7 +34,7 @@ public class VarD extends Var {
 
     @Override
     public Var mul(VarD v1) {
-        System.out.println("Сложение числа с числом");
+        System.out.println("Умножение числа на число");
         return new VarD(value * v1.getValue());
     }
 

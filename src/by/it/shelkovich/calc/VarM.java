@@ -1,5 +1,10 @@
 package by.it.shelkovich.calc;
 
+import by.it.shelkovich.calc.interfaces.Patterns;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class VarM extends Var {
     private double[][] value;
 
@@ -8,7 +13,7 @@ public class VarM extends Var {
     }
 
     VarM(String value) {
-        //this.value = Double.parseDouble(value);
+        setFrom(value);
     }
 
     VarM(double[][] value) {
@@ -21,6 +26,48 @@ public class VarM extends Var {
 
     VarM(VarM v) {
         this(v.value);
+    }
+
+    public String toString(){
+        StringBuilder result = new StringBuilder((value.length+2)*value[0].length*4+2);
+        result.append('{');
+        String delimiter1 = "";
+        String delimiter2 = "";
+        for (int i = 0; i < value.length ; i++) {
+            result.append(delimiter1).append('{');
+            delimiter1 = ",";
+            delimiter2 = "";
+            for (int j = 0; j < value[i].length ; j++) {
+                result.append(delimiter2).append(String.valueOf(value[i][j]));
+                delimiter2 = ",";
+            }
+            result.append('}');
+        }
+        result.append('}');
+        return result.toString();
+    }
+
+
+    public void setFrom(String str){
+        Pattern pVec = Pattern.compile(Patterns.exVec);
+        Matcher mVec = pVec.matcher(str);
+        int i=0;
+        while (mVec.find())
+            i++;
+        mVec.reset();
+        value = new double[i][];
+        i=0;
+        while (mVec.find()){
+            String lineStr = mVec.group();
+            double[] line = new double[lineStr.split(",").length];
+
+            Pattern pVal = Pattern.compile(Patterns.exVal);
+            Matcher mVal = pVal.matcher(lineStr);
+            int k = 0;
+            while (mVal.find())
+                line[k++] = Double.parseDouble(mVal.group());
+            value[i++] = line;
+        }
     }
 
     public VarM add(VarD arg) {
@@ -69,28 +116,29 @@ public class VarM extends Var {
 
     public VarV mul(VarV arg) {
         System.out.println("Умножение матрицы на вектор");
-        VarV result;
+        double[] result;
 
         if (this.value[0].length == arg.getValue().length) {
-            double argArray[] = new double[arg.getValue().length];
-            result = new VarV(new double[this.value[0].length]);
+            double argArray[] = arg.getValue();
+            result = new double[this.value[0].length];
             for (int i = 0; i < this.value.length; i++) {
                 double res = 0;
                 for (int j = 0; j < this.value[i].length; j++) {
                     res = res + this.value[i][j] * argArray[j];
                 }
+                result[i] = res;
             }
         } else {
             System.out.println("Число столбцов матрицы не соответствует числу элементов в векторе!");
             result = null;
         }
 
-        return result;
+        return new VarV(result);
     }
 
 
     public VarM add(VarM arg) {
-        System.out.println("сложение матрицы с матрицей");
+        System.out.println("Cложение матрицы с матрицей");
         VarM result = new VarM(this);
         for (int i = 0; i < result.value.length; i++) {
             for (int j = 0; j < result.value[i].length; j++) {

@@ -1,6 +1,8 @@
 package by.it.shelkovich.calc;
 
-public abstract class Var<T> implements IAdd, IMul, ISub, IDiv {
+import by.it.shelkovich.calc.interfaces.*;
+
+public abstract class Var implements IAdd, IMul, ISub, IDiv, StringCompatible {
     protected boolean used = false;
 
     protected boolean printed = false;
