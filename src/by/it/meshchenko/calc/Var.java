@@ -2,7 +2,10 @@ package by.it.meshchenko.calc;
 
 public abstract class Var implements IOperation {
 
-    public abstract Var accept(IVarVisitor iVarVisitor, Operation op);
+    public abstract Var acceptAdd(IOperationVisitorAdd p);
+    public abstract Var acceptDiv(IOperationVisitorDiv p);
+    public abstract Var acceptMul(IOperationVisitorMul p);
+    public abstract Var acceptSub(IOperationVisitorSub p);
 
     @Override
     public Var add(Var var) {
