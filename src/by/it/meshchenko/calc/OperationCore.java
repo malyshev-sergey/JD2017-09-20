@@ -43,7 +43,6 @@ public class OperationCore {
         }
         return result;
     }
-
     // Add: VarM + VarM
     public static Var add_MM(VarM v1, VarM v2){
         VarM result = null;
