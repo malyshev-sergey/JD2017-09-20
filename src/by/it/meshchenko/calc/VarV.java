@@ -3,7 +3,8 @@ package by.it.meshchenko.calc;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
-public class VarV extends Var implements IVariable, IVarVisitor{
+public class VarV extends Var implements IVariable, IOperationVisitorAdd,
+        IOperationVisitorDiv, IOperationVisitorMul, IOperationVisitorSub{
     private double[] value;
     private Var varOperand2;
 
@@ -22,95 +23,41 @@ public class VarV extends Var implements IVariable, IVarVisitor{
 
     // extends Var
     @Override
-    public Var accept(IVarVisitor iVar, Operation op) {
-        if(op == Operation.ADD){
-            return iVar.visitAdd(this);
-        }
-        else if(op == Operation.SUB){
-            return iVar.visitSub(this);
-        }
-        else if (op == Operation.MUL){
-            return iVar.visitMul(this);
-        }
-        else if(op == Operation.DIV){
-            return iVar.visitDiv(this);
-        }
-        else {
-            return null;
-        }
+    public Var acceptAdd(IOperationVisitorAdd p) {
+        return p.visitAdd(this);
     }
+    @Override
+    public Var acceptDiv(IOperationVisitorDiv p) {
+        return p.visitDiv(this);
+    }
+    @Override
+    public Var acceptMul(IOperationVisitorMul p) {
+        return p.visitMul(this);
+    }
+    @Override
+    public Var acceptSub(IOperationVisitorSub p) {
+        return p.visitSub(this);
+    }
+
     @Override
     public Var add(Var var) {
         varOperand2 = var;
-        return var.accept(this, Operation.ADD);
-        /*
-        VarV result;
-        if (var instanceof VarD) {
-            result = new VarV(this.value);
-            double operand2 = ((VarD) var).getValue();
-            for (int i = 0; i < value.length; i++)
-                result.value[i] += operand2;
-            return result;
-        } else if (var instanceof VarV) {
-            result = new VarV(this.value);
-            VarV operand2 = ((VarV) var);
-            for (int i = 0; i < value.length; i++)
-                result.value[i] += operand2.value[i];
-            return result;
-        } else
-            return super.add(var);
-            */
+        return var.acceptAdd(this);
     }
-
     @Override
     public Var sub(Var var) {
-        VarV result;
-        if (var instanceof VarD) {
-            result = new VarV(this.value);
-            double operand2 = ((VarD) var).getValue();
-            for (int i = 0; i < value.length; i++)
-                result.value[i] -= operand2;
-            return result;
-        } else if (var instanceof VarV) {
-            result = new VarV(this.value);
-            VarV operand2 = ((VarV) var);
-            for (int i = 0; i < value.length; i++)
-                result.value[i] -= operand2.value[i];
-            return result;
-        } else
-            return super.sub(var);
+        varOperand2 = var;
+        return var.acceptSub(this);
     }
-
     @Override
     public Var mul(Var var) {
-        VarV result;
-        if (var instanceof VarD) {
-            result = new VarV(this.value);
-            double operand2 = ((VarD) var).getValue();
-            for (int i = 0; i < value.length; i++)
-                result.value[i] *= operand2;
-            return result;
-        } else if (var instanceof VarV) {
-            double sum = 0;
-            VarV operand2 = ((VarV) var);
-            for (int i = 0; i < value.length; i++)
-                sum=this.value[i] + operand2.value[i];
-            return new VarD(sum);
-        } else
-            return super.mul(var);
+        varOperand2 = var;
+        return var.acceptMul(this);
     }
-
     @Override
     public Var div(Var var) {
-        VarV result;
-        if (var instanceof VarD) {
-            result = new VarV(this.value);
-            double operand2 = ((VarD) var).getValue();
-            for (int i = 0; i < value.length; i++)
-                result.value[i] /= operand2;
-            return result;
-        } else
-            return super.div(var);
+        varOperand2 = var;
+        return var.acceptDiv(this);
     }
 
 
@@ -136,71 +83,72 @@ public class VarV extends Var implements IVariable, IVarVisitor{
         return sb.toString();
     }
 
-    // implements IVarVisitor
+    // implements IOperationVisitorAdd
     @Override
-    public Var visitAdd(VarD varD) {
-        VarV result = new VarV(this.value);
-        double operand2 = varD.getValue();
-        for (int i = 0; i < value.length; i++)
-            result.value[i] += operand2;
-        return result;
+    public Var visitAdd(VarF varF) {
+        return OperationCore.add_VF(this, varF);
     }
-
+    // операция не возможна, вызываем метод суперкласса
     @Override
     public Var visitAdd(VarV varV) {
-        VarV result = new VarV(this.value);
-        for (int i = 0; i < value.length; i++)
-            result.value[i] += varV.value[i];
-        return result;
+        // если не совпадают размеры, операции может и не быть
+        Var res = OperationCore.add_VV(this, varV);
+        if(res != null) return res;
+        return super.mul(varOperand2);
     }
-
+    // операция не возможна, вызываем метод суперкласса
     @Override
     public Var visitAdd(VarM varM) {
         return super.add(varOperand2);
     }
 
+    // implements IOperationVisitorDiv
     @Override
-    public Var visitSub(VarD varD) {
-        return null;
+    public Var visitDiv(VarF varF) {
+        return OperationCore.div_VF(this, varF);
     }
-
-    @Override
-    public Var visitSub(VarV varV) {
-        return null;
-    }
-
-    @Override
-    public Var visitSub(VarM varM) {
-        return null;
-    }
-
-    @Override
-    public Var visitMul(VarD varD) {
-        return null;
-    }
-
-    @Override
-    public Var visitMul(VarV varV) {
-        return null;
-    }
-
-    @Override
-    public Var visitMul(VarM varM) {
-        return null;
-    }
-
-    @Override
-    public Var visitDiv(VarD varD) {
-        return null;
-    }
-
+    // операция не возможна, вызываем метод суперкласса
     @Override
     public Var visitDiv(VarV varV) {
-        return null;
+        return super.div(varOperand2);
     }
-
+    // операция не возможна, вызываем метод суперкласса
     @Override
     public Var visitDiv(VarM varM) {
-        return null;
+        return super.div(varOperand2);
+    }
+
+    // implements IOperationVisitorMul
+    @Override
+    public Var visitMul(VarF varF) {
+        return OperationCore.mul_FV(varF, this);
+    }
+    // операция не возможна, вызываем метод суперкласса
+    @Override
+    public Var visitMul(VarV varV) {
+        return super.mul(varOperand2);
+    }
+    @Override
+    public Var visitMul(VarM varM) {
+        // если не совпадают размеры, операции может и не быть
+        Var res = OperationCore.mul_VM(this, varM);
+        if(res != null) return res;
+        return super.mul(varOperand2);
+    }
+
+    // implements IOperationVisitorSub
+    @Override
+    public Var visitSub(VarF varF) {
+        return OperationCore.sub_VF(this, varF);
+    }
+    // операция не возможна, вызываем метод суперкласса
+    @Override
+    public Var visitSub(VarV varV) {
+        return super.sub(varOperand2);
+    }
+    // операция не возможна, вызываем метод суперкласса
+    @Override
+    public Var visitSub(VarM varM) {
+        return super.sub(varOperand2);
     }
 }

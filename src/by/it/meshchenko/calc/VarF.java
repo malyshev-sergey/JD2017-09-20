@@ -1,16 +1,16 @@
 package by.it.meshchenko.calc;
 
-public class VarD extends Var implements IVariable, IOperationVisitorAdd,
+public class VarF extends Var implements IVariable, IOperationVisitorAdd,
         IOperationVisitorDiv, IOperationVisitorMul, IOperationVisitorSub {
 
     private double value;
     private Var varOperand2;
 
     // Конструкторы
-    VarD(double value) {
+    VarF(double value) {
         this.value = value;
     }
-    VarD(String strValue) {
+    VarF(String strValue) {
         fromString(strValue);
     }
 
@@ -41,34 +41,16 @@ public class VarD extends Var implements IVariable, IOperationVisitorAdd,
     public Var add(Var var) {
         varOperand2 = var;
         return var.acceptAdd(this);
-        /*
-        if (var instanceof VarD)
-            return new VarD(this.value + ((VarD) var).value);
-        else
-            return var.add(this);
-        */
     }
     @Override
     public Var sub(Var var) {
         varOperand2 = var;
         return var.acceptSub(this);
-        /*
-        if (var instanceof VarD)
-            return new VarD(this.value - ((VarD) var).value);
-        else
-            return super.sub(var);
-            */
     }
     @Override
     public Var mul(Var var) {
         varOperand2 = var;
         return var.acceptMul(this);
-        /*
-        if (var instanceof VarD)
-            return new VarD(this.value * ((VarD) var).value);
-        else
-            return var.mul(this);
-            */
     }
     @Override
     public Var div(Var var) {
@@ -89,27 +71,29 @@ public class VarD extends Var implements IVariable, IOperationVisitorAdd,
 
     // implements IOperationVisitorAdd
     @Override
-    public Var visitAdd(VarD varD) {
-        return OperationCore.add_DD(this, varD);
+    public Var visitAdd(VarF varF) {
+        return OperationCore.add_FF(this, varF);
     }
     @Override
     public Var visitAdd(VarV varV) {
-        return OperationCore.add_D_V(this, varV);
+        return OperationCore.add_VF(varV, this);
     }
     @Override
     public Var visitAdd(VarM varM) {
-        return null;
+        return OperationCore.add_MF(varM, this);
     }
 
     // implements IOperationVisitorDiv
     @Override
-    public Var visitDiv(VarD varD) {
-        return new VarD(this.value / varD.value);
+    public Var visitDiv(VarF varF) {
+        return OperationCore.div_FF(this, varF);
     }
+    // операция не возможна, вызываем метод суперкласса
     @Override
     public Var visitDiv(VarV varV) {
         return super.div(varOperand2);
     }
+    // операция не возможна, вызываем метод суперкласса
     @Override
     public Var visitDiv(VarM varM) {
         return super.div(varOperand2);
@@ -117,31 +101,31 @@ public class VarD extends Var implements IVariable, IOperationVisitorAdd,
 
     // implements IOperationVisitorMul
     @Override
-    public Var visitMul(VarD varD) {
-        return new VarD(this.value * varD.value);
+    public Var visitMul(VarF varF) {
+        return OperationCore.mul_FF(this, varF);
     }
     @Override
     public Var visitMul(VarV varV) {
-        return null;
+        return OperationCore.mul_FV(this, varV);
     }
     @Override
     public Var visitMul(VarM varM) {
-        return null;
+        return OperationCore.mul_FM(this, varM);
     }
 
     // implements IOperationVisitorSub
     @Override
-    public Var visitSub(VarD varD) {
-        return new VarD(this.value - varD.value);
+    public Var visitSub(VarF varF) {
+        return OperationCore.sub_FF(this, varF);
     }
+    // операция не возможна, вызываем метод суперкласса
     @Override
     public Var visitSub(VarV varV) {
         return super.sub(varOperand2);
     }
+    // операция не возможна, вызываем метод суперкласса
     @Override
     public Var visitSub(VarM varM) {
         return super.sub(varOperand2);
     }
-
-
 }
