@@ -25,13 +25,12 @@ public class VarM extends Var {
             }
             setStr.add(var);
         }
-        double value[][] = new double[setStr.size()][];
+        this.value = new double[setStr.size()][];
         int count = 0;
         for (double[] var : setStr) {
-            value[count] = var;
+            this.value[count] = var;
             count++;
         }
-        this.value = value;
     }
 
     @Override
