@@ -30,7 +30,7 @@ public class Cat extends Animal {
 
     @Override
     public void move() {
-        System.out.print("\n" + name + " носится по дому, как сумасщедший.");
+        System.out.print("\n" + name + " носится по дому, как сумасшедший.");
     }
 
     @Override
