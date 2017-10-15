@@ -44,7 +44,7 @@ public class ConsoleRunner {
         printOneVar(new VarV(vec).mul(new VarV(vec2)));
         printOneVar(new VarV(vec).div(new VarV(vec2)));
 
-        String mat="{{1,2},{8,4}}";
+        String mat="{{1,2},{8,3}}";
         vec="{1,2}";
         String mat2="{{1,2,3},{8,4,5},{4,5,6}}";
 

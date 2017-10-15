@@ -108,9 +108,15 @@ class VarV extends Var implements IVariable {
             for (int i = 0; i < v1.value.length; i++)
                 sum+=v1.value[i] + operand2.value[i];
             return new VarD(sum);
-        } else if (var instanceof VarM) {
-            System.out.print("Опкрация пока не реализована. ");
-            return super.mul(var);
+        } else if (var instanceof VarM && (this.value.length==((VarM) var).getValue().length)) {
+            VarM operand2 = ((VarM) var);
+            double[] temp = new double[(operand2.getValue())[0].length];
+            result = new VarV(temp);
+                for (int j = 0; j < (operand2.getValue())[0].length; j++)
+                    for (int k = 0; k < operand2.getValue().length; k++)
+                        result.value[j] += this.value[k] * operand2.getValue()[k][j];
+            System.out.print("row-vector ");
+            return result;
         } else
             return super.mul(var);
     }

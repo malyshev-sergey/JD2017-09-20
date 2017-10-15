@@ -7,12 +7,17 @@ class VarM extends Var implements IVariable {
 
     private double[][] value;
 
+    public double[][] getValue() {
+        return value;
+    }
+
+
     @Override
     public void fromString(String strMatrix) {
         Pattern p = Pattern.compile(Patterns.exVec);
         Matcher m = p.matcher(strMatrix);
         if (m.find()) {
-            value = new double[m.group().split(",").length][strMatrix.split("\\u007D,").length];
+            value = new double[strMatrix.split("\\u007D,").length][m.group().split(",").length];
         }
         int i = 0;
         m.reset();
@@ -138,6 +143,7 @@ class VarM extends Var implements IVariable {
             for (int i = 0; i < this.value.length; i++)
                 for (int j = 0; j < operand2.length; j++)
                     result.value[i][0] += this.value[i][j] * operand2[j];
+            System.out.print("column-vector ");
             return result;
         } else if (var instanceof VarM && (this.value[0].length==((VarM) var).value.length)) {
             VarM operand2 = ((VarM) var);
