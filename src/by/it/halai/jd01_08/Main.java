@@ -7,7 +7,7 @@ public class Main {
 
     public static void main(String[] args) {
         //Создадим Авианосец
-        AircraftCarrier ac = new AircraftCarrier();
+        MilitaryShip ac = new AircraftCarrier();
         System.out.println(ac.showState()); //посмотрим статус корабля
         ac.movement();                      //отправили корабль в плавание)))
         System.out.println(ac.showState());
