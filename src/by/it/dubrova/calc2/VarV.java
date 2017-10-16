@@ -20,8 +20,51 @@ public class VarV extends Var implements IOperation, IVariable {
         return Double.toString(result);
     }
 
-//////////////////////////////////////
-    
+/////////////////////////////////////
+    // Возможно математику я выполнил не верно!!!!
+/////////////////////////////////////
+    public Var add(Var var) {
+        // Это наш VarD
+        this.result = 0;
+        double tmp = ((VarD)var).getValue();
+        for (double d : this.value){
+            this.result += d * tmp;
+        }
 
+        return (VarV)this;
+    }
+
+    public Var sub(Var var) {
+        // Это наш VarD
+        this.result = 0;
+        double tmp = ((VarD)var).getValue();
+        for (double d : this.value){
+            this.result -= d * tmp;
+        }
+
+        return (VarV)this;
+    }
+
+    public Var mul(Var var) {
+        // Это наш VarD
+        this.result = 0;
+        double tmp = ((VarD)var).getValue();
+        for (double d : this.value){
+            this.result *= d * tmp;
+        }
+
+        return (VarV)this;
+    }
+
+    public Var div(Var var) {
+        // Это наш VarD
+        this.result = 0;
+        double tmp = ((VarD)var).getValue();
+        for (double d : this.value){
+            this.result /= d * tmp;
+        }
+
+        return (VarV)this;
+    }
 
 }
