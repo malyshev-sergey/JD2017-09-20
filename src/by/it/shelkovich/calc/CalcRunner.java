@@ -2,8 +2,8 @@ package by.it.shelkovich.calc;
 
 public class CalcRunner {
     public static void main(String[] args) {
-        
-        System.out.println("Оперции с числами");
+
+        /*System.out.println("Оперции с числами");
         System.out.println(((Var) new VarD("3.8")).add((Var) new VarD("26.2")).toString());
         System.out.println(new VarD("87.4").sub(new VarD("23.1")).toString());
         System.out.println(new VarD("1.04").mul(new VarD("5.9")).toString());
@@ -26,6 +26,23 @@ public class CalcRunner {
         System.out.println(((Var) new VarM("{{1,2},{8,3}}")).sub((Var) new VarD("2")).toString());
         System.out.println(new VarM("{{1,2},{8,3}}").mul(new VarV("{1,2}")).toString());
         System.out.println(new VarM("{{1,2},{8,3}}").mul(new VarM("{{1,2},{8,3}}")).toString());
-        System.out.println(new VarM("{{1,2},{8,3}}").add(new VarM("{{1,2},{8,3}}")).toString());
+        System.out.println(new VarM("{{1,2},{8,3}}").add(new VarM("{{1,2},{8,3}}")).toString());*/
+
+        System.out.println(Parser.exeOp("2.3 + 3").toString());
+        System.out.println(Parser.exeOp("{1,2,3} / 5").toString());
+        System.out.println(Parser.exeOp("{{1,2},{4,5}} * {1,2}").toString());
+        
+        Parser.exeOp("C = 3");
+        Parser.exeOp("c1 = {1,2,3}");
+        Parser.exeOp("B = {{1,2},{4,5}}");
+        Parser.exeOp("F = 3");
+        Parser.exeOp("E = 3");
+        Parser.exeOp("E1 = 3");
+        Parser.exeOp("1E = 3");
+
+
+        Storage.printVar();
+        Storage.sortVar();
+
     }
 }
