@@ -1,4 +1,4 @@
-package by.it.akhmelev.calc;
+package by.it.malyshev.calc;
 
 interface Patterns {
     //возможные примеры регулярных выражений (конечно лучше составить свои).
@@ -8,6 +8,7 @@ interface Patterns {
     String exAny="("+exMat+")|("+exVec+")|("+exVal+")";   //одно из...
     String exOper="[-+*/]";                               //операция
     String exFull= "("+exAny+")"+
-                   "(" +exOper+")"+
-                   "(" +exAny +")"; //выражение целиком
+            "(" +exOper+")"+
+            "(" +exAny +")"; //выражение целиком
+
 }

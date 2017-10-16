@@ -1,6 +1,9 @@
-package by.it.akhmelev.calc;
+package by.it.shishov.calc;
 
-interface Patterns {
+/**
+ * Created by Сергей on 11.10.2017.
+ */
+public interface Patterns {
     //возможные примеры регулярных выражений (конечно лучше составить свои).
     String exVal="((-?)([0-9.])+)";                       //числа
     String exVec="\\{((-?([0-9.])+),?)+}";                //вектора
@@ -8,6 +11,6 @@ interface Patterns {
     String exAny="("+exMat+")|("+exVec+")|("+exVal+")";   //одно из...
     String exOper="[-+*/]";                               //операция
     String exFull= "("+exAny+")"+
-                   "(" +exOper+")"+
-                   "(" +exAny +")"; //выражение целиком
+            "(" +exOper+")"+
+            "(" +exAny +")"; //выражение целиком
 }
