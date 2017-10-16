@@ -1,4 +1,4 @@
-package by.it.ali.calc;
+package by.it.ali.calculator;
 
 
 public class VarD extends Var implements Str{
