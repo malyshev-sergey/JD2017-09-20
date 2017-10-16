@@ -1,7 +1,8 @@
 package by.it.dubrova.calc2;
 
 public class VarV extends Var implements IOperation, IVariable {
-    public double value[];
+    private double value[];
+    private double result; // переменная для храниения мат результата
 
     @Override
     public void fromString(String value) {
@@ -13,6 +14,14 @@ public class VarV extends Var implements IOperation, IVariable {
             this.value[start++] = Double.parseDouble(s);
         }
     }
+
+    // привести к строке наш результат
+    public String toString(){
+        return Double.toString(result);
+    }
+
+//////////////////////////////////////
+    
 
 
 }

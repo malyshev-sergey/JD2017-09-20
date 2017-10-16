@@ -17,7 +17,7 @@ public class ConsoleRunner {
         z.fromString("{1,2,3,4}");
 
 
-        System.out.println(z.value[3]);
+      //  System.out.println(z.value[3]);
     }
 /*
     public static Var inputFromKeyboard() throws IOException {
