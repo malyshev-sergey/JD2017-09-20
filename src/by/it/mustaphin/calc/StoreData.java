@@ -4,11 +4,7 @@ import java.util.*;
 
 public class StoreData {
 
-    private HashMap<String, Var> data = new HashMap<>();
-
-    public StoreData() {
-
-    }
+    static private HashMap<String, Var> data = new HashMap<>();
 
     public void store(String name, Var var) {
         data.put(name, var);
@@ -34,7 +30,7 @@ public class StoreData {
 //        }
 //    };
 
-    public void sortvar() {
+    static void sortvar() {
 //        data = new TreeMap(keyComparator);
         SortedMap<String, Var> dataSorted = new TreeMap(data);
 
@@ -52,7 +48,7 @@ public class StoreData {
         }
     }
 
-    public void printvar() {
+    static public void printvar() {
         for (Map.Entry<String, Var> couple : data.entrySet()) {
             System.out.printf("%-11s\n", couple.getKey());
         }

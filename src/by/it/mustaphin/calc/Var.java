@@ -2,6 +2,9 @@ package by.it.mustaphin.calc;
 
 abstract class Var implements MathOperations, Variable {
 
+    StoreData storeData = new StoreData();
+    String varName;
+
     @Override
     public Var add(Var var) {
 //        System.out.println("Сложение не возможно");
@@ -24,5 +27,10 @@ abstract class Var implements MathOperations, Variable {
     public Var div(Var var) {
 //        System.out.println("Деление не возможно");
         return null;
+    }
+
+    @Override
+    public void assignment(String name, Var var) {
+        storeData.store(name, var);
     }
 }
