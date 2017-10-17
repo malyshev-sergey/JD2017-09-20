@@ -19,10 +19,10 @@ public class Runner {
         sd.store("scalDivVec", varD1.div(varV2));
         sd.store("scalMulVec", varD1.mul(varV2));
         sd.store("scalSubVec", varD1.sub(varV2));
-        sd.store("vecAddScal", varV1.add(varD2));
-        sd.store("vecDivScal", varV1.div(varD2));
-        sd.store("vecMulScal", varV1.mul(varD2));
-        sd.store("vecSubScal", varV1.sub(varD2));
+        sd.store("vecAddScal", varV2.add(varD2));
+        sd.store("vecDivScal", varV2.div(varD2));
+        sd.store("vecMulScal", varV2.mul(varD2));
+        sd.store("vecSubScal", varV2.sub(varD2));
         VarM varM1 = new VarM("{{1, 2.6, 3}, {5, 6, 7.1}}");
         VarM varM2 = new VarM(new double[][]{{5, 6, 7}, {8, 9, 11}});
         sd.store("matAddMat", varM1.add(varM2));

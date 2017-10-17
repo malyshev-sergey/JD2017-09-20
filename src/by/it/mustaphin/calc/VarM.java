@@ -60,12 +60,12 @@ public class VarM extends Var {
     @Override
     public Var add(Var var) {
         if (var instanceof VarM) {
-            System.out.println("Здесь должно выполняться сложение матрицы с матрицией");
+            //Здесь должно выполняться сложение матрицы с матрицией
             return null;
         } else if (var instanceof VarV) {
             return super.add(var);
         } else if (var instanceof VarD) {
-            System.out.println("Здесь должно выполняться сложение матрицы со скалярной величиной");
+            //Здесь должно выполняться сложение матрицы со скалярной величиной
             return null;
         }
         return super.add(var);
@@ -79,12 +79,12 @@ public class VarM extends Var {
     @Override
     public Var mul(Var var) {
         if (var instanceof VarM) {
-            System.out.println("Здесь должно выполняться умножение матрицы с матрицией");
+            //Здесь должно выполняться умножение матрицы с матрицией
             return null;
         } else if (var instanceof VarV) {
             return super.add(var);
         } else if (var instanceof VarD) {
-            System.out.println("Здесь должно выполняться умножение матрицы со скалярной величиной");
+            //Здесь должно выполняться умножение матрицы со скалярной величиной
             return null;
         }
         return super.mul(var);
