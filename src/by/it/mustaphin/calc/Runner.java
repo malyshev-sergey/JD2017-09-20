@@ -37,6 +37,8 @@ public class Runner {
         sd.store("matDivScal", varM1.div(varD2));
         sd.store("matMulScal", varM1.mul(varD1));
         sd.store("matSubScal", varM1.sub(varD2));
-        sd.sortvar();
+//        sd.sortvar();
+        Parser parser = new Parser();
+        parser.parse(sd);
     }
 }

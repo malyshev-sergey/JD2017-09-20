@@ -4,12 +4,10 @@ import java.util.*;
 
 public class StoreData {
 
-    //    private HashMap<String, Var> data = new HashMap<>();
-    private SortedMap<String, Var> data;
+    private HashMap<String, Var> data = new HashMap<>();
 
     public StoreData() {
-//        data = new TreeMap(keyComparator);
-        data = new TreeMap();
+
     }
 
     public void store(String name, Var var) {
@@ -37,6 +35,8 @@ public class StoreData {
 //    };
 
     public void sortvar() {
+//        data = new TreeMap(keyComparator);
+        SortedMap<String, Var> dataSorted = new TreeMap(data);
 
 //        SortedSet<String> keySorted = new TreeSet<>();
 //        keySorted.addAll(data.keySet());
@@ -44,11 +44,17 @@ public class StoreData {
 //            System.out.printf("%-11s = %s\n", key, (null == data.get(key)) ? "Выполнить операцию невозможно либо операция не реализована" : data.get(key));
 //        }
 
-        Set<Map.Entry<String, Var>> dataSet = data.entrySet();
+        Set<Map.Entry<String, Var>> dataSet = dataSorted.entrySet();
         Iterator<Map.Entry<String, Var>> itData = dataSet.iterator();
         while (itData.hasNext()) {
             Map.Entry<String, Var> me = itData.next();
             System.out.printf("%-11s = %s\n", me.getKey(), (null == me.getValue()) ? "Выполнить операцию невозможно либо операция не реализована" : me.getValue());
+        }
+    }
+
+    public void printvar() {
+        for (Map.Entry<String, Var> couple : data.entrySet()) {
+            System.out.printf("%-11s\n", couple.getKey());
         }
     }
 }

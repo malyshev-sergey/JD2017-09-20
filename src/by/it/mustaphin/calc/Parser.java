@@ -1,26 +1,23 @@
 package by.it.mustaphin.calc;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.Scanner;
 
 public class Parser {
 
-    private String value;
-    Pattern patNumber = Pattern.compile("[.0-9]+");
-    Pattern patVector = Pattern.compile("[{]");
-    Pattern patMatrix = Pattern.compile("[{{]");
+    private String line;
 
-    public Parser(String value) {
-        this.value = value;
-    }
-
-    void parse(String value) {
-        Matcher matM = patMatrix.matcher(value);
-        Matcher matV = patVector.matcher(value);
-        if (matM.find()) {
-
-        }else if(matV.find()){
-
+    void parse(StoreData sd) {
+        System.out.println("Введите команду \"sortvarStoreData sd для отображения всех результатов или команду \"printvar\" или введите команду \"Выход\" для завершения работы");
+        Scanner scan = new Scanner(System.in);
+        line = scan.nextLine().trim();
+        if (line.equalsIgnoreCase("sortvar")) {
+            sd.sortvar();
+            parse(sd);
+        } else if (line.equalsIgnoreCase("Выход")) {
+            System.exit(0);
+        } else if (line.equalsIgnoreCase("printvar")) {
+            sd.printvar();
+            parse(sd);
         }
     }
 
