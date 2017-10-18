@@ -11,18 +11,27 @@ public class TaskA3 {
         for (int i = 0; i < 30; i++) {
             a.add(randomMark.nextInt(21) - 10);
         }
-        Iterator<Integer> itr=a.iterator();
-        System.out.println("\n\nМножество A");
+
+        List<Integer> res = new ArrayList<>(a);
+        Iterator<Integer> itr = res.iterator();
         while (itr.hasNext()) {
-            System.out.print(itr.next());
-            if (itr.hasNext()) System.out.print("; ");
+            if (itr.hasNext() && itr.next() < 0) itr.remove();
+        }
+       List<Integer> aLeft = new ArrayList<>(a);
+        itr = aLeft.iterator();
+        while (itr.hasNext()) {
+            if (itr.hasNext() && itr.next() >= 0) itr.remove();
         }
 
-//        List<Integer> b = new LinkedList<>(a);
+        res.addAll(aLeft);
 
+        aLeft.clear();
 
+        System.out.println("\nИсходная коллекция");
+        System.out.println(a);
 
-
+        System.out.println("\n\nОтрицательные элементы переставлены в конец");
+        System.out.println(res);
 
     }
 }

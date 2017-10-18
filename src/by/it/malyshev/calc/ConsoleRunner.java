@@ -31,7 +31,6 @@ public class ConsoleRunner {
         printOneVar(Parser.fromString("D = "+ Parser.singleOperation("-28+{{-1,2},{8,-3}}")));
         printOneVar(Parser.fromString("E = "+ Parser.singleOperation("{{-1,2},{8,-3}}+3")));
         printOneVar(Parser.fromString("F = "+ Parser.singleOperation("28+{1,2,3}")));
-// вычитание с матрицами и векторами пока не реализовано
         printOneVar(Parser.fromString("G = "+ Parser.singleOperation("{{-1,2},{8,-3}}-3")));
         printOneVar(Parser.fromString("H = "+ Parser.singleOperation("3-{{-1,2},{8,-3}}")));
         printOneVar(Parser.fromString("K = {{-1,2},{8,-3}}-3"));
