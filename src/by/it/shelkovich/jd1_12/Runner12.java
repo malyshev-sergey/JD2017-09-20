@@ -5,5 +5,6 @@ public class Runner12 {
         //TaskA.part1();
         //TaskA.part2();
         //TaskA.part3();
+        TaskB.part1();
     }
 }
