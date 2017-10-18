@@ -1,9 +1,6 @@
 package by.it.meshchenko.jd01_12;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedHashSet;
+import java.util.*;
 
 public class MyCollect {
     public static LinkedHashSet<Integer> getCross(LinkedHashSet<Integer> a, LinkedHashSet<Integer> b){
@@ -33,6 +30,16 @@ public class MyCollect {
             str.append(i + ", ");
         }
         if(str.length() > 2) str.replace(str.length()-2,str.length(), "");
+        return str.toString();
+    }
+
+    public static String mapToString(Map<String, Integer> m){
+        Iterator<Map.Entry<String, Integer>> itM = m.entrySet().iterator();
+        StringBuilder str = new StringBuilder();
+        while (itM.hasNext()){
+            Map.Entry<String, Integer> temp = itM.next();
+            str.append(temp.getKey() + ": " + temp.getValue().toString() + "\n");
+        }
         return str.toString();
     }
 }

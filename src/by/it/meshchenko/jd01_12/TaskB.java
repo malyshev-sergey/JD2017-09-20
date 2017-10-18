@@ -19,33 +19,19 @@ public class TaskB {
             "To eat the world's due, by the grave and thee.";
 
     public static void exampleB1(){
+        System.out.println("text = '" + text + "'");
         String[] strArray = text.trim().split("( |,\n|:\n|\\.\n|\\.|, )");
-        System.out.println("Произвольный список чисел: " + MyCollect.collectionToString(strArray));
         LinkedHashMap<String, Integer> list = new LinkedHashMap<>();
-        HashSet<String> temp = new HashSet<>();
+        //HashSet<String> temp = new HashSet<>();
         for(int i = 0; i < strArray.length; i++) {
-            if(list..containsValue())
-            int var = i.next();
-            if(var < 0){
-                newList.addFirst(var);
+            if(list.containsKey(strArray[i])){
+                list.replace(strArray[i], list.get(strArray[i]) + 1);
             }
             else {
-                newList.addLast(var);
+                list.put(strArray[i], 1);
             }
         }
-        list.keySet().keySet().entrySet().Arrays.asList(strArray));
-        System.out.println("Произвольный список чисел: " + MyCollect.collectionToString(list));
-        Deque<Integer> newList = new ArrayDeque<>();
-        for(Iterator<Integer> i = list.iterator(); i.hasNext();){
-            int var = i.next();
-            if(var < 0){
-                newList.addFirst(var);
-            }
-            else {
-                newList.addLast(var);
-            }
-        }
-        // Iterator<Map.EntrySet<key, value>> it = map.entrySet().iterator();
-        System.out.println("Отрицательные в начале: " + MyCollect.collectionToString(newList));
+        System.out.println("Кол-во различных слов: ");
+        System.out.println(MyCollect.mapToString(list));
     }
 }
