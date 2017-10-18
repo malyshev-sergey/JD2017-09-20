@@ -1,57 +1,79 @@
 package by.it.malyshev.calc;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 class Parser {
 
-    static Var fromString(String strSingleOperation) {
-        if (!(strSingleOperation.trim().equals("printvar")) &&
-                !(strSingleOperation.trim().equals("sortvar"))) {
+    static Var fromString(String strInput) {
+        if (!(strInput.trim().equals("printvar")) &&
+                !(strInput.trim().equals("sortvar"))) {
 
-            String[] strOperands = strSingleOperation.split(Patterns.exOper);
-            if (!(strOperands.length == 1)) {
-                Pattern p = Pattern.compile(Patterns.exOper);
-                Matcher m = p.matcher(strSingleOperation);
-                if (m.find()) {
-                    switch (m.group()) {
-                        case "+":
-                            return selectTypeOfOperand(strOperands[0]).add(selectTypeOfOperand(strOperands[1]));
-                        case "*":
-                            return selectTypeOfOperand(strOperands[0]).mul(selectTypeOfOperand(strOperands[1]));
-                        case "/":
-                            return selectTypeOfOperand(strOperands[0]).div(selectTypeOfOperand(strOperands[1]));
-                        case "=":
-                            if (strOperands[1].trim().equals("null")) break;
-                            variablesCollection.put(strOperands[0], selectTypeOfOperand(strOperands[1]));
-                            return null;
-                    }
-                }
+            Pattern p = Pattern.compile("=");
+            Matcher m = p.matcher(strInput);
+            if (!m.find()) {
+                new CalcError("Нет такой операции");
+                return null;
+            }
+
+            String[] strOperands = strInput.trim().split("=");
+            if (strOperands[1].trim().equals("null")) return null;
+
+            Pattern p1 = Pattern.compile(Patterns.exAny);
+            Matcher m1 = p1.matcher(strOperands[1]);
+            if (!m1.find()) {
+                new CalcError("Нет такой операции");
+                return null;
+            }
+            int counter = 0;
+            m1.reset();
+            while (m1.find()) counter++;
+            if (counter > 1) {
+                variablesCollection.put(strOperands[0], singleOperation(strOperands[1]));
+                return singleOperation(strOperands[1]);
             } else {
-                if (strSingleOperation.trim().contains("{")) {
-                    new CalcError("Пока не реализовано");
-                    return null;
-                }
-                String minus = "";
-                if (strSingleOperation.trim().charAt(0) == '-') {
-                    minus = "-";
-                    strSingleOperation = strSingleOperation.trim().substring(1, strSingleOperation.length());
-                }
-                    String[] strOperandsMin = strSingleOperation.split("-");
-                    Pattern pMin = Pattern.compile("-");
-                    Matcher mMin = pMin.matcher(strSingleOperation);
-                    if (mMin.find()) {
-                        return selectTypeOfOperand(minus + strOperandsMin[0]).sub(selectTypeOfOperand(strOperandsMin[1]));
-                    }
-                }
+                variablesCollection.put(strOperands[0], selectTypeOfOperand(strOperands[1]));
+                return selectTypeOfOperand(strOperands[1]);
+            }
 
+        } else if (strInput.trim().equals("printvar")) printVar();
+        else if (strInput.trim().equals("sortvar")) sortVar();
+        return null;
+    }
+
+
+    static Var singleOperation(String strSingleOperation) {
+        Pattern p = Pattern.compile(Patterns.exAny);
+        Matcher m = p.matcher(strSingleOperation);
+        if (!m.find()) {
             new CalcError("Нет такой операции");
-        } else if (strSingleOperation.trim().equals("printvar")) printVar();
-        else if (strSingleOperation.trim().equals("sortvar")) sortVar();
+            return null;
+        }
+        String strOper = strSingleOperation.substring(strSingleOperation.indexOf(m.group())
+                + m.group().length()).trim();
+
+        m.reset();
+        int i = 0;
+        String[] strOperands = new String[2];
+        while (m.find()) {
+            strOperands[i++] = m.group();
+        }
+        Pattern p1 = Pattern.compile(Patterns.exOper);
+        Matcher m1 = p1.matcher(strOper);
+        if (m1.find()) {
+            switch (m1.group()) {
+                case "+":
+                    return selectTypeOfOperand(strOperands[0]).add(selectTypeOfOperand(strOperands[1]));
+                case "-":
+                    if (strOperands[1].trim().charAt(0)=='-') strOperands[1] = strOperands[1].trim().substring(1);
+                    return selectTypeOfOperand(strOperands[0]).sub(selectTypeOfOperand(strOperands[1]));
+                case "*":
+                    return selectTypeOfOperand(strOperands[0]).mul(selectTypeOfOperand(strOperands[1]));
+                case "/":
+                    return selectTypeOfOperand(strOperands[0]).div(selectTypeOfOperand(strOperands[1]));
+            }
+        } else new CalcError("Нет такой операции");
         return null;
     }
 
@@ -63,16 +85,17 @@ class Parser {
         else return new VarD(strOperand.trim());
     }
 
-    static Map<String, Var> variablesCollection = new HashMap<>();
 
-    static void printVar() {
+    private static Map<String, Var> variablesCollection = new HashMap<>();
+
+    private static void printVar() {
         System.out.println("\nКоллекция переменных");
         Iterator<Map.Entry<String, Var>> itr = variablesCollection.entrySet().iterator();
         while (itr.hasNext()) System.out.println(itr.next());
 
     }
 
-    static void sortVar() {
+    private static void sortVar() {
         System.out.println("\nОтсортированная коллекция переменных");
         TreeMap<String, Var> sortedVariables = new TreeMap<>(variablesCollection);
         Iterator<Map.Entry<String, Var>> itr = sortedVariables.entrySet().iterator();
