@@ -14,5 +14,6 @@ public class Runner {
 
     TaskA3 tA3 = new TaskA3();
     tA3.fillList();
+    tA3.replace();
     }
 }

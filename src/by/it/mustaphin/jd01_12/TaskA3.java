@@ -1,8 +1,6 @@
 package by.it.mustaphin.jd01_12;
 
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class TaskA3 {
 
@@ -15,17 +13,15 @@ public class TaskA3 {
             else
                 numbs.add((int) (Math.random() * (-100)));
         }
-        System.out.println(numbs);
     }
 
     void replace() {
-        Iterator<Integer> itNumbs = numbs.iterator();
-        while (itNumbs.hasNext()) {
-
-            if (itNumbs.next() < 0) {
-                itNumbs.remove();
-
+        numbs.sort(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return (-1) * (o1 - o2);
             }
-        }
+        });
+        System.out.println(numbs);
     }
 }
