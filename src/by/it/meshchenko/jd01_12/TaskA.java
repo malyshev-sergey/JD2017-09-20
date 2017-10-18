@@ -6,8 +6,7 @@ import java.util.*;
 public class TaskA {
     // A.1  ****************************************************
     public static void exampleA1(){
-        List<Student> listStudents = new ArrayList<>();
-        listStudents.addAll(Arrays.asList(
+        List<Student> listStudents = new ArrayList<>(Arrays.asList(
                 new Student("Oleg", "M"),
                 new Student("Vova", "P"),
                 new Student("Sasha", "L"),
@@ -49,6 +48,10 @@ public class TaskA {
                 + MyCollect.printHashSet(MyCollect.getCross(aHS, bHS)));
         System.out.println("Множество A union B : "
                 + MyCollect.printHashSet(MyCollect.getUnion(aHS, bHS)));
+    }
+
+    public static void exampleA3(){
+
     }
 }
 

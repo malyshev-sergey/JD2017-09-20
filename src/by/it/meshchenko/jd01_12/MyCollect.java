@@ -30,6 +30,7 @@ public class MyCollect {
             int i = itA.next();
             str.append(i + ", ");
         }
+        if(str.length() > 2) str.replace(str.length()-2,str.length(), "");
         return str.toString();
     }
 }
