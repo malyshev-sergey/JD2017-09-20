@@ -10,30 +10,33 @@ public class ConsoleRunner {
 
     public static void main(String[ ] args) {
 
-        printOneVar(Parser.fromString("-1+2"));
-        printOneVar(Parser.fromString("-9-7"));
-        printOneVar(Parser.fromString("-1.5*-2"));
-        printOneVar(Parser.fromString("-1.5*2"));
-        printOneVar(Parser.fromString("1.5*2"));
-        printOneVar(Parser.fromString("-4/-1"));
-        printOneVar(Parser.fromString("-4/2"));
-        printOneVar(Parser.fromString("4/2"));
+        printOneVar(Parser.singleOperation("-1+2"));
+        printOneVar(Parser.singleOperation("-9-7"));
+        printOneVar(Parser.singleOperation("-1.5*-2"));
+        printOneVar(Parser.singleOperation("-1.5*2"));
+        printOneVar(Parser.singleOperation("1.5*2"));
+        printOneVar(Parser.singleOperation("-4/-1"));
+        printOneVar(Parser.singleOperation("-4/2"));
+        printOneVar(Parser.singleOperation("4/2"));
 
-        printOneVar(Parser.fromString("4 1"));
-        printOneVar(Parser.fromString("{-1,2,3}+{1,2,3}"));
-        printOneVar(Parser.fromString("{{1,2},{8,3}}*{{1,2},{8,3}}"));
-
-        Parser.fromString("A = "+ Parser.fromString("-1+2"));
-        Parser.fromString("A2  "+ Parser.fromString("4-1"));
-        Parser.fromString("A2 = "+ Parser.fromString("4-1"));
-        Parser.fromString("A1 = "+ Parser.fromString("{1,2,3}+{4,5,6}"));
-        Parser.fromString("C = "+ Parser.fromString("{{-1,2},{8,-3}}*{{-1,2},{8,-3}}"));
-        Parser.fromString("D = "+ Parser.fromString("-28+{{-1,2},{8,-3}}"));
-        Parser.fromString("E = "+ Parser.fromString("{{-1,2},{8,-3}}+3"));
-        Parser.fromString("F = "+ Parser.fromString("28+{1,2,3}"));
+        printOneVar(Parser.singleOperation("4 1"));
+        printOneVar(Parser.singleOperation("{-1,2,3}+{1,2,3}"));
+        printOneVar(Parser.singleOperation("{{1,2},{8,3}}*{{1,2},{8,3}}"));
+        System.out.println();
+        printOneVar(Parser.fromString("A = "+ Parser.singleOperation("-1+2")));
+        printOneVar(Parser.fromString("B  "+ Parser.singleOperation("4-1")));
+        printOneVar(Parser.fromString("A2 = "+ Parser.singleOperation("4-1")));
+        printOneVar(Parser.fromString("A1 = "+ Parser.singleOperation("{1,2,3}+{4,5,6}")));
+        printOneVar(Parser.fromString("C = "+ Parser.singleOperation("{{-1,2},{8,-3}}*{{-1,2},{8,-3}}")));
+        printOneVar(Parser.fromString("D = "+ Parser.singleOperation("-28+{{-1,2},{8,-3}}")));
+        printOneVar(Parser.fromString("E = "+ Parser.singleOperation("{{-1,2},{8,-3}}+3")));
+        printOneVar(Parser.fromString("F = "+ Parser.singleOperation("28+{1,2,3}")));
 // вычитание с матрицами и векторами пока не реализовано
-        Parser.fromString("E = "+ Parser.fromString("{{-1,2},{8,-3}}-3"));
-        Parser.fromString("E = "+ Parser.fromString("3-{{-1,2},{8,-3}}"));
+        printOneVar(Parser.fromString("G = "+ Parser.singleOperation("{{-1,2},{8,-3}}-3")));
+        printOneVar(Parser.fromString("H = "+ Parser.singleOperation("3-{{-1,2},{8,-3}}")));
+        printOneVar(Parser.fromString("K = {{-1,2},{8,-3}}-3"));
+        printOneVar(Parser.fromString("L = 3-{{-1,2},{8,-3}}"));
+        printOneVar(Parser.fromString("M = {{-1,2},{8,-3}}"));
 
 
         Parser.fromString("printvar");
