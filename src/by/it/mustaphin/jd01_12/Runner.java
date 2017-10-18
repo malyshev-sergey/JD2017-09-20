@@ -12,8 +12,10 @@ public class Runner {
 
 //        new TaskA2();
 
-    TaskA3 tA3 = new TaskA3();
-    tA3.fillList();
-    tA3.replace();
+//    TaskA3 tA3 = new TaskA3();
+//    tA3.fillList();
+//    tA3.replace();
+
+        new TaskB1().getRepeats();
     }
 }
