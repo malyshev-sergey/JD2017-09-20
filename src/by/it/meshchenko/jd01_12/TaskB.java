@@ -34,4 +34,38 @@ public class TaskB {
         System.out.println("Кол-во различных слов: ");
         System.out.println(MyCollect.mapToString(list));
     }
+
+    public static void exampleB2(int capacity){
+        List<Integer> arrList = new ArrayList<>(capacity);
+        List<Integer> linkList = new LinkedList<>();
+        for(int i = 0; i < capacity; i++){
+            arrList.add(i);
+            linkList.add(i);
+        }
+        long start, end;
+        System.out.println("ArrayList: ");
+        start = System.currentTimeMillis();
+        delTwo(arrList);
+        end = System.currentTimeMillis();
+        System.out.println("Win Element: " + MyCollect.collectionToString(arrList));
+        System.out.printf("Time: %d %n", end - start);
+
+        System.out.println("LinkedList: ");
+        start = System.currentTimeMillis();
+        delTwo(linkList);
+        end = System.currentTimeMillis();
+        System.out.println("Win Element: " + MyCollect.collectionToString(linkList));
+        System.out.printf("Time: %d %n", end - start);
+
+    }
+
+    private static void delTwo(List<Integer> list){
+        int i = 1;
+        while (list.size() > 1){
+            for(;i < list.size(); i++){
+                list.remove(i);
+            }
+            i = i - list.size();
+        }
+    }
 }
