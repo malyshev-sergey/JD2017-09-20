@@ -1,11 +1,13 @@
 package by.it.meshchenko.jd01_12;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 
 public class MyCollect {
-    public static HashSet<Integer>  getCross(HashSet<Integer> a, HashSet<Integer> b){
-        HashSet<Integer> result = new HashSet<>();
+    public static LinkedHashSet<Integer> getCross(LinkedHashSet<Integer> a, LinkedHashSet<Integer> b){
+        LinkedHashSet<Integer> result = new LinkedHashSet<>();
         Iterator<Integer> itA = a.iterator();
         while (itA.hasNext()){
             int i = itA.next();
@@ -16,14 +18,14 @@ public class MyCollect {
         return result;
     }
 
-    public static HashSet<Integer> getUnion(HashSet<Integer> a, HashSet<Integer> b){
-        HashSet<Integer> result = new HashSet<>();
+    public static LinkedHashSet<Integer> getUnion(LinkedHashSet<Integer> a, LinkedHashSet<Integer> b){
+        LinkedHashSet<Integer> result = new LinkedHashSet<>();
         result.addAll(a);
         result.addAll(b);
         return result;
     }
 
-    public static String printHashSet(HashSet<Integer> a){
+    public static String collectionToString(Collection<Integer> a){
         Iterator<Integer> itA = a.iterator();
         StringBuilder str = new StringBuilder();
         while (itA.hasNext()){

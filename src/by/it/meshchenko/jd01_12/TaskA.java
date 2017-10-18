@@ -38,19 +38,35 @@ public class TaskA {
 
     // A.2  ****************************************************
     public static void exampleA2(){
-        HashSet<Integer> aHS = new HashSet<>();
-        HashSet<Integer> bHS = new HashSet<>();
+        LinkedHashSet<Integer> aHS = new LinkedHashSet<>();
+        LinkedHashSet<Integer> bHS = new LinkedHashSet<>();
         aHS.addAll(Arrays.asList(1, 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37));
         bHS.addAll(Arrays.asList(1, 2, 3, 5, 8, 13, 21, 34, 55, 89));
-        System.out.println("Множество А : " + MyCollect.printHashSet(aHS));
-        System.out.println("Множество B : " + MyCollect.printHashSet(bHS));
+        System.out.println("Множество А : " + MyCollect.collectionToString(aHS));
+        System.out.println("Множество B : " + MyCollect.collectionToString(bHS));
         System.out.println("Множество A cross B : "
-                + MyCollect.printHashSet(MyCollect.getCross(aHS, bHS)));
+                + MyCollect.collectionToString(MyCollect.getCross(aHS, bHS)));
         System.out.println("Множество A union B : "
-                + MyCollect.printHashSet(MyCollect.getUnion(aHS, bHS)));
+                + MyCollect.collectionToString(MyCollect.getUnion(aHS, bHS)));
     }
 
     public static void exampleA3(){
+        Deque<Integer> list = new ArrayDeque<>(Arrays.asList(
+                -1, 2, -3, -7, 4, -3,
+                3, 10, 22, -9, 0, 10,
+                -7, 33, 53, 44, 21, 33));
+        System.out.println("Произвольный список чисел: " + MyCollect.collectionToString(list));
+        Deque<Integer> newList = new ArrayDeque<>();
+        for(Iterator<Integer> i = list.iterator(); i.hasNext();){
+            int var = i.next();
+            if(var < 0){
+                newList.addFirst(var);
+            }
+            else {
+                newList.addLast(var);
+            }
+        }
+        System.out.println("Отрицательные в начале: " + MyCollect.collectionToString(newList));
 
     }
 }
