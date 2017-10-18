@@ -22,19 +22,9 @@ public class TaskA1 {
             if (itrArrayListMarks.next() < 5) itrArrayListMarks.remove();
         }
 
-        Iterator<Integer> itrArrayListMarksAll = arrayListMarksAll.iterator();
-        System.out.println("\nСписок школьных оценок");
-        while (itrArrayListMarksAll.hasNext()) {
-            System.out.print(itrArrayListMarksAll.next());
-            if (itrArrayListMarksAll.hasNext()) System.out.print("; ");
-        }
+        System.out.println("\nСписок школьных оценок\n"+arrayListMarksAll);
 
-        itrArrayListMarks = arrayListMarks.iterator();
-        System.out.println("\n\nСубсписок высоких оценок (>4)");
-        while (itrArrayListMarks.hasNext()) {
-            System.out.print(itrArrayListMarks.next());
-            if (itrArrayListMarks.hasNext()) System.out.print("; ");
-        }
+        System.out.println("\nСубсписок высоких оценок (>4)\n"+arrayListMarks);
 
         System.out.println();
     }
