@@ -16,6 +16,8 @@ public class Runner {
 //    tA3.fillList();
 //    tA3.replace();
 
-        new TaskB1().getRepeats();
+//        new TaskB1().getRepeats();
+
+        new TaskB2().processArray();
     }
 }
