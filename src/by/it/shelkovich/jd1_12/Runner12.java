@@ -7,6 +7,7 @@ public class Runner12 {
         //TaskA.part3();
         //TaskB.part1();
         //TaskB.part2(300000);
-        TaskC.Part3();
+        TaskC.Part2();
+        //TaskC.Part3();
     }
 }
