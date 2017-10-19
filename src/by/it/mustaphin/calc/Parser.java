@@ -25,30 +25,16 @@ public class Parser {
 
     void parseExpression(String line) {
         Pattern action = Pattern.compile("[-=+*/]");
-        Pattern vars = Pattern.compile("[0-9.]+");
+        Pattern varsD = Pattern.compile("[0-9.]+");
+        Pattern varsV = Pattern.compile("[{][0-9.,]+[}]");
         Pattern varName = Pattern.compile("[a-zA-Z]+");
         Matcher mat = action.matcher(line);
-        List<String> actList = new ArrayList<>();
-        while (mat.find()) {
-            actList.add(mat.group());
-        }
-        mat = varName.matcher(line);
-        mat.find();
-        String key = mat.group();
-        List<String> membList = new ArrayList<>();
-        if (!line.contains("{")) {
-            mat = vars.matcher(line);
-            while (mat.find()) {
-                membList.add(mat.group());
-            }
-            switch (actList.get(1)) {
-                case "+":
-                    Var varD1 = new VarD(membList.get(0));
-                    Var varD2 = new VarD(membList.get(1));
-                    varD1.assignment(key, varD1.add(varD2));
-                    break;
-            }
-        }
+        //...
     }
 
+    /**
+     * <?extends Var> void add(Var var1, Var var2) {
+     var1.add(var2);
+     }
+     **/
 }
