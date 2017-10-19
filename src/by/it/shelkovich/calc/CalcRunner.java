@@ -29,7 +29,7 @@ public class CalcRunner {
         System.out.println(new VarM("{{1,2},{8,3}}").add(new VarM("{{1,2},{8,3}}")).toString());*/
 
         System.out.println(Parser.exeOp("2.3 + 3").toString());
-        System.out.println(Parser.exeOp("{1,2,3} / 5").toString());
+        System.out.println(Parser.exeOp("{-1,2,3} / 5").toString());
         System.out.println(Parser.exeOp("{{1,2},{4,5}} * {1,2}").toString());
         
         Parser.exeOp("C = 3");
