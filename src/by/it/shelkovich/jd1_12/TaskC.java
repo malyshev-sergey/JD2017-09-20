@@ -1,8 +1,29 @@
 package by.it.shelkovich.jd1_12;
 
+import by.it.ali.calc.Str;
+
 import java.util.*;
 
 public class TaskC {
+
+    static void Part1(){
+        Map<Integer, String> map = new TreeMap<>();
+        for (int i = 0; i < 10; i++) {
+            map.put(i, "Наименование"+(int)Math.round(Math.random()*5));
+        }
+
+        System.out.println("Исходная коллекция: "+map);
+
+        Set<String> checkSet = new HashSet<>();
+        Iterator<Map.Entry<Integer, String>> iter = map.entrySet().iterator();
+        while(iter.hasNext()){
+            Map.Entry<Integer, String> entry = iter.next();
+            if(checkSet.contains(entry.getValue())) iter.remove();
+            else checkSet.add(entry.getValue());
+        }
+        System.out.println("Коллекция после \"сжатия\": "+map);
+
+    }
 
     static void Part2(){
         Set<Integer> setA = new HashSet<>();
