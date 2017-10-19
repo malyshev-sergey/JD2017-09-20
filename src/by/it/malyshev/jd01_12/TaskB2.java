@@ -16,9 +16,9 @@ public class TaskB2 {
         Timer t=new Timer();
 
         processArray(n);
-        System.out.println("\nметод processArray моделирующий процесс:  "+t);
+        System.out.println("\nметод processArrayи моделирующий процесс:  "+t);
         processLinked(n);
-        System.out.println("\nметод processLinked моделирующий процесс:  "+t);
+        System.out.println("\nметод prоcessLinked моделирующий процесс:  "+t);
 
     }
 
