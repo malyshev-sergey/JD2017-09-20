@@ -32,8 +32,44 @@ public class Runner12 {
         // Составить два метода processArray и prоcessLinked моделирующие процесс.
         // Первый должен использовать класс ArrayList, а второй — LinkedList. Какой из
         // двух методов работает быстрее? Почему? Докажите. (см. пример на слайдах).
+        //      На Intel Core i5 2,6 ГГц ArrayList работает быстрее
+        //      при N = 150000
+        //      ArrayList добавление - 12, удаление - 1822
+        //      LinkedList добавление - 17, удаление - 10405
+        //      ArrayList быстрее находит элемент О(1), LinkedList - O(n)
+        //      При удалении n-го элемента, опять-таки LinkedList должен сделать поиск
         System.out.println("B.2  **************************");
-        TaskB.exampleB2(100000);
+        //TaskB.processArray(150000);
+        //TaskB.prоcessLinked(150000);
+
+        // C.1 Во входном тексте хранятся наименования некоторых объектов. Построить
+        // список C1, элементы которого содержат наименования и шифры данных объектов,
+        // причем элементы списка должны быть упорядочены по возрастанию шифров
+        // (шифр – некоторое уникальное число). Затем «сжать» список C1, удаляя
+        // дублирующиеся наименования объектов.
+        System.out.println("C.1  **************************");
+        // Представим, что Student[] listStudents это десериализованный входной текст
+        final Student[] listStudents = new Student[]{
+                new Student("Oleg", "M"),
+                new Student("Vova", "P"),
+                new Student("Sasha", "L"),
+                new Student("Kolya", "L"),
+                new Student("Dima", "M"),
+                new Student("Donald", "T"),
+                new Student("Barak", "O"),
+                new Student("Angela", "M"),
+                new Student("George", "B"),
+                new Student("Bill", "K"),
+        };
+        TaskC.exampleС1(listStudents, 14);
+
+        //C.2 Решить задачу A2 для произвольных и заранее неизвестных типов
+        // данных во множествах.
+        System.out.println("\nC.2  **************************");
+        System.out.println("Методы getCross и getUnion для пита данных Student");
+        TaskC.exampleС2(listStudents, 11);
+
+
 
     }
 }

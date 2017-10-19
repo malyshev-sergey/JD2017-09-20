@@ -3,6 +3,7 @@ package by.it.meshchenko.jd01_12;
 import java.util.*;
 
 public class MyCollect {
+    /*
     public static LinkedHashSet<Integer> getCross(LinkedHashSet<Integer> a, LinkedHashSet<Integer> b){
         LinkedHashSet<Integer> result = new LinkedHashSet<>();
         Iterator<Integer> itA = a.iterator();
@@ -17,6 +18,25 @@ public class MyCollect {
 
     public static LinkedHashSet<Integer> getUnion(LinkedHashSet<Integer> a, LinkedHashSet<Integer> b){
         LinkedHashSet<Integer> result = new LinkedHashSet<>();
+        result.addAll(a);
+        result.addAll(b);
+        return result;
+    }
+    */
+    public static <T> LinkedHashSet<T> getCross(LinkedHashSet<T> a, LinkedHashSet<T> b){
+        LinkedHashSet<T> result = new LinkedHashSet<>();
+        Iterator<T> itA = a.iterator();
+        while (itA.hasNext()){
+            T i = itA.next();
+            if(b.contains(i)){
+                result.add(i);
+            }
+        }
+        return result;
+    }
+
+    public static <T> LinkedHashSet<T> getUnion(LinkedHashSet<T> a, LinkedHashSet<T> b){
+        LinkedHashSet<T> result = new LinkedHashSet<>();
         result.addAll(a);
         result.addAll(b);
         return result;

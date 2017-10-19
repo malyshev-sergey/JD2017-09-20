@@ -35,27 +35,36 @@ public class TaskB {
         System.out.println(MyCollect.mapToString(list));
     }
 
-    public static void exampleB2(int capacity){
-        List<Integer> arrList = new ArrayList<>(capacity);
-        List<Integer> linkList = new LinkedList<>();
-        for(int i = 0; i < capacity; i++){
-            arrList.add(i);
-            linkList.add(i);
-        }
+    public static void processArray(int capacity){
+        List<Integer> arrList = new ArrayList<>();
         long start, end;
+
         System.out.println("ArrayList: ");
+        start = System.currentTimeMillis();
+        addElem(arrList, capacity);
+        end = System.currentTimeMillis();
+        System.out.printf("   Time add: %d %n", end - start);
         start = System.currentTimeMillis();
         delTwo(arrList);
         end = System.currentTimeMillis();
-        System.out.println("Win Element: " + MyCollect.collectionToString(arrList));
-        System.out.printf("Time: %d %n", end - start);
+        System.out.println("   Win Element: " + MyCollect.collectionToString(arrList));
+        System.out.printf("   Time remove: %d %n", end - start);
+    }
+
+    public static void prоcessLinked(int capacity){
+        List<Integer> linkList = new LinkedList<>();
+        long start, end;
 
         System.out.println("LinkedList: ");
         start = System.currentTimeMillis();
+        addElem(linkList, capacity);
+        end = System.currentTimeMillis();
+        System.out.printf("   Time add: %d %n", end - start);
+        start = System.currentTimeMillis();
         delTwo(linkList);
         end = System.currentTimeMillis();
-        System.out.println("Win Element: " + MyCollect.collectionToString(linkList));
-        System.out.printf("Time: %d %n", end - start);
+        System.out.println("   Win Element: " + MyCollect.collectionToString(linkList));
+        System.out.printf("   Time remove: %d %n", end - start);
 
     }
 
@@ -66,6 +75,12 @@ public class TaskB {
                 list.remove(i);
             }
             i = i - list.size();
+        }
+    }
+
+    private static void addElem(List<Integer> list, int capacity){
+        for(int i = 0; i < capacity; i++){
+            list.add(i);
         }
     }
 }
