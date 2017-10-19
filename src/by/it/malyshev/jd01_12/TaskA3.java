@@ -13,19 +13,8 @@ public class TaskA3 {
         }
 
         List<Integer> res = new ArrayList<>(a);
-        Iterator<Integer> itr = res.iterator();
-        while (itr.hasNext()) {
-            if (itr.hasNext() && itr.next() < 0) itr.remove();
-        }
-       List<Integer> aLeft = new ArrayList<>(a);
-        itr = aLeft.iterator();
-        while (itr.hasNext()) {
-            if (itr.hasNext() && itr.next() >= 0) itr.remove();
-        }
+        res.sort(Collections.reverseOrder());
 
-        res.addAll(aLeft);
-
-        aLeft.clear();
 
         System.out.println("\nИсходная коллекция");
         System.out.println(a);
