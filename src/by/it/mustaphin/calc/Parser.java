@@ -6,42 +6,48 @@ import java.util.regex.Pattern;
 
 public class Parser {
 
-    private String line;
-
     void read() {
-        SortData sd = new SortData();
-        System.out.println("Введите команду \"sortvar\" для отображения всех результатов или команду \"printvar\" или введите команду \"Выход\" для завершения работы");
+        System.out.println("Напишите выражение или введите команду \"sortvar\" для отображения всех результатов или команду \"printvar\" или введите команду \"exit\" для выхода");
         Scanner scan = new Scanner(System.in);
-        line = scan.nextLine().trim();
+        String line = scan.nextLine().trim();
         if (line.equalsIgnoreCase("sortvar")) {
-            sd.sortvar();
+            StoreData.sortvar();
             read();
-        } else if (line.equalsIgnoreCase("Выход")) {
+        } else if (line.equalsIgnoreCase("exit")) {
             System.exit(0);
         } else if (line.equalsIgnoreCase("printvar")) {
-            sd.printvar();
+            StoreData.printvar();
             read();
         } else {
-            Pattern action = Pattern.compile("[-=+*/]");
-            Pattern member = Pattern.compile("[0-9.]+");
-            Pattern name = Pattern.compile("[a-zA-Z]+");
-            Matcher mat = action.matcher(line);
-            List<String> actList = new ArrayList<>();
-            while (mat.find()) {
-                actList.add(mat.group());
-            }
-            mat = member.matcher(line);
-            List<String> membList = new ArrayList<>();
+            parseExpression(line);
+        }
+    }
+
+    void parseExpression(String line) {
+        Pattern action = Pattern.compile("[-=+*/]");
+        Pattern vars = Pattern.compile("[0-9.]+");
+        Pattern varName = Pattern.compile("[a-zA-Z]+");
+        Matcher mat = action.matcher(line);
+        List<String> actList = new ArrayList<>();
+        while (mat.find()) {
+            actList.add(mat.group());
+        }
+        mat = varName.matcher(line);
+        mat.find();
+        String key = mat.group();
+        List<String> membList = new ArrayList<>();
+        if (!line.contains("{")) {
+            mat = vars.matcher(line);
             while (mat.find()) {
                 membList.add(mat.group());
             }
-            mat = name.matcher(line);
-            mat.find();
-            String varName = mat.group();
-            if (actList.get(1).equals("+")) {
-
+            switch (actList.get(1)) {
+                case "+":
+                    Var varD1 = new VarD(membList.get(0));
+                    Var varD2 = new VarD(membList.get(1));
+                    varD1.assignment(key, varD1.add(varD2));
+                    break;
             }
-            StringBuilder sb = new StringBuilder();
         }
     }
 

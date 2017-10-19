@@ -2,8 +2,6 @@ package by.it.mustaphin.calc;
 
 abstract class Var implements MathOperations, Variable {
 
-    SortData sortData = new SortData();
-
     @Override
     public Var add(Var var) {
 //        System.out.println("Сложение не возможно");
@@ -30,6 +28,6 @@ abstract class Var implements MathOperations, Variable {
 
     @Override
     public void assignment(String name, Var var) {
-
+        StoreData.store(name, var);
     }
 }

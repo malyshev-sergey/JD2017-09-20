@@ -2,11 +2,11 @@ package by.it.mustaphin.calc;
 
 import java.util.*;
 
-public class SortData {
+public class StoreData {
 
     static private HashMap<String, Var> data = new HashMap<>();
 
-    public void store(String name, Var var) {
+    static void store(String name, Var var) {
         data.put(name, var);
     }
 
