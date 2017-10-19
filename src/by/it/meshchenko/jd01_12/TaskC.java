@@ -93,4 +93,33 @@ public class TaskC {
         }
 
     }
+
+    public static void exampleС3(String str){
+        Stack<Character> stack = new Stack<>();
+        for(int i = 0; i < str.length(); i++){
+            switch (str.charAt(i)){
+                case '{': stack.push('{'); break;
+                case '(': stack.push('('); break;
+                case '[': stack.push('['); break;
+                case '}':
+                    if(!stack.isEmpty() && stack.pop().compareTo('{') == 0){ break; }
+                    else{ strError(str); return;}
+                case ')':
+                    if(!stack.isEmpty() && stack.pop().compareTo('(') == 0){ break; }
+                    else{ strError(str); return; }
+                case ']':
+                    if(!stack.isEmpty() && stack.pop().compareTo('[') == 0){ break; }
+                    else{ strError(str); return; }
+                default: break;
+            }
+
+        }
+        if(stack.isEmpty()) strSuccess(str);
+    }
+    private static void strSuccess(String str){
+        System.out.println("Расстановка скобок в строке '" + str + "' корректна");
+    }
+    private static void strError(String str){
+        System.out.println("Расстановка скобок в строке '" + str + "' не корректна");
+    }
 }

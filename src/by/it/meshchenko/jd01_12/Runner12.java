@@ -39,8 +39,8 @@ public class Runner12 {
         //      ArrayList быстрее находит элемент О(1), LinkedList - O(n)
         //      При удалении n-го элемента, опять-таки LinkedList должен сделать поиск
         System.out.println("B.2  **************************");
-        //TaskB.processArray(150000);
-        //TaskB.prоcessLinked(150000);
+        TaskB.processArray(150000);
+        TaskB.prоcessLinked(150000);
 
         // C.1 Во входном тексте хранятся наименования некоторых объектов. Построить
         // список C1, элементы которого содержат наименования и шифры данных объектов,
@@ -69,6 +69,13 @@ public class Runner12 {
         System.out.println("Методы getCross и getUnion для пита данных Student");
         TaskC.exampleС2(listStudents, 11);
 
+        // C.3 Задана строка, состоящая из выражений и символов «(», «)», «[», «]», «{», «}».
+        // Проверить корректность расстановки скобок с помощью коллекций.
+        System.out.println("\n\nC.3  **************************");
+        TaskC.exampleС3("2*(3+5)-{1,2,3}*{[5,6],[7,9]}");
+        TaskC.exampleС3("[5]*{1,2,3}}*9");
+        TaskC.exampleС3("({[9]})*{([8])}");
+        TaskC.exampleС3("({[9])}*{([8])}");
 
 
     }
