@@ -2,9 +2,7 @@ package by.it.shelkovich.jd1_12;
 
 import jdk.internal.org.objectweb.asm.Handle;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Pattern;
 
 public class TaskB {
@@ -23,7 +21,39 @@ public class TaskB {
         }
     }
 
-    static void part2(){
-        
+    static void part2(int n){
+        List <Integer> arrayCircle = new ArrayList<>();
+        List <Integer> linkedCircle = new LinkedList<>();
+        for (int i = 1; i <= n; i++) {
+            arrayCircle.add(i);
+            linkedCircle.add(i);
+        }
+
+        long startArray = System.currentTimeMillis();
+        processList(arrayCircle);
+        long stopArrStartLin = System.currentTimeMillis();
+        processList(linkedCircle);
+        long stopLinked = System.currentTimeMillis();
+
+        System.out.printf("Время массива: %dc., время связанного списка: %dc.\n", (stopArrStartLin-startArray)/1000, (stopLinked - stopArrStartLin)/1000 );
+    }
+
+    private static void processList(List<Integer> circle){
+        Iterator<Integer> iter = circle.iterator();
+        boolean selected = false;
+        while(circle.size() > 1) {
+            int i;
+            if (iter.hasNext()) i = iter.next();
+            else {
+                iter = circle.iterator();
+                i = iter.next();
+            }
+            if (selected) {
+                //System.out.printf("Элемет %d вышел из круга\n", i);
+                iter.remove();
+            }
+            selected = !selected;
+        }
+        System.out.printf("В круге остался элемент %s\n", circle);
     }
 }
