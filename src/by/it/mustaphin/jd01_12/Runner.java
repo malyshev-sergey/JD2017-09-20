@@ -18,6 +18,8 @@ public class Runner {
 
 //        new TaskB1().getRepeats();
 
-        new TaskB2().processArray();
+        TaskB2 tB2 = new TaskB2();
+        tB2.processArray();
+        tB2.processLinked();
     }
 }
