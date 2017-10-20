@@ -11,14 +11,14 @@ public class TaskB2 {
 
         int n=50000;
 
-        System.out.println("В кругу стоят "+n+ " человек, пронумерованных от 1 до "+n+". При ведении счета по кругу\n" +
+        System.out.println("\nВ кругу стоят "+n+ " человек, пронумерованных от 1 до "+n+". При ведении счета по кругу\n" +
                 "вычеркивается каждый второй человек, пока не останется один.");
         Timer t=new Timer();
 
         processArray(n);
-        System.out.println("\nметод processArray моделирующий процесс:  "+t);
+        System.out.println("\nметод processArray моделирующий процесс проработал:  "+t);
         processLinked(n);
-        System.out.println("\nметод processLinked моделирующий процесс:  "+t);
+        System.out.println("\nметод processLinked моделирующий процесс проработал:  "+t);
 
     }
 
@@ -66,7 +66,7 @@ public class TaskB2 {
             Delta = (double) (System.nanoTime() - iniTime) / 1000;
             iniTime = System.nanoTime();
 
-            return "Прошло " + Delta.toString() + " микросекунд.";
+            return Delta.toString() + " микросекунд.";
         }
     }
 
