@@ -13,7 +13,7 @@ public class TaskC1 {
         System.out.println(input);
 
         Random r = new Random();
-        Pattern val = Pattern.compile("NAME[0-9]");
+        Pattern val = Pattern.compile("NAME[0-9]+");
         Matcher mVal = val.matcher(input);
 
         Map<Integer, String> c1=new TreeMap<>();
@@ -50,7 +50,7 @@ public class TaskC1 {
             while (!mSpace.find(r.nextInt(sb.length()))) {
                 mSpace.reset();
             }
-            sb.insert(mSpace.start(), " NAME" + r.nextInt(10));
+            sb.insert(mSpace.start(), " NAME" + (r.nextInt(10)+1));
         }
         return sb.toString();
     }
