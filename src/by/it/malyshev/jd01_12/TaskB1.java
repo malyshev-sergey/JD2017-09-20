@@ -20,7 +20,7 @@ public class TaskB1 {
                 words.put(m.group(), 1);
             }
         }
-        System.out.println("В тексте:\n"+Data.TXT+"\n");
+        System.out.println("\nВ тексте:\n"+Data.TXT+"\n");
         for (Map.Entry<String, Integer> entry : words.entrySet()) {
             System.out.print("слово " + entry.getKey() + " встречается " + entry.getValue());
 
