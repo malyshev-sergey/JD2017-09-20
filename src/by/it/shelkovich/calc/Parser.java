@@ -7,23 +7,25 @@ import java.util.regex.Pattern;
 
 public class Parser {
     public static Var exeOp(String operation) {
-        String args[] = operation.split(Patterns.exOper);
-        Pattern p = Pattern.compile(Patterns.exOper);
+        Pattern p = Pattern.compile(Patterns.exFull);
         Matcher m = p.matcher(operation);
-        m.find();
-        String op = m.group();
-        switch (op) {
-            case "+":
-                return getVarByString(args[0].trim()).add(getVarByString(args[1].trim()));
-            case "-":
-                return getVarByString(args[0].trim()).sub(getVarByString(args[1].trim()));
-            case "*":
-                return getVarByString(args[0].trim()).mul(getVarByString(args[1].trim()));
-            case "/":
-                return getVarByString(args[0].trim()).div(getVarByString(args[1].trim()));
-            case "=":
-                Storage.vars.put(args[0].trim(), getVarByString(args[1].trim()));
-                return null;
+
+        if(m.matches()) {
+
+            String op = m.group("op");
+            switch (op) {
+                case "+":
+                    return getVarByString(m.group("first")).add(getVarByString(m.group("second")));
+                case "-":
+                    return getVarByString(m.group("first")).sub(getVarByString(m.group("second")));
+                case "*":
+                    return getVarByString(m.group("first")).mul(getVarByString(m.group("second")));
+                case "/":
+                    return getVarByString(m.group("first")).div(getVarByString(m.group("second")));
+                case "=":
+                    Storage.vars.put(m.group("first"), getVarByString(m.group("second")));
+                    return null;
+            }
         }
         return null;
     }
