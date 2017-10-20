@@ -23,5 +23,7 @@ public class Runner12 {
         TaskC.Part2();
         System.out.println("\nЗадание 3");
         TaskC.Part3();
+
+        //Throwable e = new Throwable();
     }
 }
