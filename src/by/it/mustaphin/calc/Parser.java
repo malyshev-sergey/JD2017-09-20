@@ -32,9 +32,7 @@ public class Parser {
         //...
     }
 
-    /**
-     * <?extends Var> void add(Var var1, Var var2) {
-     var1.add(var2);
-     }
-     **/
+    <T extends Var> void add(T var1, T var2) {
+        var1.add(var2);
+    }
 }
