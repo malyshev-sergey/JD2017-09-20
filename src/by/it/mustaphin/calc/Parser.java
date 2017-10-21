@@ -7,20 +7,28 @@ import java.util.regex.Pattern;
 public class Parser {
 
     void read() {
-        System.out.println("Напишите выражение или введите команду \"sortvar\" для отображения всех результатов или команду \"printvar\" или введите команду \"exit\" для выхода");
-        Scanner scan = new Scanner(System.in);
-        String line = scan.nextLine().trim();
-        if (line.equalsIgnoreCase("sortvar")) {
-            StoreData.sortvar();
-            read();
-        } else if (line.equalsIgnoreCase("exit")) {
-            System.exit(0);
-        } else if (line.equalsIgnoreCase("printvar")) {
-            StoreData.printvar();
-            read();
-        } else {
-            parseExpression(line);
-        }
+
+        Var varD1 = new VarD(2.3);
+        Var varD2 = new VarV(new double[]{3.4, 55.4});
+        varD1.assignment("sum", add(varD1, varD2));
+
+        /** System.out.println("Напишите выражение или введите команду \"sortvar\" для отображения всех результатов или команду \"printvar\" или введите команду \"exit\" для выхода");
+         Scanner scan = new Scanner(System.in);
+         String line = scan.nextLine().trim();
+         if (line.equalsIgnoreCase("sortvar")) {
+         StoreData.sortvar();
+         read();
+         } else if (line.equalsIgnoreCase("exit")) {
+         System.exit(0);
+         } else if (line.equalsIgnoreCase("printvar")) {
+         StoreData.printvar();
+         read();
+         } else {
+         //            parseExpression(line);
+         VarD varD1 = new VarD(2.3);
+         VarD varD2 = new VarD(4.6);
+         varD1.assignment("sum", add(varD1, varD2));
+         }*/
     }
 
     void parseExpression(String line) {
@@ -32,7 +40,7 @@ public class Parser {
         //...
     }
 
-    <T extends Var> void add(T var1, T var2) {
-        var1.add(var2);
+    <T extends Var> Var add(T var1, T var2) {
+        return var1.add(var2);
     }
 }
