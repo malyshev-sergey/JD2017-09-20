@@ -26,8 +26,7 @@ abstract class Var implements MathOperations, Variable {
         return null;
     }
 
-    @Override
-    public void assignment(String name, Var var) {
+    public static void assignment(String name, Var var) {
         StoreData.store(name, var);
     }
 }

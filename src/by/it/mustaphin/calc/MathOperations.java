@@ -10,6 +10,4 @@ public interface MathOperations {
 
     Var div(Var var);
 
-    void assignment(String name, Var var);
-
 }

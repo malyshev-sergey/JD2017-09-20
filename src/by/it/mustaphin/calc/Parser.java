@@ -8,27 +8,21 @@ public class Parser {
 
     void read() {
 
-        Var varD1 = new VarD(2.3);
-        Var varD2 = new VarV(new double[]{3.4, 55.4});
-        varD1.assignment("sum", add(varD1, varD2));
 
-        /** System.out.println("Напишите выражение или введите команду \"sortvar\" для отображения всех результатов или команду \"printvar\" или введите команду \"exit\" для выхода");
-         Scanner scan = new Scanner(System.in);
-         String line = scan.nextLine().trim();
-         if (line.equalsIgnoreCase("sortvar")) {
-         StoreData.sortvar();
-         read();
-         } else if (line.equalsIgnoreCase("exit")) {
-         System.exit(0);
-         } else if (line.equalsIgnoreCase("printvar")) {
-         StoreData.printvar();
-         read();
-         } else {
-         //            parseExpression(line);
-         VarD varD1 = new VarD(2.3);
-         VarD varD2 = new VarD(4.6);
-         varD1.assignment("sum", add(varD1, varD2));
-         }*/
+        System.out.println("Напишите выражение или введите команду \"sortvar\" для отображения всех результатов или команду \"printvar\" или введите команду \"exit\" для выхода");
+        Scanner scan = new Scanner(System.in);
+        String line = scan.nextLine().trim();
+        if (line.equalsIgnoreCase("sortvar")) {
+            StoreData.sortvar();
+            read();
+        } else if (line.equalsIgnoreCase("exit")) {
+            System.exit(0);
+        } else if (line.equalsIgnoreCase("printvar")) {
+            StoreData.printvar();
+            read();
+        } else {
+            parseExpression(line);
+        }
     }
 
     void parseExpression(String line) {
@@ -36,11 +30,35 @@ public class Parser {
         Pattern varsD = Pattern.compile("[0-9.]+");
         Pattern varsV = Pattern.compile("[{][0-9.,]+[}]");
         Pattern varName = Pattern.compile("[a-zA-Z]+");
-        Matcher mat = action.matcher(line);
-        //...
+        Matcher matD = varsD.matcher(line);
+        Matcher matV = varsV.matcher(line);
+        List<Var> varList = new ArrayList<>();
+        while (matD.find() | matV.find()) {
+            varList.add((null != matD.group()) ? new VarD(matD.group()) : new VarV(matV.group()));
+        }
+        Matcher matA = action.matcher(line);
+        while (matA.find()) {
+            if (matA.group().equals("+")) {
+                Var varD1 = new VarD(2.3);
+                Var.assignment("add", add(varList.get(0), varList.get(1)));
+            }
+        }
     }
 
     <T extends Var> Var add(T var1, T var2) {
         return var1.add(var2);
     }
+
+    <T extends Var> Var sub(T var1, T var2) {
+        return var1.sub(var2);
+    }
+
+    <T extends Var> Var mul(T var1, T var2) {
+        return var1.mul(var2);
+    }
+
+    <T extends Var> Var div(T var1, T var2) {
+        return var1.div(var2);
+    }
+
 }
