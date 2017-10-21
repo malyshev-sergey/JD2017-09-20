@@ -2,6 +2,10 @@ package by.it.malyshev.jd01_12;
 
 import java.util.*;
 
+/**
+ * @author Sergey Malyshev
+ */
+
 public class TaskA3 {
 
     public static void main(String[] args) {

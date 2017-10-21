@@ -1,5 +1,9 @@
 package by.it.malyshev.jd01_12;
 
+/**
+ * @author Sergey Malyshev
+ */
+
 public class Runner12 {
 
     public static void main(String[] args) {

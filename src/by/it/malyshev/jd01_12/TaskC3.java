@@ -3,6 +3,10 @@ package by.it.malyshev.jd01_12;
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
 
+/**
+ * @author Sergey Malyshev
+ */
+
 public class TaskC3 {
 
     public static void main(String[] args) {

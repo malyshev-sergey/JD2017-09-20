@@ -5,6 +5,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * @author Sergey Malyshev
+ */
+
 public class TaskA1 {
 
     public static void main(String[] args) {

@@ -3,6 +3,10 @@ package by.it.malyshev.jd01_12;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Sergey Malyshev
+ */
+
 class MyCollect {
 
     static List<Integer> getCross(List<Integer> a, List<Integer> b) {

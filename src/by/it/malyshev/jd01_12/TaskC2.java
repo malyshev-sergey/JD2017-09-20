@@ -5,6 +5,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * @author Sergey Malyshev
+ */
+
 public class TaskC2 {
 
     public static void main(String[] args) {

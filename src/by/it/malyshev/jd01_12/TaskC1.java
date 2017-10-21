@@ -4,6 +4,10 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * @author Sergey Malyshev
+ */
+
 public class TaskC1 {
 
     public static void main(String[] args) {

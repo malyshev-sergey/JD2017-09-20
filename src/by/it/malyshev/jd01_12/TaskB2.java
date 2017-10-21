@@ -5,6 +5,10 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * @author Sergey Malyshev
+ */
+
 public class TaskB2 {
 
     public static void main(String[] args) {

@@ -5,6 +5,10 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * @author Sergey Malyshev
+ */
+
 public class TaskB1 {
 
     public static void main(String[] args) {
