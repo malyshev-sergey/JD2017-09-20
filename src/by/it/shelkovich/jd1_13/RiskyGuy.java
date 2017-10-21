@@ -19,8 +19,8 @@ public class RiskyGuy {
     }
 
     public void attemptRisk() throws DeadException {
-        badAssLevel = risk.riskyMethod();
-        System.out.println(name + ": Ха-ха, у меня " + badAssLevel + " уровень крутизны!");
+        badAssLevel += risk.riskyMethod();
+        System.out.println(name + ": Ха-ха, теперь у меня " + badAssLevel + " уровень крутизны!");
     }
 
 }
