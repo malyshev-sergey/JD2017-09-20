@@ -47,6 +47,7 @@ public class VarD extends Var {
     @Override
     public Var div(VarD v1) {
         System.out.println("Деление числа на число");
+        if (v1.getValue() == 0) throw new ArithmeticException("Деление на 0");
         return new VarD(value / v1.getValue());
     }
 

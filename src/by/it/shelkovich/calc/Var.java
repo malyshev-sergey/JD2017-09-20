@@ -1,5 +1,6 @@
 package by.it.shelkovich.calc;
 
+import by.it.shelkovich.calc.Exceptions.IllegalVectorOperationException;
 import by.it.shelkovich.calc.interfaces.*;
 
 public abstract class Var implements IAdd, IMul, ISub, IDiv, StringCompatible {

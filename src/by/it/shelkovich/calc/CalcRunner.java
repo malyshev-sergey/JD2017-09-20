@@ -1,45 +1,30 @@
 package by.it.shelkovich.calc;
 
+import by.it.shelkovich.calc.Exceptions.IllegalVectorOperationException;
+import by.it.shelkovich.calc.Exceptions.MatrixMultiplyException;
+
 public class CalcRunner {
     public static void main(String[] args) {
 
-        /*System.out.println("Оперции с числами");
-        System.out.println(((Var) new VarD("3.8")).add((Var) new VarD("26.2")).toString());
-        System.out.println(new VarD("87.4").sub(new VarD("23.1")).toString());
-        System.out.println(new VarD("1.04").mul(new VarD("5.9")).toString());
-        System.out.println(new VarD("12.7").mul(new VarD("5")).toString());
-        System.out.println(new VarD("-6").add(new VarD("12")).toString());
-        System.out.println(new VarD("-7").mul(new VarD("3.1")).toString());
-        System.out.println(new VarD("4").div(new VarD("8")).toString());
-        System.out.println(new VarD("-9").sub(new VarD("0.9")).toString());
+        try {
+            System.out.println(Parser.exeOp("2.3 + 3").toString());
+            System.out.println(Parser.exeOp("{-1,2,3} / 5").toString());
+            System.out.println(Parser.exeOp("{{1,2},{4,5}} * {1,2}").toString());
 
-        System.out.println("\n\nОперации с векторами");
+            Parser.exeOp("C = 3");
+            Parser.exeOp("c1 = {1,2,3}");
+            Parser.exeOp("B = {{1,2},{4,5}}");
+            Parser.exeOp("F = 3");
+            Parser.exeOp("E = 3");
+            Parser.exeOp("E1 = 3");
+            Parser.exeOp("1E = 3");
 
-        System.out.println(((Var) new VarV("{2,3,4}")).mul((Var) new VarD("2")).toString());
-        System.out.println(new VarV("{2,3,4}").div(new VarD("3")).toString());
-        System.out.println(new VarV("{2,3,4}").sub(new VarD("5")).toString());
-        System.out.println(((Var)new VarD("-4")).add((Var)new VarV("{2,3,4}")).toString());
-        System.out.println(new VarV("{2,3,4}").add(new VarV("{5,6,7}")).toString());
-        System.out.println(new VarV("{2,3,4}").sub(new VarV("{5,6,7}")).toString());
-
-        System.out.println("\n\nОперации с матрицами");
-        System.out.println(((Var) new VarM("{{1,2},{8,3}}")).sub((Var) new VarD("2")).toString());
-        System.out.println(new VarM("{{1,2},{8,3}}").mul(new VarV("{1,2}")).toString());
-        System.out.println(new VarM("{{1,2},{8,3}}").mul(new VarM("{{1,2},{8,3}}")).toString());
-        System.out.println(new VarM("{{1,2},{8,3}}").add(new VarM("{{1,2},{8,3}}")).toString());*/
-
-        System.out.println(Parser.exeOp("2.3 + 3").toString());
-        System.out.println(Parser.exeOp("{-1,2,3} / 5").toString());
-        System.out.println(Parser.exeOp("{{1,2},{4,5}} * {1,2}").toString());
-        
-        Parser.exeOp("C = 3");
-        Parser.exeOp("c1 = {1,2,3}");
-        Parser.exeOp("B = {{1,2},{4,5}}");
-        Parser.exeOp("F = 3");
-        Parser.exeOp("E = 3");
-        Parser.exeOp("E1 = 3");
-        Parser.exeOp("1E = 3");
-
+            //Строки с арифметическими ошибками
+            System.out.println(Parser.exeOp("{{1,2},{4,5}} * {1,2,3}").toString());
+            System.out.println(Parser.exeOp("{-1,2,3} / 0").toString());
+        }catch (ArithmeticException e){
+            e.printStackTrace();
+        }
 
         Storage.printVar();
         Storage.sortVar();

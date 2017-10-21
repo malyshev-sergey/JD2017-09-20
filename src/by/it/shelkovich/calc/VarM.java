@@ -1,5 +1,6 @@
 package by.it.shelkovich.calc;
 
+import by.it.shelkovich.calc.Exceptions.MatrixMultiplyException;
 import by.it.shelkovich.calc.interfaces.Patterns;
 
 import java.util.regex.Matcher;
@@ -108,6 +109,7 @@ public class VarM extends Var {
         VarM result = new VarM(this);
         for (int i = 0; i < result.value.length; i++) {
             for (int j = 0; j < result.value[i].length; j++) {
+                if (arg.getValue() == 0) throw new ArithmeticException("Деление на 0");
                 result.value[i][j] = result.value[i][j] / arg.getValue();
             }
         }
@@ -128,10 +130,9 @@ public class VarM extends Var {
                 }
                 result[i] = res;
             }
-        } else {
-            System.out.println("Число столбцов матрицы не соответствует числу элементов в векторе!");
-            result = null;
-        }
+        } else
+            throw new MatrixMultiplyException("Число столбцов матрицы не соответствует числу элементов в векторе!");
+
 
         return new VarV(result);
     }
@@ -164,10 +165,9 @@ public class VarM extends Var {
                     result.value[i][j] = res;
                 }
             }
-        } else {
-            System.out.println("Число столбцов в первой матрице не соответствует числу строк во второй!");
-            result = null;
-        }
+        } else
+            throw new MatrixMultiplyException("Число столбцов в первой матрице не соответствует числу строк во второй!");
+
 
         return result;
     }
