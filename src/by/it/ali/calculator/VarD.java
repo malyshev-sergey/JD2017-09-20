@@ -18,7 +18,11 @@ public class VarD extends Var implements Str{
     @Override
     public Var add(Var x){
         if (x instanceof VarD)
-            return new VarD(this.value+((VarD) x).value);
+        return new VarD(this.value+((VarD) x).value);
+        else if (x instanceof VarV)
+        return new VarV("Здесь происходит сложение числа с вектором");
+        else if (x instanceof VarM)
+            return new VarM("Здесь происходит сложение числа с матрицей");
         else
             return x.add(this);
     }
@@ -27,20 +31,24 @@ public class VarD extends Var implements Str{
         if (x instanceof VarD)
             return new VarD(this.value-((VarD) x).value);
         else
-            return x.add(this);
+            return x.sub(this);
     }
     @Override
     public Var mul(Var x){
         if (x instanceof VarD)
             return new VarD(this.value*((VarD) x).value);
+        else if (x instanceof VarV)
+            return new VarV("Здесь происходит умножение числа на вектор");
+        else if (x instanceof VarM)
+            return new VarM("Здесь происходит умножение числа на матрицу");
         else
-            return x.add(this);
+            return x.mul(this);
     }
     @Override
     public Var div(Var x){
         if (x instanceof VarD)
             return new VarD(this.value/((VarD) x).value);
         else
-            return x.add(this);
+            return x.div(this);
     }
 }
