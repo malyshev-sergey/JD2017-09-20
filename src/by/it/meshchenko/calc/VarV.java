@@ -4,11 +4,14 @@ import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
 public class VarV extends Var implements IVariable, IOperationVisitorAdd,
-        IOperationVisitorDiv, IOperationVisitorMul, IOperationVisitorSub{
+        IOperationVisitorDiv, IOperationVisitorMul, IOperationVisitorSub,
+        IOperationVisitorAssign {
+
     private double[] value;
     private Var varOperand2;
 
     // Конструкторы
+    VarV(){}
     VarV(double[] value) {
         this.value = value;
     }
@@ -19,6 +22,9 @@ public class VarV extends Var implements IVariable, IOperationVisitorAdd,
     // get set
     public double[] getValue() {
         return value;
+    }
+    public void setValue(double[] value) {
+        this.value = value;
     }
 
     // extends Var
@@ -37,6 +43,10 @@ public class VarV extends Var implements IVariable, IOperationVisitorAdd,
     @Override
     public Var acceptSub(IOperationVisitorSub p) {
         return p.visitSub(this);
+    }
+    @Override
+    public boolean acceptAssign(IOperationVisitorAssign p) {
+        return p.visitAssign(this);
     }
 
     @Override
@@ -59,17 +69,38 @@ public class VarV extends Var implements IVariable, IOperationVisitorAdd,
         varOperand2 = var;
         return var.acceptDiv(this);
     }
+    @Override
+    public boolean assign(Var var){
+        varOperand2 = var;
+        return var.acceptAssign(this);
+    }
+    @Override
+    public boolean assign(String str){
+        if(fromString(str)) {
+            return true;
+        }
+        else {
+            return super.assign(str);
+        }
+    }
 
 
     // implements IVariable
     @Override
-    public void fromString(String strVector) {
-        Pattern p = Pattern.compile(Patterns.exVal);
-        value = new double[strVector.split(",").length];
-        Matcher m = p.matcher(strVector);
-        int i = 0;
-        while (m.find())
-            value[i++] = Double.parseDouble(m.group());
+    public boolean fromString(String strVector) {
+        boolean res = true;
+        try{
+            Pattern p = Pattern.compile(Patterns.exVal);
+            value = new double[strVector.split(",").length];
+            Matcher m = p.matcher(strVector);
+            int i = 0;
+            while (m.find())
+                value[i++] = Double.parseDouble(m.group());
+        }
+        catch (Exception e){
+            res = false;
+        }
+        return res;
     }
     @Override
     public String toString() {
@@ -150,5 +181,20 @@ public class VarV extends Var implements IVariable, IOperationVisitorAdd,
     @Override
     public Var visitSub(VarM varM) {
         return super.sub(varOperand2);
+    }
+
+    // implements IOperationVisitorAssign
+    @Override
+    public boolean visitAssign(VarF varF){
+        return super.assign(varOperand2);
+    }
+    @Override
+    public boolean visitAssign(VarV varV){
+        setValue(varV.getValue());
+        return true;
+    }
+    @Override
+    public boolean visitAssign(VarM varM){
+        return super.assign(varOperand2);
     }
 }
