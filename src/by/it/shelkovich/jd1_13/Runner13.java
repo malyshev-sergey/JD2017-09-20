@@ -4,7 +4,7 @@ public class Runner13 {
     public static void main(String[] args) {
         //TaskA.run();
 
-        System.out.println("Старт уровня 0");
+        /*System.out.println("Старт уровня 0");
         try {
             TaskB.run();
         }catch (ArithmeticException e) {
@@ -14,6 +14,8 @@ public class Runner13 {
         }catch (StringIndexOutOfBoundsException e){
             System.out.println("Уровень 0 зафиксировал возникновение необработанной ошибки выхода за пределы строки");
         }
-        System.out.println("Финиш уровня 0");
+        System.out.println("Финиш уровня 0");*/
+
+        TaskC.run();
     }
 }
