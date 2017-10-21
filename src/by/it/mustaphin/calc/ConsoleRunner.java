@@ -8,8 +8,7 @@ public class ConsoleRunner {
 //        varD1.assignment("scalDivScal", varD1.div(varD2));
 //        varD1.assignment("scalMulScal", varD1.mul(varD2));
 //        varD1.assignment("scalSubScal", varD1.sub(varD2));
-        new Parser().read();
-        StoreData.printvar();
-        StoreData.sortvar();
+
+        new Parser().read(args[0]);
     }
 }
