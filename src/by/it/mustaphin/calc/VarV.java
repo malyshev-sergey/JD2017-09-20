@@ -35,6 +35,7 @@ public class VarV extends Var {
     }
 
     public VarV(String str) {
+//        System.out.println("VarV constructor from String");
         fromString(str);
     }
 
@@ -42,13 +43,13 @@ public class VarV extends Var {
     public Var add(Var var) {
         VarV result = new VarV(this.value);
         if (var instanceof VarV) {
-            System.out.println("вектора с вектором\n");
+//            System.out.println("вектора с вектором\n");
             for (int i = 0; i < this.value.length; i++) {
                 result.value[i] += ((VarV) var).value[i];
             }
             return result;
         } else if (var instanceof VarD) {
-            System.out.println("вектора с числом\n");
+//            System.out.println("вектора с числом\n");
             for (int i = 0; i < this.value.length; i++) {
                 result.value[i] += ((VarD) var).getValue();
             }
@@ -61,13 +62,13 @@ public class VarV extends Var {
     public Var sub(Var var) {
         VarV result = new VarV(this.value);
         if (var instanceof VarV && ((VarV) var).value.length == this.value.length) {
-            System.out.println("вектора из вектора\n");
+//            System.out.println("вектора из вектора\n");
             for (int i = 0; i < this.value.length; i++) {
                 result.value[i] -= ((VarV) var).value[i];
             }
             return result;
         } else if (var instanceof VarD) {
-            System.out.println("вектора из числа\n");
+//            System.out.println("вектора из числа\n");
             for (int i = 0; i < this.value.length; i++) {
                 result.value[i] -= ((VarD) var).getValue();
             }
@@ -80,13 +81,13 @@ public class VarV extends Var {
     public Var mul(Var var) {
         VarV result = new VarV(this.value);
         if (var instanceof VarV) {
-            System.out.println("вектора на вектор\n");
+//            System.out.println("вектора на вектор\n");
             for (int i = 0; i < this.value.length; i++) {
                 result.value[i] *= ((VarV) var).value[i];
             }
             return result;
         } else if (var instanceof VarD) {
-            System.out.println("вектора на число\n");
+//            System.out.println("вектора на число\n");
             for (int i = 0; i < this.value.length; i++) {
                 result.value[i] *= ((VarD) var).getValue();
             }
@@ -99,7 +100,7 @@ public class VarV extends Var {
     public Var div(Var var) {
         VarV result = new VarV(this.value);
         if (var instanceof VarV && ((VarV) var).value.length == this.value.length) {
-            System.out.println("вектора на вектор\n");
+//            System.out.println("вектора на вектор\n");
             if (((VarV) var).value.length == this.value.length) {
                 for (int i = 0; i < this.value.length; i++) {
                     result.value[i] /= ((VarV) var).value[i];
@@ -107,7 +108,7 @@ public class VarV extends Var {
                 return result;
             } else return super.div(var);
         } else if (var instanceof VarD) {
-            System.out.println("вектора на число\n");
+//            System.out.println("вектора на число\n");
             for (int i = 0; i < this.value.length; i++) {
                 result.value[i] /= ((VarD) var).getValue();
             }

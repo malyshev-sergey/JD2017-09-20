@@ -41,14 +41,17 @@ public class Parser {
 
     void parseExpression(String line) {
         Pattern action = Pattern.compile("[-+*/]");
-        Pattern varsD = Pattern.compile("[0-9.]+");
+        Pattern varsD = Pattern.compile("[^-{},*+/][0-9.]+");
         Pattern varsV = Pattern.compile("[{][0-9.,]+[}]");
         Pattern varName = Pattern.compile("[a-zA-Z]+");
         Matcher matD = varsD.matcher(line);
         Matcher matV = varsV.matcher(line);
         List<Var> varList = new ArrayList<>();
-        while (matD.find() | matV.find()) {
-            varList.add((null != matD.group()) ? new VarD(matD.group()) : new VarV(matV.group()));
+        while (matV.find()) {
+            varList.add(new VarV(matV.group()));
+        }
+        while (matD.find()) {
+            varList.add(new VarD(matD.group()));
         }
         Matcher matA = action.matcher(line);
         Matcher matN = varName.matcher(line);
@@ -69,22 +72,24 @@ public class Parser {
     }
 
     <T extends Var> Var add(T var1, T var2) {
-        System.out.print("Происходит сложение ");
+//        System.out.print("Происходит сложение ");
         return var1.add(var2);
     }
 
     <T extends Var> Var sub(T var1, T var2) {
-        System.out.print("Происходит вычитание ");
+//        System.out.print("Происходит вычитание ");
         return var1.sub(var2);
     }
 
     <T extends Var> Var mul(T var1, T var2) {
-        System.out.print("Происходит умножение ");
+//        System.out.print("Происходит умножение ");
         return var1.mul(var2);
     }
 
     <T extends Var> Var div(T var1, T var2) {
-        System.out.print("Происходит деление ");
+//        System.out.println(var1.getClass().getName());
+//        System.out.println(var2.getClass().getName());
+//        System.out.print("Происходит деление ");
         return var1.div(var2);
     }
 
