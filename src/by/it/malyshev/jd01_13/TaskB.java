@@ -46,11 +46,14 @@ public class TaskB {
         //другая ошибка, передать наверх, обработать в main
         System.out.println("Запущена процедура уровеня 1");
         Random r = new Random();
-
         int q = r.nextInt(2) - 1;
         int[] a = {1, 2, 3, 4, 5};
-        a[i] = i;
-        secondLevel(q);
+        try {
+            a[i] = i;
+            secondLevel(q);
+        } catch (ArrayIndexOutOfBoundsException | ArithmeticException e) {
+            throw e;
+        }
         System.out.println("Завершена процедура уровня 1");
     }
 
@@ -60,12 +63,16 @@ public class TaskB {
 
         int a = 1;
         int b = 0;
+        try {
+            if (0 > q) {
+                throw new ArithmeticException(String.valueOf(q));
+            }
 
-        if (0 > q) {
-            throw new ArithmeticException(String.valueOf(q));
+            q += Math.sqrt(q);
+            thirdLevel(a, b);
+        } catch (ArithmeticException e) {
+            throw e;
         }
-        q += Math.sqrt(q);
-        thirdLevel(a, b);
         System.out.println("Завершена процедура уровня 2");
     }
 

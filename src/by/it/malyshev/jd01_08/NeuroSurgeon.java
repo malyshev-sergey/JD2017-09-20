@@ -6,14 +6,14 @@ public class NeuroSurgeon extends Surgeon {
     private boolean stateSquareHead;
     private boolean twoManyThoughts;
 
-    NeuroSurgeon() {
+    public NeuroSurgeon() {
         super();
         super.setDoctorName("Нейрохирург_" + randomInt());
         this.stateSquareHead = false;
         this.twoManyThoughts = false;
     }
 
-    NeuroSurgeon(String doctorName, boolean stateDisease, boolean stateSquareHead, boolean twoManyThoughts) {
+    public NeuroSurgeon(String doctorName, boolean stateDisease, boolean stateSquareHead, boolean twoManyThoughts) {
         this();
         super.setDoctorName(doctorName);
         super.setStateDisease(stateDisease);
@@ -21,7 +21,7 @@ public class NeuroSurgeon extends Surgeon {
         this.twoManyThoughts = twoManyThoughts;
     }
 
-    void setStateSquareHead(boolean stateSquareHead) {
+    public void setStateSquareHead(boolean stateSquareHead) {
         this.stateSquareHead = stateSquareHead;
         if (this.stateSquareHead || this.twoManyThoughts) {
             super.setStateDisease(true);
@@ -30,7 +30,7 @@ public class NeuroSurgeon extends Surgeon {
         }
     }
 
-    void setTwoManyThoughts(boolean twoManyThoughts) {
+    public void setTwoManyThoughts(boolean twoManyThoughts) {
         this.twoManyThoughts = twoManyThoughts;
         if (this.twoManyThoughts || this.stateSquareHead) {
             super.setStateDisease(true);
@@ -53,30 +53,46 @@ public class NeuroSurgeon extends Surgeon {
     }
 
     @Override
-    public int makeOperation() {
+    public int makeOperation() throws MedicalOperationException {
         int res = 0;
-        int temp = super.makeOperation();
-        if (temp == 0) {
-            res = 0;
-        } else if (temp == 1) {
-            if (twoManyThoughts && !stateSquareHead) {
-                System.out.println("Пациент скорее жив. Все извилины выпрямлены");
-                res = 1;
+        try {
+            int temp = super.makeOperation();
+            if (temp == 0) {
+                res = 0;
+            } else if (temp == 1) {
+                if (twoManyThoughts && !stateSquareHead) {
+                    System.out.println("Пациент скорее жив. Все извилины выпрямлены");
+                    res = 1;
+                }
+                if (stateSquareHead && !twoManyThoughts) {
+                    System.out.println("Пациент скорее жив. Сделана лоботомия");
+                    res = 2;
+                }
+                if (stateSquareHead && twoManyThoughts) {
+                    System.out.println("Пациент скорее жив. Мозг успешно удален");
+                    res = 3;
+                }
+                this.receiveCognac();
+
             }
-            if (stateSquareHead && !twoManyThoughts) {
-                System.out.println("Пациент скорее жив. Сделана лоботомия");
-                res = 2;
-            }
-            if (stateSquareHead && twoManyThoughts) {
-                System.out.println("Пациент скорее жив. Мозг успешно удален");
-                res = 3;
-            }
-            this.receiveCognac();
-        } else if (temp == 2) {
-            System.out.println("Пациент скорее мертв");
-            res = 4;
+        } catch (MedicalOperationException e){
+            throw e;
         }
+
+//        else if (temp == 2) {
+//            System.out.println("Пациент скорее мертв");
+//            res = 4;
+//        }
         return res;
+    }
+
+    @Override
+    public void makeOperationWithExcCatch(){
+        try {
+            makeOperation();
+        } catch (MedicalOperationException e){
+            System.out.println(e.getMessage()+" Пациент скорее мертв!");
+        }
     }
 
     @Override

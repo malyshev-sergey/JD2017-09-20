@@ -12,6 +12,8 @@ public class Runner13 {
         TaskA.main(null);
         System.out.println("\n-----Задание B----------------------------------");
         TaskB.main(null);
+        System.out.println("\n-----Задание C----------------------------------");
+        TaskC.main(null);
 
     }
 }

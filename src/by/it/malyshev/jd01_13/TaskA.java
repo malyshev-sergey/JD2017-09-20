@@ -18,6 +18,7 @@ public class TaskA {
     private static void read(double sum) {
         Scanner sc = new Scanner(System.in);
         String line;
+        System.out.println("Введите натуральное число или end, чтобы выйти");
         try {
             while (true) {
                 line = sc.nextLine();

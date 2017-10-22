@@ -26,7 +26,7 @@ public abstract class Surgeon implements IDoctor {
         this.stateNeedOperation = false;
     }
 
-    void setDoctorName(String doctorName) {
+    public void setDoctorName(String doctorName) {
         this.doctorName = doctorName;
     }
 
@@ -95,23 +95,40 @@ public abstract class Surgeon implements IDoctor {
 
     }
 
-    public int makeOperation() {
+    public int makeOperation() throws MedicalOperationException{
         int res = 0;
         if (!this.stateNeedOperation) {
             System.out.println("Пациенту не назначена операция");
-        } else if (randomBoolean()) {
+        } else if (!randomBoolean()) {
+            this.stateDisease = false;
+            this.stateNeedOperation = false;
+            this.stateDiagnose = false;
+            this.stateRest = true;
+            throw new MedicalOperationException("EXCEPTION: Операция прошла неудачно.");
+        } else {
             System.out.println("Операция прошла удачно.");
             res = 1;
-        } else {
-            System.out.println("Операция прошла неудачно.");
-            res=2;
         }
+//        else
+
+//            System.out.println();
+ //           res=2;
+
         this.stateDisease = false;
         this.stateNeedOperation = false;
         this.stateDiagnose = false;
         this.stateRest = true;
         return res;
     }
+
+    public void makeOperationWithExcCatch(){
+        try {
+            makeOperation();
+        } catch (MedicalOperationException e){
+            System.out.println(e.getMessage());
+        }
+    }
+
 
 
     public abstract String showState();
