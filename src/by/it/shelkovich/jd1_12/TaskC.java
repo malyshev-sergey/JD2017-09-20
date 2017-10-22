@@ -1,7 +1,5 @@
 package by.it.shelkovich.jd1_12;
 
-import by.it.ali.calc.Str;
-
 import java.util.*;
 
 public class TaskC {
