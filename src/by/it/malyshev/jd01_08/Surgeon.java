@@ -109,10 +109,6 @@ public abstract class Surgeon implements IDoctor {
             System.out.println("Операция прошла удачно.");
             res = 1;
         }
-//        else
-
-//            System.out.println();
- //           res=2;
 
         this.stateDisease = false;
         this.stateNeedOperation = false;

@@ -43,7 +43,7 @@ public class TaskC {
             neuroSurgeonA.makeOperation();
         } catch (MedicalOperationException e){
 
-            System.out.println("--------------------\nВозникло исключени в процедуре makeOperation()");
+            System.out.println("--------------------\nВозникло исключение в процедуре makeOperation()");
             System.out.println("--------------------");
             System.out.println("класс исключения и сообщение "+e);
             System.out.println("исключение возникло в классе " + e.getStackTrace()[0].getClassName());
