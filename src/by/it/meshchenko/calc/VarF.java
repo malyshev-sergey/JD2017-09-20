@@ -1,12 +1,14 @@
 package by.it.meshchenko.calc;
 
 public class VarF extends Var implements IVariable, IOperationVisitorAdd,
-        IOperationVisitorDiv, IOperationVisitorMul, IOperationVisitorSub {
+        IOperationVisitorDiv, IOperationVisitorMul, IOperationVisitorSub,
+        IOperationVisitorAssign {
 
     private double value;
     private Var varOperand2;
 
     // Конструкторы
+    VarF(){}
     VarF(double value) {
         this.value = value;
     }
@@ -17,6 +19,9 @@ public class VarF extends Var implements IVariable, IOperationVisitorAdd,
     // get set
     public double getValue() {
         return value;
+    }
+    public void setValue(double value) {
+        this.value = value;
     }
 
     // extends Var
@@ -35,6 +40,10 @@ public class VarF extends Var implements IVariable, IOperationVisitorAdd,
     @Override
     public Var acceptSub(IOperationVisitorSub p) {
         return p.visitSub(this);
+    }
+    @Override
+    public boolean acceptAssign(IOperationVisitorAssign p) {
+        return p.visitAssign(this);
     }
 
     @Override
@@ -57,6 +66,20 @@ public class VarF extends Var implements IVariable, IOperationVisitorAdd,
         varOperand2 = var;
         return var.acceptDiv(this);
     }
+    @Override
+    public boolean assign(Var var){
+        varOperand2 = var;
+        return var.acceptAssign(this);
+    }
+    @Override
+    public boolean assign(String str){
+        if(fromString(str)) {
+            return true;
+        }
+        else {
+            return super.assign(str);
+        }
+    }
 
     // implements IVariable
     @Override
@@ -64,8 +87,15 @@ public class VarF extends Var implements IVariable, IOperationVisitorAdd,
         return Double.toString(value);
     }
     @Override
-    public void fromString(String strValue) {
-        this.value = Double.parseDouble(strValue);
+    public boolean fromString(String strValue) {
+        boolean res = true;
+        try{
+            this.value = Double.parseDouble(strValue);
+        }
+        catch (Exception e){
+            res = false;
+        }
+        return res;
     }
 
 
@@ -127,5 +157,20 @@ public class VarF extends Var implements IVariable, IOperationVisitorAdd,
     @Override
     public Var visitSub(VarM varM) {
         return super.sub(varOperand2);
+    }
+
+    // implements IOperationVisitorAssign
+    @Override
+    public boolean visitAssign(VarF varF){
+        setValue(varF.getValue());
+        return true;
+    }
+    @Override
+    public boolean visitAssign(VarV varV){
+        return super.assign(varOperand2);
+    }
+    @Override
+    public boolean visitAssign(VarM varM){
+        return super.assign(varOperand2);
     }
 }
