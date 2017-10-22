@@ -1,5 +1,6 @@
 package by.it.shelkovich.calc;
 
+import by.it.shelkovich.calc.Exceptions.IllegalVectorOperationException;
 import by.it.shelkovich.calc.interfaces.Patterns;
 
 import java.util.regex.Matcher;
@@ -80,6 +81,7 @@ public class VarV extends Var {
         System.out.println("деление вектора на число");
         VarV result = new VarV(this);
         for (int i = 0; i < result.value.length; i++) {
+            if (v1.getValue() == 0) throw new ArithmeticException("Деление на 0");
             result.value[i] = result.value[i] / v1.getValue();
         }
         return result;
@@ -87,17 +89,16 @@ public class VarV extends Var {
 
 
     @Override
-    public Var add(VarV v1) {
+    public Var add(VarV v1) throws IllegalVectorOperationException {
         System.out.println("сложение вектора с вектором");
         VarV result = new VarV(this);
         if (value.length == v1.value.length) {
             for (int i = 0; i < result.value.length; i++) {
                 result.value[i] = result.value[i] + v1.value[i];
             }
-        } else {
-            System.out.println("векторы разной длинны");
-            return null;
-        }
+        } else
+            throw new IllegalVectorOperationException("векторы разной длинны");
+
         return result;
     }
 
@@ -109,10 +110,8 @@ public class VarV extends Var {
             for (int i = 0; i < result.value.length; i++) {
                 result.value[i] = result.value[i] * v1.value[i];
             }
-        } else {
-            System.out.println("векторы разной длинны");
-            return null;
-        }
+        } else
+            throw new IllegalVectorOperationException("векторы разной длинны");
         return result;
     }
 
@@ -124,10 +123,8 @@ public class VarV extends Var {
             for (int i = 0; i < result.value.length; i++) {
                 result.value[i] = result.value[i] - v1.value[i];
             }
-        } else {
-            System.out.println("векторы разной длинны");
-            return null;
-        }
+        } else
+            throw new IllegalVectorOperationException("векторы разной длинны");
         return result;
     }
 
