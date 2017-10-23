@@ -29,10 +29,10 @@ public class TaskA {
 
             double sum = 0;
             double count = 0;
-            int i = 0;
+            int j = 0;
             while(inp.available() > 0){
-                i = inp.readInt();
-                sum = sum + i;
+                j = inp.readInt();
+                sum = sum + j;
                 count++;
             }
             System.out.println("Average = " + sum / count);
