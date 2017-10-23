@@ -4,11 +4,9 @@ import java.io.*;
 
 public class TaskA {
     static void run() {
-        String path = System.getProperty("user.dir") + "/src/by/it/shelkovich/jd1_14/";
-        File f = new File(path, "taskAFile.bin");
+        File f = new File(Util.getLocalPath(), "taskAFile.bin");
         write(f);
         read(f);
-
     }
 
     private static void write(File f) {
