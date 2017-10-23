@@ -5,4 +5,6 @@ public interface IOperation {
     Var sub(Var var);
     Var mul(Var var);
     Var div(Var var);
+    boolean assign(Var var);
+    boolean assign(String str);
 }

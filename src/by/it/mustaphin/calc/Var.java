@@ -25,4 +25,8 @@ abstract class Var implements MathOperations, Variable {
         System.out.println("Деление не возможно");
         return null;
     }
+
+    public static void assignment(String name, Var var) {
+        StoreData.store(name, var);
+    }
 }

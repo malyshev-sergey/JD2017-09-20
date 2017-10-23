@@ -2,6 +2,7 @@ package by.it.meshchenko.jd01_07;
 
 public class Runner07 {
     public static void main(String[] args){
+        int a;
         // Инициализация статических и логических блоков при создании объектов:
             // static блок инициализируется только один раз,
             //      при первом создании объекта или при
@@ -17,6 +18,8 @@ public class Runner07 {
             Example1 new2 = new Example1(); // ''
             //System.out.println("Example1.main();");
             //Example1.main();
+
+
 
     }
 
