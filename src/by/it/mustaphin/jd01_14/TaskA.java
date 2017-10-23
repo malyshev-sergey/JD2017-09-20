@@ -19,14 +19,19 @@ public class TaskA {
     }
 
     void read() {
+        int sum = 0, count = 0;
         try (DataInputStream dis = new DataInputStream(new FileInputStream(new File(src)))) {
             while (dis.available() > 0) {
-                System.out.println(dis.readInt());
+                int numb = dis.readInt();
+                count++;
+                sum += numb;
+                System.out.println(numb);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.println("Среднее значение " + sum / count);
     }
 }
