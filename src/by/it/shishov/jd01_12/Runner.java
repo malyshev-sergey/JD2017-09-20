@@ -10,7 +10,7 @@ import java.util.Set;
  */
 public class Runner {
     public static void main(String[] args) {
-        //ЗАДАНИЕ А1
+        /*//ЗАДАНИЕ А1
         System.out.println("Задание А1. Оценки до:");
         ArrayList<Integer> marks = TaskA.createListOfMarks();
         TaskA.printCollection(marks);
@@ -34,8 +34,9 @@ public class Runner {
         TaskA.printCollection(list);
         TaskA.sortCollection(list);
         System.out.println("Множество после сортировки: ");
-        TaskA.printCollection(list);
+        TaskA.printCollection(list);*/
 
+        TaskB.countWords();
 
     }
 }
