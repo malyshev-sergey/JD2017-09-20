@@ -32,6 +32,7 @@ class VarV extends Var implements IVariable {
         System.arraycopy(init.value, 0, this.value, 0, this.value.length);
     }
 
+    
 
     VarV(String strVector) {
         fromString(strVector);
