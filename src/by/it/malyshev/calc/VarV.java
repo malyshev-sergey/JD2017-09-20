@@ -32,7 +32,7 @@ class VarV extends Var implements IVariable {
         System.arraycopy(init.value, 0, this.value, 0, this.value.length);
     }
 
-    
+
 
     VarV(String strVector) {
         fromString(strVector);
@@ -61,7 +61,7 @@ class VarV extends Var implements IVariable {
                 result.value[i] += operand2;
             return result;
         } else if (var instanceof VarV) {
-            if (this.value.length==(((VarV) var).value.length)) {
+            if (this.value.length==((VarV) var).value.length) {
                 result = new VarV(this);
                 VarV operand2 = (VarV) var;
                 for (int i = 0; i < result.value.length; i++)
@@ -82,7 +82,7 @@ class VarV extends Var implements IVariable {
                 result.value[i] -= operand2;
             return result;
         } else if (var instanceof VarV) {
-            if (this.value.length==(((VarV) var).value.length)) {
+            if (this.value.length==((VarV) var).value.length) {
                 result = new VarV(this.value);
                 VarV operand2 = (VarV) var;
                 for (int i = 0; i < value.length; i++)
@@ -103,7 +103,7 @@ class VarV extends Var implements IVariable {
                 result.value[i] *= operand2;
             return result;
         } else if (var instanceof VarV) {
-            if ((this.value.length==(((VarV) var).value.length))) {
+            if (this.value.length==((VarV) var).value.length) {
                 double sum = 0;
                 VarV v1 = new VarV(this);
                 VarV operand2 = (VarV) var;
@@ -130,7 +130,7 @@ class VarV extends Var implements IVariable {
     @Override
     public Var div(Var var) {
         if (var instanceof VarD) {
-            if (!(((VarD) var).getValue()==0)) {
+            if (((VarD) var).getValue()!=0) {
                 VarV result = new VarV(this);
                 double operand2 = ((VarD) var).getValue();
                 for (int i = 0; i < result.value.length; i++)

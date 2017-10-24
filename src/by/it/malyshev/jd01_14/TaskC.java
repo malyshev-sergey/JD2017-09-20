@@ -16,7 +16,7 @@ public class TaskC {
 
     private static void getListFilesDirs(String dir, boolean needFile) {
         File[] files =(new File(dir)).listFiles();
-        if (!(files==null)) {
+        if (files!=null) {
             for (File s : files) {
                 if (s.isFile()) {
                     if (needFile) System.out.println(s.getName());

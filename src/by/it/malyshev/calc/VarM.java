@@ -162,7 +162,7 @@ class VarM extends Var implements IVariable {
     public Var div(Var var) {
         VarM result;
         if (var instanceof VarD) {
-            if (!(((VarD) var).getValue()==0)) {
+            if (((VarD) var).getValue()!=0) {
                 result = new VarM(this.value);
                 double operand2 = ((VarD) var).getValue();
                 for (int i = 0; i < value.length; i++)
