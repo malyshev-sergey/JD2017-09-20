@@ -30,7 +30,7 @@ public class TaskA {
                 sum += d;
                 count++;
             }
-            System.out.printf("Среднее арифмтическое = %4.3f\n", sum / count);
+            System.out.printf("Среднее арифметическое = %4.3f\n", sum / count);
 
         } catch (IOException e) {
             e.printStackTrace();

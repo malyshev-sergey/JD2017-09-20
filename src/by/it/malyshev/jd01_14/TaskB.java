@@ -15,23 +15,22 @@ public class TaskB {
         String filename = "text.txt";
         File f = new File(dir, filename);
 
-        StringBuilder sb=null;
         try (BufferedReader br = new BufferedReader(new FileReader(f))) {
             int c;
-            sb = new StringBuilder();
+            StringBuilder sb = new StringBuilder();
             while ((c = br.read()) != -1) sb.append((char) c);
+
+            Matcher m = Pattern.compile("[A-za-zА-яЯа-яЁё]+[0-9]?").matcher(sb);
+            int words = 0;
+            int punctuationMarks = 0;
+            while (m.find()) words++;
+            m = Pattern.compile("[.,;:?!«»—()]").matcher(sb);
+            while (m.find()) punctuationMarks++;
+            System.out.println("\nВ файле " + filename + " " + punctuationMarks + " знаков препинания и " + words + " слов");
+
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        Matcher m = Pattern.compile("[A-za-zА-яЯа-яЁё]+[0-9]?").matcher(sb);
-        int words = 0;
-        int punctuationMarks = 0;
-        while (m.find()) words++;
-        m = Pattern.compile("[.,;:?!«»—()]").matcher(sb);
-        while (m.find()) punctuationMarks++;
-        System.out.println("\nВ файле "+filename+" "+punctuationMarks+" знаков препинания и "+words+" слов");
-
 
     }
 
