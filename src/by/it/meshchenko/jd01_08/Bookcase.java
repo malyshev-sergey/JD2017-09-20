@@ -6,6 +6,7 @@ public class Bookcase extends Cupboard {
     private int size = 0;
     private Stack stack;
 
+    public Bookcase(){}
     public Bookcase(String model, int dl, int vs, int gl, int size){
         super.setModel(model);
         this.dl = dl;
