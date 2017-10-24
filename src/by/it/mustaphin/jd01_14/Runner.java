@@ -9,6 +9,7 @@ public class Runner {
 //
 //        new TaskB().count();
 
-        new TaskC().getInfo(new File(System.getProperty("user.dir") + "/src/by/it/mustaphin/"));
+        TaskC tC = new TaskC();
+        tC.getInfo(new File(System.getProperty("user.dir") + "/src/by/it/mustaphin/"));
     }
 }
