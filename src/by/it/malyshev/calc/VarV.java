@@ -21,16 +21,13 @@ class VarV extends Var implements IVariable {
             value[i++] = Double.parseDouble(m.group());
     }
 
-//    VarV(double[] value){
-//            this.value = value;
-//    }
 
-    VarV(double[] value) {
+    private VarV(double[] value) {
         this.value = new double[value.length];
         System.arraycopy(value, 0, this.value, 0, value.length);
     }
 
-    VarV(VarV init) {
+    private VarV(VarV init) {
         this.value = new double[init.value.length];
         System.arraycopy(init.value, 0, this.value, 0, this.value.length);
     }
@@ -52,7 +49,6 @@ class VarV extends Var implements IVariable {
         return sb.toString();
     }
 
-    // impl IVarable
 
     @Override
     public Var add(Var var) {
@@ -63,12 +59,14 @@ class VarV extends Var implements IVariable {
             for (int i = 0; i < result.value.length; i++)
                 result.value[i] += operand2;
             return result;
-        } else if (var instanceof VarV && (this.value.length==(((VarV) var).value.length))) {
-            result = new VarV(this);
-            VarV operand2 = (VarV) var;
-            for (int i = 0; i < result.value.length; i++)
-                result.value[i] += operand2.value[i];
-            return result;
+        } else if (var instanceof VarV) {
+            if (this.value.length==(((VarV) var).value.length)) {
+                result = new VarV(this);
+                VarV operand2 = (VarV) var;
+                for (int i = 0; i < result.value.length; i++)
+                    result.value[i] += operand2.value[i];
+                return result;
+            } else throw new ArithmeticException("Сложение невозможно, вектора разной длины");
         } else
             return super.add(var);
     }
@@ -82,12 +80,14 @@ class VarV extends Var implements IVariable {
             for (int i = 0; i < value.length; i++)
                 result.value[i] -= operand2;
             return result;
-        } else if (var instanceof VarV && (this.value.length==(((VarV) var).value.length))) {
-            result = new VarV(this.value);
-            VarV operand2 = (VarV) var;
-            for (int i = 0; i < value.length; i++)
-                result.value[i] -= operand2.value[i];
-            return result;
+        } else if (var instanceof VarV) {
+            if (this.value.length==(((VarV) var).value.length)) {
+                result = new VarV(this.value);
+                VarV operand2 = (VarV) var;
+                for (int i = 0; i < value.length; i++)
+                    result.value[i] -= operand2.value[i];
+                return result;
+            } else throw new ArithmeticException("Вычитание невозможно, вектора разной длины");
         } else
             return super.sub(var);
     }
@@ -101,14 +101,17 @@ class VarV extends Var implements IVariable {
             for (int i = 0; i < result.value.length; i++)
                 result.value[i] *= operand2;
             return result;
-        } else if (var instanceof VarV && (this.value.length==(((VarV) var).value.length))) {
-            double sum = 0;
-            VarV v1 = new VarV(this);
-            VarV operand2 = (VarV) var;
-            for (int i = 0; i < v1.value.length; i++)
-                sum+=v1.value[i] + operand2.value[i];
-            return new VarD(sum);
-        } else if (var instanceof VarM && (this.value.length==((VarM) var).getValue().length)) {
+        } else if (var instanceof VarV) {
+            if ((this.value.length==(((VarV) var).value.length))) {
+                double sum = 0;
+                VarV v1 = new VarV(this);
+                VarV operand2 = (VarV) var;
+                for (int i = 0; i < v1.value.length; i++)
+                    sum += v1.value[i] + operand2.value[i];
+                return new VarD(sum);
+            } else throw new ArithmeticException("Умножение невозможо, вектора разной длины");
+        } else if (var instanceof VarM) {
+            if (this.value.length==((VarM) var).getValue().length) {
             VarM operand2 = ((VarM) var);
             double[] temp = new double[(operand2.getValue())[0].length];
             result = new VarV(temp);
@@ -117,22 +120,22 @@ class VarV extends Var implements IVariable {
                         result.value[j] += this.value[k] * operand2.getValue()[k][j];
             System.out.print("row-vector ");
             return result;
+        } else throw new ArithmeticException("Умножение невозможо, размеры вектора и матрицы не совпадают");
         } else
             return super.mul(var);
     }
 
 
-
-
     @Override
     public Var div(Var var) {
-//        VarV result;
         if (var instanceof VarD) {
-            VarV result = new VarV(this);
-            double operand2 = ((VarD) var).getValue();
-            for (int i = 0; i < result.value.length; i++)
-                result.value[i] /= operand2;
-            return result;
+            if (!(((VarD) var).getValue()==0)) {
+                VarV result = new VarV(this);
+                double operand2 = ((VarD) var).getValue();
+                for (int i = 0; i < result.value.length; i++)
+                    result.value[i] /= operand2;
+                return result;
+            } else throw new ArithmeticException("Деление на ноль невозможно");
         } else
             return super.div(var);
     }

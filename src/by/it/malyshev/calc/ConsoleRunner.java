@@ -2,40 +2,58 @@ package by.it.malyshev.calc;
 
 public class ConsoleRunner {
 
-    private static void printOneVar(Var v){
+    private static void printOneVar(Var v) {
         if (v != null) {
             System.out.println(v);
         }
     }
 
-    public static void main(String[ ] args) {
+    public static void main(String[] args) {
 
         printOneVar(Parser.singleOperation("-1+2"));
         printOneVar(Parser.singleOperation("-9-7"));
+
         printOneVar(Parser.singleOperation("-1.5*-2"));
         printOneVar(Parser.singleOperation("-1.5*2"));
         printOneVar(Parser.singleOperation("1.5*2"));
         printOneVar(Parser.singleOperation("-4/-1"));
         printOneVar(Parser.singleOperation("-4/2"));
         printOneVar(Parser.singleOperation("4/2"));
+        try {
+            printOneVar(Parser.singleOperation("4/0"));
+        } catch (ArithmeticException e) {
+            System.out.println(e.getMessage());
+        }
+
 
         printOneVar(Parser.singleOperation("4 1"));
         printOneVar(Parser.singleOperation("{-1,2,3}+{1,2,3}"));
+        try {
+
+            printOneVar(Parser.singleOperation("{-1,2,3}*{1,2}"));
+        } catch (ArithmeticException e) {
+            System.out.println(e.getMessage());
+        }
         printOneVar(Parser.singleOperation("{{1,2},{8,3}}*{{1,2},{8,3}}"));
         System.out.println();
-        printOneVar(Parser.fromString("A = "+ Parser.singleOperation("-1+2")));
-        printOneVar(Parser.fromString("B  "+ Parser.singleOperation("4-1")));
-        printOneVar(Parser.fromString("A2 = "+ Parser.singleOperation("4-1")));
-        printOneVar(Parser.fromString("A1 = "+ Parser.singleOperation("{1,2,3}+{4,5,6}")));
-        printOneVar(Parser.fromString("C = "+ Parser.singleOperation("{{-1,2},{8,-3}}*{{-1,2},{8,-3}}")));
-        printOneVar(Parser.fromString("D = "+ Parser.singleOperation("-28+{{-1,2},{8,-3}}")));
-        printOneVar(Parser.fromString("E = "+ Parser.singleOperation("{{-1,2},{8,-3}}+3")));
-        printOneVar(Parser.fromString("F = "+ Parser.singleOperation("28+{1,2,3}")));
-        printOneVar(Parser.fromString("G = "+ Parser.singleOperation("{{-1,2},{8,-3}}-3")));
-        printOneVar(Parser.fromString("H = "+ Parser.singleOperation("3-{{-1,2},{8,-3}}")));
+        printOneVar(Parser.fromString("A = " + Parser.singleOperation("-1+2")));
+        printOneVar(Parser.fromString("B  " + Parser.singleOperation("4-1")));
+        printOneVar(Parser.fromString("A2 = " + Parser.singleOperation("4-1")));
+        printOneVar(Parser.fromString("A1 = " + Parser.singleOperation("{1,2,3}+{4,5,6}")));
+        printOneVar(Parser.fromString("C = " + Parser.singleOperation("{{-1,2},{8,-3}}*{{-1,2},{8,-3}}")));
+        printOneVar(Parser.fromString("D = " + Parser.singleOperation("-28+{{-1,2},{8,-3}}")));
+        printOneVar(Parser.fromString("E = " + Parser.singleOperation("{{-1,2},{8,-3}}+3")));
+        printOneVar(Parser.fromString("F = " + Parser.singleOperation("28+{1,2,3}")));
+        printOneVar(Parser.fromString("G = " + Parser.singleOperation("{{-1,2},{8,-3}}-3")));
+        printOneVar(Parser.fromString("H = " + Parser.singleOperation("3-{{-1,2},{8,-3}}")));
         printOneVar(Parser.fromString("K = {{-1,2},{8,-3}}-3"));
         printOneVar(Parser.fromString("L = 3-{{-1,2},{8,-3}}"));
         printOneVar(Parser.fromString("M = {{-1,2},{8,-3}}"));
+        printOneVar(Parser.fromString("K = {{-1,2},{8,-3}}/0"));
+        printOneVar(Parser.fromString("K = {{-1,2},{8,-3}}*{{-1,2},{8,-3},{8,-3}}"));
+        printOneVar(Parser.fromString("K = {{-1,2},{8,-3}}*{-1,2}"));
+        printOneVar(Parser.fromString("K = {{-1,2},{8,-3}}*{-1,2,5}"));
+
 
 
         Parser.fromString("printvar");
@@ -128,6 +146,7 @@ public class ConsoleRunner {
 //        printOneVar(new VarM(mat).sub(new VarM(mat2)));
 //        printOneVar(new VarM(mat).mul(new VarM(mat2)));
 //        printOneVar(new VarM(mat).div(new VarM(mat2)));
+
 
     }
 
