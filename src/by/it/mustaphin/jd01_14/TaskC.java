@@ -59,7 +59,7 @@ public class TaskC {
     void print() {
 
         for (Map.Entry<String, File> dir : mapDirs.entrySet()) {
-            System.out.printf("Директория %s, %s\n", dir.getKey(), dir.getValue().getName());
+            System.out.printf("Директория %s, %s\n", dir.getKey(), dir.getValue().getName() );
         }
         System.out.println();
         for (Map.Entry<String, File> file : mapFiles.entrySet()) {
