@@ -11,5 +11,6 @@ interface Patterns {
             "(" +exOper+")"+
             "(" +exAny +")"; //выражение целиком
     String exAssign = "=";
-    String exAssignVarValue = "((_?)([A-Za-z]{1})([A-Za-z0-9_]+)?)"+"(" +exAssign+")"+"(" +exAny +")";
+    String nameVar = "((_?)([A-Za-z]{1})([A-Za-z0-9_]+)?)";
+    String exAssignNameVarValue = "("+ nameVar +")"+"(" +exAssign+")"+"(" +exAny +")";
 }

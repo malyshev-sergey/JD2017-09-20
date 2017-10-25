@@ -1,5 +1,8 @@
 package by.it.meshchenko.calc;
 
+import by.it.ali.calculator.Str;
+
+import java.nio.charset.Charset;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -9,7 +12,7 @@ public class Parser {
     private static boolean isAssignVarValue(String str){
         boolean res = true;
         try {
-            Pattern p = Pattern.compile(Patterns.exAssignVarValue);
+            Pattern p = Pattern.compile(Patterns.exAssignNameVarValue);
             Matcher m = p.matcher(str);
             res = m.matches();
         }
@@ -45,67 +48,57 @@ public class Parser {
 
     public static Expression parseEx(String str){
         Expression res = null;
-        if(isExFullCorrect(str)){
-            res =  new Expression();
-            // Строка с заменёнными значениями переменных (х0 + х1 - х2 / х3)
-            String strBuild = new String(str);
-            ArrayList<String> strEx = new ArrayList<>();
-            Pattern pVarF = Pattern.compile(Patterns.exVal);
-            Pattern pVarV = Pattern.compile(Patterns.exVec);
-            Pattern pVarM = Pattern.compile(Patterns.exMat);
+        if(isExFullCorrect(str)) {
+            res = new Expression();
+            StringBuilder strBuildVar = new StringBuilder(str);
+            String strVar = "";
+            Pattern p = Pattern.compile(Patterns.exAny);
+            Pattern pOper = Pattern.compile(Patterns.exOper);
 
-            Matcher mVarM = pVarM.matcher(strBuild);
-            String ex;
-            while (mVarM.find()) {
-                ex = mVarM.group();
-                strBuild = strBuild.replace(ex,"x");// + Integer.toString(op));
-                strEx.add(ex);
-            }
-            Matcher mVarV = pVarV.matcher(strBuild);
-            while (mVarV.find()) {
-                ex = mVarV.group();
-                strBuild = strBuild.replace(ex,"x");// + Integer.toString(op));
-                strEx.add(ex);
-            }
-            Matcher mVarF = pVarF.matcher(strBuild);
-            while (mVarF.find()) {
-                ex = mVarF.group();
-                strBuild = strBuild.replace(ex,"x");// + Integer.toString(op));
-                strEx.add(ex);
+            Matcher m = p.matcher(strBuildVar);
+            if(m.find()) {
+                strVar = m.group();
+                res.tempEx.put("var1", defineTypeVar(strVar));
+                strBuildVar.delete(0, strVar.length());
             }
 
-            Iterator<String> it = strEx.iterator();
-            int i = 1;
-            while (it.hasNext()){
-                res.tempEx.put("var" + i, defineTypeVar(it.next()));
-                i++;
+            Matcher mOper = pOper.matcher(strBuildVar);
+            if(mOper.find()) {
+                strVar = mOper.group();
+                res.tempOp.add(strVar);
+                strBuildVar.delete(0, strVar.length());
             }
-            // Собираем в массив операторы выражения
-            Pattern p = Pattern.compile(Patterns.exOper);
-            Matcher m = p.matcher(strBuild);
-            while (m.find()) {
-                res.tempOp.add(m.group());
+            m = p.matcher(strBuildVar);
+            if(m.find()) {
+                strVar = m.group();
+                res.tempEx.put("var2", defineTypeVar(strVar));
+                strBuildVar.delete(0, strVar.length());
             }
         }
         return res;
     }
 
+    // Соответствие строки паттерну переменной Var
+    private static boolean isExVar(String str, String pattern){
+        boolean res = false;
+        Pattern p = Pattern.compile(pattern);
+        Matcher m = p.matcher(str);
+        if(m.matches()){
+            res = true;
+        }
+        return res;
+    }
+    // Если строка соответствует паттерну, return Var
     private static Var defineTypeVar(String str){
         Var res = null;
-        Pattern pVarF = Pattern.compile(Patterns.exVal);
-        Pattern pVarV = Pattern.compile(Patterns.exVec);
-        Pattern pVarM = Pattern.compile(Patterns.exMat);
-        Matcher mVarF = pVarF.matcher(str);
-        Matcher mVarV = pVarV.matcher(str);
-        Matcher mVarM = pVarM.matcher(str);
-        if(mVarF.matches()){
-            return res = new VarF(str);
+        if(isExVar(str, Patterns.exVal)){
+            res = new VarF(str);
         }
-        else if(mVarV.matches()){
-            return res = new VarV(str);
+        else if(isExVar(str, Patterns.exVec)){
+            res = new VarV(str);
         }
-        else if(mVarM.matches()){
-            return res = new VarM(str);
+        else if(isExVar(str, Patterns.exMat)){
+            res = new VarM(str);
         }
         return res;
     }
