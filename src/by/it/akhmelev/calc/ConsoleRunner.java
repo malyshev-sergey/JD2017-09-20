@@ -34,8 +34,12 @@ public class ConsoleRunner {
         Parser.calc("2*{1,2}");
         Parser.calc("2-{1,2}");
 
+        Parser.calc("{{1,2},{3,4}}+6");
+        Parser.calc("{{1,2},{3,4}}-6");
+        Parser.calc("{{1,2},{3,4}}*6");
+        Parser.calc("{{1,2},{3,4}}/6");
+
         Parser.calc("A=9");
         Parser.calc("B={3,5}");
-
     }
 }
