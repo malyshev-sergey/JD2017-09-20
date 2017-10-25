@@ -8,7 +8,7 @@ public class TaskA {
         for (int i = 0; i < 10 ; i++) {
             pupils.add(i,(int)(Math.random()*10));
         }
-        System.out.println("TaskA1");
+        System.out.println("[TaskA1]");
         System.out.println("Исходные оценки: "+pupils);
         int a=10;
         for (int j = 0; j < a;) {
@@ -27,7 +27,7 @@ public class TaskA {
         for (int i = 0; i < 10 ; i++) {
             p.add(i,-5+(int)(Math.random()*10));
         }
-        System.out.println("TaskA3");
+        System.out.println("[TaskA3]");
         System.out.println("Исходный список: "+p);
         for (int i = 0; i < 10 ; i++) {
             if (p.get(i)>=0){
