@@ -3,19 +3,25 @@ package by.it.akhmelev.calc;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Parser {
+class Parser {
 
-    static Var getVar(String strVar) throws MathException {
-        if (Pattern.compile(Patterns.exMat).matcher(strVar).find()) {
+    //проверка типа вынесена в метод
+    private static boolean checkPattern(String pattern, String str) {
+        return Pattern.compile(pattern).matcher(str).find();
+    }
+
+    //преобразование строки в переменную
+    private static Var getVar(String strVar) throws MathException {
+        if (checkPattern(Patterns.exMat, strVar))
             throw new MathException("Работа с матрицами пока не реализована.");
-        }
-        if (Pattern.compile(Patterns.exVec).matcher(strVar).find())
+        if (checkPattern(Patterns.exVec, strVar))
             return new VarV(strVar);
-        if (Pattern.compile(Patterns.exVal).matcher(strVar).find())
+        if (checkPattern(Patterns.exVal, strVar))
             return new VarD(strVar);
         throw new MathException("Выражение не распознано");
     }
 
+    //разбор выражения
     static void calc(String expr) {
         try {
             String operads[] = expr.split(Patterns.exOper, 2);
@@ -27,7 +33,7 @@ public class Parser {
             Var two = getVar(operads[1]);
             if (operation.equals("=")) {
                 Var.saveVar(operads[0], two);
-                System.out.println(operads[0]+"="+two);
+                System.out.println(operads[0] + "=" + two);
 
             } else {
                 Var one = getVar(operads[0]);
@@ -50,9 +56,7 @@ public class Parser {
                 System.out.println(expr + "=" + result);
             }
         } catch (MathException e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
-
-
     }
 }
