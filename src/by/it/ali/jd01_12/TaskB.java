@@ -28,7 +28,7 @@ public class TaskB {
 //        }
 //        textArray.remove(2);
         //System.out.println(textArray.get(2));
-       for (int i = 0; i < textMas.length; i++) {
+        for (int i = 0; i < textMas.length; i++) {
            String key=textMas[i];
            if (count.containsKey(key))
             count.put(textMas[i], count.get(key)+1);
@@ -47,7 +47,6 @@ public class TaskB {
         public  String toString(){
             Delta=(double)(System.nanoTime()-iniTime)/1000;
             iniTime=System.nanoTime();
-
             return "Прошло "+Delta.toString()+" микросекунд.";
         }
 
