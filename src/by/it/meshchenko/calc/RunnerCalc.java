@@ -28,18 +28,18 @@ public class RunnerCalc {
         printOneVar(Calc.calculate(Parser.parseEx("1+2")));
         printOneVar(Calc.calculate(Parser.parseEx("9-7")));
         printOneVar(Calc.calculate(Parser.parseEx("1.5*2")));
-        printOneVar(Calc.calculate(Parser.parseEx("-4/(-1)")));
+        printOneVar(Calc.calculate(Parser.parseEx("-4/-1")));
 
         // V F
         System.out.println("\nпроверка  +-*/ операций с векторами справа и скалярами слева");
         printOneVar(new VarV(vec).add(new VarF("2")));
-        printOneVar(new VarV(vec).sub(new VarF("7")));
+        printOneVar(new VarV(vec).sub(new VarF("1")));
         printOneVar(new VarV(vec).mul(new VarF("2")));
-        printOneVar(new VarV(vec).div(new VarF("-1")));
+        printOneVar(new VarV(vec).div(new VarF("1")));
         printOneVar(Calc.calculate(Parser.parseEx("{1,2,3}+2")));
-        printOneVar(Calc.calculate(Parser.parseEx("{-1,2,3}-7")));
+        printOneVar(Calc.calculate(Parser.parseEx("{1,2,3}-7")));
         printOneVar(Calc.calculate(Parser.parseEx("{1,2,3}*2")));
-        printOneVar(Calc.calculate(Parser.parseEx("{1,2,3}/(-1)")));
+        printOneVar(Calc.calculate(Parser.parseEx("{1,2,3}/-1")));
 
         // F V
         System.out.println("\nпроверка  +-*/ операций со скалярами справа и векторами слева");

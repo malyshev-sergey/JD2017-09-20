@@ -1,55 +1,57 @@
 package by.it.meshchenko.calc;
 
+import by.it.ali.calculator.Str;
+
+import java.nio.charset.Charset;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
     // Проверка на корректность операции присваивания (О.П.) ( A=2, A={1,2}, A={{1,2},{3,4}} )
     private static boolean isAssignVarValue(String str){
-        boolean res = false;
+        boolean res = true;
         try {
             Pattern p = Pattern.compile(Patterns.exAssignNameVarValue);
             Matcher m = p.matcher(str);
             res = m.matches();
         }
         catch (Exception e){
+            res = false;
         }
         return res;
     }
 
     // Проверка на корректность арифметического выражения (А.В.) ( {1,2}+{{1,2},{3,4}} )
     private static boolean isExFullCorrect(String str){
-        boolean res = false;
+        boolean res = true;
         try {
             Pattern p = Pattern.compile(Patterns.exFull);
             Matcher m = p.matcher(str);
             res = m.matches();
         }
         catch (Exception e){
-
+            res = false;
         }
         return res;
     }
 
     public static Expression parseAssign(String str){
         Expression res = null;
-        try{
-            if(isAssignVarValue(str)){
-                String[] strMass = str.split(Patterns.exAssign);
-                res =  new Expression();
-                res.tempEx.put(strMass[0], defineTypeVar(strMass[1]));
-            }
+        if(isAssignVarValue(str)){
+            String[] strMass = str.split(Patterns.exAssign);
+            res =  new Expression();
+            res.tempEx.put(strMass[0], defineTypeVar(strMass[1]));
         }
-        catch (Exception e){}
         return res;
     }
 
-    static Expression parseEx(String str){
+    public static Expression parseEx(String str){
         Expression res = null;
         if(isExFullCorrect(str)) {
             res = new Expression();
             StringBuilder strBuildVar = new StringBuilder(str);
-            String strVar;
+            String strVar = "";
             Pattern p = Pattern.compile(Patterns.exAny);
             Pattern pOper = Pattern.compile(Patterns.exOper);
 
