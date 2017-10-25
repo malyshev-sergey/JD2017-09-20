@@ -12,7 +12,7 @@ public class MyCollect {
             a.add((int) (Math.random() * 30));
             b.add((int) (Math.random() * 30));
         }
-        System.out.println("TaskA2");
+        System.out.println("[TaskA2]");
         System.out.println("A: "+a);
         System.out.println("B: "+b);
     }
