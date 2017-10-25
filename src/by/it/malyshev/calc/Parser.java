@@ -28,13 +28,18 @@ class Parser {
             }
             int counter = 0;
             m1.reset();
-            while (m1.find()) counter++;
-            if (counter > 1) {
-                variablesCollection.put(strOperands[0], singleOperation(strOperands[1]));
-                return singleOperation(strOperands[1]);
-            } else {
-                variablesCollection.put(strOperands[0], selectTypeOfOperand(strOperands[1]));
-                return selectTypeOfOperand(strOperands[1]);
+            try {
+                while (m1.find()) counter++;
+                if (counter > 1) {
+                    variablesCollection.put(strOperands[0], singleOperation(strOperands[1]));
+                    return singleOperation(strOperands[1]);
+                } else {
+                    variablesCollection.put(strOperands[0], selectTypeOfOperand(strOperands[1]));
+                    return selectTypeOfOperand(strOperands[1]);
+                }
+            } catch (ArithmeticException e) {
+                System.out.println(e.getMessage());
+                return null;
             }
 
         } else if (strInput.trim().equals("printvar")) printVar();
@@ -66,7 +71,7 @@ class Parser {
                 case "+":
                     return selectTypeOfOperand(strOperands[0]).add(selectTypeOfOperand(strOperands[1]));
                 case "-":
-                    if (strOperands[1].trim().charAt(0)=='-') strOperands[1] = strOperands[1].trim().substring(1);
+                    if (strOperands[1].trim().charAt(0) == '-') strOperands[1] = strOperands[1].trim().substring(1);
                     return selectTypeOfOperand(strOperands[0]).sub(selectTypeOfOperand(strOperands[1]));
                 case "*":
                     return selectTypeOfOperand(strOperands[0]).mul(selectTypeOfOperand(strOperands[1]));
@@ -76,6 +81,7 @@ class Parser {
         } else new CalcError("Нет такой операции");
         return null;
     }
+
 
 
     private static Var selectTypeOfOperand(String strOperand) {
@@ -90,16 +96,16 @@ class Parser {
 
     private static void printVar() {
         System.out.println("\nКоллекция переменных");
-        Iterator<Map.Entry<String, Var>> itr = variablesCollection.entrySet().iterator();
-        while (itr.hasNext()) System.out.println(itr.next());
+        for (Map.Entry<String, Var> stringVarEntry : variablesCollection.entrySet())
+            System.out.println(stringVarEntry);
 
     }
 
     private static void sortVar() {
         System.out.println("\nОтсортированная коллекция переменных");
         TreeMap<String, Var> sortedVariables = new TreeMap<>(variablesCollection);
-        Iterator<Map.Entry<String, Var>> itr = sortedVariables.entrySet().iterator();
-        while (itr.hasNext()) System.out.println(itr.next());
+        for (Map.Entry<String, Var> stringVarEntry : sortedVariables.entrySet())
+            System.out.println(stringVarEntry);
 
     }
 
