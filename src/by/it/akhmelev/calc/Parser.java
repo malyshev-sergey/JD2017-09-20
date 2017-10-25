@@ -7,7 +7,7 @@ class Parser {
 
     //проверка типа вынесена в метод
     private static boolean checkPattern(String pattern, String str) {
-        return Pattern.compile(pattern).matcher(str).find();
+        return Pattern.compile(pattern).matcher(str).matches();
     }
 
     //преобразование строки в переменную
@@ -56,7 +56,8 @@ class Parser {
                 System.out.println(expr + "=" + result);
             }
         } catch (MathException e) {
-            System.out.println(e.getMessage());
+            System.out.flush();
+            System.out.println(expr+" "+e.getMessage());
         }
     }
 }
