@@ -27,7 +27,7 @@ public class TaskB {
         //Новый более продвинутый способ читать файлы
         try {
             for (String line : Files.readAllLines(Paths.get(src))) {
-                sb.append(line);
+                sb.append(line).append("\n");
             }
         } catch (IOException e) {
             e.printStackTrace();
