@@ -24,7 +24,7 @@ public class StoreData {
     void getData() {
         Set<String> vars = property.stringPropertyNames();
         for (String parameter : vars) {
-//            data.put(parameter, property.getProperty(parameter));
+            data.put(parameter, new Var().getVar(property.getProperty(parameter)));
         }
     }
 

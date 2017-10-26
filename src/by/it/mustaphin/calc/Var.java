@@ -1,6 +1,8 @@
 package by.it.mustaphin.calc;
 
-abstract class Var implements MathOperations, Variable {
+class Var implements MathOperations, Variable {
+
+    Var var = null;
 
     @Override
     public Var add(Var var) {
@@ -28,5 +30,17 @@ abstract class Var implements MathOperations, Variable {
 
     public static void assignment(String name, Var var) {
         StoreData.store(name, var);
+    }
+
+    @Override
+    public void fromString(String str) {
+        if (str.contains("{{")) {
+            var = new VarD(str);
+        }
+    }
+
+    public Var getVar(String str) {
+        fromString(str);
+        return var;
     }
 }
