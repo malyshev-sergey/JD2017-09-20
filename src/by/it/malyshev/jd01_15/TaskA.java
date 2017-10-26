@@ -19,15 +19,16 @@ public class TaskA {
             System.out.println();
         }
 
-        String dir = System.getProperty("user.dir") + "/src/by/it/malyshev/jd01_15/matrix.txt";
+        String dir = System.getProperty("user.dir") + "/src/by/it/malyshev/jd01_14/matrix.txt";
 
-        try (PrintWriter prt=new PrintWriter(new FileWriter(dir,false))) {
+        try (PrintWriter prt=new PrintWriter(new FileWriter(dir,true))) {
 
             for (int i = 0; i < 4; i++) {
                 for (int j = 0; j < 4; j++)
                     prt.printf("%3d ", matrix[i][j]);
                 prt.println();
             }
+
 
         } catch (IOException e) {
             e.printStackTrace();
