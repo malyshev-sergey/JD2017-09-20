@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 public class Parser {
 
     void read() {
+
         System.out.println("Напишите выражение или введите команду \"sortvar\" для отображения всех результатов или команду \"printvar\" или введите команду \"exit\" для выхода");
         Scanner scan = new Scanner(System.in);
         String line = scan.nextLine().trim();

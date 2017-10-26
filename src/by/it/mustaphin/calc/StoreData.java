@@ -1,10 +1,32 @@
 package by.it.mustaphin.calc;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
 
 public class StoreData {
 
+    Properties property = new Properties();
+
+    public StoreData() {
+        try (FileInputStream fis = new FileInputStream(System.getProperty("user.dir") + "/src/by/it/mustaphin/calc/vars.txt")) {
+            property.load(fis);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     static private HashMap<String, Var> data = new HashMap<>();
+
+    void getData() {
+        Set<String> vars = property.stringPropertyNames();
+        for (String parameter : vars) {
+//            data.put(parameter, property.getProperty(parameter));
+        }
+    }
 
     static void store(String name, Var var) {
         data.put(name, var);
