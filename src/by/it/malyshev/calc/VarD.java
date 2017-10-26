@@ -53,7 +53,8 @@ class VarD extends Var implements IVariable {
     @Override
     public Var div(Var var) {
         if (var instanceof VarD)
-            return new VarD(this.value / ((VarD) var).value);
+            if (((VarD) var).value!=0) return new VarD(this.value / ((VarD) var).value);
+            else throw new ArithmeticException("Деление на ноль невозможно");
         else
             return super.div(var);
     }

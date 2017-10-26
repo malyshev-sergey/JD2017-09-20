@@ -79,10 +79,6 @@ public class NeuroSurgeon extends Surgeon {
             throw e;
         }
 
-//        else if (temp == 2) {
-//            System.out.println("Пациент скорее мертв");
-//            res = 4;
-//        }
         return res;
     }
 
