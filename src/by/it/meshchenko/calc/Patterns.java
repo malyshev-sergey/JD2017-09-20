@@ -2,7 +2,9 @@ package by.it.meshchenko.calc;
 
 interface Patterns {
     //возможные примеры регулярных выражений (конечно лучше составить свои).
-    String exVal = "((-?)([0-9.])+)";                       //числа
+    String exValsimpl = "((-?)([0-9.])+)";                   //числа:   0, 1.1, -1, -10.9
+    String exValcomlp = "(((\\(-){1})([0-9.])+)(\\){1})";    //числа: (-1), (-10.9)
+    String exVal = "(("+exValsimpl+")|("+exValcomlp+"))";   //числа
     String exVec = "\\{((-?([0-9.])+),?)+}";                //вектора
     String exMat = "\\{((\\{((-?([0-9.])+),?)+}),?)+}";     //матрицы
     String exAny = "("+exMat+")|("+exVec+")|("+exVal+")";   //одно из...

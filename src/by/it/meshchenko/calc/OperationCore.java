@@ -1,15 +1,18 @@
 package by.it.meshchenko.calc;
 
-public class OperationCore {
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+class OperationCore {
     // Методы операций для различных типов переменных.
     // Операции могут быть одинаковы при перестановке местами переменных.
 
     // Add: VarF + VarF
-    public static Var add_FF(VarF v1, VarF v2){
+    static Var add_FF(VarF v1, VarF v2){
         return new VarF(v1.getValue() + v2.getValue());
     }
     // Add: VarF + VarV  <--> VarV + VarF
-    public static Var add_VF(VarV v1, VarF v2){
+    static Var add_VF(VarV v1, VarF v2){
         VarV result = new VarV(v1.getValue());
         double[] resultVal = result.getValue();
         double operand2 = v2.getValue();
@@ -19,7 +22,7 @@ public class OperationCore {
         return result;
     }
     // Add: VarF + VarM <---> VarM + VarF
-    public static Var add_MF(VarM v1, VarF v2){
+    static Var add_MF(VarM v1, VarF v2){
         VarM result = new VarM(v1.getValue());
         double[][] resultVal = result.getValue();
         double operand2 = v2.getValue();
@@ -31,7 +34,7 @@ public class OperationCore {
         return result;
     }
     // Add: VarV + VarV
-    public static Var add_VV(VarV v1, VarV v2){
+    static Var add_VV(VarV v1, VarV v2){
         VarV result = null;
         if(v1.getValue().length == v1.getValue().length) {
             result = new VarV(v1.getValue());
@@ -44,7 +47,7 @@ public class OperationCore {
         return result;
     }
     // Add: VarM + VarM
-    public static Var add_MM(VarM v1, VarM v2){
+    static Var add_MM(VarM v1, VarM v2){
         VarM result = null;
         if(v1.getValue().length == v1.getValue().length
                 && v1.getValue()[0].length == v1.getValue()[0].length) {
@@ -62,11 +65,11 @@ public class OperationCore {
 
 
     // Div: VarF / VarF
-    public static Var div_FF(VarF v1, VarF v2) {
+    static Var div_FF(VarF v1, VarF v2) {
         return new VarF(v1.getValue() / v2.getValue());
     }
     // Div: VarV / VarF
-    public static Var div_VF(VarV v1, VarF v2){
+    static Var div_VF(VarV v1, VarF v2){
         VarV result = new VarV(v1.getValue());
         double[] resultVal = result.getValue();
         double operand2 = v2.getValue();
@@ -76,7 +79,7 @@ public class OperationCore {
         return result;
     }
     // Div: VarM / VarF
-    public static Var div_MF(VarM v1, VarF v2){
+    static Var div_MF(VarM v1, VarF v2){
         VarM result = new VarM(v1.getValue());
         double[][] resultVal = result.getValue();
         double operand2 = v2.getValue();
@@ -90,11 +93,11 @@ public class OperationCore {
 
 
     // Mul: VarF * VarF
-    public static Var mul_FF(VarF v1, VarF v2) {
+    static Var mul_FF(VarF v1, VarF v2) {
         return new VarF(v1.getValue() * v2.getValue());
     }
     // Mul: VarF * VarV <---> VarV * VarF
-    public static Var mul_FV(VarF v1, VarV v2){
+    static Var mul_FV(VarF v1, VarV v2){
         VarV result = new VarV(v2.getValue());
         double[] resultVal = result.getValue();
         double operand2 = v1.getValue();
@@ -104,7 +107,7 @@ public class OperationCore {
         return result;
     }
     // Mul: VarF * VarM <---> VarM * VarF
-    public static Var mul_FM(VarF v1, VarM v2){
+    static Var mul_FM(VarF v1, VarM v2){
         VarM result = new VarM(v2.getValue());
         double[][] resultVal = result.getValue();
         double operand2 = v1.getValue();
@@ -117,7 +120,7 @@ public class OperationCore {
     }
     // Mul: VarV * VarV - не реализовано необходимо менять класс VarV
     // Mul: VarV * VarM
-    public static Var mul_VM(VarV v1, VarM v2){
+    static Var mul_VM(VarV v1, VarM v2){
         double[] size = v1.getValue();
         double[][] operator = new double[1][size.length];
         for(int i = 0; i < size.length; i++ ){
@@ -126,7 +129,7 @@ public class OperationCore {
         return mul_MM(new VarM(operator), v2);
     }
     // Mul: VarM * VarV
-    public static Var mul_MV(VarM v1, VarV v2){
+    static Var mul_MV(VarM v1, VarV v2){
         double[] size = v2.getValue();
         double[][] operator = new double[1][size.length];
         for(int i = 0; i < size.length; i++ ){
@@ -135,7 +138,7 @@ public class OperationCore {
         return mul_MM(v1, new VarM(operator));
     }
     // Mul: VarM * VarM
-    public static Var mul_MM(VarM v1, VarM v2){
+    static Var mul_MM(VarM v1, VarM v2){
         VarM result = null;
         if(v1 != null && v2 != null){
             double[][] resV1 = v1.getValue();
@@ -161,16 +164,34 @@ public class OperationCore {
 
 
     // Sub: VarF - VarF
-    public static Var sub_FF(VarF v1, VarF v2){
+    static Var sub_FF(VarF v1, VarF v2){
         return add_FF(v1, new VarF(-v2.getValue()));
     }
     // Sub: VarV - VarF
-    public static Var sub_VF(VarV v1, VarF v2){
+    static Var sub_VF(VarV v1, VarF v2){
         return add_VF(v1, new VarF(-v2.getValue()));
     }
     // Sub: VarM - VarF
-    public static Var sub_MF(VarM v1, VarF v2){
+    static Var sub_MF(VarM v1, VarF v2){
         return add_MF(v1, new VarF(-v2.getValue()));
     }
     // Sub: VarV - VarV - не реализовано необходимо менять класс VarV
+
+    static Double PatternExValToDouble(String strValue){
+        Double res = null;
+        Pattern p = Pattern.compile(Patterns.exValsimpl);
+        Matcher m = p.matcher(strValue);
+        try{
+            if(m.matches()) {
+                return res = Double.parseDouble(strValue);
+            }
+            p = Pattern.compile(Patterns.exValcomlp);
+            m = p.matcher(strValue);
+            if(m.matches()){
+                return res = Double.parseDouble(strValue.substring(1, strValue.length()-1));
+            }
+        }
+        catch (ClassCastException e){}
+        return res;
+    }
 }

@@ -87,19 +87,19 @@ public class VarV extends Var implements IVariable, IOperationVisitorAdd,
 
     // implements IVariable
     @Override
-    public boolean fromString(String strVector) {
+    public boolean fromString(String strVector) throws ClassCastException {
         boolean res = true;
-        try{
-            Pattern p = Pattern.compile(Patterns.exVal);
+        Double temp = null;
+            Pattern p = Pattern.compile(Patterns.exValsimpl);
             value = new double[strVector.split(",").length];
             Matcher m = p.matcher(strVector);
             int i = 0;
-            while (m.find())
-                value[i++] = Double.parseDouble(m.group());
-        }
-        catch (Exception e){
-            res = false;
-        }
+            while (m.find()){
+                temp = OperationCore.PatternExValToDouble(m.group());
+                if(temp == null) return res = false;
+                value[i++] = temp;
+                res = true;
+            }
         return res;
     }
     @Override
