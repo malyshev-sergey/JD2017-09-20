@@ -88,12 +88,11 @@ public class VarF extends Var implements IVariable, IOperationVisitorAdd,
     }
     @Override
     public boolean fromString(String strValue) {
-        boolean res = true;
-        try{
-            this.value = Double.parseDouble(strValue);
-        }
-        catch (Exception e){
-            res = false;
+        boolean res = false;
+        Double temp = OperationCore.PatternExValToDouble(strValue);
+        if(temp != null){
+            this.value = temp;
+            res = true;
         }
         return res;
     }

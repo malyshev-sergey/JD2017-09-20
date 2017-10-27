@@ -99,23 +99,25 @@ public class VarM extends Var implements IVariable, IOperationVisitorAdd,
     }
     @Override
     public boolean fromString(String strMatrix) {
-        boolean res = true;
-        try {
-            String[] vectorMass = strMatrix.split("},\\{");
-            int m = vectorMass.length;
-            int n = vectorMass[0].split(",").length;
-            value = new double[m][n];
-            Pattern p = Pattern.compile(Patterns.exVal);
-            for (int i = 0; i < m; i++) {
-                Matcher match = p.matcher(vectorMass[i]);
-                int j = 0;
-                while (match.find()) {
-                    value[i][j++] = Double.parseDouble(match.group());
+        boolean res = false;
+        Double temp = null;
+
+        String[] vectorMass = strMatrix.split("},\\{");
+        int m = vectorMass.length;
+        int n = vectorMass[0].split(",").length;
+        value = new double[m][n];
+        Pattern p = Pattern.compile(Patterns.exValsimpl);
+        for (int i = 0; i < m; i++) {
+            Matcher match = p.matcher(vectorMass[i]);
+            int j = 0;
+            while (match.find()) {
+                temp = OperationCore.PatternExValToDouble(match.group());
+                if(temp == null){
+                    return res = false;
                 }
+                value[i][j++] = temp;
+                res = true;
             }
-        }
-        catch (Exception e){
-            res = false;
         }
         return res;
     }

@@ -34,8 +34,6 @@ public class Calc {
             if(res == null){
                 res = temp.getValue();
             }
-            //System.out.printf("%-8s %-20s %n", temp.getKey(),temp.getValue().toString());
-            //calcCore(res, temp.getValue(), expres, i);
             else {
                 if(expres.tempOp.size() > 0){
                     if(expres.tempOp.get(i).compareTo("+") == 0){
@@ -62,34 +60,11 @@ public class Calc {
 
         return res;
     }
-    private static void calcCore(Var res, Var var, Expression expres, int i){
-        if(res == null){
-            res = var;
-            //System.out.println("" + res.toString());
-            //res.assign(var);
-        }
-        else {
-            if(expres.tempOp.get(i) == "+"){
-                res = res.add(var);
-            }
-            else if(expres.tempOp.get(i) == "/"){
-                res = res.div(var);
-            }
-            else if(expres.tempOp.get(i) == "*"){
-                res = res.mul(var);
-            }
-            else if(expres.tempOp.get(i) == "-"){
-                res = res.sub(var);
-            }
-            else{}
-        }
-    }
 
     public static <K extends Comparable<? super K>, V > Map<K, V> sortByKey(Map<K, V> map )
     {
         List<Map.Entry<K, V>> list = new LinkedList<>(map.entrySet());
-        Collections.sort( list, new Comparator<Map.Entry<K, V>>()
-        {
+        Collections.sort( list, new Comparator<Map.Entry<K, V>>(){
             @Override
             public int compare(Map.Entry<K, V> o1, Map.Entry<K, V> o2)
             {
