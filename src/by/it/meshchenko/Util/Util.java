@@ -1,5 +1,7 @@
 package by.it.meshchenko.Util;
 
+import java.util.Random;
+
 public class Util {
     public static <T extends Number> boolean findInArray(T[] arr, T t){
         boolean res = false;
@@ -29,5 +31,10 @@ public class Util {
             }
         }
         return  res;
+    }
+
+    public static int randomInt(int start, int end) {
+        int random = new Random().nextInt(end-start);
+        return start + random;
     }
 }
