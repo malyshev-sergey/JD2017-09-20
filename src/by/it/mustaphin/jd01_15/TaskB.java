@@ -35,12 +35,12 @@ public class TaskB {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        removeComments();
+        removeComments();//jfgjhg fgehf jhg fjgf
     }
 
     void removeComments() {
-        Pattern patMultiComent = Pattern.compile("/[*]+[a-zA-Z0-9()=!. \\n{};]+[*]/");
-        Pattern patLineComent = Pattern.compile("// .+[\\n]?");
+        Pattern patMultiComent = Pattern.compile(Patterns.patMultiComent);
+        Pattern patLineComent = Pattern.compile(Patterns.patLineComent);
         Matcher mat = patMultiComent.matcher(sb);
         String newLine[] = sb.toString().split(String.valueOf(patMultiComent));
         sb.setLength(0);
