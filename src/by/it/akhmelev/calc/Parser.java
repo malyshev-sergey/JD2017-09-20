@@ -26,8 +26,7 @@ class Parser {
         try {
             String operads[] = expr.split(Patterns.exOper, 2);
             String operation = "";
-            Pattern p = Pattern.compile(Patterns.exOper);
-            Matcher m = p.matcher(expr);
+            Matcher m = Pattern.compile(Patterns.exOper).matcher(expr);
             if (m.find())
                 operation = m.group();
             Var two = getVar(operads[1]);
