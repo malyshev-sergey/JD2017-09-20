@@ -13,58 +13,64 @@ public class TaskC {
     Map<String, File> mapDirs = new HashMap<>();
 
     void getInfo(File file) {
-        System.out.println("getInfo() " + file.getAbsolutePath());
         File files[] = file.listFiles();
         for (File inner : files) {
             if (inner.isDirectory()) {
                 mapDirs.put(inner.getAbsolutePath(), inner);
-            } else if (inner.isFile()) {
-                mapFiles.put(inner.getAbsolutePath(), inner);
+            }
+        }
+//        print();
+        File dir = selectDir();
+        if (null == selectDir()) {
+            seekFiles();
+        } else {
+            getInfo(selectDir());
+        }
+    }
+
+    boolean isBottom(File file) {
+        for (File seekDir : file.listFiles()) {
+            if (seekDir.isDirectory()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    void seekFiles() {
+        for (Map.Entry<String, File> me : mapDirs.entrySet()) {
+            File dir[] = me.getValue().listFiles();
+            for (File file : dir) {
+                if (file.isFile()) {
+                    mapFiles.put(file.getAbsolutePath(), file);
+                }
             }
         }
         print();
-        getInfo(select());
+        System.exit(0);
     }
 
-    File select() {
-        if (mapDirs.entrySet().size() == alreadyChecked.size()) {
-            print();
-        }
+    File selectDir() {
         File selectedDir = null;
-        boolean bottom = true;
-        begin:
         for (Map.Entry<String, File> me : mapDirs.entrySet()) {
             if (alreadyChecked.contains(me.getKey())) {
                 continue;
             }
-            if (bottom) {
-                for (File seekDir : me.getValue().listFiles()) {
-                    if (seekDir.isDirectory()) {
-                        bottom = false;
-                        break;
-                    }
-                }
-                if (bottom) {
-                    continue begin;
-                }
+            if (!isBottom(me.getValue())) {
+                alreadyChecked.add(me.getKey());
+                selectedDir = me.getValue();
             }
-            alreadyChecked.add(me.getKey());
-            selectedDir = me.getValue();
-            break;
         }
-        System.out.println((null == selectedDir) ? "null" : "NOT null");
         return selectedDir;
     }
 
     void print() {
-
         for (Map.Entry<String, File> dir : mapDirs.entrySet()) {
-            System.out.printf("Директория %s, %s\n", dir.getKey(), dir.getValue().getName() );
+            System.out.printf("Директория %s\n", dir.getKey());
         }
         System.out.println();
         for (Map.Entry<String, File> file : mapFiles.entrySet()) {
             System.out.printf("Файл %s\n", file.getKey());
         }
-//        System.exit(0);
     }
 }
