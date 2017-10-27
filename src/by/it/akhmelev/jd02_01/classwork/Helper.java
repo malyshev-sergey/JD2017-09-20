@@ -1,6 +1,6 @@
 package by.it.akhmelev.jd02_01.classwork;
 
-public class Helper {
+class Helper {
 
     static int random(int from, int to){
         return (int)Math.round(Math.random()*(to-from)+from);

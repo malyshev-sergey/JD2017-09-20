@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class Goods extends HashMap<String,Double>{
+class Goods extends HashMap<String,Double>{
 
     static Goods items=new Goods();
 
     private List<String> names;
 
-    public Goods() {
+    private Goods() {
         this.put("Bread",0.8);
         this.put("Milk",1.5);
         this.put("Beer",2.1);
