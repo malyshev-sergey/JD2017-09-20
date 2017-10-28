@@ -8,7 +8,7 @@ import java.io.*;
 public class TaskA {
     public static void solveTaskA() throws IOException {
         String src = System.getProperty("user.dir") + "/src/by/it/shishov/";
-        String filename = src + "jd01_14/integer.dat";
+        String filename = src + "jd01_14/integer.txt";
         File f = new File(filename);
 
 
