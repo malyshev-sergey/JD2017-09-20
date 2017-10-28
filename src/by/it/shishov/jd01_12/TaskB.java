@@ -21,7 +21,7 @@ public class TaskB {
         }
 
         for (Map.Entry<String, Integer> word : textCount.entrySet()){
-            System.out.println("Слово " + word.getKey() + " встречалось " +word.getValue() + " раз");
+            System.out.println(word.getKey() + " повторяется " +word.getValue() + " раз(а)");
         }
 
 
