@@ -10,7 +10,8 @@ public class TaskB {
         Path path = Paths.get(pathStr + "TaskB.java");
 
         //comment1;
-        /* multiline comment */
+        /* multiline
+         comment */
         StringBuilder sb = null; //endline comment;
         /* multiline incapsulating //line comment*/
 
