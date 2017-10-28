@@ -73,11 +73,6 @@ public class VarM extends Var {
             } catch (MathException e) {
                 e.printStackTrace();
             }
-            try {
-                throw new MathException("Вычитание ");
-            } catch (MathException e) {
-                e.printStackTrace();
-            }
             System.out.println("Здесь должно выполняться сложение матрицы с матрицей");
             return null;
         } else if (var instanceof VarV) {
@@ -102,11 +97,6 @@ public class VarM extends Var {
                 } else {
                     throw new MathException("Матрицы разного размера");
                 }
-            } catch (MathException e) {
-                e.printStackTrace();
-            }
-            try {
-                throw new MathException("Вычитание ");
             } catch (MathException e) {
                 e.printStackTrace();
             }
