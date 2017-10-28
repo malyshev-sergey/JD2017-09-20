@@ -13,8 +13,6 @@ public class TaskB {
     private static  int i = 1;
 
     static void example1() throws IOException {
-        // int[][] res = createTwoMass(4, 4, -15, 15);
-        //printTwoMass(res);
         String src = System.getProperty("user.dir") + "/src/by/it/meshchenko/";
         String fileNameRead = src + "jd01_15/Runner15.java";
         String fileNameWrite = src + "jd01_15/Runner15.txt";

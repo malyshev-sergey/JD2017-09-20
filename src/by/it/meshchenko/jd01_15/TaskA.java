@@ -1,17 +1,12 @@
 package by.it.meshchenko.jd01_15;
 
 import by.it.meshchenko.Util.*;
-
 import java.io.*;
-import java.nio.file.attribute.*;
 import java.nio.file.*;
-import java.nio.charset.*;
-import java.util.Set;
 
 public class TaskA {
     static void example1() throws IOException{
         int[][] res = createTwoMass(4, 4, -15, 15);
-        //printTwoMass(res);
         String src = System.getProperty("user.dir") + "/src/by/it/meshchenko/";
         String fileName = src + "jd01_15/matrix.txt";
 
