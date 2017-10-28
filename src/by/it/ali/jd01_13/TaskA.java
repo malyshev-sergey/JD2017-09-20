@@ -11,7 +11,7 @@ public class TaskA {
         //try{
         String a="10";
         String b="14";
-        System.out.println("Введите число:");
+        System.out.println("[TaskA]Введите число:");
         Scanner sc = new Scanner(System.in);
         String c = sc.nextLine();
         if (c.equals("END")) System.exit(0);

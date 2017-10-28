@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class TaskB {
 
     static void levelOne() throws /*NumberFormatException,*/ InputMismatchException {
-        System.out.println("Введите 3 не отрицательных числа числа");
+        System.out.println("[TaskB]Введите 3 неотрицательных числа");
    Scanner sc = new Scanner(System.in);
     Integer a = sc.nextInt();
     Integer b = sc.nextInt();
