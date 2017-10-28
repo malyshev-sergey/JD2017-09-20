@@ -6,7 +6,7 @@ import java.util.Scanner;
 import static java.lang.Double.parseDouble;
 
 public class TaskA {
-    static void SolveTaskA () throws NumberFormatException, ArithmeticException
+    static void SolveTaskA() throws NumberFormatException, ArithmeticException
     {
         //try{
         String a="10";
@@ -19,7 +19,6 @@ public class TaskA {
         if (parseDouble(c)<0){ throw new ArithmeticException();}
         double d = (Math.sqrt(parseDouble(a)) + Math.sqrt(parseDouble(b))+Math.sqrt(parseDouble(c)));
         System.out.println("Сумма корней всех чисел: "+d);
-
        // }
 //        catch (NumberFormatException e){
 //            System.err.println("Неверно введено число! "+e);
