@@ -37,4 +37,17 @@ public class Util {
         int random = new Random().nextInt(end-start);
         return start + random;
     }
+
+    public static String strDefiniteSize(String str, int size, String strReplace){
+        StringBuilder res = new StringBuilder("");
+        int len = str.length();
+        if(size >= len) {
+            for(int i = 0; i < (size - len); i++) {
+                res.append(strReplace);
+            }
+            res.append(str);
+        }
+        else res.append(str.substring(0, size));
+        return  res.toString();
+    }
 }

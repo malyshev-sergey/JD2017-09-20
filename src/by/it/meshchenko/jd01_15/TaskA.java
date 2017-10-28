@@ -14,18 +14,17 @@ public class TaskA {
         //printTwoMass(res);
         String src = System.getProperty("user.dir") + "/src/by/it/meshchenko/";
         String fileName = src + "jd01_15/matrix.txt";
-        Path path = Paths.get(fileName);
 
         // Если файла нет, создаём файл - без этого блока тоже работает, если файла нет :)
         //if(!Files.exists(path, LinkOption.NOFOLLOW_LINKS)){
             //path = Files.createFile(path);
         //}
         try(BufferedWriter fr = new BufferedWriter(
-                new FileWriter(path.toAbsolutePath().toString()))) {
+                new FileWriter(Paths.get(fileName).toAbsolutePath().toString()))) {
 
             String str = twoMassToString(res, true);
             fr.write(str);
-            System.out.println("Запись в файл '" + path.getFileName() + "' закончена \n");
+            System.out.println("Запись в файл '" + Paths.get(fileName).getFileName() + "' закончена \n");
         }
         catch (IOException e){
             e.printStackTrace();
@@ -52,7 +51,7 @@ public class TaskA {
         if(res != null) {
             for (int i = 0; i < res.length; i++) {
                 for (int j = 0; j < res[0].length; j++) {
-                    strLen.append(strDefiniteSize(Integer.toString(res[i][j]), 3));
+                    strLen.append(Util.strDefiniteSize(Integer.toString(res[i][j]), 3, " "));
                     if (j < res[0].length) strLen.append(" ");
                 }
                 if (i < res[0].length - 1) strLen.append("\r\n");
@@ -64,18 +63,5 @@ public class TaskA {
         }
         if(printConsole) System.out.println(strLen);
         return strLen.toString();
-    }
-
-    private static String strDefiniteSize(String str, int size){
-        StringBuilder res = new StringBuilder("");
-        int len = str.length();
-        if(size >= len) {
-            for(int i = 0; i < (size - len); i++) {
-                res.append(" ");
-            }
-            res.append(str);
-        }
-        else res.append(str.substring(0, size).toString());
-        return  res.toString();
     }
 }
