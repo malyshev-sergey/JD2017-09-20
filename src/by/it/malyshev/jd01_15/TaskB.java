@@ -57,17 +57,16 @@ public class TaskB {
 
         // печатаем в файл и консоль
         filename = System.getProperty("user.dir") + "/src/by/it/malyshev/jd01_15/TaskB.txt";
-        try (PrintWriter prt1 = new PrintWriter(new FileWriter(filename));
-             PrintWriter prt2 = new PrintWriter(System.out)) {
+        try (PrintWriter prt1 = new PrintWriter(new FileWriter(filename))) {
             int counter = 1;
             for (String line : sb.toString().split("\n")) {
                 prt1.printf("%2d %s\n", (counter), line);
-                prt2.printf("%2d %s\n", (counter++), line);
+                System.out.printf("%2d %s\n", (counter++), line);
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         }
+
 
     }  // main
 
