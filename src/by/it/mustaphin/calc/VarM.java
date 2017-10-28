@@ -60,7 +60,25 @@ public class VarM extends Var {
     @Override
     public Var add(Var var) {
         if (var instanceof VarM) {
-            //Здесь должно выполняться сложение матрицы с матрицией
+            try {
+                if (this.value.length == ((VarM) var).value.length) {
+                    for (int i = 0; i < this.value.length; i++) {
+                        if (this.value[i].length != ((VarM) var).value[i].length) {
+                            throw new MathException("Матрицы разного размера");
+                        }
+                    }
+                } else {
+                    throw new MathException("Матрицы разного размера");
+                }
+            } catch (MathException e) {
+                e.printStackTrace();
+            }
+            try {
+                throw new MathException("Вычитание ");
+            } catch (MathException e) {
+                e.printStackTrace();
+            }
+            System.out.println("Здесь должно выполняться сложение матрицы с матрицей");
             return null;
         } else if (var instanceof VarV) {
             return super.add(var);
@@ -73,6 +91,27 @@ public class VarM extends Var {
 
     @Override
     public Var sub(Var var) {
+        if (var instanceof VarM) {
+            try {
+                if (this.value.length == ((VarM) var).value.length) {
+                    for (int i = 0; i < this.value.length; i++) {
+                        if (this.value[i].length != ((VarM) var).value[i].length) {
+                            throw new MathException("Матрицы разного размера");
+                        }
+                    }
+                } else {
+                    throw new MathException("Матрицы разного размера");
+                }
+            } catch (MathException e) {
+                e.printStackTrace();
+            }
+            try {
+                throw new MathException("Вычитание ");
+            } catch (MathException e) {
+                e.printStackTrace();
+            }
+            System.out.println("Здесь должно выполняться вычитание матрицы из матрицы");
+        }
         return super.sub(var);
     }
 

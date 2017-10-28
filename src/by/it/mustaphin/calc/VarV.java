@@ -43,38 +43,54 @@ public class VarV extends Var {
     public Var add(Var var) {
         VarV result = new VarV(this.value);
         if (var instanceof VarV) {
+            if (((VarV) var).value.length == this.value.length) {
 //            System.out.println("вектора с вектором\n");
-            for (int i = 0; i < this.value.length; i++) {
-                result.value[i] += ((VarV) var).value[i];
+                for (int i = 0; i < this.value.length; i++) {
+                    result.value[i] += ((VarV) var).value[i];
+                }
+                return result;
+            } else {
+                try {
+                    throw new MathException("Векторы разной длины");
+                } catch (MathException e) {
+                    e.printStackTrace();
+                }
             }
-            return result;
         } else if (var instanceof VarD) {
 //            System.out.println("вектора с числом\n");
             for (int i = 0; i < this.value.length; i++) {
                 result.value[i] += ((VarD) var).getValue();
             }
             return result;
-        } else
-            return super.add(var);
+        }
+        return super.add(var);
     }
 
     @Override
     public Var sub(Var var) {
         VarV result = new VarV(this.value);
-        if (var instanceof VarV && ((VarV) var).value.length == this.value.length) {
-//            System.out.println("вектора из вектора\n");
-            for (int i = 0; i < this.value.length; i++) {
-                result.value[i] -= ((VarV) var).value[i];
+        if (var instanceof VarV) {
+            if (((VarV) var).value.length == this.value.length) {
+                for (int i = 0; i < this.value.length; i++) {
+                    result.value[i] -= ((VarV) var).value[i];
+                }
+                return result;
+            } else {
+                try {
+                    throw new MathException("Векторы разной длины");
+                } catch (MathException e) {
+                    e.printStackTrace();
+                }
             }
-            return result;
+//            System.out.println("вектора из вектора\n");
         } else if (var instanceof VarD) {
 //            System.out.println("вектора из числа\n");
             for (int i = 0; i < this.value.length; i++) {
                 result.value[i] -= ((VarD) var).getValue();
             }
             return result;
-        } else
-            return super.sub(var);
+        }
+        return super.sub(var);
     }
 
     @Override

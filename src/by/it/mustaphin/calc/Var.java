@@ -6,25 +6,41 @@ class Var implements MathOperations, Variable {
 
     @Override
     public Var add(Var var) {
-        System.out.println("Сложение не возможно");
+        try {
+            throw new MathException("Сложение не возможно");
+        } catch (MathException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
     @Override
     public Var sub(Var var) {
-        System.out.println("Вычитние не возможно");
+        try {
+            throw new MathException("Вычитние не возможно");
+        } catch (MathException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
     @Override
     public Var mul(Var var) {
-        System.out.println("Умножение не возможно");
+        try {
+            throw new MathException("Умножение не возможно");
+        } catch (MathException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
     @Override
     public Var div(Var var) {
-        System.out.println("Деление не возможно");
+        try {
+            throw new MathException("Деление не возможно");
+        } catch (MathException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
@@ -35,6 +51,10 @@ class Var implements MathOperations, Variable {
     @Override
     public void fromString(String str) {
         if (str.contains("{{")) {
+            var = new VarM(str);
+        } else if (str.contains("{")) {
+            var = new VarV(str);
+        } else{
             var = new VarD(str);
         }
     }
