@@ -62,7 +62,7 @@ public class Util {
     }
 
     // Прочитать строку с консоли
-    static String getOneLine() throws IOException {
+    public static String getOneLine() throws IOException {
         BufferedReader stin = new BufferedReader(new InputStreamReader(System.in));
         String line = stin.readLine();
         //stin.close();

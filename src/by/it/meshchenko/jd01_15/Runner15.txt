@@ -7,5 +7,6 @@
 007         System.out.println("B.  **************************");
 008         TaskB.example1();
 009         System.out.println("C.  **************************");
-010     }
-011 }
+010         TaskC.example1();
+011     }
+012 }
