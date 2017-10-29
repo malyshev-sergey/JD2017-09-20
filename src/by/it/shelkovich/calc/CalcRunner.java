@@ -1,13 +1,11 @@
 package by.it.shelkovich.calc;
 
-import by.it.shelkovich.calc.Exceptions.IllegalVectorOperationException;
-import by.it.shelkovich.calc.Exceptions.MatrixMultiplyException;
-
 public class CalcRunner {
     public static void main(String[] args) {
 
+
         try {
-            System.out.println(Parser.exeOp("2.3 + 3").toString());
+            /*System.out.println(Parser.exeOp("2.3 + 3").toString());
             System.out.println(Parser.exeOp("{-1,2,3} / 5").toString());
             System.out.println(Parser.exeOp("{{1,2},{4,5}} * {1,2}").toString());
 
@@ -21,13 +19,21 @@ public class CalcRunner {
 
             //Строки с арифметическими ошибками
             System.out.println(Parser.exeOp("{{1,2},{4,5}} * {1,2,3}").toString());
-            System.out.println(Parser.exeOp("{-1,2,3} / 0").toString());
+            System.out.println(Parser.exeOp("{-1,2,3} / 0").toString());*/
+            VarFileIO varFile = new VarFileIO();
+            varFile.loadFromFile();
         }catch (ArithmeticException e){
             e.printStackTrace();
         }
 
-        Storage.printVar();
-        Storage.sortVar();
+        //VarFileIO varFile = new VarFileIO();
+        //varFile.saveToFile();
+        VarStorage.printVar();
+        VarStorage.sortVar();
+
+        for (int i = 0; i < 60; i++) {
+            Logger.log(i+": сообщение");
+        }
 
     }
 }

@@ -23,14 +23,14 @@ public class Parser {
                 case "/":
                     return getVarByString(m.group("first")).div(getVarByString(m.group("second")));
                 case "=":
-                    Storage.vars.put(m.group("first"), getVarByString(m.group("second")));
+                    VarStorage.vars.put(m.group("first"), getVarByString(m.group("second")));
                     return null;
             }
         }
         return null;
     }
 
-    private static Var getVarByString(String value) {
+    public static Var getVarByString(String value) {
         if (value.charAt(0) != '{') {
             Pattern p = Pattern.compile(Patterns.exVal);
             if (p.matcher(value).matches()) return new VarD(value);

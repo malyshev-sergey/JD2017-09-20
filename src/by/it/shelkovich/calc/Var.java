@@ -23,6 +23,7 @@ public abstract class Var implements IAdd, IMul, ISub, IDiv, StringCompatible {
     void printErr(String err) {
         if (!printed && !used) {
             System.out.printf("Операция %s невозможна\n", err);
+            Logger.log("\"Операция "+err+" невозможна");
             printed = true;
         } else if (printed) printed = false;
     }

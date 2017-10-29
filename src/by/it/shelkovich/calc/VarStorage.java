@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class Storage {
+public class VarStorage {
     public static HashMap<String, Var> vars = new HashMap<>();
 
     public static void printVar(){
