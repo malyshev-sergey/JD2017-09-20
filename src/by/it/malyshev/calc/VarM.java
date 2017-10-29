@@ -68,7 +68,7 @@ class VarM extends Var implements IVariable {
 
 
     @Override
-    public Var add(Var var) {
+    public Var add(Var var) throws CalcError{
         VarM result;
         if (var instanceof VarD) {
             result = new VarM(this.value);
@@ -93,7 +93,7 @@ class VarM extends Var implements IVariable {
     }
 
     @Override
-    public Var sub(Var var) {
+    public Var sub(Var var) throws CalcError{
         VarM result;
         if (var instanceof VarD) {
             result = new VarM(this.value);
@@ -120,7 +120,7 @@ class VarM extends Var implements IVariable {
 
 
     @Override
-    public Var mul(Var var) {
+    public Var mul(Var var) throws CalcError{
         VarM result;
         if (var instanceof VarD) {
             result = new VarM(this.value);
@@ -159,7 +159,7 @@ class VarM extends Var implements IVariable {
 
 
     @Override
-    public Var div(Var var) {
+    public Var div(Var var) throws CalcError{
         VarM result;
         if (var instanceof VarD) {
             if (((VarD) var).getValue()!=0) {
