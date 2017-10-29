@@ -12,8 +12,12 @@ class Parser {
 
             Pattern p = Pattern.compile("=");
             Matcher m = p.matcher(strInput);
-            if (!m.find()) {
-                new CalcError("Нет такой операции");
+            try {
+                if (!m.find()) {
+                    throw new CalcError("Нет такой операции");
+                }
+            } catch (CalcError e) {
+                System.out.println(e.getMessage());
                 return null;
             }
 
@@ -22,8 +26,12 @@ class Parser {
 
             Pattern p1 = Pattern.compile(Patterns.exAny);
             Matcher m1 = p1.matcher(strOperands[1]);
-            if (!m1.find()) {
-                new CalcError("Нет такой операции");
+            try {
+                if (!m1.find()) {
+                    throw new CalcError("Нет такой операции");
+                }
+            } catch (CalcError e) {
+                System.out.println(e.getMessage());
                 return null;
             }
             int counter = 0;
@@ -42,6 +50,7 @@ class Parser {
                 return null;
             }
 
+
         } else if (strInput.trim().equals("printvar")) printVar();
         else if (strInput.trim().equals("sortvar")) sortVar();
         return null;
@@ -49,39 +58,42 @@ class Parser {
 
 
     static Var singleOperation(String strSingleOperation) {
-        Pattern p = Pattern.compile(Patterns.exAny);
-        Matcher m = p.matcher(strSingleOperation);
-        if (!m.find()) {
-            new CalcError("Нет такой операции");
+        try {
+            Pattern p = Pattern.compile(Patterns.exAny);
+            Matcher m = p.matcher(strSingleOperation);
+            if (!m.find()) {
+                throw new CalcError("Нет такой операции");
+            }
+            String strOper = strSingleOperation.substring(strSingleOperation.indexOf(m.group())
+                    + m.group().length()).trim();
+
+            m.reset();
+            int i = 0;
+            String[] strOperands = new String[2];
+            while (m.find()) {
+                strOperands[i++] = m.group();
+            }
+            Pattern p1 = Pattern.compile(Patterns.exOper);
+            Matcher m1 = p1.matcher(strOper);
+            if (m1.find()) {
+                switch (m1.group()) {
+                    case "+":
+                        return selectTypeOfOperand(strOperands[0]).add(selectTypeOfOperand(strOperands[1]));
+                    case "-":
+                        if (strOperands[1].trim().charAt(0) == '-') strOperands[1] = strOperands[1].trim().substring(1);
+                        return selectTypeOfOperand(strOperands[0]).sub(selectTypeOfOperand(strOperands[1]));
+                    case "*":
+                        return selectTypeOfOperand(strOperands[0]).mul(selectTypeOfOperand(strOperands[1]));
+                    case "/":
+                        return selectTypeOfOperand(strOperands[0]).div(selectTypeOfOperand(strOperands[1]));
+                }
+            } else throw new CalcError("Нет такой операции");
+        } catch (CalcError e) {
+            System.out.println(e.getMessage());
             return null;
         }
-        String strOper = strSingleOperation.substring(strSingleOperation.indexOf(m.group())
-                + m.group().length()).trim();
-
-        m.reset();
-        int i = 0;
-        String[] strOperands = new String[2];
-        while (m.find()) {
-            strOperands[i++] = m.group();
-        }
-        Pattern p1 = Pattern.compile(Patterns.exOper);
-        Matcher m1 = p1.matcher(strOper);
-        if (m1.find()) {
-            switch (m1.group()) {
-                case "+":
-                    return selectTypeOfOperand(strOperands[0]).add(selectTypeOfOperand(strOperands[1]));
-                case "-":
-                    if (strOperands[1].trim().charAt(0) == '-') strOperands[1] = strOperands[1].trim().substring(1);
-                    return selectTypeOfOperand(strOperands[0]).sub(selectTypeOfOperand(strOperands[1]));
-                case "*":
-                    return selectTypeOfOperand(strOperands[0]).mul(selectTypeOfOperand(strOperands[1]));
-                case "/":
-                    return selectTypeOfOperand(strOperands[0]).div(selectTypeOfOperand(strOperands[1]));
-            }
-        } else new CalcError("Нет такой операции");
         return null;
     }
-
 
 
     private static Var selectTypeOfOperand(String strOperand) {

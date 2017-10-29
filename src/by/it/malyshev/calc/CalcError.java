@@ -1,7 +1,8 @@
 package by.it.malyshev.calc;
 
-class CalcError {
+
+class CalcError extends Exception{
     CalcError(String msg) {
-        System.out.println(msg);
+        super(msg);
     }
 }
