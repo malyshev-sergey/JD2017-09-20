@@ -1,7 +1,5 @@
 package by.it.mustaphin.jd01_12;
 
-import by.it.ali.jd01_04.TaskA;
-
 public class Runner {
     public static void main(String[] args) {
 
