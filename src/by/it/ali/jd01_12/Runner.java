@@ -7,5 +7,7 @@ public class Runner {
         MyCollect.getCross();
         MyCollect.getUnion();
         TaskA.solveA3();
+        TaskB.SolveTaskB1();
+        TaskB.SolveTaskB2();
     }
 }
