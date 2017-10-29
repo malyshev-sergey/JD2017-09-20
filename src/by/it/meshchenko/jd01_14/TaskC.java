@@ -9,7 +9,7 @@ public class TaskC {
         String fileName = src;
         File f = new File(fileName);
 
-        //Читаем из файла
+        // list директорий и файлов
         ArrayList<File> dirs = new ArrayList<>();
         ArrayList<File> files = new ArrayList<>();
         try {
