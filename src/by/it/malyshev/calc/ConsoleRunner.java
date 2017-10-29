@@ -10,6 +10,8 @@ public class ConsoleRunner {
 
     public static void main(String[] args) {
 
+        Depository.restore();
+
         printOneVar(Parser.singleOperation("-1+2"));
         printOneVar(Parser.singleOperation("-9-7"));
 
@@ -23,6 +25,7 @@ public class ConsoleRunner {
             printOneVar(Parser.singleOperation("4/0"));
         } catch (ArithmeticException e) {
             System.out.println(e.getMessage());
+            Depository.logWrite(e.getMessage());
         }
 
 
@@ -33,6 +36,7 @@ public class ConsoleRunner {
             printOneVar(Parser.singleOperation("{-1,2,3}*{1,2}"));
         } catch (ArithmeticException e) {
             System.out.println(e.getMessage());
+            Depository.logWrite(e.getMessage());
         }
         printOneVar(Parser.singleOperation("{{1,2},{8,3}}*{{1,2},{8,3}}"));
         System.out.println();
@@ -58,6 +62,7 @@ public class ConsoleRunner {
 
         Parser.fromString("printvar");
         Parser.fromString("sortvar");
+        Depository.store();
 
 
 //        System.out.println("\nпроверка +-*/ операций со скалярами");

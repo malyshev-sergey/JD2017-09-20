@@ -1,6 +1,5 @@
 package by.it.malyshev.calc;
 
-import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -18,6 +17,7 @@ class Parser {
                 }
             } catch (CalcError e) {
                 System.out.println(e.getMessage());
+                Depository.logWrite(e.getMessage());
                 return null;
             }
 
@@ -32,6 +32,7 @@ class Parser {
                 }
             } catch (CalcError e) {
                 System.out.println(e.getMessage());
+                Depository.logWrite(e.getMessage());
                 return null;
             }
             int counter = 0;
@@ -39,20 +40,21 @@ class Parser {
             try {
                 while (m1.find()) counter++;
                 if (counter > 1) {
-                    variablesCollection.put(strOperands[0], singleOperation(strOperands[1]));
+                    Depository.variablesCollection.put(strOperands[0], singleOperation(strOperands[1]));
                     return singleOperation(strOperands[1]);
                 } else {
-                    variablesCollection.put(strOperands[0], selectTypeOfOperand(strOperands[1]));
+                    Depository.variablesCollection.put(strOperands[0], selectTypeOfOperand(strOperands[1]));
                     return selectTypeOfOperand(strOperands[1]);
                 }
             } catch (ArithmeticException e) {
                 System.out.println(e.getMessage());
+                Depository.logWrite(e.getMessage());
                 return null;
             }
 
 
-        } else if (strInput.trim().equals("printvar")) printVar();
-        else if (strInput.trim().equals("sortvar")) sortVar();
+        } else if (strInput.trim().equals("printvar")) Depository.printVar();
+        else if (strInput.trim().equals("sortvar")) Depository.sortVar();
         return null;
     }
 
@@ -90,6 +92,7 @@ class Parser {
             } else throw new CalcError("Нет такой операции");
         } catch (CalcError e) {
             System.out.println(e.getMessage());
+            Depository.logWrite(e.getMessage());
             return null;
         }
         return null;
@@ -102,24 +105,5 @@ class Parser {
         else if (strOperand.trim().substring(0, 1).equals("{")) return new VarV(strOperand.trim());
         else return new VarD(strOperand.trim());
     }
-
-
-    private static Map<String, Var> variablesCollection = new HashMap<>();
-
-    private static void printVar() {
-        System.out.println("\nКоллекция переменных");
-        for (Map.Entry<String, Var> stringVarEntry : variablesCollection.entrySet())
-            System.out.println(stringVarEntry);
-
-    }
-
-    private static void sortVar() {
-        System.out.println("\nОтсортированная коллекция переменных");
-        TreeMap<String, Var> sortedVariables = new TreeMap<>(variablesCollection);
-        for (Map.Entry<String, Var> stringVarEntry : sortedVariables.entrySet())
-            System.out.println(stringVarEntry);
-
-    }
-
 
 }
