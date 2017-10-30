@@ -6,8 +6,11 @@ import java.util.regex.Pattern;
 class Parser {
 
     static Var fromString(String strInput) {
+        Depository.logWrite("Input: "+strInput);
+        Var res;
         if (!(strInput.trim().equals("printvar")) &&
                 !(strInput.trim().equals("sortvar"))) {
+
 
             Pattern p = Pattern.compile("=");
             Matcher m = p.matcher(strInput);
@@ -44,7 +47,9 @@ class Parser {
                     return singleOperation(strOperands[1]);
                 } else {
                     Depository.variablesCollection.put(strOperands[0], selectTypeOfOperand(strOperands[1]));
-                    return selectTypeOfOperand(strOperands[1]);
+                    res= selectTypeOfOperand(strOperands[1]);
+//                    Depository.logWrite(strOperands[0]+" = " + selectTypeOfOperand(strOperands[1]));
+                    return res;
                 }
             } catch (ArithmeticException e) {
                 System.out.println(e.getMessage());
@@ -60,6 +65,7 @@ class Parser {
 
 
     static Var singleOperation(String strSingleOperation) {
+        Var res;
         try {
             Pattern p = Pattern.compile(Patterns.exAny);
             Matcher m = p.matcher(strSingleOperation);
@@ -80,16 +86,27 @@ class Parser {
             if (m1.find()) {
                 switch (m1.group()) {
                     case "+":
-                        return selectTypeOfOperand(strOperands[0]).add(selectTypeOfOperand(strOperands[1]));
+                        res= selectTypeOfOperand(strOperands[0]).add(selectTypeOfOperand(strOperands[1]));
+//                        Depository.logWrite(" Output: "+res.toString()+"\r\n");
+                        return res;
                     case "-":
                         if (strOperands[1].trim().charAt(0) == '-') strOperands[1] = strOperands[1].trim().substring(1);
-                        return selectTypeOfOperand(strOperands[0]).sub(selectTypeOfOperand(strOperands[1]));
+                        res= selectTypeOfOperand(strOperands[0]).sub(selectTypeOfOperand(strOperands[1]));
+//                        Depository.logWrite(selectTypeOfOperand(strOperands[0])+" - " + selectTypeOfOperand(strOperands[1])+" = "+res.toString());
+//                        Depository.logWrite(" Output: "+res.toString()+"\r\n");
+                        return res;
                     case "*":
-                        return selectTypeOfOperand(strOperands[0]).mul(selectTypeOfOperand(strOperands[1]));
+                        res= selectTypeOfOperand(strOperands[0]).mul(selectTypeOfOperand(strOperands[1]));
+//                        Depository.logWrite(selectTypeOfOperand(strOperands[0])+" * " + selectTypeOfOperand(strOperands[1])+" = "+res.toString());
+//                        Depository.logWrite(" Output: "+res.toString()+"\r\n");
+                        return res;
                     case "/":
-                        return selectTypeOfOperand(strOperands[0]).div(selectTypeOfOperand(strOperands[1]));
+                        res= selectTypeOfOperand(strOperands[0]).div(selectTypeOfOperand(strOperands[1]));
+//                        Depository.logWrite(selectTypeOfOperand(strOperands[0])+" / " + selectTypeOfOperand(strOperands[1])+" = "+res.toString());
+//                        Depository.logWrite(" Output: "+res.toString()+"\r\n");
+                        return res;
                 }
-            } else throw new CalcError("Нет такой операции");
+           } else throw new CalcError("Нет такой операции");
         } catch (CalcError e) {
             System.out.println(e.getMessage());
             Depository.logWrite(e.getMessage());

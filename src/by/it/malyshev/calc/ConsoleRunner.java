@@ -4,6 +4,7 @@ public class ConsoleRunner {
 
     private static void printOneVar(Var v) {
         if (v != null) {
+            Depository.logWrite("Output: "+v.toString());
             System.out.println(v);
         }
     }
@@ -53,10 +54,10 @@ public class ConsoleRunner {
         printOneVar(Parser.fromString("K = {{-1,2},{8,-3}}-3"));
         printOneVar(Parser.fromString("L = 3-{{-1,2},{8,-3}}"));
         printOneVar(Parser.fromString("M = {{-1,2},{8,-3}}"));
-        printOneVar(Parser.fromString("K = {{-1,2},{8,-3}}/0"));
-        printOneVar(Parser.fromString("K = {{-1,2},{8,-3}}*{{-1,2},{8,-3},{8,-3}}"));
-        printOneVar(Parser.fromString("K = {{-1,2},{8,-3}}*{-1,2}"));
-        printOneVar(Parser.fromString("K = {{-1,2},{8,-3}}*{-1,2,5}"));
+        printOneVar(Parser.fromString("N = {{-1,2},{8,-3}}/0"));
+        printOneVar(Parser.fromString("O = {{-1,2},{8,-3}}*{{-1,2},{8,-3},{8,-3}}"));
+        printOneVar(Parser.fromString("P = {{-1,2},{8,-3}}*{-1,2}"));
+        printOneVar(Parser.fromString("R = {{-1,2},{8,-3}}*{-1,2,5}"));
 
 
 
