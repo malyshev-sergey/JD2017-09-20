@@ -1,23 +1,19 @@
 package by.it.govor.jd_01_06.taskB;
 
 
+import java.util.Arrays;
 
-        import java.util.Arrays;
-
+import static by.it.govor.jd_01_06.Date.STR;
 
 public class Task2 {
      static void task() {
-/*
-
-        String s = by.it.govor.jd_01_06.Date.STR;
-        String[] str = s.split("//.!");
+        String[] str = STR.split("[\\.!//n]{1,}");
 
 
         for (int j = 0; j < str.length; j++) {
 
-
-            for (int i = 0; i < str.length - j; i++) {
-                if(i!=str.length-j-1){
+            for (int i = 0; i < str.length; i++) {
+                if(i!=str.length-1){
                     String[] r = str[i].split(" ");
                     String[] y = str[i + 1].split(" ");
                     if (r.length > y.length) {
@@ -30,7 +26,7 @@ public class Task2 {
         }
         System.out.println(Arrays.asList(str));
     
-    */
+
      }
 
 }
