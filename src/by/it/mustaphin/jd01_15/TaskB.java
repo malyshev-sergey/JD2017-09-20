@@ -3,6 +3,7 @@ package by.it.mustaphin.jd01_15;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -10,6 +11,7 @@ import java.util.regex.Pattern;
 public class TaskB {
 
     StringBuilder sb = new StringBuilder();
+    int lineNumber = 1;
 
     //Метод чтения сдержимого файла класса
     void read() {
@@ -39,14 +41,44 @@ public class TaskB {
     }
 
     void removeComments() {
-        Pattern patMultiComent = Pattern.compile(Patterns.patMultiComent);
-        Pattern patLineComent = Pattern.compile(Patterns.patLineComent);
-        Matcher mat = patMultiComent.matcher(sb);
-        String newLine[] = sb.toString().split(String.valueOf(patMultiComent));
+        Pattern lineComent = Pattern.compile(Patterns.patLineComent);
+        String newLine[] = sb.toString().split(Patterns.patMultiComent);
         sb.setLength(0);
         for (String line : newLine) {
             sb.append(line);
         }
+        List<Integer[]> couple = new ArrayList<>();
+        Matcher mat = lineComent.matcher(sb);
+        while (mat.find()) {
+            couple.add(new Integer[]{mat.start(), mat.end()});
+        }
+        Collections.reverse(couple);
+        for (Integer[] twin : couple) {
+            sb.delete(twin[0], twin[1]);
+        }
+        addLineNumbers();
+        System.out.println(sb);
+    }
 
+    void addLineNumbers() {
+        sb.append(getLineNumber(lineNumber));
+        Pattern newLine = Pattern.compile("\\R");
+        List<Integer> lines = new ArrayList<>();
+        Matcher mat = newLine.matcher(sb);
+        while (mat.find()) {
+            lines.add(mat.start());
+        }
+        Collections.reverse(lines);
+        for (Integer numb : lines) {
+            System.out.println(numb);
+//            sb.append(getLineNumber(++lineNumber).toCharArray(), numb, 2);
+        }
+    }
+
+    String getLineNumber(int lineNumber) {
+        if (10 > lineNumber) {
+            return "0" + String.valueOf(lineNumber);
+        }
+        return "" + lineNumber;
     }
 }
