@@ -56,7 +56,7 @@ class Depository {
             try (BufferedReader bufferedReader = new BufferedReader(new FileReader(logFile))) {
                 String line;
                 while((line = bufferedReader.readLine()) != null){
-                    logList.add(line);
+                    logList.addLast(line);
                 }
 
             } catch (IOException e) {
@@ -66,9 +66,12 @@ class Depository {
         logList.addLast(str);
         while(logList.size()>50) logList.pop();
         try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(logFile))) {
+//            int counter=0;
             for (String v : logList) {
                 bufferedWriter.write(v);
-                bufferedWriter.newLine();
+              bufferedWriter.newLine();
+
+//                if (counter>1) counter=0;
             }
         } catch (IOException e) {
             e.printStackTrace();
