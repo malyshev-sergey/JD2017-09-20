@@ -12,6 +12,7 @@ public class StoreData {
     public StoreData() {
         try (FileInputStream fis = new FileInputStream(System.getProperty("user.dir") + "/src/by/it/mustaphin/calc/vars.txt")) {
             property.load(fis);
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -24,7 +25,7 @@ public class StoreData {
     void getData() {
         Set<String> vars = property.stringPropertyNames();
         for (String parameter : vars) {
-            data.put(parameter, new Var().getVar(property.getProperty(parameter)));
+            data.put(parameter, Var.getVar(property.getProperty(parameter)));
         }
     }
 
