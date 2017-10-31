@@ -2,8 +2,6 @@ package by.it.mustaphin.calc;
 
 abstract class Var implements MathOperations, Variable {
 
-    Var var = null;
-
     @Override
     public Var add(Var var) {
         try {
@@ -42,10 +40,6 @@ abstract class Var implements MathOperations, Variable {
             e.printStackTrace();
         }
         return null;
-    }
-
-    public static void assignment(String name, Var var) {
-        StoreData.store(name, var);
     }
 
     static Var getVar(String str) {
