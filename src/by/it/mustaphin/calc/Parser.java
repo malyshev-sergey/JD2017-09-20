@@ -14,6 +14,7 @@ public class Parser {
             StoreData.sortvar();
             read();
         } else if (line.equalsIgnoreCase("exit")) {
+            StoreData.writeData();
             System.exit(0);
         } else if (line.equalsIgnoreCase("printvar")) {
             StoreData.printvar();
@@ -29,6 +30,7 @@ public class Parser {
             StoreData.sortvar();
             read();
         } else if (line.equalsIgnoreCase("exit")) {
+            StoreData.writeData();
             System.exit(0);
         } else if (line.equalsIgnoreCase("printvar")) {
             StoreData.printvar();
@@ -41,7 +43,7 @@ public class Parser {
 
     void parseExpression(String line) {
         Pattern action = Pattern.compile("[-+*/]");
-        Pattern varsD = Pattern.compile("[^-{},*+/][0-9.]+");
+        Pattern varsD = Pattern.compile("[^-{},*+/=][0-9.]+|[0-9.]+");
         Pattern varsV = Pattern.compile("[{][0-9.,]+[}]");
         Pattern varName = Pattern.compile("[a-zA-Z]+");
         Matcher matD = varsD.matcher(line);
@@ -57,18 +59,19 @@ public class Parser {
         Matcher matN = varName.matcher(line);
         while (matA.find() & matN.find()) {
             if (matA.group().equals("+")) {
-                Var.assignment(matN.group(), add(varList.get(0), varList.get(1)));
+                StoreData.data.put(matN.group(), add(varList.get(0), varList.get(1)));
             }
             if (matA.group().equals("-")) {
-                Var.assignment(matN.group(), sub(varList.get(0), varList.get(1)));
+                StoreData.data.put(matN.group(), sub(varList.get(0), varList.get(1)));
             }
             if (matA.group().equals("*")) {
-                Var.assignment(matN.group(), mul(varList.get(0), varList.get(1)));
+                StoreData.data.put(matN.group(), mul(varList.get(0), varList.get(1)));
             }
             if (matA.group().equals("/")) {
-                Var.assignment(matN.group(), div(varList.get(0), varList.get(1)));
+                StoreData.data.put(matN.group(), div(varList.get(0), varList.get(1)));
             }
         }
+        varList.clear();
     }
 
     <T extends Var> Var add(T var1, T var2) {
@@ -87,8 +90,6 @@ public class Parser {
     }
 
     <T extends Var> Var div(T var1, T var2) {
-//        System.out.println(var1.getClass().getName());
-//        System.out.println(var2.getClass().getName());
 //        System.out.print("Происходит деление ");
         return var1.div(var2);
     }
