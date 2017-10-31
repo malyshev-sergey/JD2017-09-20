@@ -11,7 +11,6 @@ import java.util.regex.Pattern;
 public class TaskB {
 
     StringBuilder sb = new StringBuilder();
-    int lineNumber = 1;
 
     //Метод чтения сдержимого файла класса
     void read() {
@@ -61,7 +60,6 @@ public class TaskB {
     }
 
     void addLineNumbers() {
-        sb.append(getLineNumber(lineNumber));
         Pattern newLine = Pattern.compile("\\R");
         List<Integer> lines = new ArrayList<>();
         Matcher mat = newLine.matcher(sb);
@@ -69,10 +67,11 @@ public class TaskB {
             lines.add(mat.start());
         }
         Collections.reverse(lines);
+        int lineNumber = lines.size() + 2;
         for (Integer numb : lines) {
-            System.out.println(numb);
-//            sb.append(getLineNumber(++lineNumber).toCharArray(), numb, 2);
+            sb.insert(numb + 1, getLineNumber(--lineNumber));
         }
+        sb.insert(0, getLineNumber(1));
     }
 
     String getLineNumber(int lineNumber) {
