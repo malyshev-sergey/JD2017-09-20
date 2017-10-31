@@ -13,9 +13,8 @@ public class TaskB {
     StringBuilder sb = new StringBuilder();
 
     //Метод чтения сдержимого файла класса
-    void read() {
+    void readSrc() {
         String src = System.getProperty("user.dir") + "/src/by/it/mustaphin/jd01_15/TaskB.java";
-        String out = System.getProperty("user.dir") + "/src/by/it/mustaphin/jd01_15/TaskB.txt";
 
         /**try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(new File(src))))) {
          String line;
@@ -72,6 +71,15 @@ public class TaskB {
             sb.insert(numb + 1, getLineNumber(--lineNumber));
         }
         sb.insert(0, getLineNumber(1));
+    }
+
+    void writeToFile() {
+        String out = System.getProperty("user.dir") + "/src/by/it/mustaphin/jd01_15/TaskB.txt";
+        try (FileWriter fw = new FileWriter(new File(out))) {
+            fw.write(sb.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     String getLineNumber(int lineNumber) {
