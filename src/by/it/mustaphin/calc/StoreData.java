@@ -7,12 +7,11 @@ import java.util.*;
 
 public class StoreData {
 
-    Properties property = new Properties();
+    static Properties property = new Properties();
 
-    public StoreData() {
+    static {
         try (FileInputStream fis = new FileInputStream(System.getProperty("user.dir") + "/src/by/it/mustaphin/calc/vars.txt")) {
             property.load(fis);
-
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -31,6 +30,7 @@ public class StoreData {
 
     static void store(String name, Var var) {
         data.put(name, var);
+//        property.
     }
 
     static void sortvar() {
