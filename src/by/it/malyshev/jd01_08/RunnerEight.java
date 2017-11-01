@@ -22,7 +22,8 @@ public class RunnerEight {
         // начинаем лечить больного пациента
         neuroSurgeonA.treatDisease();
         // пытаемся отправить на операцию
-        neuroSurgeonA.makeOperation();
+        neuroSurgeonA.makeOperationWithExcCatch();
+
         // врач может отдохнуть
         neuroSurgeonA.haveARest();
 
@@ -43,7 +44,7 @@ public class RunnerEight {
         // начинаем лечить
         neuroSurgeonB.treatDisease();
         // делаем операцию, результат ее непредсказуем 50 на 50, каждый раз будет новый
-        neuroSurgeonB.makeOperation();
+        neuroSurgeonB.makeOperationWithExcCatch();
         // отдыхаем
         neuroSurgeonB.haveARest();
 
@@ -56,7 +57,7 @@ public class RunnerEight {
         // начинаем лечить
         neuroSurgeonB.treatDisease();
         // делаем операцию, результат ее непредсказуем
-        neuroSurgeonB.makeOperation();
+        neuroSurgeonB.makeOperationWithExcCatch();
 
         System.out.println("---");
         // пришел больной с симптомами "слишком много мыслей" и "квадратная голова"
@@ -67,7 +68,7 @@ public class RunnerEight {
         // начинаем лечить
         neuroSurgeonB.treatDisease();
         // делаем операцию, результат ее непредсказуем
-        neuroSurgeonB.makeOperation();
+       neuroSurgeonB.makeOperationWithExcCatch();
         // запускаем метод, который потенциально можно развивать
         neuroSurgeonB.writeReport();
         // отдыхаем
@@ -76,8 +77,6 @@ public class RunnerEight {
         System.out.println(neuroSurgeonB.showState());
         // и т.д. не все доработано :(, но не уверен, что оно того стоит...
 
-
-
-
     }
+
 }

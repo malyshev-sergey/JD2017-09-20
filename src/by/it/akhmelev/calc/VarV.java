@@ -41,7 +41,7 @@ class VarV extends Var implements IVariable {
     // implementation IOperation
 
     @Override
-    public Var add(Var var) {
+    public Var add(Var var) throws MathException {
         VarV result;
         if (var instanceof VarD) {
             result = new VarV(this.value);
@@ -60,7 +60,7 @@ class VarV extends Var implements IVariable {
     }
 
     @Override
-    public Var sub(Var var) {
+    public Var sub(Var var) throws MathException {
         VarV result;
         if (var instanceof VarD) {
             result = new VarV(this.value);
@@ -79,7 +79,7 @@ class VarV extends Var implements IVariable {
     }
 
     @Override
-    public Var mul(Var var) {
+    public Var mul(Var var) throws MathException {
         VarV result;
         if (var instanceof VarD) {
             result = new VarV(this.value);
@@ -98,7 +98,7 @@ class VarV extends Var implements IVariable {
     }
 
     @Override
-    public Var div(Var var) {
+    public Var div(Var var) throws MathException {
         VarV result;
         if (var instanceof VarD) {
             result = new VarV(this.value);
