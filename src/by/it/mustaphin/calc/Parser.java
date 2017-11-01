@@ -3,7 +3,8 @@ package by.it.mustaphin.calc;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -46,6 +47,11 @@ public class Parser {
     }
 
     void parseExpression(String line) {
+        try (FileWriter out = new FileWriter(new File(System.getProperty("user.dir") + "/src/by/it/mustaphin/calc/log.txt"), true)) {
+            out.write(line + "\n");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         Pattern action = Pattern.compile("[-+*/]");
         Pattern varsD = Pattern.compile("[^-{},*+/=][0-9.]+|[0-9.]+");
         Pattern varsV = Pattern.compile("[{][0-9.,]+[}]");
@@ -61,27 +67,19 @@ public class Parser {
         }
         Matcher matA = action.matcher(line);
         Matcher matN = varName.matcher(line);
-        try (PrintWriter out = new PrintWriter(new FileWriter(new File(System.getProperty("user.dir") + "/src/by/it/mustaphin/calc/log.txt")))) {
-            while (matA.find() & matN.find()) {
-                if (matA.group().equals("+")) {
-                    out.write("Выполняется операция сложения ");
-                    StoreData.data.put(matN.group(), add(varList.get(0), varList.get(1)));
-                }
-                if (matA.group().equals("-")) {
-                    out.write("Выполняется операция вычитания ");
-                    StoreData.data.put(matN.group(), sub(varList.get(0), varList.get(1)));
-                }
-                if (matA.group().equals("*")) {
-                    out.write("Выполняется операция умножения ");
-                    StoreData.data.put(matN.group(), mul(varList.get(0), varList.get(1)));
-                }
-                if (matA.group().equals("/")) {
-                    out.write("Выполняется операция деления ");
-                    StoreData.data.put(matN.group(), div(varList.get(0), varList.get(1)));
-                }
+        while (matA.find() & matN.find()) {
+            if (matA.group().equals("+")) {
+                StoreData.data.put(matN.group(), add(varList.get(0), varList.get(1)));
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+            if (matA.group().equals("-")) {
+                StoreData.data.put(matN.group(), sub(varList.get(0), varList.get(1)));
+            }
+            if (matA.group().equals("*")) {
+                StoreData.data.put(matN.group(), mul(varList.get(0), varList.get(1)));
+            }
+            if (matA.group().equals("/")) {
+                StoreData.data.put(matN.group(), div(varList.get(0), varList.get(1)));
+            }
         }
         varList.clear();
     }

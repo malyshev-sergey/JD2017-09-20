@@ -34,15 +34,11 @@ public class VarD extends Var {
 
     @Override
     public Var add(Var var) {
-        if (var instanceof VarD) {
-            try (PrintWriter out = new PrintWriter(new FileWriter(new File(System.getProperty("user.dir") + "/src/by/it/mustaphin/calc/log.txt")))) {
-                out.write("дискретного числа с числом\n");
-                return new VarD(value + ((VarD) var).value);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return var.add(this);
+//        System.out.println("дискретного числа с числом\n");
+        if (var instanceof VarD)
+            return new VarD(value + ((VarD) var).value);
+        else
+            return var.add(this);
     }
 
     @Override
