@@ -1,3 +1,8 @@
-#Tue Oct 31 23:27:03 MSK 2017
+#Wed Nov 01 12:07:25 MSK 2017
+anyVar=4.0
 var=3.0
+ttt=121.0
+someVar=16.0
 varvar=64.0
+newVar=4.0
+miniVar=99.0
