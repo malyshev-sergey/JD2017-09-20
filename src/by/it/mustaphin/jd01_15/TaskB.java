@@ -35,7 +35,7 @@ public class TaskB {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        removeComments();//jfgjhg fgehf jhg fjgf
+        removeComments();
     }
 
     void removeComments() {
