@@ -1,5 +1,9 @@
 package by.it.mustaphin.calc;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -57,40 +61,44 @@ public class Parser {
         }
         Matcher matA = action.matcher(line);
         Matcher matN = varName.matcher(line);
-        while (matA.find() & matN.find()) {
-            if (matA.group().equals("+")) {
-                StoreData.data.put(matN.group(), add(varList.get(0), varList.get(1)));
+        try (PrintWriter out = new PrintWriter(new FileWriter(new File(System.getProperty("user.dir") + "/src/by/it/mustaphin/calc/log.txt")))) {
+            while (matA.find() & matN.find()) {
+                if (matA.group().equals("+")) {
+                    out.write("Выполняется операция сложения ");
+                    StoreData.data.put(matN.group(), add(varList.get(0), varList.get(1)));
+                }
+                if (matA.group().equals("-")) {
+                    out.write("Выполняется операция вычитания ");
+                    StoreData.data.put(matN.group(), sub(varList.get(0), varList.get(1)));
+                }
+                if (matA.group().equals("*")) {
+                    out.write("Выполняется операция умножения ");
+                    StoreData.data.put(matN.group(), mul(varList.get(0), varList.get(1)));
+                }
+                if (matA.group().equals("/")) {
+                    out.write("Выполняется операция деления ");
+                    StoreData.data.put(matN.group(), div(varList.get(0), varList.get(1)));
+                }
             }
-            if (matA.group().equals("-")) {
-                StoreData.data.put(matN.group(), sub(varList.get(0), varList.get(1)));
-            }
-            if (matA.group().equals("*")) {
-                StoreData.data.put(matN.group(), mul(varList.get(0), varList.get(1)));
-            }
-            if (matA.group().equals("/")) {
-                StoreData.data.put(matN.group(), div(varList.get(0), varList.get(1)));
-            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         varList.clear();
     }
 
     <T extends Var> Var add(T var1, T var2) {
-//        System.out.print("Происходит сложение ");
         return var1.add(var2);
     }
 
     <T extends Var> Var sub(T var1, T var2) {
-//        System.out.print("Происходит вычитание ");
         return var1.sub(var2);
     }
 
     <T extends Var> Var mul(T var1, T var2) {
-//        System.out.print("Происходит умножение ");
         return var1.mul(var2);
     }
 
     <T extends Var> Var div(T var1, T var2) {
-//        System.out.print("Происходит деление ");
         return var1.div(var2);
     }
 

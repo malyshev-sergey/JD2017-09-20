@@ -5,7 +5,7 @@ abstract class Var implements MathOperations, Variable {
     @Override
     public Var add(Var var) {
         try {
-            throw new MathException("Сложение не возможно");
+            throw new MathException(this + " Сложение не возможно " + var);
         } catch (MathException e) {
             e.printStackTrace();
         }
@@ -15,7 +15,7 @@ abstract class Var implements MathOperations, Variable {
     @Override
     public Var sub(Var var) {
         try {
-            throw new MathException("Вычитние не возможно");
+            throw new MathException(this + " Вычитние не возможно " + var);
         } catch (MathException e) {
             e.printStackTrace();
         }
@@ -25,7 +25,7 @@ abstract class Var implements MathOperations, Variable {
     @Override
     public Var mul(Var var) {
         try {
-            throw new MathException("Умножение не возможно");
+            throw new MathException(this + " Умножение не возможно " + var);
         } catch (MathException e) {
             e.printStackTrace();
         }
@@ -35,7 +35,7 @@ abstract class Var implements MathOperations, Variable {
     @Override
     public Var div(Var var) {
         try {
-            throw new MathException("Деление не возможно");
+            throw new MathException(this + " Деление не возможно " + var);
         } catch (MathException e) {
             e.printStackTrace();
         }

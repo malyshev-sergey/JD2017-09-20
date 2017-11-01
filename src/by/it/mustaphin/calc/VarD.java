@@ -1,5 +1,10 @@
 package by.it.mustaphin.calc;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
 public class VarD extends Var {
 
     private double value = 0;
@@ -24,21 +29,25 @@ public class VarD extends Var {
     }
 
     VarD(String valStr) {
-//        System.out.println("VarD constructor from String");
         fromString(valStr);
     }
 
     @Override
     public Var add(Var var) {
-//        System.out.println("дискретного числа с числом\n");
-        if (var instanceof VarD)
-            return new VarD(value + ((VarD) var).value);
-        else return var.add(this);
+        if (var instanceof VarD) {
+            try (PrintWriter out = new PrintWriter(new FileWriter(new File(System.getProperty("user.dir") + "/src/by/it/mustaphin/calc/log.txt")))) {
+                out.write("дискретного числа с числом\n");
+                return new VarD(value + ((VarD) var).value);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return var.add(this);
     }
 
     @Override
     public Var sub(Var var) {
-//        System.out.println("дискретного числа из числа\n");zz
+//        System.out.println("дискретного числа из числа\n");
         if (var instanceof VarD)
             return new VarD(this.value - ((VarD) var).value);
         else return super.sub(var);
@@ -47,9 +56,9 @@ public class VarD extends Var {
     @Override
     public Var mul(Var var) {
 //        System.out.println("дискретного числа на число\n");
-        if (var instanceof VarD)
+        if (var instanceof VarD) {
             return new VarD(((VarD) var).value * ((VarD) var).value);
-        else return var.mul(this);
+        } else return var.mul(this);
     }
 
     @Override
