@@ -1,5 +1,8 @@
 package by.it.shelkovich.jd2_02;
 
+import java.io.OutputStream;
+import java.io.PrintStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +15,17 @@ public class Runner2_2 {
     private static int buyersAtCass = 0;
 
     public static void main(String[] args) {
+
+        PrintStream ps = new PrintStream(System.out){
+            @Override
+            public PrintStream printf(String format, Object... args) {
+                synchronized (Cashier.printMonitor) {
+                    return super.printf(format, args);
+                }
+            }
+        };
+        System.setOut(ps);
+
 
         CashierDispatcher cashierDispatcher = new CashierDispatcher();
         cashierDispatcher.setDaemon(true);
@@ -33,9 +47,9 @@ public class Runner2_2 {
             if (quarter % 2 != 0) {
                 preferCount = (i % 30) + 10;
                 inviteBuyers(Util.getRandomIntFromRange(0, preferCount - buyersAlive));
-                System.err.println("Sec " + i + "> Alive " + buyersAlive + " At cass " + buyersAtCass);
+                //System.err.println("Sec " + i + "> Alive " + buyersAlive + " At cass " + buyersAtCass);
             } else {
-                System.err.println("Sec " + i + "< Alive " + buyersAlive + " At cass " + buyersAtCass);
+                //System.err.println("Sec " + i + "< Alive " + buyersAlive + " At cass " + buyersAtCass);
                 preferCount = (30 - i % 30) + 10;
                 if (buyersAlive < preferCount) inviteBuyers(Util.getRandomIntFromRange(0,2));
             }
