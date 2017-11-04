@@ -19,6 +19,16 @@ public class Runner07 {
             //System.out.println("Example1.main();");
             //Example1.main();
 
+        for(int i = 0; i < 1; i++){
+            System.out.println("i/5 + i%5 = " + (i/5 + i%5));
+        }
+
+        System.out.println("0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789");
+        System.out.println("ttt\t\tttt");
+        System.out.println("ttn\t\t\nttn");
+        System.out.println("rrr\t\t\trrr\rrrr");
+        Integer i = null;
+        System.out.printf("ee %s ee", Integer.toString(i));
 
 
     }

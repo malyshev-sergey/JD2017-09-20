@@ -1,10 +1,10 @@
 package by.it.meshchenko.jd02_01;
 
-public class ChooseCood {
+public class ChooseGood {
     private String good;
     private Double price;
 
-    public ChooseCood(String good, Double price) {
+    public ChooseGood(String good, Double price) {
         this.good = good;
         this.price = price;
     }

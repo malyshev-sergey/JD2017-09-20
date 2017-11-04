@@ -1,10 +1,11 @@
 package by.it.meshchenko.jd02_01;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Runner02_01 {
     public static void main(String[] args) {
+
+
+
+
 //        int counterBuyers = 0;
 //
 //        for (int i = 1; i <= 5; i++) {
@@ -12,11 +13,7 @@ public class Runner02_01 {
 //            new Thread(c).start();
 //        }
 
-        // Магазин начал работу
-        Dispatcher.storeOpen();
-        ImitationFlowBuyers ifB = new ImitationFlowBuyers(Dispatcher.storeTimeWork);
-        Thread th_ifB = new Thread(ifB);
-        th_ifB.start();
+        Dispatcher.run();
 
 
         //List<Buyer> buyers = new ArrayList<>();

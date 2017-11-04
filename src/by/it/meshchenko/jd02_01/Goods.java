@@ -1,7 +1,5 @@
 package by.it.meshchenko.jd02_01;
 
-import by.it.ali.calculator.Str;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
