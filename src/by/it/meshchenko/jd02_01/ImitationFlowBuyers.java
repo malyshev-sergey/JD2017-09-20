@@ -7,7 +7,6 @@ public class ImitationFlowBuyers implements Runnable {
     private int aBMF = 10;                           // 'amountBuyerMaxFirst' N >= t+10
     private int aBMS = 70;                           // 'amountBuyerMaxSecond' N <= 40+(30-t)
     private int tempNumberBuyer = 0;                 // N
-    static final Integer printSynchr = 0;
 
     public ImitationFlowBuyers(int timeWork){
         this.timeWork = timeWork;
@@ -23,9 +22,7 @@ public class ImitationFlowBuyers implements Runnable {
                     pv.setTotal(Dispatcher.total);
                     Dispatcher.printWork(pv);
                 }
-
                 Thread.sleep(1000);
-
             }
         }
         catch (InterruptedException e){

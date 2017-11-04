@@ -17,9 +17,6 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
     static final List<Buyer> listBuyers = new ArrayList<>();
 
     final Deque<ChooseGood> backet  = new LinkedList<>();
-    private interface IgoToQueueBuyers{
-        Deque<Buyer> queue(boolean p);
-    }
 
     Buyer(int number, boolean isPensioner) {
         super("B_#" + Integer.toString(number) + (isPensioner ? "P" : ""));
@@ -36,6 +33,7 @@ public class Buyer extends Thread implements IBuyer, IUseBacket {
     @Override
     public void run() {
         enterToMarket();
+        takeBacket();
         chooseGoods();
         goToQueue();
         goToOut();

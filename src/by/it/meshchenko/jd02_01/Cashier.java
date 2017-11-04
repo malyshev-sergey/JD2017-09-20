@@ -11,7 +11,6 @@ public class Cashier implements Runnable {
     private boolean isOpen = false;
     private boolean isWork = true;
     final Lock lockCashier = new ReentrantLock();
-    static List<Buyer> listCashiers = new ArrayList<>();
 
     public Cashier(int num) {
         this.num = num;
@@ -38,7 +37,7 @@ public class Cashier implements Runnable {
             finally {
                 lockCashier.unlock();
             }
-            // Открываем кассу и работаем пока диспетчер на отпустит на "обед"
+            // Открываем кассу и работаем пока диспетчер не отпустит на "обед"
             if(isOpen) Dispatcher.printWork(printStatus("** Cash desk is open"));
             while (open) {
                 serviceBuyer();

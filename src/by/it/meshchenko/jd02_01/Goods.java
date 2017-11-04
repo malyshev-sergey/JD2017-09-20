@@ -18,7 +18,7 @@ public class Goods extends HashMap<String, Double> {
         this.put("Buckwheat", 4.7);
         this.put("Almond", 25.3);
         this.put("Whater", 25.3);
-        names = new ArrayList<String>(this.keySet());
+        names = new ArrayList<>(this.keySet());
     }
     String randomGood(){
         return names.get(Helper.random(0,names.size()-1));

@@ -5,10 +5,6 @@ public class PrintView {
     private int countBuyer;
     private String[] cashiers = new String[5];
     private boolean isCashier;
-    //private String c2;
-    //private String c3;
-    //private String c4;
-    //private String c5;
     private int queueSize;
     private double total;
     private String buyerState;

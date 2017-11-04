@@ -8,15 +8,13 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 class Dispatcher {
-
     // Время работы магазина
     static final int storeTimeWork = 120;
 
-    //static final Lock lockCashiers = new ReentrantLock();
-    //static final Integer printSynchr = 0;
     //Выручка магазина
     static final Integer totalSynchr = 0;
     static double total = 0;
+
     //Анонимный класс компаратора
     static Comparator<Buyer> idComp = new Comparator<Buyer>(){
 
@@ -27,6 +25,7 @@ class Dispatcher {
             return 1;
         }
     };
+
     //Очередь покупателей c пенсионерами (которые обслуживаются первыми) на обслуживание в кассе
     static final PriorityQueue<Buyer> buyerQueue = new PriorityQueue<>(5, idComp);
 
