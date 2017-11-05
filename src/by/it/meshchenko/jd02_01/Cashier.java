@@ -1,15 +1,11 @@
 package by.it.meshchenko.jd02_01;
 
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class Cashier implements Runnable {
     private int num;
     private boolean isOpen = false;
-    private boolean isWork = true;
     final Lock lockCashier = new ReentrantLock();
 
     public Cashier(int num) {
@@ -18,27 +14,9 @@ public class Cashier implements Runnable {
 
     @Override
     public void run() {
-        boolean work = true;
-        boolean open = false;
-        while(work){
-            //Запускаем поток и ждём когда появятся покупатели в очереди на кассу
-            synchronized (this) {
-                try {
-                    this.wait();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            try{
-                lockCashier.lock();
-                open = isOpen();
-                work = isWork();
-            }
-            finally {
-                lockCashier.unlock();
-            }
+        boolean open = true;
             // Открываем кассу и работаем пока диспетчер не отпустит на "обед"
-            if(isOpen) Dispatcher.printWork(printStatus("** Cash desk is open"));
+            Dispatcher.printWork(printStatus("** Cash desk is open"));
             while (open) {
                 serviceBuyer();
                 try{
@@ -49,9 +27,8 @@ public class Cashier implements Runnable {
                     lockCashier.unlock();
                 }
             }
-            if(!isOpen && isWork) Dispatcher.printWork(printStatus("** Cash desk is closed"));
+            Dispatcher.printWork(printStatus("** Cash desk is closed"));
             Helper.sleep(100);
-        }
     }
 
     @Override
@@ -65,14 +42,6 @@ public class Cashier implements Runnable {
 
     public void setOpen(boolean open) {
         isOpen = open;
-    }
-
-    public boolean isWork() {
-        return isWork;
-    }
-
-    public void setWork(boolean work) {
-        isWork = work;
     }
 
     private void serviceBuyer(){

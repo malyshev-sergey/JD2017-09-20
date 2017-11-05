@@ -1,11 +1,7 @@
 package by.it.meshchenko.jd02_01;
 
 import java.util.Comparator;
-import java.util.Deque;
-import java.util.LinkedList;
 import java.util.PriorityQueue;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 class Dispatcher {
     // Время работы магазина
@@ -39,7 +35,6 @@ class Dispatcher {
         for (int i = 0; i < arrThreadCas.length; i++) {
             arrCas[i] = new Cashier(i+1);
             arrThreadCas[i] = new Thread(arrCas[i]);
-            arrThreadCas[i].start();
         }
         //Создаём поток имитирующий покупателей
         ImitationFlowBuyers ifB = new ImitationFlowBuyers(Dispatcher.storeTimeWork);
@@ -80,20 +75,6 @@ class Dispatcher {
 
             }
         }
-        // Отпускаем кассиров домой
-        for (int i = 0; i < arrCas.length; i++) {
-            try{
-                arrCas[i].lockCashier.lock();
-                arrCas[i].setWork(false);
-                synchronized (arrCas[i]) {
-                    if(arrThreadCas[i].getState() == Thread.State.WAITING)
-                        arrCas[i].notify();
-                }
-            }
-            finally {
-                arrCas[i].lockCashier.unlock();
-            }
-        }
         //Закрываем магазин
         storeClosed();
     }
@@ -127,8 +108,13 @@ class Dispatcher {
                 else if(i < num && !arrCas[i].isOpen()) {
                     arrCas[i].setOpen(true);
                     synchronized (arrCas[i]) {
-                            if(arrThreadCas[i].getState() == Thread.State.WAITING)
-                                arrCas[i].notify();
+                        if(arrThreadCas[i].getState() == Thread.State.NEW) {
+                            arrThreadCas[i].start();
+                        }
+                        else if(arrThreadCas[i].getState() == Thread.State.TERMINATED) {
+                            arrThreadCas[i] = new Thread(arrCas[i]);
+                            arrThreadCas[i].start();
+                        }
                     }
                 }
             }
