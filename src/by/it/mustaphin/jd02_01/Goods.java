@@ -1,7 +1,7 @@
 package by.it.mustaphin.jd02_01;
 
 public enum Goods {
-    MEAT, OIL, MILK, TEA, NUTS;
+    MEAT, OIL, MILK, TEA, NUTS, SNACK, CHOCOLATE, ONION, CHEESE;
 
     int getPrice() {
         switch (this) {
@@ -15,6 +15,14 @@ public enum Goods {
                 return 2;
             case NUTS:
                 return 1;
+            case SNACK:
+                return 2;
+            case CHOCOLATE:
+                return 3;
+            case ONION:
+                return 4;
+            case CHEESE:
+                return 6;
             default:
                 return 0;
         }
