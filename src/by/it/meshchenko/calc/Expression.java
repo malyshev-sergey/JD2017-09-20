@@ -6,6 +6,8 @@ import java.util.LinkedHashMap;
 import java.util.Stack;
 
 public class Expression {
+    private String name;
+    private String strValue;
     public LinkedHashMap<String, Var> tempEx;
     public ArrayList<String> tempOp;
 
@@ -16,6 +18,22 @@ public class Expression {
     public Expression(LinkedHashMap<String, Var> tempEx, ArrayList<String> tempOp) {
         this.tempEx = tempEx;
         this.tempOp = tempOp;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getStrValue() {
+        return strValue;
+    }
+
+    public void setStrValue(String strValue) {
+        this.strValue = strValue;
     }
 
     public boolean isBrackets(String str){

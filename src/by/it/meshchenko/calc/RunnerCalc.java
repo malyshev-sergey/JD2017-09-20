@@ -1,23 +1,55 @@
 package by.it.meshchenko.calc;
 
+import by.it.malyshev.jd01_03.InOut;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.Map;
+
 public class RunnerCalc {
+
     private static void printOneVar(Var v){
         if (v!=null) System.out.println(v);
     }
-    public static void main(String[ ] args) {
-        //вместо парсера ввода в DEMO использовано создание готовых объектов из строк
-        //в реальном решении еще нужно программно определить тип объекта
+
+    public static void main(String[ ] args)  throws IOException {
+
+        //Переменные для тестирования операций +*-/
         String vec = "{1,2,3}";
         String matrix = "{{1,2,3},{4,5,6},{7,8,9}}";
-        Expression ex = new Expression();
-        ex.tempEx.putAll(Parser.parseAssign("C=2.5").tempEx);
-        ex.tempEx.putAll(Parser.parseAssign("B=-1.5").tempEx);
-        ex.tempEx.putAll(Parser.parseAssign("Z=5.5").tempEx);
-        ex.tempEx.putAll(Parser.parseAssign("D=-7.55").tempEx);
-        System.out.println("printVar");
-        Calc.printVar(ex.tempEx);
-        System.out.println("sortVar");
-        Calc.sortVar(ex.tempEx);
+        // Выражения для тестирования операций чтения и записи файла
+        Expression ex1 = Parser.parseAssign("C=-9.5");
+        Expression ex2 = Parser.parseAssign("A={1,2,3}");
+        Expression ex3 = Parser.parseAssign("Z=0.5");
+        Expression ex4 = Parser.parseAssign("B=-18.1");
+        Expression ex5 = Parser.parseAssign("D={{1,2,3},{4,5,6},{7,8,9}}");
+        LinkedHashMap<String, String> hs = new LinkedHashMap<String, String>() {
+            {
+                this.put(ex1.getName(), ex1.getStrValue());
+                this.put(ex2.getName(), ex2.getStrValue());
+                this.put(ex3.getName(), ex3.getStrValue());
+                this.put(ex4.getName(), ex4.getStrValue());
+                this.put(ex5.getName(), ex5.getStrValue());
+            }
+        };
+        //Проверка работы записи файла
+        InOutFile.write(hs);
+        //Проверка работы чтения файла
+        LinkedHashMap<String, String> hsF = InOutFile.read();
+        if(hsF != null && hsF.size() > 0){
+            System.out.println("printVar from File");
+            Calc.printStringVar(hsF);
+            System.out.println("sortVar from File");
+            Calc.sortStringVar(hsF);
+        }
+        else {
+            System.out.println("printVar");
+            Calc.printStringVar(hs);
+            System.out.println("sortVar");
+            Calc.sortStringVar(hs);
+        }
 
         // F F
         System.out.println("\nпроверка +-*/ операций со скалярами");
