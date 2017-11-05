@@ -36,29 +36,41 @@ class OperationCore {
     // Add: VarV + VarV
     static Var add_VV(VarV v1, VarV v2){
         VarV result = null;
-        if(v1.getValue().length == v1.getValue().length) {
-            result = new VarV(v1.getValue());
-            double[] resultVal = result.getValue();
-            double[] operand2 = v2.getValue();
-            for (int i = 0; i < resultVal.length; i++) {
-                resultVal[i] += operand2[i];
-            }
+        try{
+            if(v1.getValue().length == v1.getValue().length) {
+                result = new VarV(v1.getValue());
+                double[] resultVal = result.getValue();
+                double[] operand2 = v2.getValue();
+                for (int i = 0; i < resultVal.length; i++) {
+                    resultVal[i] += operand2[i];
+                }
+            } else { throw new CalcErrorException("Ошибка: сложение невозможно, несоответствие размерности векторов"); }
+        }
+        catch (CalcErrorException e){
+            //Util.printException(e);
         }
         return result;
     }
     // Add: VarM + VarM
     static Var add_MM(VarM v1, VarM v2){
         VarM result = null;
-        if(v1.getValue().length == v1.getValue().length
-                && v1.getValue()[0].length == v1.getValue()[0].length) {
-            result = new VarM(v1.getValue());
-            double[][] resultVal = result.getValue();
-            double[][] operand2 = v2.getValue();
-            for (int i = 0; i < resultVal.length; i++) {
-                for (int j = 0; j < resultVal[i].length; j++) {
-                    resultVal[i][j] += operand2[i][j];
+        try{
+            if(v1.getValue().length == v1.getValue().length
+                    && v1.getValue()[0].length == v1.getValue()[0].length) {
+                result = new VarM(v1.getValue());
+                double[][] resultVal = result.getValue();
+                double[][] operand2 = v2.getValue();
+                for (int i = 0; i < resultVal.length; i++) {
+                    for (int j = 0; j < resultVal[i].length; j++) {
+                        resultVal[i][j] += operand2[i][j];
+                    }
                 }
+            } else {
+                throw new CalcErrorException("Ошибка: сложение невозможно, несоответствие размерности матрицы и вектора");
             }
+        }
+        catch (CalcErrorException e){
+            //Util.printException(e);
         }
         return result;
     }
@@ -66,29 +78,60 @@ class OperationCore {
 
     // Div: VarF / VarF
     static Var div_FF(VarF v1, VarF v2) {
-        return new VarF(v1.getValue() / v2.getValue());
+        VarF res = null;
+        try{
+            if(v2.getValue() != 0) {
+                res = new VarF(v1.getValue() / v2.getValue());
+            } else {
+                throw new CalcErrorException("Ошибка: деление на ноль");
+            }
+        }
+        catch (CalcErrorException e){
+            //Util.printException(e);
+        }
+        return res;
     }
     // Div: VarV / VarF
     static Var div_VF(VarV v1, VarF v2){
-        VarV result = new VarV(v1.getValue());
-        double[] resultVal = result.getValue();
-        double operand2 = v2.getValue();
-        for (int i = 0; i < resultVal.length; i++) {
-            resultVal[i] /= operand2;
+        VarV res = null;
+        try{
+            if(v2.getValue() != 0) {
+                res = new VarV(v1.getValue());
+                double[] resultVal = res.getValue();
+                double operand2 = v2.getValue();
+                for (int i = 0; i < resultVal.length; i++) {
+                    resultVal[i] /= operand2;
+                }
+            } else {
+                throw new CalcErrorException("Ошибка: деление на ноль");
+            }
         }
-        return result;
+        catch (CalcErrorException e){
+            //Util.printException(e);
+        }
+        return res;
     }
     // Div: VarM / VarF
     static Var div_MF(VarM v1, VarF v2){
-        VarM result = new VarM(v1.getValue());
-        double[][] resultVal = result.getValue();
-        double operand2 = v2.getValue();
-        for (int i = 0; i < resultVal.length; i++) {
-            for (int j = 0; j < resultVal[i].length; j++) {
-                resultVal[i][j] /= operand2;
+        VarM res = null;
+        try{
+            if(v2.getValue() != 0) {
+                VarM result = new VarM(v1.getValue());
+                double[][] resultVal = result.getValue();
+                double operand2 = v2.getValue();
+                for (int i = 0; i < resultVal.length; i++) {
+                    for (int j = 0; j < resultVal[i].length; j++) {
+                        resultVal[i][j] /= operand2;
+                    }
+                }
+            } else {
+                throw new CalcErrorException("Ошибка: деление на ноль");
             }
         }
-        return result;
+        catch (CalcErrorException e){
+            //Util.printException(e);
+        }
+        return res;
     }
 
 
@@ -147,16 +190,23 @@ class OperationCore {
             int n1 = resV1[0].length;
             int n2 = resV2.length;
             int k = resV2[0].length;
-            if(m > 0 && n1 > 0 && n2 > 0 && k > 0 && n1 == n2){
-                result = new VarM(new double[m][k]);
-                double[][] res = result.getValue();
-                for(int ci = 0; ci < m; ci++){
-                    for(int cj = 0 ; cj < k; cj++){
-                        for(int n = 0; n < n1; n++){
-                            res[ci][cj] =  res[ci][cj] + resV1[ci][n] * resV2[n][cj];
+            try{
+                if(m > 0 && n1 > 0 && n2 > 0 && k > 0 && n1 == n2){
+                    result = new VarM(new double[m][k]);
+                    double[][] res = result.getValue();
+                    for(int ci = 0; ci < m; ci++){
+                        for(int cj = 0 ; cj < k; cj++){
+                            for(int n = 0; n < n1; n++){
+                                res[ci][cj] =  res[ci][cj] + resV1[ci][n] * resV2[n][cj];
+                            }
                         }
                     }
+                }else {
+                    throw new CalcErrorException("Ошибка: умножение невозможно, несоответствие размерности множителей");
                 }
+            }
+            catch (CalcErrorException e){
+                //Util.printException(e);
             }
         }
         return result;
