@@ -1,8 +1,12 @@
 package by.it.mustaphin.jd02_01;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Buyer implements Runnable, IBuyer, IUseBucket {
 
     Thread thread;
+    List<Goods> bucket = new ArrayList<>();
 
     Buyer(String name) {
         thread = new Thread(this, name);
@@ -24,13 +28,16 @@ public class Buyer implements Runnable, IBuyer, IUseBucket {
 
     @Override
     public void chooseGoods() {
-        System.out.println(Thread.currentThread().getName() + " начал выбирать товар");
         try {
-            thread.sleep((long) (1000 * ((Math.random() * 2) + 0.5)));
+            for (int i = ((int) ((Math.random() * 4) + 1)); i > 0; i--) {
+                thread.sleep((long) (1000 * ((Math.random() * 2) + 0.5)));
+                System.out.println(Thread.currentThread().getName() + " выбрал товар");
+                thread.sleep((long) (1000 * ((Math.random() * 1.2) + 0.1)));
+                putGoodsToBucket();
+            }
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println(Thread.currentThread().getName() + " закончил выбирать товар");
     }
 
     @Override
@@ -50,11 +57,7 @@ public class Buyer implements Runnable, IBuyer, IUseBucket {
 
     @Override
     public void putGoodsToBucket() {
-        try {
-            thread.sleep((long) (1000 * ((Math.random() * 1.2) + 0.1)));
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        System.out.println(Thread.currentThread().getName() + " положил товар в корзину");
+        bucket.add(Goods.values()[(int) (Math.random() * 9)]);
+        System.out.println(Thread.currentThread().getName() + " положил " + bucket.get(bucket.size() - 1) + " в корзину");
     }
 }
