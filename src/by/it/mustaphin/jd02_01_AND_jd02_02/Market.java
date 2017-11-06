@@ -4,7 +4,12 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
-class Market extends ArrayList {
+class Market extends ArrayList implements Runnable {
+
+    Market() {
+        Thread thread = new Thread(this);
+        thread.start();
+    }
 
     static Queue<Buyer> buyersQueue = new LinkedList<>();
 
@@ -27,4 +32,24 @@ class Market extends ArrayList {
         }
     }
 
+    Cashier c1 = new Cashier("Кассир 1");
+    Cashier c2 = new Cashier("Кассир 2");
+    Cashier c3 = new Cashier("Кассир 3");
+    Cashier c4 = new Cashier("Кассир 4");
+    Cashier c5 = new Cashier("Кассир 5");
+
+    void toService() {
+        while (buyersQueue.size() > 0) {
+            c1.toHandle(buyersQueue.poll());
+        }
+    }
+
+    @Override
+    public void run() {
+        while (true) {
+            if (buyersQueue.size() > 5) {
+
+            }
+        }
+    }
 }
