@@ -1,4 +1,4 @@
-package by.it.mustaphin.jd02_01;
+package by.it.mustaphin.jd02_01_AND_jd02_02;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +18,7 @@ public class Buyer implements Runnable, IBuyer, IUseBucket {
         enterToMarket();
         takeBucket();
         chooseGoods();
+        Market.moveToQueue(this);
         goToOut();
     }
 
