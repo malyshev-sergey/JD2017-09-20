@@ -17,7 +17,7 @@ public class Cashier implements Runnable {
         }
         int total = 0;
         for (Goods good : buyer.bucket) {
-            System.out.printf("%s %-2d", good, good.getPrice());
+            System.out.printf("%s %s %-2d", Thread.currentThread().getName(), good, good.getPrice());
             total += good.getPrice();
         }
         System.out.printf("ИТОГ: %d", total);
