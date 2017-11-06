@@ -1,4 +1,4 @@
-package by.it.mustaphin.jd02_01;
+package by.it.mustaphin.jd02_01_AND_jd02_02;
 
 public enum Goods {
     MEAT, OIL, MILK, TEA, NUTS, SNACK, CHOCOLATE, ONION, CHEESE;
