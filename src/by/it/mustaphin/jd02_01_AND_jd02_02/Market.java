@@ -28,7 +28,7 @@ class Market implements Runnable {
 
     @Override
     public void run() {
-        while (true) {
+        while (true) {//
             if (buyers.size() > 0) {
                 c1.buyer = buyers.poll();
             }
