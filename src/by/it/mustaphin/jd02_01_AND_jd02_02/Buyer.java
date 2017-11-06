@@ -7,9 +7,11 @@ public class Buyer implements Runnable, IBuyer, IUseBucket {
 
     Thread thread;
     List<Goods> bucket = new ArrayList<>();
+    String name;
 
     Buyer(String name) {
-        thread = new Thread(this, name);
+        this.name = name;
+        thread = new Thread(this, this.name);
         thread.start();
     }
 
@@ -18,7 +20,14 @@ public class Buyer implements Runnable, IBuyer, IUseBucket {
         enterToMarket();
         takeBucket();
         chooseGoods();
-        Market.moveToQueue(this);
+        Market.buyers.offer(this);
+        try {
+            synchronized (this) {
+                wait();
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         goToOut();
     }
 
