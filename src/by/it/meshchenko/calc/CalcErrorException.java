@@ -1,5 +1,7 @@
 package by.it.meshchenko.calc;
 
+import java.io.IOException;
+
 public class CalcErrorException extends Exception {
     public CalcErrorException() {
         super();
@@ -7,6 +9,7 @@ public class CalcErrorException extends Exception {
 
     public CalcErrorException(String msg) {
         System.out.println(msg);
+        InOutFile.log(msg);
     }
 
     public CalcErrorException(String message, Throwable cause) {
