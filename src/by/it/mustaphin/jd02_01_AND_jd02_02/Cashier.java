@@ -39,16 +39,18 @@ public class Cashier extends Thread {
             e.printStackTrace();
         }
         while (true) {
+            System.out.println(Thread.currentThread().getName() + " начал работать");
             toHandle(Market.buyers.poll());
             if (canClose) {
                 try {
                     synchronized (this) {
+                        System.out.println(Thread.currentThread().getName() + " перестал работать");
                         wait();
+                        canClose = false;
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                canClose = false;
             }
         }
     }
