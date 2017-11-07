@@ -1,13 +1,12 @@
 package by.it.mustaphin.jd02_01_AND_jd02_02;
 
-public class Cashier implements Runnable {
+public class Cashier extends Thread {
 
-    Thread thread;
-    Buyer buyer;
+    boolean canClose = false;
 
     public Cashier(String name) {
-        thread = new Thread(this, name);
-        thread.start();
+        super(name);
+        start();
     }
 
     void toHandle(Buyer buyer) {
@@ -32,8 +31,25 @@ public class Cashier implements Runnable {
 
     @Override
     public void run() {
+        try {
+            synchronized (this) {
+                wait();
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         while (true) {
             toHandle(Market.buyers.poll());
+            if (canClose) {
+                try {
+                    synchronized (this) {
+                        wait();
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                canClose = false;
+            }
         }
     }
 }
