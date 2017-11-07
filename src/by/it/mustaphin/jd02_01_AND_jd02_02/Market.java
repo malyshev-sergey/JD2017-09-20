@@ -18,7 +18,11 @@ class Market implements Runnable {
     void letIn() {
         for (int i = 0; i < 60; i++) {
             for (int k = (int) (Math.random() * 3); k > 0; k--) {
-                new Buyer(i + ":" + k);
+                boolean pensioneer = false;
+                if (((Math.random() * 10) + 1) <= 2.5) {
+                    pensioneer = true;
+                }
+                new Buyer(i + ":" + k, pensioneer);
             }
             try {
                 Thread.sleep(1000);
