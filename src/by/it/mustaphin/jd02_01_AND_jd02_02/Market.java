@@ -24,10 +24,9 @@ class Market implements Runnable {
         }
     }
 
-    Cashier c1 = new Cashier("Кассир 1");
-
     @Override
     public void run() {
+    Cashier c1 = new Cashier("Кассир 1");
         while (true) {
             if (buyers.size() > 0) {
                 c1.buyer = buyers.poll();
