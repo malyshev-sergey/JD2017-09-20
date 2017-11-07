@@ -7,6 +7,7 @@ class Market implements Runnable {
     Market() {
         Thread thread = new Thread(this);
         thread.start();
+        letIn();
     }
 
     static ConcurrentLinkedQueue<Buyer> buyers = new ConcurrentLinkedQueue<>();
@@ -26,11 +27,6 @@ class Market implements Runnable {
 
     @Override
     public void run() {
-    Cashier c1 = new Cashier("Кассир 1");
-        while (true) {
-            if (buyers.size() > 0) {
-                c1.buyer = buyers.poll();
-            }
-        }
+        Cashier c1 = new Cashier("Кассир 1");
     }
 }
