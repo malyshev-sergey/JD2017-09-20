@@ -54,7 +54,7 @@ public class ImitationFlowBuyers implements Runnable {
             }
 
             if(createBuyer){                                        // Создаём покупателя
-                int currentBuyerCount = Helper.random(0, 5);        // Каждую секунду 0..2 покупателя
+                int currentBuyerCount = Helper.random(0, 4);        // Каждую секунду 0..4 покупателя
                 boolean isPensioner = (Helper.random(0, 3) == 0);
                 for (int j = 0; j < currentBuyerCount; j++){
                     Buyer b = new Buyer(tempNumberBuyer++, isPensioner);
