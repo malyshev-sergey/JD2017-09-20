@@ -1,12 +1,11 @@
-package by.it.meshchenko.jd02_01;
+package by.it.meshchenko.jd02_03;
 
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Cashier implements Runnable {
     private int num;
-    private boolean isOpen = false;
-    final Lock lockCashier = new ReentrantLock();
+    private AtomicBoolean isOpen = new AtomicBoolean(false);
+    private AtomicBoolean isWork = new AtomicBoolean(true);
 
     public Cashier(int num) {
         this.num = num;
@@ -15,20 +14,22 @@ public class Cashier implements Runnable {
     @Override
     public void run() {
         boolean open = true;
-            // Открываем кассу и работаем пока диспетчер не отпустит на "обед"
-            Dispatcher.printWork(printStatus("** Cash desk is open"));
-            while (open) {
-                serviceBuyer();
-                try{
-                    lockCashier.lock();
-                    open = isOpen();
-                }
-                finally {
-                    lockCashier.unlock();
+        while (isWork.get()) {
+            synchronized (this) {
+                try {
+                    this.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
             }
-            Dispatcher.printWork(printStatus("** Cash desk is closed"));
+            // Открываем кассу и работаем пока диспетчер не отпустит на "обед"
+            if(isWork.get()) Dispatcher.printWork(printStatus("** Cash desk is open"));
+            while (isOpen.get()) {
+                serviceBuyer();
+            }
+            if(isWork.get()) Dispatcher.printWork(printStatus("** Cash desk is closed"));
             Helper.sleep(100);
+        }
     }
 
     @Override
@@ -36,25 +37,30 @@ public class Cashier implements Runnable {
         return "";
     }
 
-    public boolean isOpen() {
-        return isOpen;
+    public boolean getIsOpen() {
+        return isOpen.get();
     }
 
-    public void setOpen(boolean open) {
-        isOpen = open;
+    public void setIsOpen(boolean isOpen) {
+        this.isOpen.getAndSet(isOpen);
+    }
+
+    public boolean getIsWork() {
+        return isWork.get();
+    }
+
+    public void setIsWork(boolean isWork) {
+        this.isWork.getAndSet(isWork);
     }
 
     private void serviceBuyer(){
         Buyer b;
-        synchronized (Dispatcher.buyerQueue) {
-            b = Dispatcher.buyerQueue.poll();
-            PrintView pv = new PrintView();
-            pv.setQueueSize(Dispatcher.buyerQueue.size());
-            synchronized (Dispatcher.totalSynchr) {
-                pv.setTotal(Dispatcher.total);
-            }
-            Dispatcher.printWork(pv);
-        }
+        b = Dispatcher.buyerBlockQueue.poll();
+        PrintView pv = new PrintView();
+        pv.setQueueSize(Dispatcher.buyerBlockQueue.size());
+        pv.setTotal(Dispatcher.total.sum());
+        Dispatcher.printWork(pv);
+
         if(b != null) {
             int timeout = Helper.random(2000, 5000);
             Helper.sleep(timeout);
@@ -90,9 +96,7 @@ public class Cashier implements Runnable {
                 i++;
                 sum = sum + good.getPrice();
             }
-            synchronized (Dispatcher.totalSynchr) {
-                Dispatcher.total = Dispatcher.total + sum;
-            }
+                Dispatcher.total.add(sum);
         }
         str.append(String.format("%12s %10s\n","", "----------"));
         str.append(String.format("%16s %4.1f\n","Summa check: ", sum));

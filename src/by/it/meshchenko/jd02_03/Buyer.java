@@ -1,20 +1,18 @@
-package by.it.meshchenko.jd02_01;
+package by.it.meshchenko.jd02_03;
 
-import java.util.*;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
+
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.concurrent.LinkedBlockingQueue;
+
 
 public class Buyer extends Thread implements IBuyer, IUseBasket {
-    //Номер покупателя
-    private int number;
-    //true если пенсионер
-    boolean isPensioner;
-    //Коэффициент скорости пенсионера
-    private double _P;
+    private int number;     //Номер покупателя
+    boolean isPensioner;    //true если пенсионер
+    private double _P;      //Коэффициент скорости пенсионера
 
-    static final Lock lockBuyers = new ReentrantLock();
     //Покупатели, которые в магазине
-    static final List<Buyer> listBuyers = new ArrayList<>();
+    static final LinkedBlockingQueue<Buyer> listBlockingBuyers = new LinkedBlockingQueue<>();
 
     final Deque<ChooseGood> basket  = new LinkedList<>();
 
@@ -62,10 +60,11 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
 
     @Override
     public void goToQueue() {
-        synchronized (Dispatcher.buyerQueue) {
-            Dispatcher.buyerQueue.add(this);
-            Dispatcher.printWork(printStatus(this + " join queue, hi is #" + Dispatcher.buyerQueue.size()));
-        }
+        Dispatcher.buyerBlockQueue.add(this);
+        Dispatcher.printWork(printStatus(this + " join queue, hi is #"
+                + Dispatcher.buyerBlockQueue.size()));
+        // Отдаём разрешение 'выбор товара в зале'
+        Dispatcher.hallCapacitySemaphore.release();
         synchronized (this) {
             try {
                 this.wait();
@@ -77,22 +76,27 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
 
     @Override
     public void goToOut() {
+        Dispatcher.countBasketSemaphore.release();
+        Dispatcher.printWork(printStatus(this + " returned basket"));
         Dispatcher.printWork(printStatus(this + " out from market"));
-        try{
-            Buyer.lockBuyers.lock();
-            Buyer.listBuyers.remove(this);
-        }
-        finally {
-            Buyer.lockBuyers.unlock();
-        }
+        Buyer.listBlockingBuyers.remove(this);
     }
 
     @Override
     public void takeBasket() {
-        Dispatcher.printWork(printStatus(this + " take basket"));
-        int timeout = Helper.random((int)(100*_P), (int)(200*_P));  //Взять корзину 0,1..0,2 сек
-        Dispatcher.printWork(printStatus(this + " timeout take basket: " + timeout));
-        Helper.sleep(timeout);
+        try {
+            // Берём разерешние чтобы взять корзину
+            Dispatcher.countBasketSemaphore.acquire();
+            Dispatcher.printWork(printStatus(this + " take basket"));
+            int timeout = Helper.random((int) (100 * _P), (int) (200 * _P));  //Взять корзину 0,1..0,2 сек
+            Dispatcher.printWork(printStatus(this + " timeout take basket: " + timeout));
+            Helper.sleep(timeout);
+            // Берём разрешение 'выбор товара в зале'
+            Dispatcher.hallCapacitySemaphore.acquire();
+        }
+        catch (InterruptedException e){
+            e.printStackTrace();
+        }
     }
 
     @Override
