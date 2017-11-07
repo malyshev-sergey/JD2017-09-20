@@ -1,14 +1,19 @@
-package by.it.shelkovich.jd2_02;
+package by.it.shelkovich.jd2_03;
 
 import java.util.HashMap;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.Semaphore;
 
 public class Buyer extends Thread implements IBuyer, IAbleToUseBasket {
+    private static Semaphore premitToEnter = new Semaphore(20);
+    private static ArrayBlockingQueue<Buyer> baskets= new ArrayBlockingQueue<>(30);
+
     private boolean pensioneer;
     private int num;
     private final double pensioneerRatio = 1.5;
     private boolean serviced = false;
 
-    private HashMap<Product, Integer> basket = new HashMap<>();
+    private HashMap<Product, Integer> basket;
 
     Buyer(int num) {
         this(num, false);
@@ -22,8 +27,18 @@ public class Buyer extends Thread implements IBuyer, IAbleToUseBasket {
 
     public void run() {
         enterToMarket();
-        takeBasket();
-        putGoodsToBasket();
+        try {
+            System.out.printf("Покупатель %d%s пытается пройти в торговый зал\n", num, (pensioneer ? " (пенсионер)" : ""));
+            premitToEnter.acquire();
+            takeBasket();
+            putGoodsToBasket();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            premitToEnter.release();
+        }
+
+
         goToCashier();
         exitFromMarket();
     }
@@ -38,9 +53,8 @@ public class Buyer extends Thread implements IBuyer, IAbleToUseBasket {
 
     @Override
     public void goToCashier() {
-        System.out.printf("Покупатель %d%s встал в очередь на кассы\n", num, (pensioneer ? " (пенсионер)" : ""));
-        if(pensioneer) BuyerQueue.pensQueue.addLast(this);
-        else BuyerQueue.queue.addLast(this);
+        if(pensioneer) BuyerQueue.addLastPens(this);
+        else BuyerQueue.addLast(this);
 
         synchronized (this) {
             while (!serviced) {
@@ -63,6 +77,12 @@ public class Buyer extends Thread implements IBuyer, IAbleToUseBasket {
 
     @Override
     public void takeBasket() {
+        System.out.printf("Покупатель %d%s пытается взять корзину\n", num, (pensioneer ? " (пенсионер)" : ""));
+        try {
+            basket = Basket.baskets.take();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         int timeout = Util.getRandomIntFromRange(100, 200);
         if (pensioneer) timeout *= pensioneerRatio;
         Util.sleep(timeout);
@@ -103,6 +123,12 @@ public class Buyer extends Thread implements IBuyer, IAbleToUseBasket {
 
     @Override
     public void exitFromMarket() {
+        basket.clear();
+        try {
+            Basket.baskets.put(basket);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         System.out.printf("Покупатель %d%s вышел из магазина\n", num, (pensioneer ? " (пенсионер)" : ""));
     }
 }

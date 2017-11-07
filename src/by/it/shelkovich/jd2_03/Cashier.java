@@ -1,9 +1,9 @@
-package by.it.shelkovich.jd2_02;
+package by.it.shelkovich.jd2_03;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class Cashier extends Thread {
+public class Cashier implements Runnable {
     static String printMonitor = "";
 
     int id;
@@ -30,18 +30,22 @@ public class Cashier extends Thread {
                     }
                 }
             }
+
+            if(CashierDispatcher.buyersServiced.get() > 100) break;
+
             Buyer buyer;
-            if ((buyer = BuyerQueue.pensQueue.poll()) == null) {
-                if ((buyer = BuyerQueue.queue.poll()) == null) {
+            if ((buyer = BuyerQueue.pollPens()) == null) {
+                if ((buyer = BuyerQueue.poll()) == null) {
                     Util.sleep(100);
                     continue;
                 }
             }
-            System.out.printf("Покупатель %d%s начал обслуживаться кассиром %d\n", buyer.getNum(), (buyer.isPensioneer() ? " (пенсионер)" : ""), id);
+
+
             int timeout = Util.getRandomIntFromRange(2000, 5000);
             Util.sleep(timeout);
 
-            //System.out.printf("Покупатель %d%s был обслужен кассиром %d (%dмс.)\n", buyer.getNum(), (buyer.isPensioneer() ? " (пенсионер)" : ""), id, timeout);
+            //
             printCheck(buyer);
 
             buyer.setServiced();
@@ -63,10 +67,9 @@ public class Cashier extends Thread {
                 total += line.getKey().getPrice() * line.getValue();
             }
 
-            BuyerQueue.moneyTotal += total;
+            BuyerQueue.moneyTotal.addAndGet(total);
             printToCol("Всего: " + total + "р.", id - 1);
-            System.out.printf("| %21s | %21s | %21s | %21s | %21s | %2s | %4s |\n", "", "", "", "", "", BuyerQueue.queue.size() +
-                    BuyerQueue.pensQueue.size(), BuyerQueue.moneyTotal);
+            System.out.printf("| %21s | %21s | %21s | %21s | %21s | %2s | %4s |\n", "", "", "", "", "", BuyerQueue.getSize(), BuyerQueue.moneyTotal);
         }
     }
 

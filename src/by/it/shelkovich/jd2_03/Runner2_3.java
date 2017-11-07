@@ -1,12 +1,10 @@
-package by.it.shelkovich.jd2_02;
+package by.it.shelkovich.jd2_03;
 
-import java.io.OutputStream;
 import java.io.PrintStream;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Runner2_2 {
+public class Runner2_3 {
     private static int buyerNum = 0;
     private static List<Buyer> buyers = new ArrayList<>();
     private static List<Integer> stat = new ArrayList<>();
@@ -31,7 +29,7 @@ public class Runner2_2 {
         cashierDispatcher.setDaemon(true);
         cashierDispatcher.start();
 
-        for (int i = 1; i <= 120; i++) {
+        for (int i = 1; i <= 60; i++) {
             buyersAlive = 0;
             buyersAtCass = 0;
 
