@@ -8,10 +8,12 @@ public class Buyer implements Runnable, IBuyer, IUseBucket {
     Thread thread;
     List<Goods> bucket = new ArrayList<>();
     String name;
+    long k;
 
-    Buyer(String name) {
+    Buyer(String name, boolean pensioneer) {
         this.name = name;
         thread = new Thread(this, this.name);
+        k = (pensioneer) ? ((long) (Math.random() * 1000) + 1000) : 1000;
         thread.start();
     }
 
@@ -40,9 +42,9 @@ public class Buyer implements Runnable, IBuyer, IUseBucket {
     public void chooseGoods() {
         try {
             for (int i = ((int) ((Math.random() * 4) + 1)); i > 0; i--) {
-                thread.sleep((long) (1000 * ((Math.random() * 2) + 0.5)));
+                thread.sleep((long) (k * ((Math.random() * 2) + 0.5)));
                 System.out.println(Thread.currentThread().getName() + " выбрал товар");
-                thread.sleep((long) (1000 * ((Math.random() * 1.2) + 0.1)));
+                thread.sleep((long) (k * ((Math.random() * 1.2) + 0.1)));
                 putGoodsToBucket();
             }
         } catch (InterruptedException e) {
@@ -58,7 +60,7 @@ public class Buyer implements Runnable, IBuyer, IUseBucket {
     @Override
     public void takeBucket() {
         try {
-            thread.sleep((long) (1000 * ((Math.random() * 1.2) + 0.1)));
+            thread.sleep((long) (k * ((Math.random() * 1.2) + 0.1)));
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
