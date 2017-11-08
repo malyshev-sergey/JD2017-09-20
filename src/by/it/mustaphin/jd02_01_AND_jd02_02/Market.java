@@ -75,7 +75,7 @@ class Market implements Runnable {
                 }
             }
             for (int j = 0; j < 2; j++)
-                for (int i = 28; i < 60; i++) {
+                for (int i = 0; i < 60; i++) {
                     currentSecond = i;
                     if (((i / 30 == 1) & (i % 30 == 0)) || ((i / 30 == 2) & (i % 30 == 0))) {
                         frequentlyCreate = !frequentlyCreate;
