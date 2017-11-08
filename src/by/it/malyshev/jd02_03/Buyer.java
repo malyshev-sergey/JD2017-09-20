@@ -2,6 +2,9 @@ package by.it.malyshev.jd02_03;
 
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.Semaphore;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 class Buyer extends Thread implements IBuyer, IUseBasket {
 
@@ -17,6 +20,9 @@ class Buyer extends Thread implements IBuyer, IUseBasket {
 
     static CopyOnWriteArrayList<Buyer> buyers = new CopyOnWriteArrayList<>();
     static CopyOnWriteArrayList<Buyer> buyersIn = new CopyOnWriteArrayList<>();
+
+    final Lock buyerLock = new ReentrantLock();
+    final Condition notRunBuyer = buyerLock.newCondition();
 
     private static Semaphore hallCapasity = new Semaphore(20);
 
@@ -112,13 +118,15 @@ class Buyer extends Thread implements IBuyer, IUseBasket {
     public void goToQueue() {
         Dispatcher.buyerQueue.add(this);
         System.out.println("ok+" + Dispatcher.buyerQueue.size());
-        synchronized (this) {
+
+        this.buyerLock.lock();
             try {
-                this.wait();
+                this.notRunBuyer.await();
             } catch (InterruptedException e) {
                 e.printStackTrace();
+            } finally {
+                this.buyerLock.unlock();
             }
-        }
     }
 
 }

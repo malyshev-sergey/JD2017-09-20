@@ -20,7 +20,6 @@ class Dispatcher implements Runnable {
     private static List<Integer> waitingCashiers = new ArrayList<>();
     private static List<Integer> workingCashiers = new ArrayList<>();
 
-
     private static Cashier[] cashiers = new Cashier[5];
 
     static int getWorkingCashiers() {
@@ -50,16 +49,16 @@ class Dispatcher implements Runnable {
         }
 
 
-        Helper.sleep(1000);
+        Helper.sleep(5000);
         while (Buyer.buyersIn.size() != 0) {
             cashiersAdministrate();
             Helper.sleep(300);
         }
         for (Cashier cashier : cashiers) {
+            cashier.cashierLock.lock();
             cashier.setShouldCloseCashbox(false);
-            synchronized (cashier) {
-                cashier.notify();
-            }
+            cashier.notRun.signal();
+            cashier.cashierLock.unlock();
         }
         cashiersExecutor.shutdown();
     }
@@ -111,10 +110,11 @@ class Dispatcher implements Runnable {
     private static void openCashier() {
         int c = selectCashier(true);
         System.out.println("Open " + cashiers[c]);
+
+        cashiers[c].cashierLock.lock();
         cashiers[c].setShouldCloseCashbox(false);
-        synchronized (cashiers[c]) {
-            cashiers[c].notify();
-        }
+        cashiers[c].notRun.signal();
+        cashiers[c].cashierLock.unlock();
     }
 
 

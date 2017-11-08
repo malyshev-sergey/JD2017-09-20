@@ -1,9 +1,17 @@
 package by.it.malyshev.jd02_03;
 
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 public class Cashier implements Runnable {
 
     private int num;
     private boolean shouldCloseCashbox;
+
+    final Lock cashierLock = new ReentrantLock();
+    final Condition notRun = cashierLock.newCondition();
+
 
     public Cashier(int num) {
         this.num = num;
@@ -22,14 +30,15 @@ public class Cashier implements Runnable {
     @Override
     public void run() {
         while (Dispatcher.countBuyer.get() < Dispatcher.planBuyer) {
-            if (shouldCloseCashbox) {
-                synchronized (this) {
-                    try {
-                        this.wait();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+            this.cashierLock.lock();
+            try {
+                while (this.shouldCloseCashbox) {
+                    this.notRun.await();
                 }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } finally {
+                this.cashierLock.unlock();
             }
             Buyer b;
             b = Dispatcher.buyerQueue.poll();
@@ -39,9 +48,10 @@ public class Cashier implements Runnable {
                 printCheque(b);
                 Basket.baskets.add(b.getBasket());
                 System.out.println(this + " stop service for " + b);
-                synchronized (b) {
-                    b.notify();
-                }
+
+                b.buyerLock.lock();
+                b.notRunBuyer.signal();
+                b.buyerLock.unlock();
 
                 Dispatcher.countBuyer.getAndAdd(1);
             }
