@@ -13,7 +13,7 @@ class Buyer extends Thread implements IBuyer, IUseBasket {
     }
 
     private boolean pensioner;
-    private final double pensionerRetardation = 1.5;
+    final double pensionerRetardation = 1.5;
 
     static final List<Buyer> buyers = new ArrayList<>();
     static final List<Buyer> buyersIn = new ArrayList<>();

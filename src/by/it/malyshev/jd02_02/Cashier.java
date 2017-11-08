@@ -37,7 +37,11 @@ public class Cashier implements Runnable {
             }
             if (b != null) {
                 System.out.println(this + " start service for " + b);
-                Helper.sleep(Helper.random(2000, 5000));
+
+                int timeout = Helper.random(2000, 5000);
+                if (b.isPensioner()) timeout *= b.pensionerRetardation;
+                Helper.sleep(timeout);
+
                 printCheque(b);
                 synchronized (Basket.baskets) {
                     Basket.baskets.add(b.getBasket());

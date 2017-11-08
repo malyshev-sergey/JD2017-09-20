@@ -16,7 +16,7 @@ class Buyer extends Thread implements IBuyer, IUseBasket {
     }
 
     private boolean pensioner;
-    private final double pensionerRetardation = 1.5;
+    final double pensionerRetardation = 1.5;
 
     static CopyOnWriteArrayList<Buyer> buyers = new CopyOnWriteArrayList<>();
     static CopyOnWriteArrayList<Buyer> buyersIn = new CopyOnWriteArrayList<>();
