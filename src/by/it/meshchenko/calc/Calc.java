@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
 public class Calc {
 
-    public static void printVar(HashMap<String, Var> map){
+    public static void printVar(Map<String, Var> map){
         Iterator<Map.Entry<String, Var>> itM = map.entrySet().iterator();
         while (itM.hasNext()){
             Map.Entry<String, Var> temp = itM.next();
@@ -16,11 +16,28 @@ public class Calc {
     public static void sortVar(Map<String, Var> map){
         LinkedHashMap<String, Var> l = new LinkedHashMap<>();
         l.putAll(sortByKey(map));
-
         Iterator<Map.Entry<String, Var>> itM = l.entrySet().iterator();
         while (itM.hasNext()){
             Map.Entry<String, Var> temp = itM.next();
             System.out.printf("%-8s %-20s %n", temp.getKey(),temp.getValue().toString());
+        }
+    }
+
+    public static void printStringVar(Map<String, String> map){
+        Iterator<Map.Entry<String, String>> itM = map.entrySet().iterator();
+        while (itM.hasNext()){
+            Map.Entry<String, String> temp = itM.next();
+            System.out.printf("%-8s %-20s %n", temp.getKey(),temp.getValue());
+        }
+    }
+    public static void sortStringVar(Map<String, String> map){
+        LinkedHashMap<String, String> l = new LinkedHashMap<>();
+        l.putAll(sortByKey(map));
+
+        Iterator<Map.Entry<String, String>> itM = l.entrySet().iterator();
+        while (itM.hasNext()){
+            Map.Entry<String, String> temp = itM.next();
+            System.out.printf("%-8s %-20s %n", temp.getKey(),temp.getValue());
         }
     }
 

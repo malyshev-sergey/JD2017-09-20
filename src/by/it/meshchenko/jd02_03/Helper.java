@@ -1,4 +1,4 @@
-package by.it.meshchenko.jd02_01;
+package by.it.meshchenko.jd02_03;
 
 public class Helper {
     static int  random(int from, int to){

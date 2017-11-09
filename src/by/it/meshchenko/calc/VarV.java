@@ -161,10 +161,7 @@ public class VarV extends Var implements IVariable, IOperationVisitorAdd,
     }
     @Override
     public Var visitMul(VarM varM) {
-        // если не совпадают размеры, операции может и не быть
-        Var res = OperationCore.mul_VM(this, varM);
-        if(res != null) return res;
-        return super.mul(varOperand2);
+        return OperationCore.mul_VM(this, varM);
     }
 
     // implements IOperationVisitorSub

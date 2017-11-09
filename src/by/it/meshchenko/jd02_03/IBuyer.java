@@ -1,4 +1,4 @@
-package by.it.meshchenko.jd02_01;
+package by.it.meshchenko.jd02_03;
 
 public interface IBuyer {
     void enterToMarket();
