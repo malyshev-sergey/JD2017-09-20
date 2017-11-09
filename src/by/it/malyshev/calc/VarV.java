@@ -119,7 +119,7 @@ class VarV extends Var implements IVariable {
                 for (int j = 0; j < (operand2.getValue())[0].length; j++)
                     for (int k = 0; k < operand2.getValue().length; k++)
                         result.value[j] += this.value[k] * operand2.getValue()[k][j];
-            System.out.print("row-vector ");
+//            System.out.print("row-vector ");
             return result;
         } else throw new ArithmeticException("Умножение невозможо, размеры вектора и матрицы не совпадают");
         } else

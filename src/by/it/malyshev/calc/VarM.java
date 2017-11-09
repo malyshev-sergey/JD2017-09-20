@@ -138,7 +138,7 @@ class VarM extends Var implements IVariable {
             for (int i = 0; i < this.value.length; i++)
                 for (int j = 0; j < operand2.length; j++)
                     result.value[i][0] += this.value[i][j] * operand2[j];
-            System.out.print("column-vector ");
+//            System.out.print("column-vector ");
             return result;
         } else throw new ArithmeticException("Умножение невозможо, размеры матрицы и вектора не совпадают");
 
