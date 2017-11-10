@@ -37,7 +37,9 @@ public class Parser {
             if(isAssignVarValue(str)){
                 String[] strMass = str.split(Patterns.exAssign);
                 res =  new Expression();
-                res.tempEx.put(strMass[0], defineTypeVar(strMass[1]));
+                res.setName(strMass[0]);
+                res.setStrValue(strMass[1]);
+                res.tempEx.putAll(parseEx(strMass[1]).tempEx);
             }
         }
         catch (Exception e){}

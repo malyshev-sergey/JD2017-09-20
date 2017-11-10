@@ -1,14 +1,16 @@
 package by.it.malyshev.calc;
 
-import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 class Parser {
 
     static Var fromString(String strInput) {
+        Depository.logWrite("Input: "+strInput);
+        Var res;
         if (!(strInput.trim().equals("printvar")) &&
                 !(strInput.trim().equals("sortvar"))) {
+
 
             Pattern p = Pattern.compile("=");
             Matcher m = p.matcher(strInput);
@@ -18,6 +20,7 @@ class Parser {
                 }
             } catch (CalcError e) {
                 System.out.println(e.getMessage());
+                Depository.logWrite(e.getMessage());
                 return null;
             }
 
@@ -32,6 +35,7 @@ class Parser {
                 }
             } catch (CalcError e) {
                 System.out.println(e.getMessage());
+                Depository.logWrite(e.getMessage());
                 return null;
             }
             int counter = 0;
@@ -39,25 +43,29 @@ class Parser {
             try {
                 while (m1.find()) counter++;
                 if (counter > 1) {
-                    variablesCollection.put(strOperands[0], singleOperation(strOperands[1]));
+                    Depository.variablesCollection.put(strOperands[0], singleOperation(strOperands[1]));
                     return singleOperation(strOperands[1]);
                 } else {
-                    variablesCollection.put(strOperands[0], selectTypeOfOperand(strOperands[1]));
-                    return selectTypeOfOperand(strOperands[1]);
+                    Depository.variablesCollection.put(strOperands[0], selectTypeOfOperand(strOperands[1]));
+                    res= selectTypeOfOperand(strOperands[1]);
+//                    Depository.logWrite(strOperands[0]+" = " + selectTypeOfOperand(strOperands[1]));
+                    return res;
                 }
             } catch (ArithmeticException e) {
                 System.out.println(e.getMessage());
+                Depository.logWrite(e.getMessage());
                 return null;
             }
 
 
-        } else if (strInput.trim().equals("printvar")) printVar();
-        else if (strInput.trim().equals("sortvar")) sortVar();
+        } else if (strInput.trim().equals("printvar")) Depository.printVar();
+        else if (strInput.trim().equals("sortvar")) Depository.sortVar();
         return null;
     }
 
 
     static Var singleOperation(String strSingleOperation) {
+        Var res;
         try {
             Pattern p = Pattern.compile(Patterns.exAny);
             Matcher m = p.matcher(strSingleOperation);
@@ -78,18 +86,30 @@ class Parser {
             if (m1.find()) {
                 switch (m1.group()) {
                     case "+":
-                        return selectTypeOfOperand(strOperands[0]).add(selectTypeOfOperand(strOperands[1]));
+                        res= selectTypeOfOperand(strOperands[0]).add(selectTypeOfOperand(strOperands[1]));
+//                        Depository.logWrite(" Output: "+res.toString()+"\r\n");
+                        return res;
                     case "-":
                         if (strOperands[1].trim().charAt(0) == '-') strOperands[1] = strOperands[1].trim().substring(1);
-                        return selectTypeOfOperand(strOperands[0]).sub(selectTypeOfOperand(strOperands[1]));
+                        res= selectTypeOfOperand(strOperands[0]).sub(selectTypeOfOperand(strOperands[1]));
+//                        Depository.logWrite(selectTypeOfOperand(strOperands[0])+" - " + selectTypeOfOperand(strOperands[1])+" = "+res.toString());
+//                        Depository.logWrite(" Output: "+res.toString()+"\r\n");
+                        return res;
                     case "*":
-                        return selectTypeOfOperand(strOperands[0]).mul(selectTypeOfOperand(strOperands[1]));
+                        res= selectTypeOfOperand(strOperands[0]).mul(selectTypeOfOperand(strOperands[1]));
+//                        Depository.logWrite(selectTypeOfOperand(strOperands[0])+" * " + selectTypeOfOperand(strOperands[1])+" = "+res.toString());
+//                        Depository.logWrite(" Output: "+res.toString()+"\r\n");
+                        return res;
                     case "/":
-                        return selectTypeOfOperand(strOperands[0]).div(selectTypeOfOperand(strOperands[1]));
+                        res= selectTypeOfOperand(strOperands[0]).div(selectTypeOfOperand(strOperands[1]));
+//                        Depository.logWrite(selectTypeOfOperand(strOperands[0])+" / " + selectTypeOfOperand(strOperands[1])+" = "+res.toString());
+//                        Depository.logWrite(" Output: "+res.toString()+"\r\n");
+                        return res;
                 }
-            } else throw new CalcError("Нет такой операции");
+           } else throw new CalcError("Нет такой операции");
         } catch (CalcError e) {
             System.out.println(e.getMessage());
+            Depository.logWrite(e.getMessage());
             return null;
         }
         return null;
@@ -102,24 +122,5 @@ class Parser {
         else if (strOperand.trim().substring(0, 1).equals("{")) return new VarV(strOperand.trim());
         else return new VarD(strOperand.trim());
     }
-
-
-    private static Map<String, Var> variablesCollection = new HashMap<>();
-
-    private static void printVar() {
-        System.out.println("\nКоллекция переменных");
-        for (Map.Entry<String, Var> stringVarEntry : variablesCollection.entrySet())
-            System.out.println(stringVarEntry);
-
-    }
-
-    private static void sortVar() {
-        System.out.println("\nОтсортированная коллекция переменных");
-        TreeMap<String, Var> sortedVariables = new TreeMap<>(variablesCollection);
-        for (Map.Entry<String, Var> stringVarEntry : sortedVariables.entrySet())
-            System.out.println(stringVarEntry);
-
-    }
-
 
 }

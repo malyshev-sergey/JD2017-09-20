@@ -10,36 +10,66 @@ public abstract class Var implements IOperation {
 
     @Override
     public Var add(Var var) {
-        new CalcError("Сложение невозможно");
+        try{
+            throw new CalcErrorException("Сложение невозможно");
+        }
+        catch (CalcErrorException e){
+
+        }
         return null;
     }
 
     @Override
     public Var sub(Var var) {
-        new CalcError("Вычитание невозможно");
+        try{
+            throw new CalcErrorException("Вычитание невозможно");
+        }
+        catch (CalcErrorException e){
+
+        }
         return null;
     }
 
     @Override
     public Var mul(Var var) {
-        new CalcError("Умножение невозможно");
+        try{
+            throw new CalcErrorException("Умножение невозможно");
+        }
+        catch (CalcErrorException e){
+
+        }
         return null;
     }
 
     @Override
     public Var div(Var var) {
-        new CalcError("Деление невозможно");
+        try{
+            throw new CalcErrorException("Деление невозможно");
+        }
+        catch (CalcErrorException e){
+
+        }
         return null;
     }
 
     @Override
     public boolean assign(Var var){
-        new CalcError("Присвоить значение невозможно");
+        try{
+            throw new CalcErrorException("Присвоить значение невозможно");
+        }
+        catch (CalcErrorException e){
+
+        }
         return false;
     }
     @Override
     public boolean assign(String str){
-        new CalcError("Присвоить значение невозможно");
+        try{
+            throw new CalcErrorException("Присвоить значение невозможно");
+        }
+        catch (CalcErrorException e){
+
+        }
         return false;
     }
 }

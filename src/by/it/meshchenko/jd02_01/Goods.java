@@ -1,7 +1,5 @@
 package by.it.meshchenko.jd02_01;
 
-import by.it.ali.calculator.Str;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,7 +8,7 @@ public class Goods extends HashMap<String, Double> {
 
     static Goods items = new Goods();
 
-    List<String> names;
+    private List<String> names;
 
     public Goods() {
         this.put("Bread", 1.5);
@@ -20,9 +18,9 @@ public class Goods extends HashMap<String, Double> {
         this.put("Buckwheat", 4.7);
         this.put("Almond", 25.3);
         this.put("Whater", 25.3);
-        names = new ArrayList<String>(this.keySet());
+        names = new ArrayList<>(this.keySet());
     }
     String randomGood(){
-        return "";//names.get();
+        return names.get(Helper.random(0,names.size()-1));
     }
 }
