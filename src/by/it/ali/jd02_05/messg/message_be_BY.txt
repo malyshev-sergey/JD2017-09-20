@@ -1,0 +1,3 @@
+msg.welcome = Прывiтанне
+msg.name = Аббас Алi
+msg.hru = Як справы?
