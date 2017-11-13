@@ -1,0 +1,4 @@
+msg.welcome=Привитанне!
+msg.name=Сярожа Шышоу
+msg.howdoyoudo=Як справы?
+msg.test=Бяларуски тэст
