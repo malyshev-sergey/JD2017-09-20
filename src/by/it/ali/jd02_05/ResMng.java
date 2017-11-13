@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-public enum ResMng {
+enum ResMng {
     INSTANCE;
     private ResourceBundle bundle;
     private String path ="by.it.ali.jd02_05.res.message";
