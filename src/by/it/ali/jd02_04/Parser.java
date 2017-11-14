@@ -1,4 +1,4 @@
-package by.it.ali.calculator;
+package by.it.ali.jd02_04;
 
 
 import java.util.regex.Matcher;
