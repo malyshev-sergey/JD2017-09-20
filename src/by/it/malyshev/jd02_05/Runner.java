@@ -19,8 +19,8 @@ public class Runner {
 
         String inputLine;
 
-        label:
         while (true) {
+            boolean exit=false;
             System.out.print("\n"+ResMan.INSTANCE.getString(Msg.WELCOM)+", ");
             System.out.println(ResMan.INSTANCE.getString(Msg.NAME)+"!");
             System.out.println(ResMan.INSTANCE.getString(Msg.HOW_DO_YOU_DO));
@@ -40,8 +40,10 @@ public class Runner {
                     locale=Locale.ENGLISH;
                     break;
                 case "exit":
-                    break label;
+                    exit=true;
+                    break;
             }
+            if (exit) break;
             ResMan.INSTANCE.setLocale(locale);
         }
 
