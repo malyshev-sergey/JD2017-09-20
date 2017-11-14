@@ -1,0 +1,3 @@
+txt.Hello= hello
+txt.Bad= bad;
+txt.Good=good
