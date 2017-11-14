@@ -3,13 +3,10 @@ package by.it.meshchenko.jd02_05;
 import by.it.meshchenko.Util.*;
 
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.util.Date;
 import java.util.Locale;
 
 public class Runner02_05 {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException{
         // A.
         //  Создать программу, которая может приветствовать пользователя на
         //      трех языках: английском, русском, белорусском. Требуемый язык и
@@ -27,27 +24,27 @@ public class Runner02_05 {
         //      получить из них файлы .properties утилитой native2ascii. Приведите
         //      использованные при этом командыв текстовомфайлекоманды.txt.
         //  Опционально. Напишите программу на java, которая автоматически генерирует
-        //      файлы .propertiesиз текстовых файлов так же как это делает native2ascii.
+        //      файлы .properties из текстовых файлов так же как это делает native2ascii.
 
-        while (true){
+        // Опционально. Напишите программу на java, которая автоматически генерирует
+        // файлы .properties из текстовых файлов так же как это делает native2ascii.
+        EmulatorNative2ascii.run("", "message_be_BY.txt");
+
+        while (true) {
             System.out.println("Доступны команды: 'en', 'ru', 'be' или 'end' для выхода: \n");
             String str = Util.getOneLine();
-            if(str.toLowerCase().compareTo("end") == 0) return;
+            if (str.toLowerCase().compareTo("end") == 0) return;
             else {
-                try{
+                try {
                     String com = str.trim();
-                    if(com.compareToIgnoreCase("en") == 0 ) {
+                    if (com.compareToIgnoreCase("en") == 0) {
                         doThis("en", "UK");
-                    }
-                    else if(com.compareToIgnoreCase("ru") == 0) {
+                    } else if (com.compareToIgnoreCase("ru") == 0) {
                         doThis("ru", "RU");
-                    }
-                    else if (com.compareToIgnoreCase("be") == 0) {
+                    } else if (com.compareToIgnoreCase("be") == 0) {
                         doThis("be", "BY");
-                    }
-                    else System.out.println("Неверная команда...");
-                }
-                catch(Exception e){
+                    } else System.out.println("Неверная команда...");
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
