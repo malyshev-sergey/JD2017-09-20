@@ -20,7 +20,6 @@ public class Runner {
         String inputLine;
 
         while (true) {
-            boolean exit=false;
             System.out.print("\n"+ResMan.INSTANCE.getString(Msg.WELCOM)+", ");
             System.out.println(ResMan.INSTANCE.getString(Msg.NAME)+"!");
             System.out.println(ResMan.INSTANCE.getString(Msg.HOW_DO_YOU_DO));
@@ -40,10 +39,8 @@ public class Runner {
                     locale=Locale.ENGLISH;
                     break;
                 case "exit":
-                    exit=true;
-                    break;
+                    return;
             }
-            if (exit) break;
             ResMan.INSTANCE.setLocale(locale);
         }
 
