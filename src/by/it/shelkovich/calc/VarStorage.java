@@ -21,4 +21,12 @@ public class VarStorage {
             System.out.printf("%s - %s\n", var.getKey(), var.getValue().toString());
         }
     }
+
+    public static void put(String name, Var var){
+        vars.put(name,var);
+    }
+
+    public static Var get(String name){
+        return vars.get(name);
+    }
 }

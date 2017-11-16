@@ -28,25 +28,25 @@ public class VarD extends Var {
 
     @Override
     public Var add(VarD v1) {
-        System.out.println("Сложение числа с числом");
+        //System.out.println("Сложение числа с числом");
         return new VarD(value + v1.getValue());
     }
 
     @Override
     public Var mul(VarD v1) {
-        System.out.println("Умножение числа на число");
+        //System.out.println("Умножение числа на число");
         return new VarD(value * v1.getValue());
     }
 
     @Override
     public Var sub(VarD v1) {
-        System.out.println("Разность числа с числом");
+        ///System.out.println("Разность числа с числом");
         return new VarD(value - v1.getValue());
     }
 
     @Override
     public Var div(VarD v1) {
-        System.out.println("Деление числа на число");
+        //System.out.println("Деление числа на число");
         if (v1.getValue() == 0) throw new ArithmeticException("Деление на 0");
         return new VarD(value / v1.getValue());
     }
@@ -59,6 +59,7 @@ public class VarD extends Var {
             else if ("mul".equals(type)) return v.mul(this);
             else if ("sub".equals(type)) return v.sub(this);
             else if ("div".equals(type)) return v.div(this);
+            else if ("set".equals(type)) return v.set(this);
             return null;
         } else
             v.setUsed(false);

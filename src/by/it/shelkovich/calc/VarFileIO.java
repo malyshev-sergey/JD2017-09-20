@@ -29,7 +29,8 @@ public class VarFileIO {
         try(BufferedReader bufferedReader = new BufferedReader(new FileReader(file))){
             String line;
             while((line = bufferedReader.readLine()) != null) {
-                Parser.exeOp(line);
+                Parser parser = new Parser();
+                parser.exeOp(line);
             }
         } catch (IOException e) {
             e.printStackTrace();

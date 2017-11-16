@@ -2,34 +2,28 @@ package by.it.shelkovich.calc;
 
 public class CalcRunner {
     public static void main(String[] args) {
-
+        VarFileIO varFile = new VarFileIO();
+        varFile.loadFromFile();
+        Parser parser = new Parser();
 
         try {
-            /*System.out.println(Parser.exeOp("2.3 + 3").toString());
-            System.out.println(Parser.exeOp("{-1,2,3} / 5").toString());
-            System.out.println(Parser.exeOp("{{1,2},{4,5}} * {1,2}").toString());
 
-            Parser.exeOp("C = 3");
-            Parser.exeOp("c1 = {1,2,3}");
-            Parser.exeOp("B = {{1,2},{4,5}}");
-            Parser.exeOp("F = 3");
-            Parser.exeOp("E = 3");
-            Parser.exeOp("E1 = 3");
-            Parser.exeOp("1E = 3");
+            System.out.println(parser.calc("A=2+5.3"));
+            System.out.println(parser.calc("B=A*3.5"));
+            System.out.println(parser.calc("B1=B+0.11*-5"));
+            System.out.println(parser.calc("B2=A/2-1"));
 
-            //Строки с арифметическими ошибками
-            System.out.println(Parser.exeOp("{{1,2},{4,5}} * {1,2,3}").toString());
-            System.out.println(Parser.exeOp("{-1,2,3} / 0").toString());*/
-            VarFileIO varFile = new VarFileIO();
-            varFile.loadFromFile();
+            System.out.println(parser.calc("C=B+(A*2)"));
+            System.out.println(parser.calc("D=((C-0.15)-20)/(7-5)"));
+            System.out.println(parser.calc("E={2,3}*(D/2)"));
+
         }catch (ArithmeticException e){
             e.printStackTrace();
         }
-
-        //VarFileIO varFile = new VarFileIO();
-        //varFile.saveToFile();
+        
         VarStorage.printVar();
         VarStorage.sortVar();
+        varFile.saveToFile();
 
         for (int i = 0; i < 60; i++) {
             Logger.log(i+": сообщение");
