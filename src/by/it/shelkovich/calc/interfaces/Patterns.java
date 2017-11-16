@@ -2,7 +2,7 @@ package by.it.shelkovich.calc.interfaces;
 
 public interface Patterns {
     //возможные примеры регулярных выражений (конечно лучше составить свои).
-    String exName="(([A-Za-z0-9])+)";                       //имена переменных
+    String exName="(([A-Za-z]+[])+)";                       //имена переменных
     String exVal="((-?)([0-9.])+)";                       //числа
     String exVec="\\{((-?([0-9.])+),?)+}";                //вектора
     String exMat="\\{((\\{((-?([0-9.])+),?)+}),?)+}";     //матрицы

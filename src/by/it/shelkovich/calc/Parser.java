@@ -2,6 +2,7 @@ package by.it.shelkovich.calc;
 
 import by.it.shelkovich.calc.interfaces.Patterns;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -38,5 +39,9 @@ public class Parser {
         } else if (value.charAt(1) != '{') return new VarV(value);
         else return new VarM(value);
     }
+
+//    public Var calc (List<String> elements){
+//
+//    }
 
 }
