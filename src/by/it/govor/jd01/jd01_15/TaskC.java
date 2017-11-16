@@ -12,13 +12,13 @@ class TaskC {
     static void taskC() {
 
 
-       File file = new File(System.getProperty("user.dir") + "/srt/by/it/govor/jd01_15/TaskB.class");
+       File file = new File(System.getProperty("user.dir") + "/src/by/it/govor/jd01/jd01_15/TaskB.java");
        boolean flag = true;
 
        StringBuilder s = new StringBuilder();
        Pattern p = Pattern.compile("cd/");
        String string;
-       String way=System.getProperty("user.dir") + "/srt/by/it/govor/jd01_15/TaskB.class";
+       String way=System.getProperty("user.dir") + "/src/by/it/govor/jd01_15/TaskB.java";
        try( BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));) {
            while (flag) {
                string= reader.readLine();

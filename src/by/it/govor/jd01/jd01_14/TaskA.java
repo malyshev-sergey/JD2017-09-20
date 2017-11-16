@@ -7,7 +7,7 @@ import java.io.IOException;
 
 
 class TaskA {
-   File file = new File(System.getProperty("user.dir")+"/srt/by/it/govor/jd01_14/text.txt");
+   File file = new File(System.getProperty("user.dir")+"/src/by/it/govor/jd01/jd01_14/text.txt");
     public void taskA() {
 
 

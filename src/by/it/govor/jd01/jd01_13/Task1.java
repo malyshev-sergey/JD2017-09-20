@@ -4,9 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-/**
- * Created by User on 20.10.2017.
- */
+
 public class Task1 {
     public static void task1() {
 

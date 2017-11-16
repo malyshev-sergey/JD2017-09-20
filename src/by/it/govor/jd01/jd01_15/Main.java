@@ -4,7 +4,7 @@ package by.it.govor.jd01.jd01_15;
 public class Main {
     public static void main(String[] args) {
         Task1.task1();
-        TaskB.taskB();
+       TaskB.taskB();
         TaskC.taskC();
      }
 }
