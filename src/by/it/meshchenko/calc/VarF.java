@@ -172,4 +172,9 @@ public class VarF extends Var implements IVariable, IOperationVisitorAdd,
     public boolean visitAssign(VarM varM){
         return super.assign(varOperand2);
     }
+
+    @Override
+    public Var getVar() {
+        return new VarF();
+    }
 }

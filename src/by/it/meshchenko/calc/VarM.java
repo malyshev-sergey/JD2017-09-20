@@ -198,4 +198,9 @@ public class VarM extends Var implements IVariable, IOperationVisitorAdd,
         return true;
     }
 
+    @Override
+    public Var getVar() {
+        return new VarM();
+    }
+
 }
