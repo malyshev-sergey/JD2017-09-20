@@ -1,6 +1,7 @@
 package by.it.meshchenko.calc;
 
-import java.io.IOException;
+import by.it.meshchenko.calc.Report.FullReportBuilder;
+import by.it.meshchenko.calc.Report.ShortReportBuilder;
 
 public class CalcErrorException extends Exception {
     // Создаём Logger
@@ -12,7 +13,11 @@ public class CalcErrorException extends Exception {
 
     public CalcErrorException(String msg) {
         System.out.println(msg);
-        log.writeError(msg);
+        log.message(msg);
+        //Формирование отчёта 'полного'
+        FullReportBuilder.report.append(msg + "\n");
+        //Формирование отчёта 'краткого'
+        ShortReportBuilder.report.append(msg + "\n");
     }
 
     public CalcErrorException(String message, Throwable cause) {

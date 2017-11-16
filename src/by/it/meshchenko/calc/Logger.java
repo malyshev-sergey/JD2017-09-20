@@ -33,7 +33,7 @@ public class Logger {
     }
 
     //Логирование: 50 последних сообщений
-    public void writeError(String str1) {
+    public void message(String str1) {
         //Скрок в файле
         int number = 50;
         DateFormat df = DateFormat.getDateTimeInstance(3, 2, Locale.FRANCE);

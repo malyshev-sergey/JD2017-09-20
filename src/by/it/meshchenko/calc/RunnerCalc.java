@@ -1,9 +1,12 @@
 package by.it.meshchenko.calc;
 
+import by.it.meshchenko.calc.Report.FullReportBuilder;
+import by.it.meshchenko.calc.Report.ReportBuilder;
+import by.it.meshchenko.calc.Report.Report;
+import by.it.meshchenko.calc.Report.ShortReportBuilder;
+
 import java.io.IOException;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 public class RunnerCalc {
 
@@ -13,11 +16,18 @@ public class RunnerCalc {
     private static void printOneVar(String str, Var v) throws IOException{
         if (v!=null){
             System.out.println(str + " = " + v);
-            log.writeError(str + " = " + v.toString());
+            log.message(str + " = " + v.toString());
+            //Формирование отчёта 'полного'
+            FullReportBuilder.report.append(str + " = " + v.toString() + "\n");
+            //Формирование отчёта 'краткого'
+            ShortReportBuilder.report.append(v.toString() + "\n");
         }
     }
 
     public static void main(String[ ] args)  throws IOException {
+
+        // Время запуска пакета (для формирования отчёта)
+        ReportBuilder.setTimeStart();
 
         // Выражения для тестирования операций чтения и записи файла
         Expression ex1 = Parser.parseAssign("C=-9.5");
@@ -63,7 +73,7 @@ public class RunnerCalc {
         String strEx2 = "9-7";
         String strEx3 = "1.5*2";
         String strEx4 = "-4/(-1)";
-        log.writeError(opStr);
+        log.message(opStr);
         System.out.println();
         System.out.println(opStr);
         printOneVar(strEx1, Parser.parseAndCalcEx(strEx1).varValue);
@@ -78,7 +88,7 @@ public class RunnerCalc {
         strEx3 = "{1,2,3}*2";
         strEx4 = "{1,2,3}/0";
 
-        log.writeError(opStr);
+        log.message(opStr);
         System.out.println();
         System.out.println(opStr);
         printOneVar(strEx1, Parser.parseAndCalcEx(strEx1).varValue);
@@ -93,7 +103,7 @@ public class RunnerCalc {
         strEx3 = "1*{1,2,3}";
         strEx4 = "2/{1,2,3}";
 
-        log.writeError(opStr);
+        log.message(opStr);
         System.out.println();
         System.out.println(opStr);
         printOneVar(strEx1, Parser.parseAndCalcEx(strEx1).varValue);
@@ -108,7 +118,7 @@ public class RunnerCalc {
         strEx3 = "{1,2,3}*{1,2,3}";
         strEx4 = "{1,2,3}/{1,2,3}";
 
-        log.writeError(opStr);
+        log.message(opStr);
         System.out.println();
         System.out.println(opStr);
         printOneVar(strEx1, Parser.parseAndCalcEx(strEx1).varValue);
@@ -123,7 +133,7 @@ public class RunnerCalc {
         strEx3 = "{{1,2,3},{4,5,6},{7,8,9}}*2";
         strEx4 = "{{1,2,3},{4,5,6},{7,8,9}}/(-1)";
 
-        log.writeError(opStr);
+        log.message(opStr);
         System.out.println();
         System.out.println(opStr);
         printOneVar(strEx1, Parser.parseAndCalcEx(strEx1).varValue);
@@ -138,7 +148,7 @@ public class RunnerCalc {
         strEx3 = "1.5*{{1,2,3},{4,5,6},{7,8,9}}";
         strEx4 = "-4/{{1,2,3},{4,5,6},{7,8,9}}";
 
-        log.writeError(opStr);
+        log.message(opStr);
         System.out.println();
         System.out.println(opStr);
         printOneVar(strEx1, Parser.parseAndCalcEx(strEx1).varValue);
@@ -153,7 +163,7 @@ public class RunnerCalc {
         strEx3 = "{{1,2,3},{4,5,6},{7,8,9}}*{1,2,3}";
         strEx4 = "{{1,2,3},{4,5,6},{7,8,9}}/{1,2,3}";
 
-        log.writeError(opStr);
+        log.message(opStr);
         System.out.println();
         System.out.println(opStr);
         printOneVar(strEx1, Parser.parseAndCalcEx(strEx1).varValue);
@@ -168,7 +178,7 @@ public class RunnerCalc {
         strEx3 = "{1,2,3}*{{1,2,3},{4,5,6},{7,8,9}}";
         strEx4 = "{1,2,3}/{{1,2,3},{4,5,6},{7,8,9}}";
 
-        log.writeError(opStr);
+        log.message(opStr);
         System.out.println();
         System.out.println(opStr);
         printOneVar(strEx1, Parser.parseAndCalcEx(strEx1).varValue);
@@ -183,7 +193,7 @@ public class RunnerCalc {
         strEx3 = "{{1,2,3},{4,5,6},{7,8,9}}*{{1,2,3},{4,5,6},{7,8,9}}";
         strEx4 = "{{1,2,3},{4,5,6},{7,8,9}}/{{1,2,3},{4,5,6},{7,8,9}}";
 
-        log.writeError(opStr);
+        log.message(opStr);
         System.out.println();
         System.out.println(opStr);
         printOneVar(strEx1, Parser.parseAndCalcEx(strEx1).varValue);
@@ -227,7 +237,9 @@ public class RunnerCalc {
         strEx1 = "F={{1,2,3},{4,5,6},{7,8,9}}*(10+5)*(-1*(-4))-(2+1-3*(12-9))";
         printOneVar(strEx1, Parser.parseAndCalcAssign(strEx1).varValue);
 
-        // Тестирование задания из jd02_06
+
+        // 'jd02_06 B.'
+        // Тестирование задания из jd02_06 B.
         //      Фабричным методом выведем переменные (из задания jd02_04) A, B, B1, B2,
         //      C, D, E, F на экран, с следующем порядке: VarF, VarV, VarM
         System.out.println("\nТестирование задания из jd02_06");
@@ -262,5 +274,13 @@ public class RunnerCalc {
                 System.out.printf("%-8s %-50s %n", temp.getValue().getName(),
                         temp.getValue().varValue.toString());
         }
+
+
+        // 'jd02_06 C.' На основе паттерна Строитель формировался текстовый отчет об операциях
+        //  в учебном проекте
+        ReportBuilder irp = Math.random() > 0.5 ? new FullReportBuilder() : new ShortReportBuilder();
+        Report pr = new Report(irp);
+        ReportBuilder.setTimeEnd();
+        pr.buildReport();
     }
 }
