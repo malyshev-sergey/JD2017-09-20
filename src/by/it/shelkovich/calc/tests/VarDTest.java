@@ -3,6 +3,7 @@ package by.it.shelkovich.calc.tests;
 import by.it.shelkovich.calc.Parser;
 import by.it.shelkovich.calc.Var;
 import by.it.shelkovich.calc.VarD;
+import by.it.shelkovich.calc.VarFactory;
 
 import static org.junit.Assert.*;
 
@@ -49,7 +50,7 @@ public class VarDTest {
     public void parser() throws Exception {
         Parser parser = new Parser();
         String value = "15.6";
-        assertEquals(value, parser.getVarByString(value).toString());
+        assertEquals(value, VarFactory.getInstance().getVar(value).toString());
     }
 
 }

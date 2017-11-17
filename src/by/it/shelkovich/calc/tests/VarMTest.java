@@ -72,7 +72,7 @@ public class VarMTest {
     public void parser() throws Exception {
         Parser parser = new Parser();
         String value = "{{7.0,-1.8},{13.0,21.0}}";
-        assertEquals(value, parser.getVarByString(value).toString());
+        assertEquals(value, VarFactory.getInstance().getVar(value).toString());
     }
 
 }

@@ -1,9 +1,6 @@
 package by.it.shelkovich.calc.tests;
 
-import by.it.shelkovich.calc.Parser;
-import by.it.shelkovich.calc.Var;
-import by.it.shelkovich.calc.VarD;
-import by.it.shelkovich.calc.VarV;
+import by.it.shelkovich.calc.*;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -75,7 +72,7 @@ public class VarVTest {
     public void parser() throws Exception {
         Parser parser = new Parser();
         String value = "{7.0,-1.8}";
-        assertEquals(value, parser.getVarByString(value).toString());
+        assertEquals(value, VarFactory.getInstance().getVar(value).toString());
     }
 
 }

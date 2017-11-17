@@ -34,36 +34,23 @@ public class Parser implements Callable<Var> {
         Matcher m = p.matcher(operation);
 
         if (m.matches()) {
-
+            VarFactory factory = VarFactory.getInstance();
             String op = m.group("op");
             switch (op) {
                 case "+":
-                    return getVarByString(m.group("first")).add(getVarByString(m.group("second")));
+                    return factory.getVar(m.group("first")).add(factory.getVar(m.group("second")));
                 case "-":
-                    return getVarByString(m.group("first")).sub(getVarByString(m.group("second")));
+                    return factory.getVar(m.group("first")).sub(factory.getVar(m.group("second")));
                 case "*":
-                    return getVarByString(m.group("first")).mul(getVarByString(m.group("second")));
+                    return factory.getVar(m.group("first")).mul(factory.getVar(m.group("second")));
                 case "/":
-                    return getVarByString(m.group("first")).div(getVarByString(m.group("second")));
+                    return factory.getVar(m.group("first")).div(factory.getVar(m.group("second")));
                 case "=":
-                    return getVarByString(m.group("first")).set(getVarByString(m.group("second")));
+                    return factory.getVar(m.group("first")).set(factory.getVar(m.group("second")));
             }
         }
         return null;
     }
-
-    public Var getVarByString(String value) {
-        if (value.charAt(0) != '{') {
-            Pattern p = Pattern.compile(Patterns.exVal);
-            if (p.matcher(value).matches()) return new VarD(value);
-
-            p = Pattern.compile(Patterns.exName);
-            if (p.matcher(value).matches()) return new VarS(value);
-            else return null;
-        } else if (value.charAt(1) != '{') return new VarV(value);
-        else return new VarM(value);
-    }
-
 
     public Var calc(String calcString) {
         List<String> subBracers = getSubBracersList(calcString);

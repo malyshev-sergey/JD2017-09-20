@@ -19,17 +19,13 @@ public class CalcRunner {
             System.out.println(parser.calc("E={2,3}*(D/2)"));
 
         }catch (ArithmeticException e){
+            Logger.INSTANCE.log(e.getMessage());
             e.printStackTrace();
         }
         
         VarStorage.printVars();
         VarStorage.sortVars();
         varFile.saveToFile();
-
-        //Логгер, хранящий последние 50 записей (не помню из какого задания)
-        for (int i = 0; i < 60; i++) {
-            Logger.log(i+": сообщение");
-        }
 
     }
 }
