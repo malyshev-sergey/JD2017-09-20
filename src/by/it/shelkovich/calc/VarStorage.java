@@ -7,14 +7,14 @@ import java.util.TreeMap;
 public class VarStorage {
     public static HashMap<String, Var> vars = new HashMap<>();
 
-    public static void printVar(){
+    public static void printVars(){
         System.out.println("Сохранённые переменные: ");
         for(Map.Entry<String, Var> var: vars.entrySet()){
             System.out.printf("%s - %s\n", var.getKey(), var.getValue().toString());
         }
     }
 
-    public static void sortVar(){
+    public static void sortVars(){
         System.out.println("Отсортированные сохранённые переменные: ");
         TreeMap <String, Var> sortedVars = new TreeMap<>(vars);
         for(Map.Entry<String, Var> var: sortedVars.entrySet()){

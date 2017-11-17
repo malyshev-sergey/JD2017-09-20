@@ -8,6 +8,7 @@ public class CalcRunner {
 
         try {
 
+            System.out.println(parser.calc("1.5/2.1+1"));
             System.out.println(parser.calc("A=2+5.3"));
             System.out.println(parser.calc("B=A*3.5"));
             System.out.println(parser.calc("B1=B+0.11*-5"));
@@ -21,10 +22,11 @@ public class CalcRunner {
             e.printStackTrace();
         }
         
-        VarStorage.printVar();
-        VarStorage.sortVar();
+        VarStorage.printVars();
+        VarStorage.sortVars();
         varFile.saveToFile();
 
+        //Логгер, хранящий последние 50 записей (не помню из какого задания)
         for (int i = 0; i < 60; i++) {
             Logger.log(i+": сообщение");
         }

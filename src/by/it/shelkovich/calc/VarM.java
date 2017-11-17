@@ -13,7 +13,7 @@ public class VarM extends Var {
         return value;
     }
 
-    VarM(String value) {
+    public VarM(String value) {
         setFrom(value);
     }
 

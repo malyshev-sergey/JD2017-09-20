@@ -7,15 +7,15 @@ public class VarD extends Var {
         return value;
     }
 
-    VarD(String value) {
+    public VarD(String value) {
         setFrom(value);
     }
 
-    VarD(double value) {
+    public VarD(double value) {
         this.value = value;
     }
 
-    VarD(VarD value) {
+    public VarD(VarD value) {
         this.value = value.getValue();
     }
 
