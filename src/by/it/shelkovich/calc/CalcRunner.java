@@ -7,15 +7,13 @@ import by.it.shelkovich.calc.reports.*;
 
 public class CalcRunner {
     public static void main(String[] args) {
-        ReportDataCollector collector = new ReportDataCollector();
-        EventProducer.INSTANCE.addListner(collector);
-        EventProducer.INSTANCE.addListner(Logger.INSTANCE);
+        ReportDataCollector collector = new ReportDataCollector(); //собиратель данных для отчёта
+        EventProducer.INSTANCE.addListner(collector); //регистрация собирателя на события
+        EventProducer.INSTANCE.addListner(Logger.INSTANCE); //регистрация логгера на события
         collector.saveStartTime();
 
         VarFileIO varFile = new VarFileIO();
-        varFile.loadFromFile();
-
-
+        varFile.loadFromFile(); //загрузка переменных из файла
 
         Parser parser = new Parser();
 
@@ -30,9 +28,9 @@ public class CalcRunner {
             System.out.println(parser.calc("C=B+(A*2)"));
             System.out.println(parser.calc("D=((C-0.15)-20)/(7-5)"));
             System.out.println(parser.calc("E={2,3}*(D/2)"));
+            System.out.println(parser.calc("{{-1,2},{-3,14}}*E"));
 
         }catch (ArithmeticException e){
-            //Logger.INSTANCE.log(e.getMessage());
             EventProducer.INSTANCE.notifyListners(e.getMessage());
             e.printStackTrace();
         }
@@ -46,11 +44,11 @@ public class CalcRunner {
 
         Reporter reporter = new Reporter(new ShortReportBuilder(), collector);
         ReportPrinter repPrinter = new ReportPrinter(reporter.buildReport());
-        repPrinter.print();
+        repPrinter.print();//вывод сокращённого отчёта
 
         reporter.setBuilder(new FullReportBuilder());
         repPrinter.setReport(reporter.buildReport());
-        repPrinter.print();
+        repPrinter.print();//вывод полного отчёта
 
     }
 }
