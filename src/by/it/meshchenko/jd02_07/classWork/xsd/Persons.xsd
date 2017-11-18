@@ -6,28 +6,32 @@
     <element name="Persons">
         <complexType>
             <sequence>
-                <element name="Person" type="tns:Person" maxOccurs="unbounded"></element>
+                <element
+                        name="Person"
+                        type="tns:Person"
+                        maxOccurs="unbounded">
+                </element>
             </sequence>
         </complexType>
     </element>
     <complexType name="Person">
         <sequence>
-            <element name="Email" type="string"></element>
-            <element name="Nickname" type="string"></element>
-            <element name="Password" type="string"></element>
-            <element name="Ads" type="tns:Ads"></element>
+            <element name="Email" type="string" />
+            <element name="Nickname" type="string" />
+            <element name="Password" type="string" />
+            <element name="Ads" type="tns:Ads" />
         </sequence>
     </complexType>
     <complexType name="Ads">
         <sequence>
-            <element name="Ad" type="tns:Ad"></element>
+            <element name="Ad" type="tns:Ad" />
         </sequence>
     </complexType>
     <complexType name="Ad">
         <all>
-            <element name="Description" type="string"></element>
-            <element name="Count" type="string"></element>
-            <element name="Square" type="string"></element>
+            <element name="Description" type="string" />
+            <element name="Count" type="string" />
+            <element name="Square" type="string" />
         </all>
     </complexType>
 </schema>

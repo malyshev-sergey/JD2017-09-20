@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<Persons>
+<Persons xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://by.it.meshchenko/Persons Persons.xsd"
+         xmlns="http://by.it.meshchenko/Persons"
+>
     <Person>
         <Email>asd@aasd.it</Email>
         <Nickname>qwerty</Nickname>

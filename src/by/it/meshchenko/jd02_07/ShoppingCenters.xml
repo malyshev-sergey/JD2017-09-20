@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ShoppingCenters xmlns="http://by.it.meshchenko/ShoppingCenters"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://by.it.meshchenko/ShoppingCenters ShoppingCenters.xsd"
+
+>
+    <ShoppingCenter>
+        <Name>Korona</Name>
+        <Adress>Minsk, str.Pobeditelei 65</Adress>
+        <Lat>51.3</Lat>
+        <Lng>23.6</Lng>
+        <Rooms>
+            <Room>
+                <RoomName>B147</RoomName>
+                <Square>150.4</Square>
+                <Price>900</Price>
+                <isRented>false</isRented>
+            </Room>
+        </Rooms>
+    </ShoppingCenter>
+</ShoppingCenters>

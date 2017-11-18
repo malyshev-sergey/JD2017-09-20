@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+    <!ELEMENT ShoppingCenters (ShoppingCenter)+>
+        <!ELEMENT ShoppingCenter (Name, Adress, Lat, Lng, Rooms)>
+        <!ELEMENT Name (#PCDATA)>
+        <!ELEMENT Adress (#PCDATA)>
+        <!ELEMENT Lat (#PCDATA)>
+        <!ELEMENT Lng (#PCDATA)>
+        <!ELEMENT Rooms (Room)+>
+        <!ELEMENT Room (RoomName, Square, Price, isRented) >
+        <!ELEMENT RoomName (#PCDATA)>
+        <!ELEMENT Square (#PCDATA)>
+        <!ELEMENT Price (#PCDATA)>
+        <!ELEMENT isRented (#PCDATA)>
