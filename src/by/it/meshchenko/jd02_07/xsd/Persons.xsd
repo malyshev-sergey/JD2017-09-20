@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://by.it.meshchenko/Persons"
+        xmlns:tns="http://by.it.meshchenko/Persons"
+        elementFormDefault="qualified">
+    <element name="Persons">
+        <complexType>
+            <sequence>
+                <element name="Person" type="tns:Person" maxOccurs="unbounded"></element>
+            </sequence>
+        </complexType>
+    </element>
+    <complexType name="Person">
+        <sequence>
+            <element name="Email" type="string"></element>
+            <element name="Nickname" type="string"></element>
+            <element name="Password" type="string"></element>
+            <element name="Ads" type="tns:Ads"></element>
+        </sequence>
+    </complexType>
+    <complexType name="Ads">
+        <sequence>
+            <element name="Ad" type="tns:Ad"></element>
+        </sequence>
+    </complexType>
+    <complexType name="Ad">
+        <all>
+            <element name="Description" type="string"></element>
+            <element name="Count" type="string"></element>
+            <element name="Square" type="string"></element>
+        </all>
+    </complexType>
+</schema>
