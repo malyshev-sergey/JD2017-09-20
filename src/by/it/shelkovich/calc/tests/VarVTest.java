@@ -1,6 +1,10 @@
 package by.it.shelkovich.calc.tests;
 
 import by.it.shelkovich.calc.*;
+import by.it.shelkovich.calc.Vars.Var;
+import by.it.shelkovich.calc.Vars.VarD;
+import by.it.shelkovich.calc.Vars.VarFactory;
+import by.it.shelkovich.calc.Vars.VarV;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

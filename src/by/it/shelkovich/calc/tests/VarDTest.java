@@ -1,9 +1,9 @@
 package by.it.shelkovich.calc.tests;
 
 import by.it.shelkovich.calc.Parser;
-import by.it.shelkovich.calc.Var;
-import by.it.shelkovich.calc.VarD;
-import by.it.shelkovich.calc.VarFactory;
+import by.it.shelkovich.calc.Vars.Var;
+import by.it.shelkovich.calc.Vars.VarD;
+import by.it.shelkovich.calc.Vars.VarFactory;
 
 import static org.junit.Assert.*;
 

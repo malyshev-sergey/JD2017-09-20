@@ -1,4 +1,4 @@
-package by.it.shelkovich.calc;
+package by.it.shelkovich.calc.Vars;
 
 public class VarS extends Var {
     String name;

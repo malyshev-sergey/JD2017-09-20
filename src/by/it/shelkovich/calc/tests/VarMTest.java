@@ -1,6 +1,7 @@
 package by.it.shelkovich.calc.tests;
 
 import by.it.shelkovich.calc.*;
+import by.it.shelkovich.calc.Vars.*;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

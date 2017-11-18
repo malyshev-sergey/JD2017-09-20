@@ -1,6 +1,6 @@
-package by.it.shelkovich.calc;
+package by.it.shelkovich.calc.Vars;
 
-import by.it.shelkovich.calc.Exceptions.IllegalVectorOperationException;
+import by.it.shelkovich.calc.exceptions.IllegalVectorOperationException;
 import by.it.shelkovich.calc.interfaces.Patterns;
 
 import java.util.regex.Matcher;

@@ -1,6 +1,9 @@
 package by.it.shelkovich.calc;
 
+import by.it.shelkovich.calc.Vars.Var;
+import by.it.shelkovich.calc.Vars.VarFactory;
 import by.it.shelkovich.calc.interfaces.Patterns;
+import by.it.shelkovich.calc.events.EventProducer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,9 +17,7 @@ public class Parser implements Callable<Var> {
 
     List<String> operadns;
     List<String> operations;
-    private final List<String> prior = new ArrayList<>(Arrays.asList(
-            new String[]{"=", "+", "-", "*", "/"})
-    );
+    private final List<String> prior = new ArrayList<>(Arrays.asList("=", "+", "-", "*", "/"));
     private String sourceStr;
 
 
@@ -51,8 +52,14 @@ public class Parser implements Callable<Var> {
         }
         return null;
     }
+    public Var calc(String calcStr){
+        Var var = calcProc(calcStr);
+        //Logger.INSTANCE.log("calculating: "+ calcStr + "\nresult: "+ var.toString());
+        EventProducer.INSTANCE.notifyListners("calculating: "+ calcStr + "\nresult: "+ var.toString());
+        return var;
+    }
 
-    public Var calc(String calcString) {
+    private Var calcProc(String calcString) {
         List<String> subBracers = getSubBracersList(calcString);
         if (subBracers.size() > 0) {
             List<FutureTask<Var>> tasks = new ArrayList<>();
@@ -60,7 +67,7 @@ public class Parser implements Callable<Var> {
 
             for (int i = 0; i < subBracers.size(); i++) {
                 Callable<Var> parser = new Parser(subBracers.get(i));
-                FutureTask<Var> fTask = new FutureTask<Var>(parser);
+                FutureTask<Var> fTask = new FutureTask<>(parser);
                 tasks.add(fTask);
                 calcString = calcString.replace("(" + subBracers.get(i) + ")", "#" + tasks.indexOf(fTask) + "$");
                 executor.execute(fTask);
@@ -141,7 +148,7 @@ public class Parser implements Callable<Var> {
 
     @Override
     public Var call() throws Exception {
-        if (sourceStr != null) return calc(sourceStr);
+        if (sourceStr != null) return calcProc(sourceStr);
         else return null;
     }
 }

@@ -1,6 +1,6 @@
 package by.it.shelkovich.calc.interfaces;
 
-import by.it.shelkovich.calc.*;
+import by.it.shelkovich.calc.Vars.*;
 
 public interface IMul {
     Var mul(VarD v1);

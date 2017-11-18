@@ -1,4 +1,6 @@
-package by.it.shelkovich.calc;
+package by.it.shelkovich.calc.Vars;
+
+import by.it.shelkovich.calc.Parser;
 
 import java.io.*;
 import java.util.Map;
@@ -13,7 +15,7 @@ public class VarFileIO {
     }
 
 
-    void saveToFile(){
+    public void saveToFile(){
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))){
             for (Map.Entry<String, Var> varEntry: VarStorage.vars.entrySet()) {
                 bufferedWriter.write(varEntry.getKey()+"="+varEntry.getValue());
@@ -25,7 +27,7 @@ public class VarFileIO {
 
 
     }
-    void loadFromFile(){
+    public void loadFromFile(){
         try(BufferedReader bufferedReader = new BufferedReader(new FileReader(file))){
             String line;
             while((line = bufferedReader.readLine()) != null) {

@@ -1,6 +1,7 @@
-package by.it.shelkovich.calc;
+package by.it.shelkovich.calc.Vars;
 
 import by.it.shelkovich.calc.interfaces.*;
+import by.it.shelkovich.calc.events.EventProducer;
 
 public abstract class Var implements IAdd, IMul, ISub, IDiv, ISet, StringCompatible {
     protected boolean used = false;
@@ -22,7 +23,8 @@ public abstract class Var implements IAdd, IMul, ISub, IDiv, ISet, StringCompati
     void printErr(String err) {
         if (!printed && !used) {
             System.out.printf("Операция %s невозможна\n", err);
-            Logger.INSTANCE.log("\"Операция "+err+" невозможна");
+            //Logger.INSTANCE.log("\"Операция "+err+" невозможна");
+            EventProducer.INSTANCE.notifyListners("\"Операция "+err+" невозможна");
             printed = true;
         } else if (printed) printed = false;
     }

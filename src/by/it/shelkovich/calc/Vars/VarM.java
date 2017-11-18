@@ -1,6 +1,6 @@
-package by.it.shelkovich.calc;
+package by.it.shelkovich.calc.Vars;
 
-import by.it.shelkovich.calc.Exceptions.MatrixMultiplyException;
+import by.it.shelkovich.calc.exceptions.MatrixMultiplyException;
 import by.it.shelkovich.calc.interfaces.Patterns;
 
 import java.util.regex.Matcher;
@@ -33,7 +33,7 @@ public class VarM extends Var {
         StringBuilder result = new StringBuilder((value.length+2)*value[0].length*4+2);
         result.append('{');
         String delimiter1 = "";
-        String delimiter2 = "";
+        String delimiter2;
         for (int i = 0; i < value.length ; i++) {
             result.append(delimiter1).append('{');
             delimiter1 = ",";

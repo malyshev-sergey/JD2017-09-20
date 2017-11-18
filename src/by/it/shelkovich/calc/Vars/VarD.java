@@ -1,4 +1,4 @@
-package by.it.shelkovich.calc;
+package by.it.shelkovich.calc.Vars;
 
 public class VarD extends Var {
     private Double value;

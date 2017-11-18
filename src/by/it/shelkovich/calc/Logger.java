@@ -1,5 +1,7 @@
 package by.it.shelkovich.calc;
 
+import by.it.shelkovich.calc.events.IVarEventListner;
+
 import java.io.*;
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -7,10 +9,15 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public enum Logger {
-    INSTANCE;
+public enum Logger implements IVarEventListner{
+    INSTANCE {
+        @Override
+        public void doAction(String msg) {
+            log(msg);
+        }
+    };
 
-    private File logFile = new File(System.getProperty("user.dir") + "/src/by/it/shelkovich/jd2_06/log.txt");
+    private File logFile = new File(System.getProperty("user.dir") + "/src/by/it/shelkovich/calc/log.txt");
     private List<String> logMsgs = new ArrayList<>();
 
     public void log(String msg) {

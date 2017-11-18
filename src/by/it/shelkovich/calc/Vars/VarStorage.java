@@ -1,4 +1,6 @@
-package by.it.shelkovich.calc;
+package by.it.shelkovich.calc.Vars;
+
+import by.it.shelkovich.calc.Vars.Var;
 
 import java.util.HashMap;
 import java.util.Map;

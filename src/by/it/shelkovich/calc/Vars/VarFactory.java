@@ -1,4 +1,4 @@
-package by.it.shelkovich.calc;
+package by.it.shelkovich.calc.Vars;
 
 import by.it.shelkovich.calc.interfaces.Patterns;
 
