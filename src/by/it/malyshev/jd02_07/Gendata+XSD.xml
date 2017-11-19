@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<Gendata xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://by.it.malyshev/jd02_07/Gendata Gendata.xsd"
+<Gendata xmlns:gen="http://www.w3.org/2001/XMLSchema-instance"
+         gen:schemaLocation="http://by.it.malyshev/jd02_07/Gendata Gendata.xsd"
          xmlns="http://by.it.malyshev/jd02_07/Gendata"
 >
     <Person kit="N22223">

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <schema xmlns="http://www.w3.org/2001/XMLSchema"
         targetNamespace="http://by.it.malyshev/jd02_07/Gendata"
-        xmlns:tns="http://by.it.malyshev/jd02_07/Gendata"
+        xmlns:gen="http://by.it.malyshev/jd02_07/Gendata"
         elementFormDefault="qualified">
     <element name="Gendata">
         <complexType>
             <sequence>
                 <element name="Person"
-                         type="tns:Person"
+                         type="gen:Person"
                          maxOccurs="unbounded">
                 </element>
             </sequence>
@@ -18,8 +18,8 @@
             <element name="Name" type="string"/>
             <element name="Ancestor" type="string"/>
             <element name="Country" type="string"/>
-            <element name="Geocoord" type="tns:Geocoord"/>
-            <element name="Haplotype" type="tns:Haplotype"/>
+            <element name="Geocoord" type="gen:Geocoord"/>
+            <element name="Haplotype" type="gen:Haplotype"/>
         </sequence>
         <attribute name="kit" type="string" use="required"/>
     </complexType>
@@ -33,7 +33,7 @@
 
     <complexType name="Haplotype">
         <sequence>
-            <element name="STRmarkers" type="tns:STRmarkers"
+            <element name="STRmarkers" type="gen:STRmarkers"
                      maxOccurs="unbounded">
             </element>
         </sequence>
