@@ -7,6 +7,7 @@ public abstract class Var implements IOperation {
     public abstract Var acceptMul(IOperationVisitorMul p);
     public abstract Var acceptSub(IOperationVisitorSub p);
     public abstract boolean acceptAssign(IOperationVisitorAssign p);
+    public abstract Var getVar();
 
     @Override
     public Var add(Var var) {

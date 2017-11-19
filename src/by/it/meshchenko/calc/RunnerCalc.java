@@ -1,26 +1,33 @@
 package by.it.meshchenko.calc;
 
-import by.it.malyshev.jd01_03.InOut;
+import by.it.meshchenko.calc.Report.FullReportBuilder;
+import by.it.meshchenko.calc.Report.ReportBuilder;
+import by.it.meshchenko.calc.Report.Report;
+import by.it.meshchenko.calc.Report.ShortReportBuilder;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.Map;
+import java.util.*;
 
 public class RunnerCalc {
+
+    // Создаём Logger
+    static Logger log = Logger.getInstance();
 
     private static void printOneVar(String str, Var v) throws IOException{
         if (v!=null){
             System.out.println(str + " = " + v);
-            InOutFile.log(str + " = " + v.toString());
+            log.message(str + " = " + v.toString());
+            //Формирование отчёта 'полного'
+            FullReportBuilder.report.append(str + " = " + v.toString() + "\n");
+            //Формирование отчёта 'краткого'
+            ShortReportBuilder.report.append(v.toString() + "\n");
         }
     }
 
     public static void main(String[ ] args)  throws IOException {
 
-
-
+        // Время запуска пакета (для формирования отчёта)
+        ReportBuilder.setTimeStart();
 
         // Выражения для тестирования операций чтения и записи файла
         Expression ex1 = Parser.parseAssign("C=-9.5");
@@ -66,7 +73,7 @@ public class RunnerCalc {
         String strEx2 = "9-7";
         String strEx3 = "1.5*2";
         String strEx4 = "-4/(-1)";
-        InOutFile.log(opStr);
+        log.message(opStr);
         System.out.println();
         System.out.println(opStr);
         printOneVar(strEx1, Parser.parseAndCalcEx(strEx1).varValue);
@@ -81,7 +88,7 @@ public class RunnerCalc {
         strEx3 = "{1,2,3}*2";
         strEx4 = "{1,2,3}/0";
 
-        InOutFile.log(opStr);
+        log.message(opStr);
         System.out.println();
         System.out.println(opStr);
         printOneVar(strEx1, Parser.parseAndCalcEx(strEx1).varValue);
@@ -96,7 +103,7 @@ public class RunnerCalc {
         strEx3 = "1*{1,2,3}";
         strEx4 = "2/{1,2,3}";
 
-        InOutFile.log(opStr);
+        log.message(opStr);
         System.out.println();
         System.out.println(opStr);
         printOneVar(strEx1, Parser.parseAndCalcEx(strEx1).varValue);
@@ -111,7 +118,7 @@ public class RunnerCalc {
         strEx3 = "{1,2,3}*{1,2,3}";
         strEx4 = "{1,2,3}/{1,2,3}";
 
-        InOutFile.log(opStr);
+        log.message(opStr);
         System.out.println();
         System.out.println(opStr);
         printOneVar(strEx1, Parser.parseAndCalcEx(strEx1).varValue);
@@ -126,7 +133,7 @@ public class RunnerCalc {
         strEx3 = "{{1,2,3},{4,5,6},{7,8,9}}*2";
         strEx4 = "{{1,2,3},{4,5,6},{7,8,9}}/(-1)";
 
-        InOutFile.log(opStr);
+        log.message(opStr);
         System.out.println();
         System.out.println(opStr);
         printOneVar(strEx1, Parser.parseAndCalcEx(strEx1).varValue);
@@ -141,7 +148,7 @@ public class RunnerCalc {
         strEx3 = "1.5*{{1,2,3},{4,5,6},{7,8,9}}";
         strEx4 = "-4/{{1,2,3},{4,5,6},{7,8,9}}";
 
-        InOutFile.log(opStr);
+        log.message(opStr);
         System.out.println();
         System.out.println(opStr);
         printOneVar(strEx1, Parser.parseAndCalcEx(strEx1).varValue);
@@ -156,7 +163,7 @@ public class RunnerCalc {
         strEx3 = "{{1,2,3},{4,5,6},{7,8,9}}*{1,2,3}";
         strEx4 = "{{1,2,3},{4,5,6},{7,8,9}}/{1,2,3}";
 
-        InOutFile.log(opStr);
+        log.message(opStr);
         System.out.println();
         System.out.println(opStr);
         printOneVar(strEx1, Parser.parseAndCalcEx(strEx1).varValue);
@@ -171,7 +178,7 @@ public class RunnerCalc {
         strEx3 = "{1,2,3}*{{1,2,3},{4,5,6},{7,8,9}}";
         strEx4 = "{1,2,3}/{{1,2,3},{4,5,6},{7,8,9}}";
 
-        InOutFile.log(opStr);
+        log.message(opStr);
         System.out.println();
         System.out.println(opStr);
         printOneVar(strEx1, Parser.parseAndCalcEx(strEx1).varValue);
@@ -186,7 +193,7 @@ public class RunnerCalc {
         strEx3 = "{{1,2,3},{4,5,6},{7,8,9}}*{{1,2,3},{4,5,6},{7,8,9}}";
         strEx4 = "{{1,2,3},{4,5,6},{7,8,9}}/{{1,2,3},{4,5,6},{7,8,9}}";
 
-        InOutFile.log(opStr);
+        log.message(opStr);
         System.out.println();
         System.out.println(opStr);
         printOneVar(strEx1, Parser.parseAndCalcEx(strEx1).varValue);
@@ -229,5 +236,51 @@ public class RunnerCalc {
         // F={{1,2,3},{4,5,6},{7,8,9}}*(10+5)*(-1*(-4))-(2+1-3*(12-9))
         strEx1 = "F={{1,2,3},{4,5,6},{7,8,9}}*(10+5)*(-1*(-4))-(2+1-3*(12-9))";
         printOneVar(strEx1, Parser.parseAndCalcAssign(strEx1).varValue);
+
+
+        // 'jd02_06 B.'
+        // Тестирование задания из jd02_06 B.
+        //      Фабричным методом выведем переменные (из задания jd02_04) A, B, B1, B2,
+        //      C, D, E, F на экран, с следующем порядке: VarF, VarV, VarM
+        System.out.println("\nТестирование задания из jd02_06");
+        System.out.println("\tФабричным методом выведем переменные (из задания jd02_04) A, B, B1, B2,");
+        System.out.println("\tC, D, E, F на экран, с следующем порядке: VarF, VarV, VarM");
+
+        CreatorVar cr = new CreatorVar();
+        Iterator<Map.Entry<String, Expression>> itM = Expression.blockEx.entrySet().iterator();
+
+        System.out.println("VarF");
+        while (itM.hasNext()){
+            Map.Entry<String, Expression> temp = itM.next();
+            if(cr.typeVarF(temp.getValue().varValue))
+            System.out.printf("%-8s %-50s %n", temp.getValue().getName(),
+                    temp.getValue().varValue.toString());
+        }
+
+        System.out.println("VarV");
+        itM = Expression.blockEx.entrySet().iterator();
+        while (itM.hasNext()){
+            Map.Entry<String, Expression> temp = itM.next();
+            if(cr.typeVarV(temp.getValue().varValue))
+                System.out.printf("%-8s %-50s %n", temp.getValue().getName(),
+                        temp.getValue().varValue.toString());
+        }
+
+        System.out.println("VarM");
+        itM = Expression.blockEx.entrySet().iterator();
+        while (itM.hasNext()){
+            Map.Entry<String, Expression> temp = itM.next();
+            if(cr.typeVarM(temp.getValue().varValue))
+                System.out.printf("%-8s %-50s %n", temp.getValue().getName(),
+                        temp.getValue().varValue.toString());
+        }
+
+
+        // 'jd02_06 C.' На основе паттерна Строитель формировался текстовый отчет об операциях
+        //  в учебном проекте
+        ReportBuilder irp = Math.random() > 0.5 ? new FullReportBuilder() : new ShortReportBuilder();
+        Report pr = new Report(irp);
+        ReportBuilder.setTimeEnd();
+        pr.buildReport();
     }
 }

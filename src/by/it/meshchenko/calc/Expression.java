@@ -6,7 +6,7 @@ public class Expression {
     private String name;
     private String strValue;
 
-    public static final String majorKey = "1_majorKey_";
+    public static final String IMAGINATION_KEY = "1_imaginationKey_";
     public static int varNumber;
     public static HashMap<String, Expression> blockEx;
 

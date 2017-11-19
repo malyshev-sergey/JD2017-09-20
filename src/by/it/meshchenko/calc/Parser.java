@@ -58,7 +58,7 @@ public class Parser {
                 Matcher m = p.matcher(strMass[0]);
                 if(m.matches()) {
                     res.setName(strMass[0]);
-                    Expression.blockEx.put(Expression.majorKey + strMass[0], res);
+                    Expression.blockEx.put(strMass[0], res);
                 }
                 else throw new CalcErrorException("Недопустимое имя переменной");
                 res.setStrValue(strMass[1]);
@@ -133,7 +133,7 @@ public class Parser {
 
     private static Var doParseEx(Expression expr){
         StringBuilder strBuild = new StringBuilder(expr.getStrValue());
-        String key;
+        String key = Expression.IMAGINATION_KEY + "var";
         String varStr;
 
         // Работа со скобками
@@ -144,7 +144,7 @@ public class Parser {
             do {
                 // Делаем замену выражения в скабках на 'var1', 'var2' и т.д.
                 // (4+5)*7-4*(3-1) --> var1*7-4*(3-1) --> var1*7-4*var2
-                key = "var" + Expression.varNumber;
+                key = key + Expression.varNumber;
                 varStr = replaceBracketsOnVar(strBuild, key);
                 if (!varStr.isEmpty()) {
                     Expression.blockEx.put(key, new Expression(varStr));
@@ -159,7 +159,7 @@ public class Parser {
         Pattern p = Pattern.compile(Patterns.exPriorOp1);
         Matcher m = p.matcher(strBuild);
         while(m.find()){
-            key = "var" + Expression.varNumber;
+            key = key + Expression.varNumber;
             varStr = m.group();
             if(varStr.compareTo(strBuild.toString()) != 0) {
                 Expression.blockEx.put(key, new Expression(varStr));
@@ -206,6 +206,7 @@ public class Parser {
     // Если строка соответствует паттерну, return Var
     private static Var defineTypeVar(String str){
         Var res = null;
+        Expression e1;
         try {
             if (isExVar(str, Patterns.exVal)) {
                 res = new VarF(str);
@@ -213,12 +214,8 @@ public class Parser {
                 res = new VarV(str);
             } else if (isExVar(str, Patterns.exMat)) {
                 res = new VarM(str);
-            } else if (isExVar(str, Patterns.nameVar)) {
-                Expression e1 = Expression.blockEx.get(str);
-                if(e1 == null)
-                    e1 = Expression.blockEx.get(Expression.majorKey + str);
-                if (e1 == null)
-                    throw new CalcErrorException("Отсутствует переменная в HashMap<String, Expression> blockEx");
+            } else if ( (e1 = Expression.blockEx.get(Expression.IMAGINATION_KEY + str)) != null
+                    || (e1 = Expression.blockEx.get(str)) != null) {
                 res = doParseEx(e1);
             } else {
                 throw new CalcErrorException("Невозможно привести к типу Var");
