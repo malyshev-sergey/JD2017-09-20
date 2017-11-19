@@ -1,6 +1,6 @@
-package by.it.shelkovich.calc;
+package by.it.shelkovich.calc.Vars;
 
-import by.it.shelkovich.calc.Exceptions.MatrixMultiplyException;
+import by.it.shelkovich.calc.exceptions.MatrixMultiplyException;
 import by.it.shelkovich.calc.interfaces.Patterns;
 
 import java.util.regex.Matcher;
@@ -13,7 +13,7 @@ public class VarM extends Var {
         return value;
     }
 
-    VarM(String value) {
+    public VarM(String value) {
         setFrom(value);
     }
 
@@ -33,7 +33,7 @@ public class VarM extends Var {
         StringBuilder result = new StringBuilder((value.length+2)*value[0].length*4+2);
         result.append('{');
         String delimiter1 = "";
-        String delimiter2 = "";
+        String delimiter2;
         for (int i = 0; i < value.length ; i++) {
             result.append(delimiter1).append('{');
             delimiter1 = ",";
@@ -72,7 +72,7 @@ public class VarM extends Var {
     }
 
     public VarM add(VarD arg) {
-        System.out.println("сложение матрицы с числом");
+        //System.out.println("сложение матрицы с числом");
         VarM result = new VarM(this);
         for (int i = 0; i < result.value.length; i++) {
             for (int j = 0; j < result.value[i].length; j++) {
@@ -83,7 +83,7 @@ public class VarM extends Var {
     }
 
     public VarM mul(VarD arg) {
-        System.out.println("Умножение матрицы на число");
+        //System.out.println("Умножение матрицы на число");
         VarM result = new VarM(this);
         for (int i = 0; i < result.value.length; i++) {
             for (int j = 0; j < result.value[i].length; j++) {
@@ -94,7 +94,7 @@ public class VarM extends Var {
     }
 
     public VarM sub(VarD arg) {
-        System.out.println("Разность матрицы с числом");
+        //System.out.println("Разность матрицы с числом");
         VarM result = new VarM(this);
         for (int i = 0; i < result.value.length; i++) {
             for (int j = 0; j < result.value[i].length; j++) {
@@ -105,7 +105,7 @@ public class VarM extends Var {
     }
 
     public VarM div(VarD arg) {
-        System.out.println("Деление матрицы на число");
+        //System.out.println("Деление матрицы на число");
         VarM result = new VarM(this);
         for (int i = 0; i < result.value.length; i++) {
             for (int j = 0; j < result.value[i].length; j++) {
@@ -117,7 +117,7 @@ public class VarM extends Var {
     }
 
     public VarV mul(VarV arg) {
-        System.out.println("Умножение матрицы на вектор");
+        //System.out.println("Умножение матрицы на вектор");
         double[] result;
 
         if (this.value[0].length == arg.getValue().length) {
@@ -139,7 +139,7 @@ public class VarM extends Var {
 
 
     public VarM add(VarM arg) {
-        System.out.println("Cложение матрицы с матрицей");
+        //System.out.println("Cложение матрицы с матрицей");
         VarM result = new VarM(this);
         for (int i = 0; i < result.value.length; i++) {
             for (int j = 0; j < result.value[i].length; j++) {
@@ -150,7 +150,7 @@ public class VarM extends Var {
     }
 
     public VarM mul(VarM arg) {
-        System.out.println("Умножение матрицы на матрицу");
+        //System.out.println("Умножение матрицы на матрицу");
         VarM result;
 
         if (this.value[0].length == arg.value.length) {
@@ -180,6 +180,7 @@ public class VarM extends Var {
             else if ("mul".equals(type)) return v.mul(this);
             else if ("sub".equals(type)) return v.sub(this);
             else if ("div".equals(type)) return v.div(this);
+            else if ("set".equals(type)) return v.set(this);
             return null;
         } else
             v.setUsed(false);

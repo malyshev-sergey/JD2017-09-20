@@ -1,23 +1,17 @@
-package by.it.shelkovich.calc;
-
-import by.it.shelkovich.calc.events.IVarEventListner;
+package by.it.shelkovich.jd2_06;
 
 import java.io.*;
 import java.text.DateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public enum Logger implements IVarEventListner{
-    INSTANCE {
-        @Override
-        public void doAction(String msg) {
-            log(msg);
-        }
-    };
+public enum Logger {
+    INSTANCE;
 
-    private File logFile = new File(System.getProperty("user.dir") + "/src/by/it/shelkovich/calc/log.txt");
+    private File logFile = new File(System.getProperty("user.dir") + "/src/by/it/shelkovich/jd2_06/log.txt");
     private List<String> logMsgs = new ArrayList<>();
 
     public void log(String msg) {

@@ -1,9 +1,9 @@
-package by.it.shelkovich.calc;
+package by.it.shelkovich.calc.Vars;
 
-import by.it.shelkovich.calc.Exceptions.IllegalVectorOperationException;
 import by.it.shelkovich.calc.interfaces.*;
+import by.it.shelkovich.calc.events.EventProducer;
 
-public abstract class Var implements IAdd, IMul, ISub, IDiv, StringCompatible {
+public abstract class Var implements IAdd, IMul, ISub, IDiv, ISet, StringCompatible {
     protected boolean used = false;
 
     protected boolean printed = false;
@@ -23,7 +23,8 @@ public abstract class Var implements IAdd, IMul, ISub, IDiv, StringCompatible {
     void printErr(String err) {
         if (!printed && !used) {
             System.out.printf("Операция %s невозможна\n", err);
-            Logger.log("\"Операция "+err+" невозможна");
+            //Logger.INSTANCE.log("\"Операция "+err+" невозможна");
+            EventProducer.INSTANCE.notifyListners("\"Операция "+err+" невозможна");
             printed = true;
         } else if (printed) printed = false;
     }
@@ -88,6 +89,11 @@ public abstract class Var implements IAdd, IMul, ISub, IDiv, StringCompatible {
         return defaultWrap("add", "сложения", v1, false, true);
     }
 
+    @Override
+    public Var add(VarS v1) {
+        return defaultWrap("add", "сложения", v1.getValue(), true, true);
+    }
+
 
     //########################################.Умножение.##################################################
     @Override
@@ -108,6 +114,11 @@ public abstract class Var implements IAdd, IMul, ISub, IDiv, StringCompatible {
     @Override
     public Var mul(VarM v1) {
         return defaultWrap("mul", "умножения", v1, false, true);
+    }
+
+    @Override
+    public Var mul(VarS v1) {
+        return defaultWrap("mul", "умножения", v1.getValue(), true, true);
     }
 
     //########################################.Разность.##################################################
@@ -131,6 +142,11 @@ public abstract class Var implements IAdd, IMul, ISub, IDiv, StringCompatible {
         return defaultWrap("sub", "разности", v1, false, false);
     }
 
+    @Override
+    public Var sub(VarS v1) {
+        return defaultWrap("sub", "разности", v1.getValue(), true, false);
+    }
+
     //########################################.Деление.##################################################
     @Override
     public Var div(VarD v1) {
@@ -150,6 +166,39 @@ public abstract class Var implements IAdd, IMul, ISub, IDiv, StringCompatible {
     @Override
     public Var div(VarM v1) {
         return defaultWrap("div", "деления", v1, false, false);
+    }
+
+    @Override
+    public Var div(VarS v1) { return defaultWrap("div", "деления", v1.getValue(), true, false); }
+
+    //########################################.Присвоение.##################################################
+    @Override
+    public Var set(VarD v1) {
+        printErr("присвоения");
+        return null;
+    }
+
+    @Override
+    public final Var set(Var v1) {
+        return defaultWrap("set", "присвоения", v1, true, true);
+    }
+
+    @Override
+    public Var set(VarV v1) {
+        printErr("присвоения");
+        return null;
+    }
+
+    @Override
+    public Var set(VarM v1) {
+        printErr("присвоения");
+        return null;
+    }
+
+    @Override
+    public Var set(VarS v1) {
+        printErr("присвоения");
+        return null;
     }
 
 }

@@ -1,4 +1,4 @@
-package by.it.shelkovich.calc.Exceptions;
+package by.it.shelkovich.calc.exceptions;
 
 public class IllegalVectorOperationException extends ArithmeticException {
 

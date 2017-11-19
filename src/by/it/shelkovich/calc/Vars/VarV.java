@@ -1,6 +1,6 @@
-package by.it.shelkovich.calc;
+package by.it.shelkovich.calc.Vars;
 
-import by.it.shelkovich.calc.Exceptions.IllegalVectorOperationException;
+import by.it.shelkovich.calc.exceptions.IllegalVectorOperationException;
 import by.it.shelkovich.calc.interfaces.Patterns;
 
 import java.util.regex.Matcher;
@@ -13,7 +13,7 @@ public class VarV extends Var {
         return value;
     }
 
-    VarV(String value) {
+    public VarV(String value) {
         setFrom(value);
     }
 
@@ -48,7 +48,7 @@ public class VarV extends Var {
 
     @Override
     public Var add(VarD v1) {
-        System.out.println("сложение вектора с числом");
+        //System.out.println("сложение вектора с числом");
         VarV result = new VarV(this);
         for (int i = 0; i < result.value.length; i++) {
             result.value[i] = result.value[i] + v1.getValue();
@@ -58,7 +58,7 @@ public class VarV extends Var {
 
     @Override
     public Var mul(VarD v1) {
-        System.out.println("умножение вектора на число");
+        //System.out.println("умножение вектора на число");
         VarV result = new VarV(this);
         for (int i = 0; i < result.value.length; i++) {
             result.value[i] = result.value[i] * v1.getValue();
@@ -68,7 +68,7 @@ public class VarV extends Var {
 
     @Override
     public Var sub(VarD v1) {
-        System.out.println("разность вектора с числом");
+        //System.out.println("разность вектора с числом");
         VarV result = new VarV(this);
         for (int i = 0; i < result.value.length; i++) {
             result.value[i] = result.value[i] - v1.getValue();
@@ -78,7 +78,7 @@ public class VarV extends Var {
 
     @Override
     public Var div(VarD v1) {
-        System.out.println("деление вектора на число");
+        //System.out.println("деление вектора на число");
         VarV result = new VarV(this);
         for (int i = 0; i < result.value.length; i++) {
             if (v1.getValue() == 0) throw new ArithmeticException("Деление на 0");
@@ -90,7 +90,7 @@ public class VarV extends Var {
 
     @Override
     public Var add(VarV v1) throws IllegalVectorOperationException {
-        System.out.println("сложение вектора с вектором");
+        //System.out.println("сложение вектора с вектором");
         VarV result = new VarV(this);
         if (value.length == v1.value.length) {
             for (int i = 0; i < result.value.length; i++) {
@@ -104,7 +104,7 @@ public class VarV extends Var {
 
     @Override
     public Var mul(VarV v1) {
-        System.out.println("умножение вектора на вектор");
+        //System.out.println("умножение вектора на вектор");
         VarV result = new VarV(this);
         if (value.length == v1.value.length) {
             for (int i = 0; i < result.value.length; i++) {
@@ -117,7 +117,7 @@ public class VarV extends Var {
 
     @Override
     public Var sub(VarV v1) {
-        System.out.println("разность вектора с вектором");
+        //System.out.println("разность вектора с вектором");
         VarV result = new VarV(this);
         if (value.length == v1.value.length) {
             for (int i = 0; i < result.value.length; i++) {
@@ -136,6 +136,7 @@ public class VarV extends Var {
             else if ("mul".equals(type)) return v.mul(this);
             else if ("sub".equals(type)) return v.sub(this);
             else if ("div".equals(type)) return v.div(this);
+            else if ("set".equals(type)) return v.set(this);
             return null;
         } else
             v.setUsed(false);
