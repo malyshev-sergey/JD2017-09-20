@@ -28,7 +28,7 @@ public class Ex03_DOM {
 
     //Демо. Рекурсивный обход DOM-дерева.
     //На уровень C самостоятельно разберитесь, как переделать вывод в формате обычного XML
-    //а также как и где извлечь значение и аттрибуты узла
+    //а также как и где извлечь значение и атрибуты узла
     private static void printDom(String prefix, Node node) {
         String text=node.getNodeValue();
         if (text!=null) {
