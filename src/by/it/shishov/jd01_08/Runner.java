@@ -23,5 +23,6 @@ public class Runner {
         kesha.drink();
         kesha.move();
         System.out.println(kesha);
+
     }
 }
