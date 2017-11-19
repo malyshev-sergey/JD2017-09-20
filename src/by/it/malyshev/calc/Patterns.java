@@ -1,14 +1,14 @@
 package by.it.malyshev.calc;
 
 interface Patterns {
-    //возможные примеры регулярных выражений (конечно лучше составить свои).
-    String exVal="((-?)([0-9.])+)";                       //числа
-    String exVec="\\{((-?([0-9.])+),?)+}";                //вектора
-    String exMat="\\{((\\{((-?([0-9.])+),?)+}),?)+}";     //матрицы
+    String exVal = "((-?)([0-9.])+)";                       //числа
+    String exVec = "\\{((-?([0-9.])+),?)+}";                //вектора
+    String exMat = "\\{((\\{((-?([0-9.])+),?)+}),?)+}";     //матрицы
+    String exOper = "(?<=[^+-/*=,{])[-+*/=]";                               //операция
+    String exVar = "[A-Za-z][A-Za-z0-9]*";
     String exAny="("+exMat+")|("+exVec+")|("+exVal+")";   //одно из...
-    String exOper="[-+*/]";                               //операция
-    String exFull= "("+exAny+")"+
-            "(" +exOper+")"+
-            "(" +exAny +")"; //выражение целиком
+//    String exFull= "("+exAny+")"+
+//            "(" +exOper+")"+
+//            "(" +exAny +")"; //выражение целиком
 
 }

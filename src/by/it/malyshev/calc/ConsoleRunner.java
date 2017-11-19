@@ -1,160 +1,245 @@
 package by.it.malyshev.calc;
 
-public class ConsoleRunner {
+import by.it.malyshev.calc.report.*;
+import by.it.malyshev.calc.report.Writer;
 
-    private static void printOneVar(Var v) {
-        if (v != null) {
-            Depository.logWrite("Output: "+v.toString());
-            System.out.println(v);
-        }
-    }
+import java.io.*;
+import java.util.LinkedList;
+import java.util.NoSuchElementException;
+import java.util.concurrent.*;
+
+public class ConsoleRunner {
 
     public static void main(String[] args) {
 
+        Depository.programStartTime = System.currentTimeMillis();
         Depository.restore();
+        help();
+        boolean debug = false;
 
-        printOneVar(Parser.singleOperation("-1+2"));
-        printOneVar(Parser.singleOperation("-9-7"));
+        while (true) {
 
-        printOneVar(Parser.singleOperation("-1.5*-2"));
-        printOneVar(Parser.singleOperation("-1.5*2"));
-        printOneVar(Parser.singleOperation("1.5*2"));
-        printOneVar(Parser.singleOperation("-4/-1"));
-        printOneVar(Parser.singleOperation("-4/2"));
-        printOneVar(Parser.singleOperation("4/2"));
-        try {
-            printOneVar(Parser.singleOperation("4/0"));
-        } catch (ArithmeticException e) {
-            System.out.println(e.getMessage());
-            Depository.logWrite(e.getMessage());
+            System.out.print("\r\n In: > ");
+
+            String inputLine = getCommandLine();
+            String command = inputLine.trim().toLowerCase();
+            switch (command) {
+                case "longreport":
+                    report(false);
+                    System.out.println("Полный отчет записан в файл");
+                    break;
+                case "shortreport":
+                    report(true);
+                    System.out.println("Краткий отчет записан в файл");
+                    break;
+                case "printvar":
+                    Depository.printVar();
+                    break;
+                case "sortvar":
+                    Depository.sortVar();
+                    break;
+                case "examples":
+                    examples(debug);
+                    break;
+                case "help":
+                    help();
+                    break;
+                case "?":
+                    help();
+                    break;
+                case "debug on":
+                    debug = true;
+                    System.out.println("Включен режим отладки");
+                    break;
+                case "debug off":
+                    debug = false;
+                    System.out.println("Выключен режим отладки");
+                    break;
+                case "exit":
+                    Depository.store();
+                    report(false);
+                    report(true);
+                    return;
+                case "":
+                    break;
+                default:
+                    print(parse(inputLine, debug));
+            }
         }
-
-
-        printOneVar(Parser.singleOperation("4 1"));
-        printOneVar(Parser.singleOperation("{-1,2,3}+{1,2,3}"));
-        try {
-
-            printOneVar(Parser.singleOperation("{-1,2,3}*{1,2}"));
-        } catch (ArithmeticException e) {
-            System.out.println(e.getMessage());
-            Depository.logWrite(e.getMessage());
-        }
-        printOneVar(Parser.singleOperation("{{1,2},{8,3}}*{{1,2},{8,3}}"));
-        System.out.println();
-        printOneVar(Parser.fromString("A = " + Parser.singleOperation("-1+2")));
-        printOneVar(Parser.fromString("B  " + Parser.singleOperation("4-1")));
-        printOneVar(Parser.fromString("A2 = " + Parser.singleOperation("4-1")));
-        printOneVar(Parser.fromString("A1 = " + Parser.singleOperation("{1,2,3}+{4,5,6}")));
-        printOneVar(Parser.fromString("C = " + Parser.singleOperation("{{-1,2},{8,-3}}*{{-1,2},{8,-3}}")));
-        printOneVar(Parser.fromString("D = " + Parser.singleOperation("-28+{{-1,2},{8,-3}}")));
-        printOneVar(Parser.fromString("E = " + Parser.singleOperation("{{-1,2},{8,-3}}+3")));
-        printOneVar(Parser.fromString("F = " + Parser.singleOperation("28+{1,2,3}")));
-        printOneVar(Parser.fromString("G = " + Parser.singleOperation("{{-1,2},{8,-3}}-3")));
-        printOneVar(Parser.fromString("H = " + Parser.singleOperation("3-{{-1,2},{8,-3}}")));
-        printOneVar(Parser.fromString("K = {{-1,2},{8,-3}}-3"));
-        printOneVar(Parser.fromString("L = 3-{{-1,2},{8,-3}}"));
-        printOneVar(Parser.fromString("M = {{-1,2},{8,-3}}"));
-        printOneVar(Parser.fromString("N = {{-1,2},{8,-3}}/0"));
-        printOneVar(Parser.fromString("O = {{-1,2},{8,-3}}*{{-1,2},{8,-3},{8,-3}}"));
-        printOneVar(Parser.fromString("P = {{-1,2},{8,-3}}*{-1,2}"));
-        printOneVar(Parser.fromString("R = {{-1,2},{8,-3}}*{-1,2,5}"));
-
-
-
-        Parser.fromString("printvar");
-        Parser.fromString("sortvar");
-        Depository.store();
-
-
-//        System.out.println("\nпроверка +-*/ операций со скалярами");
-//        printOneVar(new VarD("1").add(new VarD("2")));
-//        printOneVar(new VarD("9").sub(new VarD("7")));
-//        printOneVar(new VarD("1.5").mul(new VarD("2")));
-//        printOneVar(new VarD("-4").div(new VarD("-1")));
-//
-//
-//        String vec="{1,2,3}";
-//        String vec2="{1,2}";
-//
-//        System.out.println("\nпроверка  +-*/ операций с векторами слева и скалярами справа");
-//        printOneVar(new VarV(vec).add(new VarD("2")));
-//        printOneVar(new VarV(vec).sub(new VarD("1")));
-//        printOneVar(new VarV(vec).mul(new VarD("2")));
-//        printOneVar(new VarV(vec).div(new VarD("1")));
-//
-//        System.out.println("\nпроверка  +-*/ операций со скалярами слева и векторами справа");
-//        printOneVar(new VarD("1").add(new VarV(vec)));
-//        printOneVar(new VarD("2").sub(new VarV(vec)));
-//        printOneVar(new VarD("1").mul(new VarV(vec)));
-//        printOneVar(new VarD("2").div(new VarV(vec)));
-//
-//        System.out.println("\nпроверка  +-*/ операций с двумя векторами");
-//        printOneVar(new VarV(vec).add(new VarV(vec)));
-//        printOneVar(new VarV(vec).sub(new VarV(vec)));
-//        printOneVar(new VarV(vec).mul(new VarV(vec)));
-//        printOneVar(new VarV(vec).div(new VarV(vec)));
-//
-//        System.out.println("\nпроверка  +-*/ операций с двумя векторами c разной размерностью");
-//        printOneVar(new VarV(vec).add(new VarV(vec2)));
-//        printOneVar(new VarV(vec).sub(new VarV(vec2)));
-//        printOneVar(new VarV(vec).mul(new VarV(vec2)));
-//        printOneVar(new VarV(vec).div(new VarV(vec2)));
-//
-//        String mat="{{1,2},{8,3}}";
-//        vec="{1,2}";
-//        String mat2="{{1,2,3},{8,4,5},{4,5,6}}";
-//
-//        System.out.println("\nпроверка  +-*/ операций с матрицами слева и скалярами справа");
-//        printOneVar(new VarM(mat).add(new VarD("2")));
-//        printOneVar(new VarM(mat).sub(new VarD("1")));
-//        printOneVar(new VarM(mat).mul(new VarD("2")));
-//        printOneVar(new VarM(mat).div(new VarD("1")));
-//
-//        System.out.println("\nпроверка  +-*/ операций со скалярами слева и матрицами справа");
-//        printOneVar(new VarD("1").add(new VarM(mat)));
-//        printOneVar(new VarD("2").sub(new VarM(mat)));
-//        printOneVar(new VarD("1").mul(new VarM(mat)));
-//        printOneVar(new VarD("2").div(new VarM(mat)));
-//
-//
-//        System.out.println("\nпроверка  +-*/ операций с матрицами сдева и векторами справа");
-//        printOneVar(new VarM(mat).add(new VarV(vec)));
-//        printOneVar(new VarM(mat).sub(new VarV(vec)));
-//        printOneVar(new VarM(mat).mul(new VarV(vec)));
-//        printOneVar(new VarM(mat).div(new VarV(vec)));
-//
-//        System.out.println("\nпроверка  +-*/ операций с матрицами сдева и векторами справа с разной размерностью");
-//        printOneVar(new VarM(mat2).add(new VarV(vec)));
-//        printOneVar(new VarM(mat2).sub(new VarV(vec)));
-//        printOneVar(new VarM(mat2).mul(new VarV(vec)));
-//        printOneVar(new VarM(mat2).div(new VarV(vec)));
-//
-//        System.out.println("\nпроверка  +-*/ операций с матрицами справа и векторами слева");
-//        printOneVar(new VarV(vec).add(new VarM(mat)));
-//        printOneVar(new VarV(vec).sub(new VarM(mat)));
-//        printOneVar(new VarV(vec).mul(new VarM(mat)));
-//        printOneVar(new VarV(vec).div(new VarM(mat)));
-//
-//        System.out.println("\nпроверка  +-*/ операций с матрицами справа и векторами слева с разной размерностью");
-//        printOneVar(new VarV(vec).add(new VarM(mat2)));
-//        printOneVar(new VarV(vec).sub(new VarM(mat2)));
-//        printOneVar(new VarV(vec).mul(new VarM(mat2)));
-//        printOneVar(new VarV(vec).div(new VarM(mat2)));
-//
-//        System.out.println("\nпроверка  +-*/ операций с двумя матрицами");
-//        printOneVar(new VarM(mat).add(new VarM(mat)));
-//        printOneVar(new VarM(mat).sub(new VarM(mat)));
-//        printOneVar(new VarM(mat).mul(new VarM(mat)));
-//        printOneVar(new VarM(mat).div(new VarM(mat)));
-//
-//        System.out.println("\nпроверка  +-*/ операций с двумя матрицами с разной размерностью");
-//        printOneVar(new VarM(mat).add(new VarM(mat2)));
-//        printOneVar(new VarM(mat).sub(new VarM(mat2)));
-//        printOneVar(new VarM(mat).mul(new VarM(mat2)));
-//        printOneVar(new VarM(mat).div(new VarM(mat2)));
-
 
     }
 
+    private static void examples(boolean debug) {
+        String[] expessions = {
+                "A=2+5.3",
+                "B=A*3.5",
+                "B1=B+0.11*-5",
+                "B2=A/2-1",
+                "C=B+(A*2)",
+                "D=((C-0.15)-20)/(7-5)",
+                "E={2,3}*(D/2)",
+                "A1=-1*0",
+                "A2=2/0",
+                "A3={1,2,3}*{{1,2},{1,2},{1,2}}",
+                "A4={{1,2,3},{1,2,3}}*{{1,2,3},{1,2,3},{1,2,3}}",
+                "F={{1,2,3},{4,5,6},{7,8,9}}*(10+5)*(-1*(-4))-(2+1-3*(12-9))",
+                "G=2+5.3+1-9*8-1/6"
+        };
+        for (String expession : expessions) {
+            System.out.println("In:" + expession);
+            print(parse(expession, debug));
+        }
+    }
+
+    private static void print(String v) {
+        if (v != null) {
+            if (!Depository.block) {
+                Logger.getLogger().logWrite("Out: " + v);
+                Depository.outputLines.add(v);
+                System.out.println("Out: " + v);
+            }
+        }
+    }
+
+    private static String getCommandLine() {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String inputLine = null;
+        try {
+            inputLine = br.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return inputLine;
+    }
+
+    private static void help() {
+        String help = "\r\nУчебный проект Calc\r\n\r\nВведите выражение или команду:\r\n" +
+                "\"examples\" - запустить заготовленный набор выражений;\r\n" +
+                "\"exit\" - завершить программу;\r\n" +
+                "\"longreport\" - печатать в файл полный отчет;\r\n" +
+                "\"shortreport\" - печатать в файл краткий отчет;\r\n" +
+                "\"printvar\" - вывести на консоль коллекцию переменных;\r\n" +
+                "\"sortvar\" - вывести на консоль отсортированную коллекцию переменных;\r\n" +
+                "\"help\" или \"?\" - печатать эту подсказку;\r\n" +
+                "\"debug on\" - включить режим отладки;\r\n" +
+                "\"debug off\" - выключить режим отладки";
+        System.out.println(help);
+    }
+
+    private static void report(boolean needShortReport) {
+        Depository.programFinishTime = System.currentTimeMillis();
+        Writer writer = new Writer();
+        ReportBuilder reportBuilder = needShortReport ? new ShortReportBuilder() : new LongReportBuilder();
+        writer.setReportBuilder(reportBuilder);
+        writer.constructReport();
+        Report report = writer.getReport();
+        String f = needShortReport ? "shortreport.txt" : "longreport.html";
+        File reportFile = new File(System.getProperty("user.dir") + "/src/by/it/malyshev/calc/out/" + f);
+        File repDir = new File(System.getProperty("user.dir") + "/src/by/it/malyshev/calc/out");
+        if (!repDir.exists())
+            if (!repDir.mkdir()) return;
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(reportFile))) {
+            bufferedWriter.write(report.toString());
+            bufferedWriter.newLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    static String parse(String inputStr, boolean debug) {
+        if (!Depository.block) {
+            Depository.inputLines.add(inputStr);
+            Logger.getLogger().logWrite("In: " + inputStr);
+        }
+        inputStr = inputStr.trim();
+
+        try {
+            if (!bracketsCheck(inputStr)) {
+                throw new CalcError("Скобки расставлены неверно");
+            }
+        } catch (CalcError e) {
+            if (!Depository.block) {
+                System.out.println("Out: " + e.getMessage());
+                Logger.getLogger().logWrite("Out: " + e.getMessage());
+                Depository.outputLines.add(e.getMessage());
+            }
+            return null;
+        }
+        return brackets(inputStr, debug);
+    }
+
+    private static boolean bracketsCheck(String str) {
+        try {
+            char[] strToChar = str.toCharArray();
+            LinkedList<Character> l = new LinkedList<>();
+            for (char s : strToChar) {
+                switch (s) {
+                    case '{':
+                        l.push('{');
+                        break;
+                    case '(':
+                        l.push('(');
+                        break;
+                    case '}':
+                        if (l.pop() != '{') return false;
+                        break;
+                    case ')':
+                        if (l.pop() != '(') return false;
+                        break;
+                }
+            }
+            return l.isEmpty();
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+    }
+
+    private static String brackets(String inputStr, boolean debug) {
+        String res = null;
+        char[] inputStrToChar = inputStr.toCharArray();
+        int leftB = -1;
+        int rightB = -1;
+        for (int i = 0; i < inputStrToChar.length; i++) {
+            if (inputStrToChar[i] == '(') leftB = i;
+            else if (inputStrToChar[i] == ')') {
+                rightB = i;
+                break;
+            }
+        }
+        StringBuilder resultStr = new StringBuilder();
+        resultStr.append(inputStr);
+        if (leftB != -1 && rightB != -1) {
+            Parser parser = debug ? new Parser(resultStr.substring(leftB + 1, rightB), Parser.Debug.ON) : new Parser(resultStr.substring(leftB + 1, rightB));
+            ExecutorService executorService = Executors.newFixedThreadPool(1);
+            FutureTask<String> task = new FutureTask<>(parser);
+            executorService.submit(task);
+            try {
+                res = task.get();
+                if (res == null) {
+                    executorService.shutdown();
+                    return null;
+                }
+                return brackets(resultStr.replace(leftB, rightB + 1, res).toString(), debug);
+            } catch (InterruptedException | ExecutionException e) {
+                e.printStackTrace();
+            } finally {
+                executorService.shutdown();
+            }
+        }
+        Parser parser = debug ? new Parser(resultStr.toString(), Parser.Debug.ON) : new Parser(resultStr.toString());
+        ExecutorService executorService = Executors.newFixedThreadPool(1);
+        FutureTask<String> task = new FutureTask<>(parser);
+        executorService.submit(task);
+        try {
+            res = task.get();
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        } finally {
+            executorService.shutdown();
+        }
+        if (res == null) return null;
+        return res;
+    }
 
 }

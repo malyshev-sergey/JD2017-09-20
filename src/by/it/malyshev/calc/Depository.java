@@ -3,18 +3,31 @@ package by.it.malyshev.calc;
 import java.io.*;
 import java.util.*;
 
-class Depository {
+public class Depository {
 
     static Map<String, Var> variablesCollection = new HashMap<>();
-    private static File varsFile= new File(System.getProperty("user.dir") + "/src/by/it/malyshev/calc/vars.txt");
-    private static File logFile = new File(System.getProperty("user.dir") + "/src/by/it/malyshev/calc/log.txt");
-    private static LinkedList<String> logList = new LinkedList<>();
+    private static File varsFile = new File(System.getProperty("user.dir") + "/src/by/it/malyshev/calc/out/vars.txt");
+    public static long programStartTime;
+    public static long programFinishTime;
+    public static List<String> inputLines = new ArrayList<>();
+    public static List<String> outputLines = new ArrayList<>();
+    static boolean block;
 
     static void printVar() {
         System.out.println("\nКоллекция переменных");
         for (Map.Entry<String, Var> stringVarEntry : variablesCollection.entrySet())
             System.out.println(stringVarEntry);
     }
+
+    public static String[] varColtoString() {
+        TreeMap<String, Var> sortedVariables = new TreeMap<>(variablesCollection);
+        String[] res = new String[sortedVariables.size()];
+        int counter = 0;
+        for (Map.Entry<String, Var> stringVarEntry : sortedVariables.entrySet())
+            res[counter++] = stringVarEntry.toString();
+        return res;
+    }
+
 
     static void sortVar() {
         System.out.println("\nОтсортированная коллекция переменных");
@@ -24,12 +37,13 @@ class Depository {
     }
 
 
-
-
-    static void store(){
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(varsFile))){
-            for (Map.Entry<String, Var> varEntry: Depository.variablesCollection.entrySet()) {
-                bufferedWriter.write(varEntry.getKey()+"="+varEntry.getValue());
+    static void store() {
+        File varDir = new File(System.getProperty("user.dir") + "/src/by/it/malyshev/calc/out");
+        if (!varDir.exists())
+            if (!varDir.mkdir()) return;
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(varsFile))) {
+            for (Map.Entry<String, Var> varEntry : Depository.variablesCollection.entrySet()) {
+                bufferedWriter.write(varEntry.getKey() + "=" + varEntry.getValue());
                 bufferedWriter.newLine();
             }
         } catch (IOException e) {
@@ -37,47 +51,21 @@ class Depository {
         }
 
     }
-    static void restore(){
+
+    static void restore() {
         String inputLine;
-        try(BufferedReader bufferedReader = new BufferedReader(new FileReader(varsFile))){
-            while((inputLine = bufferedReader.readLine()) != null) {
-                Parser.fromString(inputLine);
+        block = true;
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(varsFile))) {
+            while ((inputLine = bufferedReader.readLine()) != null) {
+                ConsoleRunner.parse(inputLine, false);
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+
+        } catch (Exception e) {
+            System.out.println("Пока нет файла с сохраненными переменными");
+            block = false;
         }
+        block = false;
     }
-
-
-
-    static void logWrite(String str) {
-        logList.clear();
-        if (logFile.exists()) {
-            try (BufferedReader bufferedReader = new BufferedReader(new FileReader(logFile))) {
-                String line;
-                while((line = bufferedReader.readLine()) != null){
-                    logList.addLast(line);
-                }
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        logList.addLast(str);
-        while(logList.size()>50) logList.pop();
-        try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(logFile))) {
-//            int counter=0;
-            for (String v : logList) {
-                bufferedWriter.write(v);
-              bufferedWriter.newLine();
-
-//                if (counter>1) counter=0;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
 
 
 }

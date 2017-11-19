@@ -1,126 +1,151 @@
 package by.it.malyshev.calc;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.concurrent.Callable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-class Parser {
 
-    static Var fromString(String strInput) {
-        Depository.logWrite("Input: "+strInput);
-        Var res;
-        if (!(strInput.trim().equals("printvar")) &&
-                !(strInput.trim().equals("sortvar"))) {
+class Parser implements Callable<String> {
 
+    private List<String> operands;
+    private List<String> operations;
+    private final List<String> prior = new ArrayList<>(Arrays.asList("=", "+", "-", "*", "/"));
+    private String expr;
+    private boolean debugOn;
 
-            Pattern p = Pattern.compile("=");
-            Matcher m = p.matcher(strInput);
-            try {
-                if (!m.find()) {
-                    throw new CalcError("Нет такой операции");
-                }
-            } catch (CalcError e) {
-                System.out.println(e.getMessage());
-                Depository.logWrite(e.getMessage());
-                return null;
-            }
+    public Parser(String expression, Debug debugStatus) {
+        this.expr = expression;
+        this.debugOn = debugStatus == Debug.ON;
+    }
 
-            String[] strOperands = strInput.trim().split("=");
-            if (strOperands[1].trim().equals("null")) return null;
+    public Parser(String expression) {
+        this(expression, Debug.OFF);
+    }
 
-            Pattern p1 = Pattern.compile(Patterns.exAny);
-            Matcher m1 = p1.matcher(strOperands[1]);
-            try {
-                if (!m1.find()) {
-                    throw new CalcError("Нет такой операции");
-                }
-            } catch (CalcError e) {
-                System.out.println(e.getMessage());
-                Depository.logWrite(e.getMessage());
-                return null;
-            }
-            int counter = 0;
-            m1.reset();
-            try {
-                while (m1.find()) counter++;
-                if (counter > 1) {
-                    Depository.variablesCollection.put(strOperands[0], singleOperation(strOperands[1]));
-                    return singleOperation(strOperands[1]);
-                } else {
-                    Depository.variablesCollection.put(strOperands[0], selectTypeOfOperand(strOperands[1]));
-                    res= selectTypeOfOperand(strOperands[1]);
-//                    Depository.logWrite(strOperands[0]+" = " + selectTypeOfOperand(strOperands[1]));
-                    return res;
-                }
-            } catch (ArithmeticException e) {
-                System.out.println(e.getMessage());
-                Depository.logWrite(e.getMessage());
-                return null;
-            }
-
-
-        } else if (strInput.trim().equals("printvar")) Depository.printVar();
-        else if (strInput.trim().equals("sortvar")) Depository.sortVar();
-        return null;
+    enum Debug {
+        ON, OFF
     }
 
 
-    static Var singleOperation(String strSingleOperation) {
-        Var res;
-        try {
-            Pattern p = Pattern.compile(Patterns.exAny);
-            Matcher m = p.matcher(strSingleOperation);
-            if (!m.find()) {
-                throw new CalcError("Нет такой операции");
-            }
-            String strOper = strSingleOperation.substring(strSingleOperation.indexOf(m.group())
-                    + m.group().length()).trim();
+    @Override
+    public String call() throws Exception {
+        Var res = calc(expr);
+        if (res == null) return null;
+        return res.toString();
+    }
 
-            m.reset();
-            int i = 0;
-            String[] strOperands = new String[2];
-            while (m.find()) {
-                strOperands[i++] = m.group();
+    private VarCreator getVarCreator(String strVar) {
+        VarCreator varCreator = null;
+        if (strVar.matches(Patterns.exMat))
+            varCreator = new VarCreatorVarM();
+        if (strVar.matches(Patterns.exVec))
+            varCreator = new VarCreatorVarV();
+        if (strVar.matches(Patterns.exVal))
+            varCreator = new VarCreatorVarD();
+        return varCreator;
+    }
+
+    private Var getVar(String str) {
+        Var res;
+        VarCreator varCreator = getVarCreator(str);
+        if (varCreator != null) {
+            res = varCreator.factoryMethod(str);
+        } else
+            res = Var.getVar(str);
+        return res;
+    }
+
+
+    Var getVarTest(String strVar) {
+        return getVar(strVar);
+    }
+
+
+    private int getPositionOperation() {
+        int currentPrior = -1;
+        int currentPosition = -1;
+        for (int i = 0; i < operations.size(); i++) {
+            String currentOperation = operations.get(i);
+            if (currentPrior < prior.indexOf(currentOperation)) {
+                currentPosition = i;
+                currentPrior = prior.indexOf(currentOperation);
             }
-            Pattern p1 = Pattern.compile(Patterns.exOper);
-            Matcher m1 = p1.matcher(strOper);
-            if (m1.find()) {
-                switch (m1.group()) {
-                    case "+":
-                        res= selectTypeOfOperand(strOperands[0]).add(selectTypeOfOperand(strOperands[1]));
-//                        Depository.logWrite(" Output: "+res.toString()+"\r\n");
-                        return res;
-                    case "-":
-                        if (strOperands[1].trim().charAt(0) == '-') strOperands[1] = strOperands[1].trim().substring(1);
-                        res= selectTypeOfOperand(strOperands[0]).sub(selectTypeOfOperand(strOperands[1]));
-//                        Depository.logWrite(selectTypeOfOperand(strOperands[0])+" - " + selectTypeOfOperand(strOperands[1])+" = "+res.toString());
-//                        Depository.logWrite(" Output: "+res.toString()+"\r\n");
-                        return res;
-                    case "*":
-                        res= selectTypeOfOperand(strOperands[0]).mul(selectTypeOfOperand(strOperands[1]));
-//                        Depository.logWrite(selectTypeOfOperand(strOperands[0])+" * " + selectTypeOfOperand(strOperands[1])+" = "+res.toString());
-//                        Depository.logWrite(" Output: "+res.toString()+"\r\n");
-                        return res;
-                    case "/":
-                        res= selectTypeOfOperand(strOperands[0]).div(selectTypeOfOperand(strOperands[1]));
-//                        Depository.logWrite(selectTypeOfOperand(strOperands[0])+" / " + selectTypeOfOperand(strOperands[1])+" = "+res.toString());
-//                        Depository.logWrite(" Output: "+res.toString()+"\r\n");
-                        return res;
-                }
-           } else throw new CalcError("Нет такой операции");
-        } catch (CalcError e) {
-            System.out.println(e.getMessage());
-            Depository.logWrite(e.getMessage());
-            return null;
         }
-        return null;
+        return currentPosition;
     }
 
 
-    private static Var selectTypeOfOperand(String strOperand) {
-        if (strOperand.trim().length() > 2 && strOperand.trim().substring(0, 2).equals("{{"))
-            return new VarM(strOperand.trim());
-        else if (strOperand.trim().substring(0, 1).equals("{")) return new VarV(strOperand.trim());
-        else return new VarD(strOperand.trim());
+    Var calc(String expr) {
+        Var result = null;
+        try {
+            if (expr.trim().matches(Patterns.exAny)) return getVar(expr);
+
+            List<String> test = new ArrayList<>(Arrays.asList(expr.split("=")));
+            if (test.size() > 1) {
+                if (!test.get(0).matches(Patterns.exVar))
+                    throw new CalcError("Недопустимое имя переменной " + test.get(0));
+                if (test.size() > 2) throw new CalcError("Неизвестное выражение " + expr);
+            }
+            operands = new ArrayList<>(Arrays.asList(expr.split(Patterns.exOper)));
+            Matcher m = Pattern.compile(Patterns.exOper).matcher(expr);
+            operations = new ArrayList<>();
+            while (m.find())
+                operations.add(m.group());
+            if (operands.size() != operations.size() + 1) throw new CalcError("Неизвестное выражение " + expr);
+            if (debugOn) System.out.printf("\tDEBUG: %s operand=%s operation=%s\n", expr, operands, operations);
+            while (operations.size() > 0) {
+                if (debugOn) debug();
+                int currentPosition = getPositionOperation();
+                String strOne = operands.get(currentPosition);
+                String operation = operations.remove(currentPosition);
+                String strTwo = operands.remove(currentPosition + 1);
+                Var one = getVar(strOne.trim());
+                Var two = getVar(strTwo.trim());
+                if (operation.equals("=") && two != null) {
+                    two.saveVar(strOne.trim());
+                    return two;
+                }
+                if (one == null)
+                    throw new CalcError("Неизвестное значение " + strOne.trim());
+                if (two == null)
+                    throw new CalcError("Неизвеcтное значение " + strTwo.trim());
+                switch (operation) {
+                    case "+":
+                        result = one.add(two);
+                        break;
+                    case "-":
+                        result = one.sub(two);
+                        break;
+                    case "*":
+                        result = one.mul(two);
+                        break;
+                    case "/":
+                        result = one.div(two);
+                        break;
+                }
+                operands.set(currentPosition, result != null ? result.toString() : null);
+            }
+            if (result == null) throw new CalcError("Неизвестное выражение " + expr);
+        } catch (ArithmeticException | CalcError e) {
+            System.out.flush();
+            if (!Depository.block) {
+                System.out.println("Out: " + e.getMessage());
+                Logger.getLogger().logWrite("Out: " + e.getMessage());
+                Depository.outputLines.add(e.getMessage());
+            }
+        }
+        return result;
+    }
+
+    private void debug() {
+        StringBuilder sb = new StringBuilder("\t\tdebug: " + operands.get(0));
+        for (int i = 0; i < operations.size(); i++) {
+            sb.append(operations.get(i)).append(operands.get(i + 1));
+        }
+        System.out.println(sb.toString());
     }
 
 }
