@@ -40,7 +40,7 @@
     </complexType>
 
     <complexType name="STRmarkers">
-        <all>
+        <sequence>
             <element name="DYS393" type="positiveInteger"/>
             <element name="DYS390" type="positiveInteger"/>
             <element name="DYS19" type="positiveInteger"/>
@@ -53,6 +53,6 @@
             <element name="DYS389i" type="positiveInteger"/>
             <element name="DYS392" type="positiveInteger"/>
             <element name="DYS389ii" type="positiveInteger"/>
-        </all>
+        </sequence>
     </complexType>
 </schema>
