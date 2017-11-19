@@ -1,8 +1,6 @@
 package by.it.govor.calc;
 
-/**
- * Created by User on 15.10.2017.
- */
+
 interface IOperation {
     Var add(Var var1);
 

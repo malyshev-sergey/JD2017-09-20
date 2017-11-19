@@ -1,12 +1,20 @@
-package by.it.govor.jd02_01;
+package by.it.govor.jd02_03;
 
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Runner {
+
     public static void main(String[] args) {
+        for (int i = 0; i <5 ; i++) {
+            Cashier cas = new Cashier(i);
+            new Thread(cas).start();
+        }
+
+
         int nubler =0;
         boolean b=false;
         List<Buyer> buyers = new ArrayList<>();

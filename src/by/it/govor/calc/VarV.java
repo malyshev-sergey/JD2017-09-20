@@ -3,9 +3,7 @@ package by.it.govor.calc;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Created by User on 15.10.2017.
- */
+
 class VarV extends Var implements IVariable {
 
     private double[] value;
