@@ -67,6 +67,8 @@ class TaskC {
     }
 
     public static void solveTaskC4(int[][] m, int n) {
+        int[][] mU = new int[n][n];
+
         System.out.println("Найдем максимальный элемент в матрице");
         int max = 0;
         for (int i = 0; i < m.length; i++) {
@@ -77,15 +79,34 @@ class TaskC {
             }
         }
         System.out.println("Максимальный элемент в матрице равен " + max);
+        System.out.println("Исходная матрица:");
+        for (int i = 0; i < m.length; i++) {
+            for (int j = 0; j < m[0].length; j++) {
+                System.out.print(m[i][j] + " ");
+            }
+            System.out.println();
+        }
         System.out.println("Удалим все строки и столбцы, которые содержат максимальный элемент");
         for (int i = 0; i < m.length; i++) {
             for (int j = 0; j < m[0].length; j++) {
                 if (m[i][j] == max) {
+                    mU = new int[mU.length - 1][mU[0].length - 1];
+                    for (int k = 0; k < mU.length; k++) {
+                        for (int l = 0; l < mU[0].length; l++) {
+                            if (k == i && l == j) {
+                                mU[k][l] = m[k + 1][l + 1];
+                            } else if (k == i) {
+                                mU[k][l] = m[k + 1][l];
+                            } else if (l == j) {
+                                mU[k][l] = m[k][l + 1];
+                            }
+                        }
 
+                    }
                 }
-                System.out.println(m[i][j] + " ");
+
             }
-            System.out.println();
+
         }
     }
 
@@ -120,7 +141,7 @@ class TaskC {
     }
 
     public static void solveTaskC6(int[][] m, int n) {
-        System.out.println("Переместим элементы матрицы равные 0 в конец матрицы");
+        System.out.println("Переместим элементы матрицы равные 0 в конец строки матрицы");
         for (int i = 0; i < m.length; i++) {
             for (int j = 0; j < m[0].length; j++) {
                 int a;
