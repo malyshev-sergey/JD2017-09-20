@@ -37,9 +37,9 @@ public class RP_SAX extends DefaultHandler {
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
         System.out.print(tab + "<" + qName);
         for (int i=0; i<attributes.getLength(); i++){
-            String attName = attributes.getLocalName(i);
-            String attValue = attributes.getValue(i);
-            System.out.print(" " + attName + "=" + attValue);
+            String attName=attributes.getLocalName(i);
+            String attValue=attributes.getValue(i);
+            System.out.print(" "+attName+"="+attValue);
         }
 
         tab = tab + "\t";

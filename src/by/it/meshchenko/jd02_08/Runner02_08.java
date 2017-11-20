@@ -25,11 +25,7 @@ public class Runner02_08 {
         // Соответственно будут RP_SAX, RP_StAX, RP_DOM парсер
 
         final String XML_PATH = "src/by/it/meshchenko/jd02_07/ShoppingCenters.xml";
-        System.out.println("SAX *************************");
+
         RP_SAX.parse(XML_PATH);
-        System.out.println("\nStAX *************************");
-        RP_StAX.parse(XML_PATH);
-        System.out.println("\nDOM *************************");
-        RP_DOM.parse(XML_PATH);
     }
 }
