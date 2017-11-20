@@ -9,11 +9,13 @@ public class Runner2_08 {
 
         String fileName = "src/by/it/shelkovich/jd2_08/xsd/data.xml";
         XMLPrinter printer = new SAXPrinter(fileName);
-        //printer.print();
+        printer.print();
 
         printer = new StAXPrinter(fileName);
         printer.print();
 
+        printer = new DOMPrinter(fileName);
+        printer.print();
 
 
     }

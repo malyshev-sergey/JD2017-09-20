@@ -51,8 +51,17 @@ public class StAXPrinter extends XMLPrinter {
         StringBuilder tab = new StringBuilder(init);
 
         tag.append("<").append(reader.getLocalName()).append(" ");
+        int count = reader.getNamespaceCount();
+
+
+        for (int i = 0; i < reader.getNamespaceCount(); i++) {
+            String prefix = reader.getNamespacePrefix(i);
+            if (prefix == null) prefix="";
+            else prefix=":"+prefix;
+            tag.append("xmlns").append(prefix).append("=\"").append(reader.getNamespaceURI(i)).append("\" ");
+        }
         for (int i = 0; i < reader.getAttributeCount(); i++) {
-            tag.append(reader.getAttributeLocalName(i)).append("=\"").append(reader.getAttributeValue(i)).append("\" ");
+            tag.append(reader.getAttributePrefix(i)).append(":").append(reader.getAttributeLocalName(i)).append("=\"").append(reader.getAttributeValue(i)).append("\" ");
         }
         tag.deleteCharAt(tag.length()-1).append(">");
         for (int i = 0; i < level ; i++) {
