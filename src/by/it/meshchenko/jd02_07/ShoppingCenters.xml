@@ -16,6 +16,12 @@
                 <Price>900</Price>
                 <isRented>false</isRented>
             </Room>
+            <Room>
+                <RoomName>C57</RoomName>
+                <Square>154.4</Square>
+                <Price>970</Price>
+                <isRented>false</isRented>
+            </Room>
         </Rooms>
     </ShoppingCenter>
 </ShoppingCenters>
