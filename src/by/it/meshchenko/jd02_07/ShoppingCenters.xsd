@@ -24,7 +24,7 @@
     </complexType>
     <complexType name="Rooms">
         <sequence>
-            <element name="Room" type="tns:Room" />
+            <element name="Room" type="tns:Room" maxOccurs="unbounded" />
         </sequence>
     </complexType>
     <complexType name="Room">
