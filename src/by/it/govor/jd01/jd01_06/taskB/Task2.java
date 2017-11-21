@@ -1,9 +1,9 @@
-package by.it.govor.jd_01_06.taskB;
+package by.it.govor.jd01.jd01_06.taskB;
 
 
 import java.util.Arrays;
 
-import static by.it.govor.jd_01_06.Date.STR;
+import static by.it.govor.jd01.jd01_06.Date.STR;
 
 public class Task2 {
      static void task() {

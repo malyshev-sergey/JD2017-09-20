@@ -1,4 +1,4 @@
-package by.it.govor.jd_02_06;
+package by.it.govor.jd02_06;
 
 
 public class Main {

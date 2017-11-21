@@ -1,4 +1,4 @@
-package by.it.govor.jd_01_06;
+package by.it.govor.jd01.jd01_06;
 
 /**
  * Created by User on 05.10.2017.

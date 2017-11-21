@@ -1,4 +1,4 @@
-package by.it.govor.jd_02_05;
+package by.it.govor.jd02_05;
 
 
 public interface txt {

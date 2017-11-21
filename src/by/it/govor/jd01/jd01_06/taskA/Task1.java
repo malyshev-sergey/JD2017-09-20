@@ -1,8 +1,8 @@
-package by.it.govor.jd_01_06.taskA;
+package by.it.govor.jd01.jd01_06.taskA;
 
-//import by.it.govor.jd_01_06.Date;
+//import by.it.govor.jd01.jd01_06.Date;
 
-import by.it.govor.jd_01_06.Date;
+import by.it.govor.jd01.jd01_06.Date;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

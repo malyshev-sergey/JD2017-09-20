@@ -1,8 +1,5 @@
-package by.it.govor.jd_02_06;
+package by.it.govor.jd02_06;
 
-
-import by.it.govor.jd_01_06.Date;
-import by.it.govor.jd_02_05.NowDate;
 
 import java.io.*;
 import java.text.DateFormat;
@@ -29,7 +26,7 @@ class Logger {
     }
 
     private void writeError(String error) {
-        File file = new File(System.getProperty("user.dir") + "/src/by/it/govor/jd_02_06/log.txt");
+        File file = new File(System.getProperty("user.dir") + "/src/by/it/govor/jd02_06/log.txt");
         try( FileOutputStream outFile = new FileOutputStream(file);
              BufferedWriter write = new BufferedWriter(new OutputStreamWriter(outFile)))  {
 

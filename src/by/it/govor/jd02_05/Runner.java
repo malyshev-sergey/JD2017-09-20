@@ -1,8 +1,6 @@
-package by.it.govor.jd_02_05;
+package by.it.govor.jd02_05;
 
 
-        import java.text.DateFormat;
-        import java.util.Date;
         import java.util.Locale;
 
 public class Runner {

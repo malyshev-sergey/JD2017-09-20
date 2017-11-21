@@ -1,6 +1,4 @@
-package by.it.govor.jd_02_05;
-
-import sun.security.jca.GetInstance;
+package by.it.govor.jd02_05;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -8,7 +6,7 @@ import java.util.ResourceBundle;
 public enum  ResMan {
     INSTANCE;
     private ResourceBundle resurs;
-    private final String p ="by.it.govor.jd_02_05.text";
+    private final String p ="by.it.govor.jd02_05.text";
     ResMan(){
 
         resurs = ResourceBundle.getBundle(p, Locale.getDefault());
