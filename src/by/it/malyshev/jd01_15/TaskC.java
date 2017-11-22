@@ -95,7 +95,7 @@ public class TaskC {
         int counterFiles = 0;
         int counterFolders = 0;
         long length = 0;
-        SimpleDateFormat dateFormat = new SimpleDateFormat("converter.MM.yyyy KK:mm:ss");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy KK:mm:ss");
 
         FileSystemView view = FileSystemView.getFileSystemView();
         System.out.print ("\nТом в устройстве "+p.getRoot().toString().substring(0,1).toUpperCase());

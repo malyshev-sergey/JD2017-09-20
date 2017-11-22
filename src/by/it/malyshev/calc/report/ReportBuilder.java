@@ -10,7 +10,7 @@ public abstract class ReportBuilder {
     void createNewReport() { report = new Report(); }
 
     StringBuilder sb = new StringBuilder();
-    SimpleDateFormat dateFormat = new SimpleDateFormat("converter.MM.yyyy HH:mm:ss");
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
 
     public abstract void addHeader();
     public abstract void addProgramStartTime();
