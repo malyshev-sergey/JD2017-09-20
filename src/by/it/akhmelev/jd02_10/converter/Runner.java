@@ -15,8 +15,8 @@ public class Runner {
         AbstractConverter<Students> converter =
                 converterFactory.createConverterBuilder("xml_to_json",Students.class);
         file=new File(src+"jd02_09/generate/xml_data.xml");
-        converter.buildConverter(file);
-        String json=converter.getConverterResult();
+        converter.fromText(file);
+        String json=converter.toText();
         System.out.println(json);
 
         //из XML-файла в JSON-файл
@@ -29,15 +29,15 @@ public class Runner {
         System.out.println("\n--- из JSON-файла в XML-текст\n");
         converter = converterFactory.createConverterBuilder("json_to_xml",Students.class);
         file=new File(src+"jd02_09/generate/json_data.json");
-        converter.buildConverter(file);
-        String xml=converter.getConverterResult();
+        converter.fromText(file);
+        String xml=converter.toText();
         System.out.println(xml);
 
         //из JSON-текста в XML-текст
         System.out.println("\n--- из JSON-текста в XML-текст\n");
         converter = converterFactory.createConverterBuilder("json_to_xml",Students.class);
-        converter.buildConverter(json); //берем из предыдущего вызова конвертера
-        xml=converter.getConverterResult();
+        converter.fromText(json); //берем из предыдущего вызова конвертера
+        xml=converter.toText();
         System.out.println(xml);
 
     }

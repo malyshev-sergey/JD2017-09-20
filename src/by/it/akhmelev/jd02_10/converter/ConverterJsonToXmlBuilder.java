@@ -17,14 +17,14 @@ class ConverterJsonToXmlBuilder<T> extends AbstractConverter<T> {
 
     //построение по данным из строки
     @Override
-    public void buildConverter(String txtData) {
+    public void fromText(String txtData) {
         Gson gson = new GsonBuilder().serializeNulls().setPrettyPrinting().create();
         bean = gson.fromJson(txtData, getBeanClass());
     }
 
     //запись результата в строку
     @Override
-    public String getConverterResult() {
+    public String toText() {
         StringWriter stringWriter = new StringWriter();
         try {
             JAXBContext jc = JAXBContext.newInstance(getBeanClass());

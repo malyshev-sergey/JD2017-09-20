@@ -15,7 +15,7 @@ class ConverterXmlToJsonBuilder<T> extends AbstractConverter<T> {
 
     //построение по данным из строки
     @Override
-    public void buildConverter(String txtData) {
+    public void fromText(String txtData) {
         try {
             StringReader stringReader = new StringReader(txtData);
             JAXBContext jc = JAXBContext.newInstance(getBeanClass());
@@ -31,7 +31,7 @@ class ConverterXmlToJsonBuilder<T> extends AbstractConverter<T> {
     }
     //запись результата в строку
     @Override
-    public String getConverterResult() {
+    public String toText() {
         Gson gson = new GsonBuilder().serializeNulls().setPrettyPrinting().create();
         return gson.toJson(bean);
     }

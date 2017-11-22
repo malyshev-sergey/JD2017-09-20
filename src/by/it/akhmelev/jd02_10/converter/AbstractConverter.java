@@ -6,9 +6,9 @@ abstract class AbstractConverter<T> {
     //тут будут данные, т.е. сам bean
     T bean;
 
-    //поле класса нужно на случай, т.к. может быть bean = null;
+    //поле класса нужно, т.к. может быть bean = null;
     private final Class<T> beanClass;
-    //можно обойти этот недостаток, но довольно сложно:
+    //можно попробовать обойти этот недостаток, но довольно сложно:
     //https://habrahabr.ru/post/66593/
 
     AbstractConverter(Class<T> beanClass) {
@@ -22,14 +22,14 @@ abstract class AbstractConverter<T> {
     }
 
     //построение по данным из строки
-    abstract public void buildConverter(String txtData);
+    abstract public void fromText(String txtData);
 
     //запись результата в строку
-    abstract public String getConverterResult();
+    abstract public String toText();
 
     //построение по данным из файла
     //метод не абстрактный, т.к. одинаков для всех)
-    void buildConverter(File file) {
+    void fromText(File file) {
         String txtData = "";
         try (BufferedReader reader =
                      new BufferedReader(
@@ -42,8 +42,8 @@ abstract class AbstractConverter<T> {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        //специализированный builder (тот что здесь абстрактный)
-        buildConverter(txtData);
+        //специализированный метод (тот что здесь абстрактный)
+        fromText(txtData);
     }
 
     //запись результата в файл
@@ -53,8 +53,8 @@ abstract class AbstractConverter<T> {
                      new BufferedWriter(
                              new FileWriter(endFile))) {
             bufferedWriter.write(
-                    //специализированный конвертер (тот что здесь абстрактный)
-                    getConverterResult()
+                    //специализированный метод (тот что здесь абстрактный)
+                    toText()
             );
         } catch (IOException e) {
             e.printStackTrace();
