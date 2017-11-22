@@ -6,23 +6,15 @@ abstract class AbstractConverter<T> {
     //тут данные, т.е. сам bean
     T bean;
     //поле класса нужно на случай, когда bean = null;
-    private Class beanClass;
+    private Class<T> beanClass;
     //можно обойти этот недостаток, но довльно сложно:
     //https://habrahabr.ru/post/66593/
 
-    AbstractConverter(Class beanClass) {
+    AbstractConverter(Class<T> beanClass) {
         bean = null;
         this.beanClass = beanClass;
     }
 
-    AbstractConverter(T bean) {
-        this.bean = bean;
-        this.beanClass = bean.getClass();
-    }
-
-    T getBean() {
-        return bean;
-    }
 
     Class getBeanClass() {
         return beanClass;

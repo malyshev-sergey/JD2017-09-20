@@ -12,9 +12,7 @@ class ConverterXmlToJsonBuilder extends AbstractConverter {
     ConverterXmlToJsonBuilder(Class beanClass) {
         super(beanClass);
     }
-    public ConverterXmlToJsonBuilder(Object bean) {
-        super(bean);
-    }
+
     //построение по данным из строки
     @Override
     public void buildConverter(String txtData) {
@@ -32,7 +30,7 @@ class ConverterXmlToJsonBuilder extends AbstractConverter {
     @Override
     public String getConverterResult() {
         Gson gson = new GsonBuilder().serializeNulls().setPrettyPrinting().create();
-        return gson.toJson(getBean());
+        return gson.toJson(bean);
     }
 
 }

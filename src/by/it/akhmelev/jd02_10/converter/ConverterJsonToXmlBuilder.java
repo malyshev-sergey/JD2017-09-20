@@ -15,10 +15,6 @@ class ConverterJsonToXmlBuilder extends AbstractConverter {
         super(beanClass);
     }
 
-    public ConverterJsonToXmlBuilder(Object bean) {
-        super(bean);
-    }
-
     //построение по данным из строки
     @Override
     public void buildConverter(String txtData) {
@@ -29,13 +25,12 @@ class ConverterJsonToXmlBuilder extends AbstractConverter {
     //запись результата в строку
     @Override
     public String getConverterResult() {
-        JAXBContext jc = null;
         StringWriter stringWriter = new StringWriter();
         try {
-            jc = JAXBContext.newInstance(getBeanClass());
+            JAXBContext jc = JAXBContext.newInstance(getBeanClass());
             Marshaller marshaller = jc.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-            marshaller.marshal(getBean(), stringWriter);
+            marshaller.marshal(bean, stringWriter);
         } catch (JAXBException e) {
             e.printStackTrace();
         }
