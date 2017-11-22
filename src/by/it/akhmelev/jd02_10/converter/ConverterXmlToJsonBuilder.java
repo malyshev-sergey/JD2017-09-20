@@ -8,8 +8,8 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import java.io.*;
 
-class ConverterXmlToJsonBuilder extends AbstractConverter {
-    ConverterXmlToJsonBuilder(Class beanClass) {
+class ConverterXmlToJsonBuilder<T> extends AbstractConverter<T> {
+    ConverterXmlToJsonBuilder(Class<T> beanClass) {
         super(beanClass);
     }
 
@@ -20,7 +20,10 @@ class ConverterXmlToJsonBuilder extends AbstractConverter {
             StringReader stringReader = new StringReader(txtData);
             JAXBContext jc = JAXBContext.newInstance(getBeanClass());
             Unmarshaller u = jc.createUnmarshaller();
-            bean = u.unmarshal(stringReader);
+            Object oBean=u.unmarshal(stringReader);
+            //вместо такого приведения (T)oBean,
+            //используем такое (чтобы подавить warnings)
+            bean = getBeanClass().cast(oBean);
 
         } catch (JAXBException e) {
             e.printStackTrace();

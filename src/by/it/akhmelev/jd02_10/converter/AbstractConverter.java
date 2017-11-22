@@ -3,11 +3,12 @@ package by.it.akhmelev.jd02_10.converter;
 import java.io.*;
 
 abstract class AbstractConverter<T> {
-    //тут данные, т.е. сам bean
+    //тут будут данные, т.е. сам bean
     T bean;
-    //поле класса нужно на случай, когда bean = null;
-    private Class<T> beanClass;
-    //можно обойти этот недостаток, но довльно сложно:
+
+    //поле класса нужно на случай, т.к. может быть bean = null;
+    private final Class<T> beanClass;
+    //можно обойти этот недостаток, но довольно сложно:
     //https://habrahabr.ru/post/66593/
 
     AbstractConverter(Class<T> beanClass) {
@@ -16,7 +17,7 @@ abstract class AbstractConverter<T> {
     }
 
 
-    Class getBeanClass() {
+    Class<T> getBeanClass() {
         return beanClass;
     }
 

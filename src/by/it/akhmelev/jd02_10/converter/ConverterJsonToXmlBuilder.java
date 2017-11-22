@@ -8,10 +8,10 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import java.io.*;
 
-class ConverterJsonToXmlBuilder extends AbstractConverter {
+class ConverterJsonToXmlBuilder<T> extends AbstractConverter<T> {
 
 
-    ConverterJsonToXmlBuilder(Class beanClass) {
+    ConverterJsonToXmlBuilder(Class<T> beanClass) {
         super(beanClass);
     }
 
