@@ -1,11 +1,10 @@
 package by.it.mustaphin.jd02_09.JAXB;
 
 import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-@XmlRootElement
+//@XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-//@XmlType(name = "Header", propOrder = {""})
+@XmlType(name = "Header", propOrder = {"value"})
 public class Header {
 
     @XmlAttribute(required = true)
@@ -13,4 +12,17 @@ public class Header {
 
     @XmlValue
     private String value;
+
+    public Header() {}
+
+    public int getHeaderNumber() {return headerNumber;}
+
+    public void setHeaderNumber(int headerNumber) {this.headerNumber = headerNumber;}
+
+    public String getValue() {return value;}
+
+    public void setValue(String value) {this.value = value;}
+
+    @Override
+    public String toString() {return "Header #" + headerNumber + " " + value;}
 }
