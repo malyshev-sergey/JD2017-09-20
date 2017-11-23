@@ -1,4 +1,4 @@
-package by.it.mustaphin.jd02_09;
+package by.it.mustaphin.jd02_09.XSL;
 
 import by.it.mustaphin.jd02_09.XSL.XSLTranslator;
 
