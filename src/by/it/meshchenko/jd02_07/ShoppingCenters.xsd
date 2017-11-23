@@ -16,7 +16,7 @@
     <complexType name="ShoppingCenter">
         <sequence>
             <element name="Name" type="string" />
-            <element name="Adress" type="string" />
+            <element name="Address" type="string" />
             <element name="Lat" type="string" />
             <element name="Lng" type="string" />
             <element name="Rooms" type="tns:Rooms" />
