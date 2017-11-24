@@ -8,21 +8,21 @@ import java.util.ArrayList;
 public class ShoppingCenters {
 
     @XmlElement(name="ShoppingCenter")
-    private ArrayList<ShoppingCenter> list = new ArrayList<ShoppingCenter>();
+    private ArrayList<ShoppingCenter> shoppingCenters = new ArrayList<ShoppingCenter>();
 
     public ShoppingCenters() {
         super();
     }
 
     public void setList(ArrayList<ShoppingCenter> list) {
-        this.list = list;
+        this.shoppingCenters = list;
     }
     public boolean add(ShoppingCenter st) {
-        return list.add(st);
+        return shoppingCenters.add(st);
     }
 
     @Override
     public String toString() {
-        return "ShoppingCenters [list ShoppingCenter=" + list + "\n]";
+        return "ShoppingCenters [list ShoppingCenter=" + shoppingCenters + "\n]";
     }
 }

@@ -9,9 +9,7 @@ public class Rooms {
     @XmlElement(name="Room")
     private ArrayList<Room> rooms = new ArrayList<Room>();
 
-    public Rooms() {
-            super();
-        }
+    public Rooms() { super(); }
 
     public void setRooms(ArrayList<Room> room) {
             this.rooms = room;
