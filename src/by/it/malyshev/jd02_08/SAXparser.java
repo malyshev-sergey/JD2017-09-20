@@ -14,17 +14,17 @@ class SAXparser extends DefaultHandler {
 
     @Override
     public void setDocumentLocator(Locator locator) {
-            this.locator = (Locator2) locator;
+            this.locator = (Locator2)locator;
    }
 
     @Override
     public void startDocument() throws SAXException {
         System.out.println("startDocument");
-        System.out.print("<? xml version=\"");
+        System.out.print("<?xml version=\"");
         System.out.print(locator.getXMLVersion());
         System.out.print("\" encoding=\"");
         System.out.print(locator.getEncoding());
-        System.out.println("\" ?>");
+        System.out.println("\"?>");
     }
 
     @Override

@@ -21,8 +21,8 @@ class StAXparser {
 
             if (reader.getEventType() == XMLStreamConstants.START_DOCUMENT)
                 System.out.println("startDocument");
-            el.append("<? xml version=\"").append(reader.getVersion());
-            el.append("\" encoding=\"").append(reader.getEncoding()).append("\" ?>\r\n");
+            el.append("<?xml version=\"").append(reader.getVersion());
+            el.append("\" encoding=\"").append(reader.getEncoding()).append("\"?>\r\n");
             while (reader.hasNext()) {
                 int type = reader.next();
                 switch (type) {

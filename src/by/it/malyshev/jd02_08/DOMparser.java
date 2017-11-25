@@ -17,11 +17,11 @@ class DOMparser {
             Document doc = builder.parse(path);
 
             System.out.println("startDocument");
-            System.out.print("<? xml version=\"");
+            System.out.print("<?xml version=\"");
             System.out.print(doc.getXmlVersion());
             System.out.print("\" encoding=\"");
             System.out.print(doc.getXmlEncoding());
-            System.out.println("\" ?>");
+            System.out.println("\"?>");
 
             Element el = doc.getDocumentElement();
             printDom("", el);
