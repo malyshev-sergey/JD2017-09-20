@@ -8,14 +8,21 @@ public class A_AddUser {
     Connection con;
 
     public A_AddUser(Connection con) {
+        try {
+            con.setAutoCommit(false);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         this.con = con;
     }
 
     void addUser() {
         try {
             Statement st = con.createStatement();
-            int success = st.executeUpdate("INSERT INTO users (name, login, password, fk_question, fk_role) VALUES ('some', 'any', '0000', '2', '2');");
-            if (1 == success) {
+            int success = st.executeUpdate("INSERT INTO users (name, login, password, fk_question) VALUES ('some', 'any', '0000', '2');");
+            success += st.executeUpdate("INSERT INTO users_has_roles (id_user, id_role) VALUES ('1', '3');");
+            if (2 == success) {
+                con.commit();
                 System.out.println("Запись успешно добавлена");
             }
             if (null != con) {
@@ -25,6 +32,12 @@ public class A_AddUser {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            try {
+                con.setAutoCommit(true);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
