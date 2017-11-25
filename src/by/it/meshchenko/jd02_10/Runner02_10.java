@@ -32,8 +32,12 @@ public class Runner02_10 {
 
         System.out.println("A.");
         //TaskA.run();
+
         System.out.println("B.");
-        TaskB.run(root, XML_PATH);
+        //TaskB.run(root, XML_PATH);
+
+        System.out.println("C.");
+        TaskC.run(root);
 
     }
 }
