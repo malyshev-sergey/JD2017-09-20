@@ -1,10 +1,5 @@
 package by.it.mustaphin.calc;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-
 public class VarD extends Var {
 
     private double value = 0;
@@ -36,7 +31,7 @@ public class VarD extends Var {
     public Var add(Var var) {
 //        System.out.println("дискретного числа с числом\n");
         if (var instanceof VarD)
-            return new VarD(value + ((VarD) var).value);
+            return new VarD(this.value + ((VarD) var).value);
         else
             return var.add(this);
     }
@@ -53,7 +48,7 @@ public class VarD extends Var {
     public Var mul(Var var) {
 //        System.out.println("дискретного числа на число\n");
         if (var instanceof VarD) {
-            return new VarD(((VarD) var).value * ((VarD) var).value);
+            return new VarD(this.value * ((VarD) var).value);
         } else return var.mul(this);
     }
 
