@@ -72,7 +72,6 @@ public class TaskB_XmlToJsonAndBackAgain {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         System.out.println("Json-файл создан");
     }
 
