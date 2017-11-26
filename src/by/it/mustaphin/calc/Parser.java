@@ -1,6 +1,9 @@
 package by.it.mustaphin.calc;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,8 +19,11 @@ public class Parser {
     List<Var> varList = new ArrayList<>();
     List<String> actions = new ArrayList<>();
     List<String> priority = new ArrayList<>(Arrays.asList("=", "-", "+", "/", "*"));
+    boolean check = false;
 
     void parseExpression(String line) {
+        varList.clear();
+        actions.clear();
         StoreData.writeToLog(line);
         String operands[] = line.split(Patterns.exOper);
         for (String operand : operands) {
@@ -37,19 +43,21 @@ public class Parser {
         while (matA.find()) {
             actions.add(matA.group());
         }
-
+        check = true;
         doMathAct();
-        varList.clear();
-        actions.clear();
     }
 
     void doMathAct() {
         for (int i = actions.size() - 1; i >= 0; i--) {
+            if (!check) {
+                return;
+            }
             if (priority.get(3).equals(actions.get(i)) || priority.get(4).equals(actions.get(i))) {
                 if (actions.get(i).equals("*")) {
                     varList.set(i - 1, mul(varList.get(i - 1), varList.get(i)));
                     varList.remove(i);
                     actions.remove(i);
+                    check = true;
                     if (varList.size() > 1) {
                         doMathAct();
                     }
@@ -57,6 +65,7 @@ public class Parser {
                     varList.set(i - 1, div(varList.get(i - 1), varList.get(i)));
                     varList.remove(i);
                     actions.remove(i);
+                    check = true;
                     if (varList.size() > 1) {
                         doMathAct();
                     }
@@ -64,11 +73,15 @@ public class Parser {
             }
         }
         for (int i = actions.size() - 1; i >= 0; i--) {
+            if (!check) {
+                return;
+            }
             if (priority.get(2).equals(actions.get(i)) || priority.get(1).equals(actions.get(i))) {
                 if (actions.get(i).equals("+")) {
                     varList.set(i - 1, add(varList.get(i - 1), varList.get(i)));
                     varList.remove(i);
                     actions.remove(i);
+                    check = true;
                     if (varList.size() > 1) {
                         doMathAct();
                     }
@@ -76,6 +89,7 @@ public class Parser {
                     varList.set(i - 1, sub(varList.get(i - 1), varList.get(i)));
                     varList.remove(i);
                     actions.remove(i);
+                    check = true;
                     if (varList.size() > 1) {
                         doMathAct();
                     }
@@ -83,13 +97,10 @@ public class Parser {
             }
         }
         if (actions.size() == 1 && actions.get(0).equals("=")) {
-//            for (Var v : varList) {
-//                System.out.println(v);
-//            }
-//            System.out.println(varList.get(0));
-//            StoreData.data.put(newVarName, varList.get(0));
-//            StoreData.writeVar();
-//            System.exit(0);
+            System.out.println(varList.get(0));
+            StoreData.data.put(newVarName, varList.get(0));
+            StoreData.writeVar();
+            check = false;
         }
     }
 
