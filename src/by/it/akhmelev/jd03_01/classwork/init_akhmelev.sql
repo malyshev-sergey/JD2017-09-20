@@ -37,11 +37,11 @@ CREATE TABLE IF NOT EXISTS `akhmelev`.`users` (
   `Login` VARCHAR(45) NULL,
   `Password` VARCHAR(45) NULL,
   `Email` VARCHAR(45) NULL,
-  `roles_ID` INT NOT NULL,
+  `FK_roles` INT NOT NULL,
   PRIMARY KEY (`ID`),
-  INDEX `fk_users_roles_idx` (`roles_ID` ASC),
+  INDEX `fk_users_roles_idx` (`FK_roles` ASC),
   CONSTRAINT `fk_users_roles`
-    FOREIGN KEY (`roles_ID`)
+    FOREIGN KEY (`FK_roles`)
     REFERENCES `akhmelev`.`roles` (`ID`)
     ON DELETE RESTRICT
     ON UPDATE RESTRICT)
@@ -62,11 +62,11 @@ CREATE TABLE IF NOT EXISTS `akhmelev`.`ads` (
   `Area` DOUBLE NULL,
   `Description` VARCHAR(5000) NULL,
   `Address` VARCHAR(500) NULL,
-  `users_ID` INT NOT NULL,
+  `FK_users` INT NOT NULL,
   PRIMARY KEY (`ID`),
-  INDEX `fk_ads_users1_idx` (`users_ID` ASC),
+  INDEX `fk_ads_users1_idx` (`FK_users` ASC),
   CONSTRAINT `fk_ads_users1`
-    FOREIGN KEY (`users_ID`)
+    FOREIGN KEY (`FK_users`)
     REFERENCES `akhmelev`.`users` (`ID`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
@@ -94,8 +94,8 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `akhmelev`;
-INSERT INTO `akhmelev`.`users` (`ID`, `Login`, `Password`, `Email`, `roles_ID`) VALUES (DEFAULT, 'admin', 'padmin', 'admin@it.by', 1);
-INSERT INTO `akhmelev`.`users` (`ID`, `Login`, `Password`, `Email`, `roles_ID`) VALUES (DEFAULT, 'user', 'puser', 'user@it.by', 2);
+INSERT INTO `akhmelev`.`users` (`ID`, `Login`, `Password`, `Email`, `FK_roles`) VALUES (DEFAULT, 'admin', 'padmin', 'admin@it.by', 1);
+INSERT INTO `akhmelev`.`users` (`ID`, `Login`, `Password`, `Email`, `FK_roles`) VALUES (DEFAULT, 'user', 'puser', 'user@it.by', 2);
 
 COMMIT;
 
@@ -105,7 +105,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `akhmelev`;
-INSERT INTO `akhmelev`.`ads` (`ID`, `RoomCount`, `Floor`, `Floors`, `Price`, `Area`, `Description`, `Address`, `users_ID`) VALUES (DEFAULT, '2', 4, 5, 55555, 45, 'Хорошая квартира', 'Кнорина 2, кв. 11', 2);
+INSERT INTO `akhmelev`.`ads` (`ID`, `RoomCount`, `Floor`, `Floors`, `Price`, `Area`, `Description`, `Address`, `FK_users`) VALUES (DEFAULT, '2', 4, 5, 55555, 45, 'Хорошая квартира', 'Кнорина 2, кв. 11', 2);
 
 COMMIT;
 
