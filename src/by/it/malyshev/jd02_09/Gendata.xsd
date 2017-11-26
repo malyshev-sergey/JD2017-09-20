@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <schema xmlns="http://www.w3.org/2001/XMLSchema"
-        targetNamespace="http://by/it/malyshev/jd02_07/gendata"
-        xmlns:xsi="http://by/it/malyshev/jd02_07/gendata"
+        targetNamespace="http://by/it/malyshev/jd02_09/generate"
+        xmlns:xsi="http://by/it/malyshev/jd02_09/generate"
         elementFormDefault="qualified">
     <element name="Gendata">
         <complexType>
@@ -36,6 +36,7 @@
             <element name="STRmarkers" type="xsi:STRmarkers"
                      maxOccurs="unbounded">
             </element>
+            <element name="SNPs" type="string"/>
         </sequence>
     </complexType>
 

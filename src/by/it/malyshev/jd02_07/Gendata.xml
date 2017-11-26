@@ -3,7 +3,6 @@
     <Person kit="N22223">
         <Name>Archibald Volf</Name>
         <Ancestor>Adam Volf</Ancestor>
-        <Country>Germany</Country>
         <Country>Switzerland</Country>
         <Geocoord>
             <Latitude>46.9983</Latitude>
@@ -24,6 +23,6 @@
                 <DYS392>13</DYS392>
                 <DYS389ii>30</DYS389ii>
             </STRmarkers>
-        </Haplotype>
+       </Haplotype>
     </Person>
 </Gendata>
