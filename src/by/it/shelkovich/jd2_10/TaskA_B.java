@@ -36,9 +36,7 @@ public class TaskA_B {
             m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             m.marshal(payment1,System.out);
 
-        } catch (JAXBException e) {
-            e.printStackTrace();
-        } catch (FileNotFoundException e) {
+        } catch (JAXBException | FileNotFoundException e) {
             e.printStackTrace();
         }
     }
