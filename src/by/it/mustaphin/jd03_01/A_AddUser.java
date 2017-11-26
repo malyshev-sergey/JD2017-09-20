@@ -20,23 +20,22 @@ public class A_AddUser {
         try {
             Statement st = con.createStatement();
             int success = st.executeUpdate("INSERT INTO users (name, login, password, fk_question) VALUES ('some', 'any', '0000', '2');");
-            success += st.executeUpdate("INSERT INTO users_has_roles (id_user, id_role) VALUES ('1', '3');");
+            success += st.executeUpdate("INSERT INTO mustaphin.users_has_roles (id_user, id_role) VALUES ('1', '3');");
             if (2 == success) {
                 con.commit();
                 System.out.println("Запись успешно добавлена");
-            }
-            if (null != con) {
-                con = null;
             } else {
                 System.out.println("Ошибка записи в БД");
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }finally {
-            try {
-                con.setAutoCommit(true);
-            } catch (SQLException e) {
-                e.printStackTrace();
+        } finally {
+            if (null != con) {
+                try {
+                    con.setAutoCommit(true);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
