@@ -7,10 +7,10 @@ public class Runner {
     public static void main(String[] args) {
         Connection con = new CreateConnection().connection;
 //        new C_Init(con).initDB();
-//        new A_AddUser(con).addUser();
-//        new A_AddData(con).updateCurrentPosition(2, 1);
-//        new A_AddData(con).updateCurrentPosition(2, 2);
-//        new A_AddData(con).updateCurrentPosition(2, 3);
+        new A_AddUser(con).addUser();
+        new A_AddData(con).updateCurrentPosition(2, 1);
+        new A_AddData(con).updateCurrentPosition(2, 2);
+        new A_AddData(con).updateCurrentPosition(2, 3);
         new B_ShowUsers(con).getData();
 //        new C_Reset(con).removeAll();
         try {
