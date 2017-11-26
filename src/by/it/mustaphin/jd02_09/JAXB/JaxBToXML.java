@@ -47,4 +47,16 @@ public class JaxBToXML {
             e.printStackTrace();
         }
     }
+
+    public void convert(Tickets tickets) {
+        try {
+            JAXBContext jc = JAXBContext.newInstance(Tickets.class);
+            Marshaller m = jc.createMarshaller();
+            m.marshal(tickets, new FileOutputStream("src" + File.separator + "by" + File.separator + "it" + File.separator + "mustaphin" + File.separator + "jd02_10" + File.separator + "Tikcets.xml"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
+    }
 }
