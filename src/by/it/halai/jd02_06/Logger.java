@@ -14,8 +14,8 @@ class Logger {
     public static synchronized Logger loggerError(String error) {
         if (sin == null) {
             sin = new Logger();
-            sin.writeError(error);
         }
+        sin.writeError(error);
         return sin;
     }
 
