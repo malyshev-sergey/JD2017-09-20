@@ -42,9 +42,9 @@ public class B_ShowUsers {
                         userSb.append("роль: " + rsRole.getString("type") + "\n");
                     }
                 }
+                System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++");
                 System.out.print(user.getValue());
                 System.out.print(userSb);
-                System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++");
             }
         } catch (SQLException e) {
             e.printStackTrace();
