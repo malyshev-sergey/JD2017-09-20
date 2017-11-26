@@ -39,12 +39,11 @@ public class Ex_04__Init {
                             "  `Login` VARCHAR(45) NULL,\n" +
                             "  `Password` VARCHAR(45) NULL,\n" +
                             "  `Email` VARCHAR(45) NULL,\n" +
-                            "  `FK_Roles` INT NOT NULL,\n" +
-                            "  `userscol` VARCHAR(45) NULL,\n" +
+                            "  `FK_roles` INT NOT NULL,\n" +
                             "  PRIMARY KEY (`ID`),\n" +
-                            "  INDEX `fk_users_FK_Rolesx` (`FK_Roles` ASC),\n" +
+                            "  INDEX `fk_users_FK_rolesx` (`FK_roles` ASC),\n" +
                             "  CONSTRAINT `fk_users_roles`\n" +
-                            "    FOREIGN KEY (`FK_Roles`)\n" +
+                            "    FOREIGN KEY (`FK_roles`)\n" +
                             "    REFERENCES `akhmelev`.`roles` (`ID`)\n" +
                             "    ON DELETE RESTRICT \n" +
                             "    ON UPDATE RESTRICT )\n" +
@@ -54,8 +53,8 @@ public class Ex_04__Init {
                     "CREATE TABLE IF NOT EXISTS `akhmelev`.`ads` (\n" +
                             "  `ID` INT NOT NULL AUTO_INCREMENT,\n" +
                             "  `RoomCount` INT NULL,\n" +
-                            "  `Flat` INT NULL,\n" +
-                            "  `Flats` INT NULL,\n" +
+                            "  `Floor` INT NULL,\n" +
+                            "  `Floors` INT NULL,\n" +
                             "  `Price` DOUBLE NULL,\n" +
                             "  `Area` DOUBLE NULL,\n" +
                             "  `Description` VARCHAR(5000) NULL,\n" +
@@ -70,6 +69,13 @@ public class Ex_04__Init {
                             "    ON UPDATE CASCADE)\n" +
                             "ENGINE = InnoDB;"
             );
+            //вставка тестовых записей
+            statement.executeUpdate("INSERT INTO `akhmelev`.`roles` (`ID`, `Role`) VALUES (DEFAULT, 'Administrator');");
+            statement.executeUpdate("INSERT INTO `akhmelev`.`roles` (`ID`, `Role`) VALUES (DEFAULT, 'User');");
+            statement.executeUpdate("INSERT INTO `akhmelev`.`roles` (`ID`, `Role`) VALUES (DEFAULT, 'Guest');");
+            statement.executeUpdate("INSERT INTO `akhmelev`.`users` (`ID`, `Login`, `Password`, `Email`, `FK_roles`) VALUES (DEFAULT, 'admin', 'padmin', 'admin@it.by', 1);");
+            statement.executeUpdate("INSERT INTO `akhmelev`.`users` (`ID`, `Login`, `Password`, `Email`, `FK_roles`) VALUES (DEFAULT, 'user', 'puser', 'user@it.by', 2);");
+            statement.executeUpdate("INSERT INTO `akhmelev`.`ads` (`ID`, `RoomCount`, `Floor`, `Floors`, `Price`, `Area`, `Description`, `Address`, `FK_users`) VALUES (DEFAULT, '2', 4, 5, 55555, 45, 'Хорошая квартира', 'Кнорина 2, кв. 11', 2);");
         }
         catch (Exception e){
             e.printStackTrace();
