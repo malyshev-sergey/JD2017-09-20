@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
     <!ELEMENT ShoppingCenters (ShoppingCenter)+>
-        <!ELEMENT ShoppingCenter (Name, Adress, Lat, Lng, Rooms)>
+        <!ELEMENT ShoppingCenter (Name, Address, Lat, Lng, Rooms)>
         <!ELEMENT Name (#PCDATA)>
-        <!ELEMENT Adress (#PCDATA)>
+        <!ELEMENT Address (#PCDATA)>
         <!ELEMENT Lat (#PCDATA)>
         <!ELEMENT Lng (#PCDATA)>
         <!ELEMENT Rooms (Room)+>
