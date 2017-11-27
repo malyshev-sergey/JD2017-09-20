@@ -31,10 +31,10 @@ public class Runner02_10 {
         final String XML_PATH = "jd02_10/ShoppingCenters.xml";
 
         System.out.println("A.");
-        //TaskA.run();
+        TaskA.run();
 
         System.out.println("B.");
-        //TaskB.run(root, XML_PATH);
+        TaskB.run(root, XML_PATH);
 
         System.out.println("C.");
         TaskC.run(root);
