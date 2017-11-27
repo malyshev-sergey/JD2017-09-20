@@ -13,16 +13,32 @@ public class Header {
     @XmlValue
     private String value;
 
-    public Header() {}
+    public Header(int headerNumber, String value) {
+        this.headerNumber = headerNumber;
+        this.value = value;
+    }
 
-    public int getHeaderNumber() {return headerNumber;}
+    public Header() {
+    }
 
-    public void setHeaderNumber(int headerNumber) {this.headerNumber = headerNumber;}
+    public int getHeaderNumber() {
+        return headerNumber;
+    }
 
-    public String getValue() {return value;}
+    public void setHeaderNumber(int headerNumber) {
+        this.headerNumber = headerNumber;
+    }
 
-    public void setValue(String value) {this.value = value;}
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
 
     @Override
-    public String toString() {return "Header #" + headerNumber + " " + value;}
+    public String toString() {
+        return "Header #" + headerNumber + " " + value;
+    }
 }

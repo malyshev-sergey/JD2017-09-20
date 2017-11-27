@@ -23,6 +23,14 @@ public class Ticket {
     @XmlElement(name = "answers")
     private Answers answers;
 
+    public Ticket(String ticketNumber, String desc, String image, String question, Answers answers) {
+        this.ticketNumber = ticketNumber;
+        this.desc = desc;
+        this.image = image;
+        this.question = question;
+        this.answers = answers;
+    }
+
     public Answers getAnswers() {return answers;}
 
     public void setAnswers(Answers answers) {this.answers = answers;}

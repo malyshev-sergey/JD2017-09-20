@@ -15,6 +15,11 @@ public class Answer {
 
     public Answer() {}
 
+    public Answer(int answerNumber, String value) {
+        this.answerNumber = answerNumber;
+        this.value = value;
+    }
+
     public int getAnswerNumber() {return answerNumber;}
 
     public String getValue() {return value;}

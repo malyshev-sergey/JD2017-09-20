@@ -10,4 +10,5 @@ interface Patterns {
     String exFull = "(" + exAny + ")" +
             "(" + exOper + ")" +
             "(" + exAny + ")"; //выражение целиком
+    String exBrc = "[(][0-9-A-Z*/.+]+[)]";
 }
