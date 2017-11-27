@@ -7,6 +7,9 @@ public class User {
     private String Email;
     private int FK_Role;
 
+    public User() {
+    }
+
     public int getID() {
         return ID;
     }
@@ -47,41 +50,37 @@ public class User {
         this.FK_Role = FK_Role;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof User)) return false;
-
-        User user = (User) o;
-
-        if (FK_Role != user.FK_Role) return false;
-        if (ID != user.ID) return false;
-        if (!Email.equals(user.Email)) return false;
-        if (!Login.equals(user.Login)) return false;
-        if (!Password.equals(user.Password)) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = ID;
-        result = 31 * result + Login.hashCode();
-        result = 31 * result + Password.hashCode();
-        result = 31 * result + Email.hashCode();
-        result = 31 * result + FK_Role;
-        return result;
-    }
-
-    public User() {
-    }
-
     public User(int ID, String login, String password, String email, int FK_Role) {
         this.ID = ID;
         Login = login;
         Password = password;
         Email = email;
         this.FK_Role = FK_Role;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        if (ID != user.ID) return false;
+        if (FK_Role != user.FK_Role) return false;
+        if (Login != null ? !Login.equals(user.Login) : user.Login != null) return false;
+        if (Password != null ? !Password.equals(user.Password) : user.Password != null) return false;
+        return Email != null ? Email.equals(user.Email) : user.Email == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = ID;
+        result = 31 * result + (Login != null ? Login.hashCode() : 0);
+        result = 31 * result + (Password != null ? Password.hashCode() : 0);
+        result = 31 * result + (Email != null ? Email.hashCode() : 0);
+        result = 31 * result + FK_Role;
+        return result;
     }
 
     @Override
