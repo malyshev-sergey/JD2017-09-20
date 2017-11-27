@@ -8,7 +8,7 @@ import java.io.FileNotFoundException;
 
 class Stax {
     static void parsing() {
-        String tab="";
+        StringBuilder tab= new StringBuilder();
         StringBuilder content=new StringBuilder();
         XMLInputFactory factory = XMLInputFactory.newFactory();
         try {
@@ -17,7 +17,7 @@ class Stax {
                 int res = reader.next();
                 if (res == reader.START_ELEMENT) {
                     System.out.println(tab+"<" + reader.getLocalName() + ">");
-                    tab=tab+"\t";
+                    tab.append("\t");
                 }
                 else if (res==reader.CHARACTERS){
                    content.append(reader.getText().trim());
@@ -26,7 +26,7 @@ class Stax {
                     if (content.length()>0)
                         System.out.println(tab+content.toString());
                     content.setLength(0);
-                    tab=tab.replaceFirst("\t","");
+                    tab = new StringBuilder(tab.toString().replaceFirst("\t", ""));
                     System.out.println(tab+"<\\" + reader.getLocalName() + ">");
 
                     //tab = tab.substring(1);

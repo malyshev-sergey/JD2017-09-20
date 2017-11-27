@@ -13,32 +13,42 @@ import java.io.File;
 import java.io.IOException;
 
 public class DOM {
-    static void parser(){
+    static void parser() {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = null;
         Document doc;
-        try{
+
+        try {
             builder = factory.newDocumentBuilder();
-        }
-        catch (ParserConfigurationException e) {
+        } catch (ParserConfigurationException e) {
             e.printStackTrace();
         }
         File f = new File("src/by/it/ali/jd02_07/persons.xml");
-        try
-        {
-            doc=builder.parse(f);
-            Element r= doc.getDocumentElement();
-            System.out.println(r.getTagName());
+        try {
+            doc = builder.parse(f);
+            Element r = doc.getDocumentElement();
+            System.out.println("<" + r.getTagName() + ">");
             printer(r);
         } catch (SAXException | IOException e) {
             e.printStackTrace();
         }
     }
-    static void printer(Node r){
+
+    static void printer(Node r) {
+        Node k;
         NodeList nList = r.getChildNodes();
-        for (int i = 0; i < nList.getLength() ; i++) {
+        String text;
+        for (int i = 0; i < nList.getLength(); i++) {
             if (nList.item(i) instanceof Element)
-                System.out.println(nList.item(i).getNodeName());
+                System.out.println("<" + nList.item(i).getNodeName() + ">");
+            text=nList.item(i).getNodeValue();
+            if (text!=null) {
+                System.out.println(text.trim());
+            }
+            if (nList.item(i).hasChildNodes()) {
+                k = nList.item(i);
+                printer(k);
+            }
         }
     }
 }
