@@ -16,7 +16,7 @@ public class DOM {
     static void parser(){
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = null;
-        Document doc = null;
+        Document doc;
         try{
             builder = factory.newDocumentBuilder();
         }
@@ -33,7 +33,6 @@ public class DOM {
         } catch (SAXException | IOException e) {
             e.printStackTrace();
         }
-
     }
     static void printer(Node r){
         NodeList nList = r.getChildNodes();

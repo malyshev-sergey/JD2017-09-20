@@ -1,15 +1,15 @@
 package by.it.ali.jd02_08;
 
 import javax.xml.stream.XMLInputFactory;
-import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-public class Stax {
+class Stax {
     static void parsing() {
         String tab="";
+        StringBuilder content=new StringBuilder();
         XMLInputFactory factory = XMLInputFactory.newFactory();
         try {
             XMLStreamReader reader = factory.createXMLStreamReader(new FileInputStream("src/by/it/ali/jd02_07/persons.xml"));
@@ -20,11 +20,15 @@ public class Stax {
                     tab=tab+"\t";
                 }
                 else if (res==reader.CHARACTERS){
-                    System.out.print(reader.getText().trim());
+                   content.append(reader.getText().trim());
                 }
                 else if (res==reader.END_ELEMENT){
-                    System.out.print("<\\" + reader.getLocalName() + ">"+"\n");
+                    if (content.length()>0)
+                        System.out.println(tab+content.toString());
+                    content.setLength(0);
                     tab=tab.replaceFirst("\t","");
+                    System.out.println(tab+"<\\" + reader.getLocalName() + ">");
+
                     //tab = tab.substring(1);
                 }
             }
