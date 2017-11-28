@@ -27,12 +27,17 @@ public class A_AddUsers {
             statement.executeUpdate(
                     "insert into crm_users(" +
                             "`Name`,`Password`,`Email`)"+
-                            " values('Guru','12345','guru@guru.ru');"
+                            " values('GuruAdmin','12345','guruAdmin@guru.ru');"
             );
             statement.executeUpdate(
                     "insert into crm_users(" +
                             "`Name`,`Password`,`Email`)"+
-                            " values('User1','1234','user2@gmail.com');"
+                            " values('UserManager1','1234','userManager1@gmail.com');"
+            );
+            statement.executeUpdate(
+                    "insert into crm_users(" +
+                            "`Name`,`Password`,`Email`)"+
+                            " values('User1','123','user1@gmail.com');"
             );
         }
         catch (Exception e){

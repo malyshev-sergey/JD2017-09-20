@@ -20,9 +20,9 @@ public class C_Reset {
                              (CN.URL_DB, CN.USER_DB, CN.PASSWORD_DB);
              Statement statement=connection.createStatement()) {
 
-            ////пересоздание базы целиком
-            //statement.executeUpdate("DROP SCHEMA IF EXISTS `meshchenko` ;");
-            //statement.executeUpdate("CREATE SCHEMA IF NOT EXISTS `meshchenko` DEFAULT CHARACTER SET utf8 ;");
+            //пересоздание базы целиком
+            statement.executeUpdate("DROP SCHEMA IF EXISTS `meshchenko` ;");
+            statement.executeUpdate("CREATE SCHEMA IF NOT EXISTS `meshchenko` DEFAULT CHARACTER SET utf8 ;");
 
             //удаление всех таблиц (если работает удаление схемы то это лишнее)
             statement.executeUpdate("DROP TABLE IF EXISTS `meshchenko`.`addr_countries` ;");
