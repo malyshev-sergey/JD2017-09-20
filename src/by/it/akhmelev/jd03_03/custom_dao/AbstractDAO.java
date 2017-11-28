@@ -13,6 +13,10 @@ public abstract class AbstractDAO{
         try (Connection connection = ConnectionCreator.getConnection();
              Statement statement = connection.createStatement()) {
             result = statement.executeUpdate(sql);
+
+            //тут показан не лучший способ, который подходит только для MySQL.
+            //мы рассматривали вариант лучше этого, найдите его самостоятельно.
+
             if (sql.trim().toUpperCase().startsWith("INSERT")) {
                 ResultSet resultSet = statement.executeQuery("SELECT LAST_INSERT_ID();");
                 if (resultSet.next()) result = resultSet.getInt(1);
