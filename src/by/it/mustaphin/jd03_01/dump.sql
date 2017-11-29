@@ -1,6 +1,8 @@
+CREATE DATABASE  IF NOT EXISTS `mustaphin` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `mustaphin`;
 -- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
--- Host: localhost    Database: mustaphin
+-- Host: 127.0.0.1    Database: mustaphin
 -- ------------------------------------------------------
 -- Server version	5.7.20-log
 
@@ -107,7 +109,7 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id_user`),
   KEY `fk_users_questions1_idx` (`fk_question`),
   CONSTRAINT `fk_users_questions1` FOREIGN KEY (`fk_question`) REFERENCES `questions` (`id_question`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -157,4 +159,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-25 17:36:49
+-- Dump completed on 2017-11-29 15:17:29
