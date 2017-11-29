@@ -12,19 +12,20 @@ public class ReadRecord {
         this.con = con;
     }
 
-    void readUser(String id) {
+    public User readUser(int id) throws SQLException {
+        User user = null;
         try (Statement st = con.createStatement()) {
-            ResultSet rs = st.executeQuery("SELECT * FROM users WHERE id_user='" + id + "';");
-            System.out.print("id пользоывателя: " + id);
+            final ResultSet rs = st.executeQuery("SELECT * FROM users WHERE id_user='" + id + "';");
             if (rs.next()) {
-                System.out.printf("имя %s, логин %s, пароль %s, вн. ключ текщего прогресса %s",
+                user = new User(
                         rs.getString("name"),
                         rs.getString("login"),
                         rs.getString("password"),
-                        rs.getString("fk_question"));
+                        rs.getInt("fk_question"));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw e;
         }
+        return user;
     }
 }

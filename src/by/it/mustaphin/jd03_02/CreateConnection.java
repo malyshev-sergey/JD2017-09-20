@@ -1,26 +1,47 @@
 package by.it.mustaphin.jd03_02;
 
 import by.it.mustaphin.jd03_01.CN;
+import com.mysql.fabric.jdbc.FabricMySQLDriver;
 
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 
 public class CreateConnection {
 
-    Connection connection;
+    private static volatile Connection connection = null;
+    private static Properties prop = new Properties();
 
-    CreateConnection() {
+    static {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            if (null == connection) {
-                connection = DriverManager.getConnection(CN.URL_DB, CN.USER_DB, CN.PASSWORD_DB);
-            }
-            System.out.println("DB connected");
-        } catch (ClassNotFoundException e) {
-            System.out.println("Error loading driver: " + e);
-        } catch (SQLException e) {
+            prop.load(new FileReader(System.getProperty("user.dir") + "/src/by/it/mustaphin/jd03_02/dbConnection.properties"));
+        } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static Connection getConnection() throws SQLException {
+        if (null == connection || connection.isClosed()) {
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+                Driver dr = new FabricMySQLDriver();
+                DriverManager.registerDriver(dr);
+                synchronized (prop) {
+                    if (null == connection || connection.isClosed()) {
+                        connection = DriverManager.getConnection(prop.getProperty("url"), prop.getProperty("login"), prop.getProperty("password"));
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+
+        }
+        return connection;
     }
 }

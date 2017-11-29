@@ -11,12 +11,15 @@ public class UpdateRecord {
         this.con = con;
     }
 
-    boolean updateUser(String id, String name, String login, String password) {
+    public User updateUser(User user) throws SQLException {
+        User updUser = null;
         try (Statement st = con.createStatement()) {
-            return (1 == st.executeUpdate("UPDATE users SET login='" + name + "', password='" + login + "' , name='" + name + "' WHERE id_user='" + id + "';"));
+            if (1 == st.executeUpdate("UPDATE users SET login='" + user.getName() + "', password='" + user.getLogin() + "' , name='" + user.getPassword() + "' WHERE id_user='" + user.getId() + "';")) {
+                updUser = user;
+            }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw e;
         }
-        return false;
+        return updUser;
     }
 }
