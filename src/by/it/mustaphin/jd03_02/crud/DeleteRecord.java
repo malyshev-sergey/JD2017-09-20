@@ -11,12 +11,11 @@ public class DeleteRecord {
         this.con = con;
     }
 
-    boolean deleteUser(String id) {
+    public boolean deleteUser(User user) throws SQLException {
         try (Statement st = con.createStatement()) {
-            return (1 == st.executeUpdate("DELETE FROM users WHERE id_user='" + id + "';"));
+            return (1 == st.executeUpdate("DELETE FROM users WHERE id_user='" + user.getId() + "';"));
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw e;
         }
-        return false;
     }
 }
