@@ -15,8 +15,8 @@ public class Runner {
             e.printStackTrace();
         }
 
-        TaskA tA = new TaskA(con);
-        tA.findIdRole("mustaphin marat");
+//        TaskA tA = new TaskA(con);
+//        tA.findIdRole("mustaphin marat");
 
         CreateRecord cr = new CreateRecord(con);
         ReadRecord rr = new ReadRecord(con);
@@ -24,7 +24,7 @@ public class Runner {
         DeleteRecord dr = new DeleteRecord(con);
 
         try {
-            User user = cr.createUser(new User("newName", "newLogin", "newPassword", 0));
+            User user = cr.createUser(new User("newName", "newLogin", "newPassword", 1));
             rr.readUser(user.getId());
 
             user = ur.updateUser(user);

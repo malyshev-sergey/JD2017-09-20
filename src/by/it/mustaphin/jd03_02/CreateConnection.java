@@ -27,7 +27,6 @@ public class CreateConnection {
     public static Connection getConnection() throws SQLException {
         if (null == connection || connection.isClosed()) {
             try {
-                Class.forName("com.mysql.jdbc.Driver");
                 Driver dr = new FabricMySQLDriver();
                 DriverManager.registerDriver(dr);
                 synchronized (prop) {
@@ -36,8 +35,6 @@ public class CreateConnection {
                     }
                 }
             } catch (SQLException e) {
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
 

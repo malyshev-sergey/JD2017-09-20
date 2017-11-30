@@ -17,7 +17,7 @@ public class TaskA {
              ResultSet rs = st.executeQuery("SELECT id_role FROM users_has_roles WHERE id_user=(SELECT id_user FROM users WHERE name='" + userName + "');")) {
             System.out.print("\"" + userName + "\" has role:");
             while (rs.next()) {
-                System.out.print(" " + rs.getString("id_user"));
+                System.out.print(" " + rs.getString("id_role"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
