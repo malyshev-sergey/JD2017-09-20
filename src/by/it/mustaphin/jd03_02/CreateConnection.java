@@ -18,7 +18,11 @@ public class CreateConnection {
     static {
         try {
             prop.load(new FileReader(System.getProperty("user.dir") + "/src/by/it/mustaphin/jd03_02/dbConnection.properties"));
+                Driver dr = new FabricMySQLDriver();
+                DriverManager.registerDriver(dr);
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -26,8 +30,6 @@ public class CreateConnection {
     public static Connection getConnection() throws SQLException {
         if (null == connection || connection.isClosed()) {
             try {
-                Driver dr = new FabricMySQLDriver();
-                DriverManager.registerDriver(dr);
                 synchronized (prop) {
                     if (null == connection || connection.isClosed()) {
                         connection = DriverManager.getConnection(prop.getProperty("url"), prop.getProperty("login"), prop.getProperty("password"));
