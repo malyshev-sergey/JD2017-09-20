@@ -76,6 +76,14 @@ public class User {
         this.fk_question = fk_question;
     }
 
+    public User(int id, String name, String login, String password, int fk_question) {
+        this.id = id;
+        this.name = name;
+        this.login = login;
+        this.password = password;
+        this.fk_question = fk_question;
+    }
+
     public User() {
 
     }
