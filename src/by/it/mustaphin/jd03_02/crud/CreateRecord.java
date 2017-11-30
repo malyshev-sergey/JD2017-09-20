@@ -21,7 +21,7 @@ public class CreateRecord {
         String password = user.getPassword();
         int fk_question = user.getFk_question();
         try (Statement st = con.createStatement()) {
-            if (1 == st.executeUpdate("INSERT INTO users (name, login, password,fk_question) VALUES ('" + name + "', '" + login + "', '" + password + "','" + fk_question + "');", RETURN_GENERATED_KEYS)) {
+            if (1 == st.executeUpdate("INSERT INTO users (name, login, password, fk_question) VALUES ('" + name + "', '" + login + "', '" + password + "','" + fk_question + "');", RETURN_GENERATED_KEYS)) {
                 ResultSet keys = st.getGeneratedKeys();
                 if (keys.next()) {
                     int id = keys.getInt(1);
