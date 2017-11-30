@@ -15,26 +15,7 @@ public class Runner {
             e.printStackTrace();
         }
 
-//        TaskA tA = new TaskA(con);
-//        tA.findIdRole("mustaphin marat");
-
-        CreateRecord cr = new CreateRecord(con);
-        ReadRecord rr = new ReadRecord(con);
-        UpdateRecord ur = new UpdateRecord(con);
-        DeleteRecord dr = new DeleteRecord(con);
-
-        try {
-            User user = cr.createUser(new User("newName", "newLogin", "newPassword", 1));
-            rr.readUser(user.getId());
-
-            user = ur.updateUser(user);
-            rr.readUser(user.getId());
-
-            if (dr.deleteUser(user)) {
-                System.out.println("Пользователь c id " + user.getId() + " удалён");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        CRUDCommon cc = new CRUDCommon(con);
+        cc.operate();
     }
 }

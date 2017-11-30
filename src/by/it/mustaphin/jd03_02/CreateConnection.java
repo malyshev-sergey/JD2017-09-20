@@ -1,6 +1,5 @@
 package by.it.mustaphin.jd03_02;
 
-import by.it.mustaphin.jd03_01.CN;
 import com.mysql.fabric.jdbc.FabricMySQLDriver;
 
 import java.io.FileReader;
