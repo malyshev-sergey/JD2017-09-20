@@ -28,10 +28,4 @@ public class ConnectionCreator {
         return con;
     }
 
-    public static void main(String[] args) throws SQLException {
-        Connection connection = getConnection();
-        if (connection.isClosed()) {
-            System.out.println("Connection is closed");
-        }
-    }
 }
