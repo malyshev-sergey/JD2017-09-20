@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RoleDAO extends AbstactDAO implements InterfaceDAO<Role> {
+
     @Override
     public boolean create(Role role) throws SQLException {
         int id_role = role.getId_role();
