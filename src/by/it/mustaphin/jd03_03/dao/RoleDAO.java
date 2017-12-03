@@ -31,10 +31,32 @@ public class RoleDAO extends AbstactDAO implements InterfaceDAO<Role> {
     }
 
     @Override
+    public boolean delete(int id) throws SQLException {
+        return (0 < executeUpdate("DELETE FROM roles WHERE id_role='" + id + "';"));
+    }
+
+    @Override
     public Role read(Role role) throws SQLException {
         try (Connection con = ConnectionCreator.getConnection();
              Statement st = con.createStatement()) {
             ResultSet rs = st.executeQuery("SELECT * FROM roles WHERE id_role='" + role.getId_role() + "';");
+            if (rs.next()) {
+                role = new Role(
+                        rs.getInt("id_role"),
+                        rs.getString("type"));
+            }
+        } catch (SQLException e) {
+            throw e;
+        }
+        return role;
+    }
+
+    @Override
+    public Role read(int id) throws SQLException {
+        Role role = null;
+        try (Connection con = ConnectionCreator.getConnection();
+             Statement st = con.createStatement()) {
+            ResultSet rs = st.executeQuery("SELECT * FROM roles WHERE id_role='" + id + "';");
             if (rs.next()) {
                 role = new Role(
                         rs.getInt("id_role"),

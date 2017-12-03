@@ -32,10 +32,33 @@ public class AnswerDAO extends AbstactDAO implements InterfaceDAO<Answer> {
     }
 
     @Override
+    public boolean delete(int id) throws SQLException {
+        return (0 < executeUpdate("DELETE FROM answers WHERE id_answer='" +id + "';"));
+    }
+
+    @Override
     public Answer read(Answer answer) throws SQLException {
         try (Connection con = ConnectionCreator.getConnection();
              Statement st = con.createStatement()) {
             ResultSet rs = st.executeQuery("SELECT * FROM answers WHERE id_answer='" + answer.getId_answer() + "';");
+            if (rs.next()) {
+                answer = new Answer(
+                        rs.getBoolean("correct"),
+                        rs.getInt("fk_question"),
+                        rs.getString("text"));
+            }
+        } catch (SQLException e) {
+            throw e;
+        }
+        return answer;
+    }
+
+    @Override
+    public Answer read(int id) throws SQLException {
+        Answer answer = null;
+        try (Connection con = ConnectionCreator.getConnection();
+             Statement st = con.createStatement()) {
+            ResultSet rs = st.executeQuery("SELECT * FROM answers WHERE id_answer='" + id + "';");
             if (rs.next()) {
                 answer = new Answer(
                         rs.getBoolean("correct"),

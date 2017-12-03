@@ -33,10 +33,35 @@ public class UserDAO extends AbstactDAO implements InterfaceDAO<User> {
     }
 
     @Override
+    public boolean delete(int id) throws SQLException {
+        return (0 < executeUpdate("DELETE FROM users WHERE id_user='" + id + "';"));
+    }
+
+    @Override
     public User read(User user) throws SQLException {
         try (Connection con = ConnectionCreator.getConnection();
              Statement st = con.createStatement()) {
             ResultSet rs = st.executeQuery("SELECT * FROM users WHERE id_user='" + user.getId_user() + "';");
+            if (rs.next()) {
+                user = new User(
+                        rs.getInt("id_user"),
+                        rs.getString("name"),
+                        rs.getString("login"),
+                        rs.getString("password"),
+                        rs.getInt("fk_question"));
+            }
+        } catch (SQLException e) {
+            throw e;
+        }
+        return user;
+    }
+
+    @Override
+    public User read(int id) throws SQLException {
+        User user = null;
+        try (Connection con = ConnectionCreator.getConnection();
+             Statement st = con.createStatement()) {
+            ResultSet rs = st.executeQuery("SELECT * FROM users WHERE id_user='" + id + "';");
             if (rs.next()) {
                 user = new User(
                         rs.getInt("id_user"),
