@@ -12,6 +12,19 @@ import java.util.List;
 
 public class AnswerDAO extends AbstactDAO implements InterfaceDAO<Answer> {
 
+    private static AnswerDAO answerDAO = null;
+
+    public InterfaceDAO getInstanse() {
+        if (null == answerDAO) {
+            synchronized (AnswerDAO.class) {
+                if (null == answerDAO) {
+                    answerDAO = new AnswerDAO();
+                }
+            }
+        }
+        return answerDAO;
+    }
+
     @Override
     public boolean create(Answer answer) throws SQLException {
         boolean correct = answer.isCorrect();
@@ -33,7 +46,7 @@ public class AnswerDAO extends AbstactDAO implements InterfaceDAO<Answer> {
 
     @Override
     public boolean delete(int id) throws SQLException {
-        return (0 < executeUpdate("DELETE FROM answers WHERE id_answer='" +id + "';"));
+        return (0 < executeUpdate("DELETE FROM answers WHERE id_answer='" + id + "';"));
     }
 
     @Override

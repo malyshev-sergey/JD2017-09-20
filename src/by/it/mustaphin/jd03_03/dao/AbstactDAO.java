@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class AbstactDAO {
+public abstract class AbstactDAO {
 
     protected int executeUpdate(String sql) {
         int result = -1;

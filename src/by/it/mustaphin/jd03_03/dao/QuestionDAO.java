@@ -12,6 +12,19 @@ import java.util.List;
 
 public class QuestionDAO extends AbstactDAO implements InterfaceDAO<Question> {
 
+    private static QuestionDAO questionDAO = null;
+
+    public static QuestionDAO getQuestionDAO() {
+        if (null == questionDAO) {
+            synchronized (Question.class) {
+                if (null == questionDAO) {
+                    questionDAO = new QuestionDAO();
+                }
+            }
+        }
+        return questionDAO;
+    }
+
     @Override
     public boolean create(Question question) throws SQLException {
         String theme = question.getTheme();

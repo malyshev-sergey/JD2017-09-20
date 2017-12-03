@@ -14,6 +14,19 @@ import java.util.Map;
 
 public class RightDAO extends AbstactDAO implements InterfaceDAO<Right> {
 
+    private static RightDAO rightDAO = null;
+
+    public static RightDAO getRightDAO() {
+        if (null == rightDAO) {
+            synchronized (RightDAO.class) {
+                if (null == rightDAO) {
+                    rightDAO = new RightDAO();
+                }
+            }
+        }
+        return rightDAO;
+    }
+
     //convert to Bean parameter
     private boolean convBean(int par) {
         return par == 1;

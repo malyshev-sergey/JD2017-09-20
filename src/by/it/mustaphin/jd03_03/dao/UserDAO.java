@@ -12,6 +12,19 @@ import java.util.List;
 
 public class UserDAO extends AbstactDAO implements InterfaceDAO<User> {
 
+    private static UserDAO userDAO = null;
+
+    public static UserDAO getUserDAO() {
+        if (null == userDAO) {
+            synchronized (UserDAO.class) {
+                if (null == userDAO) {
+                    userDAO = new UserDAO();
+                }
+            }
+        }
+        return userDAO;
+    }
+
     @Override
     public boolean create(User user) throws SQLException {
         String name = user.getName();
