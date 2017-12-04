@@ -1,8 +1,3 @@
-<!-- Ant довольно простая, но несколько разросшаяся система сборки
-поэтому для полного понимания кода потребуется документация
-Смотрите тут https://ant.apache.org/manual/
--->
-
 <project name="Ant to AKHMELEV" default="10deploy" basedir="..">
     <!-- подключаем файл с настройками -->
     <property file="ant/deploy.properties"/>
@@ -101,12 +96,12 @@
                 <include name="khmelov_tomcat_lib.jar"/>
             </fileset>
             <!--<fileset dir="ant/lib_tomcat">-->
-                <!--<include name="catalina-ant.jar"/>-->
-                <!--<include name="tomcat-coyote.jar"/>-->
-                <!--<include name="tomcat-util.jar"/>-->
+            <!--<include name="catalina-ant.jar"/>-->
+            <!--<include name="tomcat-coyote.jar"/>-->
+            <!--<include name="tomcat-util.jar"/>-->
             <!--</fileset>-->
             <!--<fileset dir="ant/lib_tomcat">-->
-                <!--<include name="tomcat-juli.jar"/>-->
+            <!--<include name="tomcat-juli.jar"/>-->
             <!--</fileset>-->
         </path>
 

@@ -12,7 +12,7 @@ public class ConnectionCreator {
 
     static {
         try {
-            Class.forName("com.jdbc.mysql.Driver");
+            Class.forName("com.mysql.jdbc.Driver");
             prop.load(ConnectionCreator.class.getResourceAsStream("dbConnection.properties"));
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -22,16 +22,10 @@ public class ConnectionCreator {
     }
 
     public static Connection getConnection() throws SQLException {
-        if (null != con || con.isClosed()) {
+        if (null == con || con.isClosed()) {
             return DriverManager.getConnection(prop.getProperty("url"), prop.getProperty("login"), prop.getProperty("password"));
         }
         return con;
     }
 
-    public static void main(String[] args) throws SQLException {
-        Connection connection = getConnection();
-        if (connection.isClosed()) {
-            System.out.println("Connection is closed");
-        }
-    }
 }

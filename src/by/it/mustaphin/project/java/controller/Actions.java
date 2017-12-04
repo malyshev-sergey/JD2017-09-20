@@ -1,0 +1,28 @@
+package by.it.mustaphin.project.java.controller;
+
+public enum Actions {
+
+    LOGIN {
+        {
+            this.command = new CmdLogin();
+        }
+    },
+    SIGNUP {
+        {
+            this.command = new CmdSignup();
+        }
+    },
+    LOGOUT {
+        {
+            this.command = new CmdLogout();
+        }
+    },
+    ERROR {
+        {
+            this.command = new CmdError();
+        }
+    };
+
+
+    ICommand command;
+}
