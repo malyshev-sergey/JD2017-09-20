@@ -14,7 +14,7 @@ public class UserDAO extends AbstractDAO implements InterfaceDAO<User> {
     @Override
     public List<User> getAll(String WHERE) {
         List<User> users = new ArrayList<>();
-        String sql = "SELECT * FROM users " + WHERE + " ;";
+        String sql = String.format("SELECT * FROM `users` %s ;", WHERE);
         try (Connection connection = ConnectionCreator.getConnection();
              Statement statement = connection.createStatement()
         ) {
@@ -25,7 +25,7 @@ public class UserDAO extends AbstractDAO implements InterfaceDAO<User> {
                 user.setLogin(rs.getString("login"));
                 user.setEmail(rs.getString("email"));
                 user.setPassword(rs.getString("password"));
-                user.setFk_Role(rs.getInt("FK_Role"));
+                user.setFk_Roles(rs.getInt("FK_Role"));
                 users.add(user);
             }
         } catch (SQLException e) {
@@ -47,7 +47,7 @@ public class UserDAO extends AbstractDAO implements InterfaceDAO<User> {
         String sql = String.format(
                 "insert INTO users(Login,Password,Email,FK_Role)" +
                         " values('%s','%s','%s',%d);",
-                user.getLogin(), user.getPassword(), user.getEmail(), user.getFk_Role()
+                user.getLogin(), user.getPassword(), user.getEmail(), user.getFk_Roles()
         );
         user.setId(executeUpdate(sql));
         return (user.getId()>0);
@@ -56,7 +56,7 @@ public class UserDAO extends AbstractDAO implements InterfaceDAO<User> {
     public boolean update(User user) {
         String sql = String.format(
                 "UPDATE `users` SET `Login` = '%s', `Password` = '%s', `Email` = '%s', `FK_Role` = '%d' WHERE `users`.`ID` = %d",
-                user.getLogin(), user.getPassword(), user.getEmail(), user.getFk_Role(), user.getId()
+                user.getLogin(), user.getPassword(), user.getEmail(), user.getFk_Roles(), user.getId()
         );
         return (0 < executeUpdate(sql));
     }

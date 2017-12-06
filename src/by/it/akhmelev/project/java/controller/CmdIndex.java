@@ -6,6 +6,17 @@ import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
 
 class CmdIndex extends AbstractAction {
+
+    public static void main(String[] args) {
+        try {
+            System.out.println(
+                    DAO.getInstance().ad.getAll("")
+            );
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public ICommand execute(HttpServletRequest req) {
         try {

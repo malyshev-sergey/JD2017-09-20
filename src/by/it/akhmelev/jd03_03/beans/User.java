@@ -7,7 +7,7 @@ public class User {
     private String login;
     private String password;
     private String email;
-    private Integer fk_Role = 0;
+    private Integer fk_Roles = 0;
 
     public User() {
     }
@@ -17,7 +17,7 @@ public class User {
         this.login = login;
         this.password = password;
         this.email = email;
-        this.fk_Role = fk_Role;
+        this.fk_Roles = fk_Role;
     }
 
     public int getId() {
@@ -29,12 +29,12 @@ public class User {
     }
 
 
-    public Integer getFk_Role() {
-        return fk_Role;
+    public Integer getFk_Roles() {
+        return fk_Roles;
     }
 
-    public void setFk_Role(Integer fk_Role) {
-        this.fk_Role = fk_Role;
+    public void setFk_Roles(Integer fk_Roles) {
+        this.fk_Roles = fk_Roles;
     }
 
     public String getLogin() {
@@ -68,7 +68,7 @@ public class User {
                 ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
-                ", Role=" + fk_Role +
+                ", Role=" + fk_Roles +
                 '}';
     }
 }

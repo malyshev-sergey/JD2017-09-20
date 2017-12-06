@@ -1,6 +1,7 @@
 package by.it.akhmelev.jd03_03.bad_path;
 
 
+import by.it.akhmelev.jd03_03.classwork.connection.ConnectionCreator;
 
 import java.lang.reflect.Field;
 import java.sql.Connection;
@@ -21,7 +22,7 @@ import java.util.List;
 //  нет потокобезопасности, совсем, т.к. это только пример, иначе код заметно усложнится.
 //  Поэтому - никакого реального применения, используйте только в учебных целях!
 
-public class UniversalDAO<TypeBean> implements InterfaceDAO<TypeBean> {
+public class UniversalDAO<TypeBean> {
 
     private TypeBean bean; //это некий неизвестный bean
     private String table; //это его таблица в базе
@@ -39,7 +40,7 @@ public class UniversalDAO<TypeBean> implements InterfaceDAO<TypeBean> {
         List<TypeBean> beans = new ArrayList<>();
         String sql = "SELECT * FROM " + table + " " + WHERE + " ;";
         try (
-                Connection connection = ConnectorCreator.getConnection();
+                Connection connection = ConnectionCreator.getConnection();
                 Statement statement = connection.createStatement()
         ) {
             ResultSet rs = statement.executeQuery(sql);
@@ -53,25 +54,26 @@ public class UniversalDAO<TypeBean> implements InterfaceDAO<TypeBean> {
                     Field f = fields[i - 1];
                     f.setAccessible(true);
                     String strType = f.getType().toString();
+                    String fName=f.getName();
                     try {
                         if (f.getType() == Boolean.class || strType.equals("boolean"))
-                            f.set(newBean, rs.getBoolean(i));
+                            f.set(newBean, rs.getBoolean(fName));
                         if (f.getType() == Byte.class || strType.equals("byte"))
-                            f.set(newBean, rs.getByte(i));
+                            f.set(newBean, rs.getByte(fName));
                         if (f.getType() == Integer.class || strType.equals("int"))
-                            f.set(newBean, rs.getInt(i));
+                            f.set(newBean, rs.getInt(fName));
                         if (f.getType() == Double.class || strType.equals("double"))
-                            f.set(newBean, rs.getDouble(i));
+                            f.set(newBean, rs.getDouble(fName));
                         if (f.getType() == Float.class || strType.equals("float"))
-                            f.set(newBean, rs.getFloat(i));
+                            f.set(newBean, rs.getFloat(fName));
                         if (f.getType() == Long.class || strType.equals("long"))
-                            f.set(newBean, rs.getLong(i));
+                            f.set(newBean, rs.getLong(fName));
                         if (f.getType() == Short.class || strType.equals("short"))
-                            f.set(newBean, rs.getShort(i));
+                            f.set(newBean, rs.getShort(fName));
                         if (f.getType() == String.class)
-                            f.set(newBean, rs.getString(i));
+                            f.set(newBean, rs.getString(fName));
                         if (f.getType() == Date.class)
-                            f.set(newBean, rs.getDate(i));
+                            f.set(newBean, rs.getDate(fName));
                         //... и т.д. Но учтите, что протестированы только String int и Integer
                     } catch (IllegalAccessException e) {
                         e.printStackTrace();
@@ -182,8 +184,8 @@ public class UniversalDAO<TypeBean> implements InterfaceDAO<TypeBean> {
     //общая команда для Create Update Delete
     private static int executeUpdate(String sql, boolean returnLastID) throws SQLException {
         int result;
-        try (Connection connection = ConnectorCreator.getConnection();
-            Statement statement = connection.createStatement()) {
+        try (Connection connection = ConnectionCreator.getConnection();
+             Statement statement = connection.createStatement()) {
             result = statement.executeUpdate(sql,Statement.RETURN_GENERATED_KEYS);
             //получим ID, если это требуется извне.
             if (result>0 && returnLastID) {
