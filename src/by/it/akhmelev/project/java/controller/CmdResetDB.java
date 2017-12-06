@@ -10,6 +10,7 @@ class CmdResetDB extends AbstractAction {
     public ICommand execute(HttpServletRequest req) {
         if (FormValidator.isPost(req)){
             Init_akhmelev.main(null);
+            req.getSession().invalidate();
             return Actions.SIGNUP.command;
         }
         return null;
