@@ -1,19 +1,34 @@
 package by.it.ali.jd03_03;
 
+import java.sql.SQLException;
 import java.util.List;
 
-public interface InDAO {
-    interface InterfaceDAO<TYPE> {
+public interface InDAO<TYPE> {
+//    boolean create(User user) throws SQLException;
+//
+//    boolean create(Tickets tickets) throws SQLException;
+//
+//    boolean update(User user) throws SQLException;
+//
+//    boolean delete(User user) throws SQLException;
+//
+//    User read(User user) throws SQLException;
+//
+//    List<User> getAll() throws SQLException;
+//
+//    List<User> getAll(String WhereAndOreder) throws SQLException;
+
+
         //READ чтение отдельной сущности
-        TYPE read(int id);
+        TYPE read(TYPE entity)throws SQLException;
         //CREATE,UPDATE,DELETE обновление сущности
-        boolean create(TYPE entity);
-        boolean update(TYPE entity);
-        boolean delete(TYPE entity);
+        boolean create(TYPE entity)throws SQLException;
+        boolean update(TYPE entity)throws SQLException;
+        boolean delete(TYPE entity)throws SQLException;
 
         //READ - чтение всех элементов по условию
-        List<TYPE> getAll(String WhereAndOrder);
+        List<TYPE> getAll(String WhereAndOrder)throws SQLException;
         //и другие необходимые системе операции
 
-    }
+
 }
