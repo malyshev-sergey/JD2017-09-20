@@ -1,13 +1,11 @@
-package by.it.malyshev.jd03_01;
-
-import com.sun.xml.internal.bind.v2.model.core.ID;
+package by.it.malyshev.jd03_02;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 
 
-public class C_Init {
+public class DbInit {
 
     public static void main(String[] args) {
 
@@ -135,21 +133,16 @@ public class C_Init {
             statement.executeUpdate("INSERT INTO `malyshev`.`roles`(`ID`, `role`)VALUES(2, 'Guest'); ");
             statement.executeUpdate("INSERT INTO `malyshev`.`users`(`ID`, `login`, `password`, `email`, `roles_ID`) " +
                     "VALUES(1, 'admin', 'padmin', 'admin@it.by', 1); ");
-            statement.executeUpdate("INSERT INTO `malyshev`.`users`(`ID`, `login`, `password`, `email`, `roles_ID`) " +
-                    "VALUES(2, 'user', 'puser', 'user@it.by', 2); ");
-            statement.executeUpdate("INSERT INTO `malyshev`.`users`(`ID`, `login`, `password`, `email`, `roles_ID`) " +
-                    "VALUES(3, 'user2', 'puser2', 'user2@it.by', 2); ");
-
             statement.executeUpdate("INSERT INTO `malyshev`.`books`(`ID`, `title`, `pubyear`, `isbn`,`img`, `price`) " +
                     "VALUES(1, 'Java 8. Полное руководство', 2015, '978-5-8459-1918-2','url', 179.0); ");
             statement.executeUpdate("INSERT INTO `malyshev`.`books`(`ID`, `title`, `pubyear`, `isbn`,`img`, `price`) " +
                     "VALUES(2, 'Сильмариллион', 1977, '978-5-17-083893-6','url', 47.75); ");
 
-            statement.executeUpdate("INSERT INTO `malyshev`.`messages`(`ID`, `message`, `users_ID`, `books_ID`)VALUES(1, 'Хорошая книга', 2, 1); ");
-            statement.executeUpdate("INSERT INTO `malyshev`.`messages`(`ID`, `message`, `users_ID`, `books_ID`)VALUES(2, 'Скучная книга', 3, 2); ");
+            statement.executeUpdate("INSERT INTO `malyshev`.`messages`(`ID`, `message`, `users_ID`, `books_ID`)VALUES(1, 'Хорошая книга', 1, 1); ");
+            statement.executeUpdate("INSERT INTO `malyshev`.`messages`(`ID`, `message`, `users_ID`, `books_ID`)VALUES(2, 'Скучная книга', 1, 2); ");
 
             statement.executeUpdate("INSERT INTO `malyshev`.`orders`(`ID`, `quantity`, `users_ID`, `books_ID`)VALUES(1, 1, 1, 1); ");
-            statement.executeUpdate("INSERT INTO `malyshev`.`orders`(`ID`, `quantity`, `users_ID`, `books_ID`)VALUES(2, 2, 2, 2); ");
+            statement.executeUpdate("INSERT INTO `malyshev`.`orders`(`ID`, `quantity`, `users_ID`, `books_ID`)VALUES(2, 2, 1, 2); ");
 
             statement.executeUpdate("INSERT INTO `malyshev`.`store`(`ID`, `quantity`, `books_ID`)VALUES(1, 15, 1); ");
             statement.executeUpdate("INSERT INTO `malyshev`.`store`(`ID`, `quantity`, `books_ID`)VALUES(2, 3, 2); ");

@@ -24,8 +24,8 @@ public class A_AddData {
 
 
             if (1 == statement.executeUpdate(
-                    "insert into books(`title`,`pubyear`,`isbn`,`price`)" +
-                            " values('Generation П',2015, '978-5-699-83323-8',12.21);", Statement.RETURN_GENERATED_KEYS)) {
+                    "insert into books(`title`,`pubyear`,`isbn`, `img`,`price`)" +
+                            " values('Generation П',2015, '978-5-699-83323-8', 'url',12.21);", Statement.RETURN_GENERATED_KEYS)) {
                 ResultSet key = statement.getGeneratedKeys();
                 if (key.next()) {
                     book = key.getInt(1);
