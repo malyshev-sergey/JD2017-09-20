@@ -24,7 +24,7 @@ class CmdProfile extends AbstractAction{
         try {
             DAO dao=DAO.getInstance();
             List<Ad> ads=dao.ad.getAll(" where FK_Users="+user.getId());
-            req.getSession().setAttribute("ads",ads);
+            req.setAttribute("ads",ads);
         } catch (SQLException e) {
             e.printStackTrace();
         }

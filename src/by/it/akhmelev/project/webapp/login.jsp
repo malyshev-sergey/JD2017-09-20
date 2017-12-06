@@ -43,7 +43,4 @@
 
 <!-- Text input-->
 
-<p>User=${user}</p>
-
-
 <%@ include file="include/end-html.jsp" %>

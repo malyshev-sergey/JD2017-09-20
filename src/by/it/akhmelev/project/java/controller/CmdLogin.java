@@ -28,7 +28,7 @@ class CmdLogin extends AbstractAction {
                     session.setAttribute("user",user);
                     return Actions.PROFILE.command;
                 } else {
-                    req.setAttribute("user","User: "+user.getLogin()+" not found");
+                    req.setAttribute(Messages.ERROR,"User: "+user.getLogin()+" not found");
                 }
                 /* TODO session */
             } catch (Exception e) {

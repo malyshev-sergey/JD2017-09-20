@@ -26,8 +26,7 @@ class CmdCreateAd extends AbstractAction {
                 ad.setFK_Users(user.getId());
                 DAO dao= DAO.getInstance();
                 dao.ad.create(ad);
-                List<Ad> ads=dao.ad.getAll("");
-                req.getSession().setAttribute("ads",ads);
+                return Actions.INDEX.command;
             } catch (Exception e) {
                 e.printStackTrace();
             }

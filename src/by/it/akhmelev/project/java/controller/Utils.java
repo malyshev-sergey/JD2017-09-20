@@ -5,7 +5,7 @@ import by.it.akhmelev.project.java.bean.User;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-public class Utils {
+class Utils {
 
     static User getUserFromSession(HttpServletRequest req){
         HttpSession session=req.getSession(false);
