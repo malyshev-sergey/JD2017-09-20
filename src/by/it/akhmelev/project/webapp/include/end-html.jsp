@@ -4,8 +4,8 @@
 
 <nav class="navbar fixed-bottom navbar-light bg-light">
     <div class="container">
-        <p>Message server: ${jsp_message}</p>
-        <p>Error server: <b><span style="color: red; ">${jsp_error}</span></b></p>
+        <p>Message server: ${message}</p>
+        <p>Error server: <b><span style="color: red; ">${error}</span></b></p>
         <p>IT-academy 2017. <a href="#">Copyright, contacts and other...</a></p>
     </div>
 </nav>

@@ -2,6 +2,11 @@ package by.it.akhmelev.project.java.controller;
 
 enum Actions {
 
+    INDEX {
+        {
+            this.command = new CmdIndex();
+        }
+    },
     LOGIN {
         {
             this.command = new CmdLogin();
@@ -12,27 +17,26 @@ enum Actions {
             this.command = new CmdSignup();
         }
     },
+    PROFILE{
+        {
+            this.command = new CmdProfile();
+        }
+    },
     RESETDB{
         {
             this.command = new CmdResetDB();
         }
     },
-    LOGOUT{
+    CREATEAD{
         {
-            this.command = new CmdLogout();
+            this.command = new CmdCreateAd();
         }
     },
-//    CREATEAD{
-//        {
-//            this.command = new CmdCreateAD();
-//        }
-//    },
     ERROR{
         {
             this.command = new CmdError();
         }
     };
-
 
     ICommand command;
 }

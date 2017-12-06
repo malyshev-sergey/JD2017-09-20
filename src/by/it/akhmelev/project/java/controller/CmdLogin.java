@@ -4,8 +4,7 @@ import by.it.akhmelev.project.java.bean.User;
 import by.it.akhmelev.project.java.dao.DAO;
 
 import javax.servlet.http.HttpServletRequest;
-import java.sql.SQLException;
-import java.text.ParseException;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 class CmdLogin extends AbstractAction {
@@ -25,14 +24,14 @@ class CmdLogin extends AbstractAction {
                 );
                 if (users.size()==1){
                     user=users.get(0);
-                    req.setAttribute("user",user);
+                    HttpSession session=req.getSession();
+                    session.setAttribute("user",user);
+                    return Actions.PROFILE.command;
                 } else {
                     req.setAttribute("user","User: "+user.getLogin()+" not found");
                 }
                 /* TODO session */
-            } catch (ParseException e) {
-                e.printStackTrace();
-            } catch (SQLException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 

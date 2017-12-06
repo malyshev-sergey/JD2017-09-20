@@ -11,9 +11,12 @@ public class FrontController extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ICommand cmd=new ActionFactory().getCommand(req);
-        cmd.execute(req);
-        RequestDispatcher disp=req.getRequestDispatcher(cmd.getJsp());
-        disp.include(req,resp);
+        ICommand nextAction=cmd.execute(req);
+        if (nextAction==null) {
+            RequestDispatcher disp=req.getRequestDispatcher(cmd.getJsp());
+            disp.forward(req,resp);}
+        else
+            resp.sendRedirect("do?command="+nextAction);
     }
 
     @Override
@@ -24,7 +27,6 @@ public class FrontController extends HttpServlet{
             RequestDispatcher disp=req.getRequestDispatcher(cmd.getJsp());
             disp.forward(req,resp);}
         else
-        /* TODO fix fo */
             resp.sendRedirect("do?command="+nextAction);
     }
 }

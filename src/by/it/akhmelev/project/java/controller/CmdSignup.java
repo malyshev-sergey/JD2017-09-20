@@ -21,6 +21,11 @@ class CmdSignup extends AbstractAction {
                 user.setPassword(FormValidator.getString(req, "password", Patterns.PASSWORD));
                 user.setFk_Roles(2);
                 DAO dao = DAO.getInstance();
+                if (dao.user.getAll("where Login='"+user.getLogin()+"'").size()>0)
+                {
+                    req.setAttribute(Messages.ERROR, "Такой пользователь уже есть");
+                    return null;
+                }
                 dao.user.create(user);
                 req.setAttribute(Messages.MESSAGE, "finish");
                 return Actions.LOGIN.command;
