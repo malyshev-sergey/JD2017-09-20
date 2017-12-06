@@ -1,4 +1,4 @@
-package by.it.ali.jd03_03;
+package by.it.ali.jd03_01;
 
 import com.mysql.fabric.jdbc.FabricMySQLDriver;
 

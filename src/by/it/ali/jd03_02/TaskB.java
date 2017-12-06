@@ -10,9 +10,11 @@ public class TaskB {
                 Connection connection = DriverManager.getConnection(INF.URL, INF.USER, INF.PASSWORD);
                 Statement statement=connection.createStatement();)
         {
-            ResultSet resultSet=statement.executeQuery("SELECT Login,FKroles,(SELECT Role from roles where ID=FKroles) from users");
+            ResultSet resultSet= statement.executeQuery("SELECT* FROM users INNER JOIN roles ON users.FKroles=roles.ID");
+                    //("SELECT Login,FKroles,(SELECT Role from roles where ID=FKroles) from users");
             while (resultSet.next())
-                System.out.println(resultSet.getString("Login")+", "+resultSet.getString("FKroles")+", "+resultSet.getString("Role"));
+                System.out.println(resultSet.getString("Login")+", "+resultSet.getString("role"));
+                        //("Login")+", "+resultSet.getString("FKroles")+", "+resultSet.getString("Role"));
         } catch (SQLException e) {
             e.printStackTrace();
         }

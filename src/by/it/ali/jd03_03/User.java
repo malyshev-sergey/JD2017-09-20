@@ -8,6 +8,9 @@ public class User {
     private int fk_Roles;
     private int fk_Roles_additional;
 
+//    public User() {
+//    }
+
 
     public User(int id, String login, String password, String email, int fk_Roles, int fk_Roles_additional) {
         this.id = id;
@@ -73,4 +76,14 @@ public class User {
 
     public void setFk_Roles_additional(int fk_Roles_additional) { this.fk_Roles = fk_Roles_additional; }
 
+    @Override
+    public String toString() {
+        return "\nUser{" +
+                "id=" + id +
+                ", login='" + login + '\'' +
+                ", email='" + email + '\'' +
+                ", fk_Roles='" + fk_Roles + '\'' +
+                ", fk_Roles_additional=" + fk_Roles_additional +
+                '}';
+    }
 }
