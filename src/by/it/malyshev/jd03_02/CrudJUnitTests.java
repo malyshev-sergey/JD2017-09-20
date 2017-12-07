@@ -2,11 +2,19 @@ package by.it.malyshev.jd03_02;
 
 import by.it.malyshev.jd03_02.beans.*;
 import by.it.malyshev.jd03_02.crud.*;
-
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
+
 import static org.junit.Assert.assertEquals;
 
 public class CrudJUnitTests {
+
+    @BeforeClass
+    public static void db() {
+        DbInit.main(null);
+    }
+
 
     @Test
     public void testRoles() throws Exception {
@@ -160,6 +168,12 @@ public class CrudJUnitTests {
 
         bookCRUD.delete(resB);
     }
+
+    @AfterClass
+    public static void dbDel() {
+        DbReset.main(null);
+    }
+
 
 
 }
