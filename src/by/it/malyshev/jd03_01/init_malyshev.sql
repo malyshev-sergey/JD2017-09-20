@@ -55,9 +55,10 @@ DROP TABLE IF EXISTS `malyshev`.`books` ;
 
 CREATE TABLE IF NOT EXISTS `malyshev`.`books` (
   `ID` INT NOT NULL AUTO_INCREMENT,
-  `title` VARCHAR(100) NOT NULL,
-  `pubyear` YEAR NOT NULL,
-  `isbn` VARCHAR(45) NOT NULL,
+  `title` VARCHAR(100) NULL,
+  `pubyear` INT NULL,
+  `isbn` VARCHAR(45) NULL,
+  `img` VARCHAR(100) NULL,
   `price` DECIMAL(10,2) NOT NULL,
   PRIMARY KEY (`ID`))
 ENGINE = InnoDB;
@@ -147,14 +148,15 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `malyshev`.`authors_books`
+-- Table `malyshev`.`authorsBooks`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `malyshev`.`authors_books` ;
+DROP TABLE IF EXISTS `malyshev`.`authorsBooks` ;
 
-CREATE TABLE IF NOT EXISTS `malyshev`.`authors_books` (
-  `authors_ID` INT NOT NULL,
-  `books_ID` INT NOT NULL,
-  PRIMARY KEY (`authors_ID`, `books_ID`),
+CREATE TABLE IF NOT EXISTS `malyshev`.`authorsBooks` (
+  `ID` INT NOT NULL AUTO_INCREMENT,
+  `authors_ID` INT NULL,
+  `books_ID` INT NULL,
+  PRIMARY KEY (`ID`, `authors_ID`, `books_ID`),
   INDEX `fk_Authors_has_books_books1_idx` (`books_ID` ASC),
   INDEX `fk_Authors_has_books_Authors1_idx` (`authors_ID` ASC),
   CONSTRAINT `fk_Authors_has_books_Authors1`
@@ -202,8 +204,8 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `malyshev`;
-INSERT INTO `malyshev`.`books` (`ID`, `title`, `pubyear`, `isbn`, `price`) VALUES (1, 'Java 8. Полное руководство', 2015, '978-5-8459-1918-2', 179.0);
-INSERT INTO `malyshev`.`books` (`ID`, `title`, `pubyear`, `isbn`, `price`) VALUES (2, 'Сильмариллион', 1977, '978-5-17-083893-6', 47.75);
+INSERT INTO `malyshev`.`books` (`ID`, `title`, `pubyear`, `isbn`, `img`, `price`) VALUES (1, 'Java 8. Полное руководство', 2015, '978-5-8459-1918-2', NULL, 179.0);
+INSERT INTO `malyshev`.`books` (`ID`, `title`, `pubyear`, `isbn`, `img`, `price`) VALUES (2, 'Сильмариллион', 1977, '978-5-17-083893-6', NULL, 47.75);
 
 COMMIT;
 
@@ -253,12 +255,12 @@ COMMIT;
 
 
 -- -----------------------------------------------------
--- Data for table `malyshev`.`authors_books`
+-- Data for table `malyshev`.`authorsBooks`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `malyshev`;
-INSERT INTO `malyshev`.`authors_books` (`authors_ID`, `books_ID`) VALUES (1, 1);
-INSERT INTO `malyshev`.`authors_books` (`authors_ID`, `books_ID`) VALUES (2, 2);
+INSERT INTO `malyshev`.`authorsBooks` (`ID`, `authors_ID`, `books_ID`) VALUES (DEFAULT, 1, 1);
+INSERT INTO `malyshev`.`authorsBooks` (`ID`, `authors_ID`, `books_ID`) VALUES (DEFAULT, 2, 2);
 
 COMMIT;
 
