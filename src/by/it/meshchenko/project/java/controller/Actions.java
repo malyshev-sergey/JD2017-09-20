@@ -2,19 +2,34 @@ package by.it.meshchenko.project.java.controller;
 
 public enum Actions {
 
-    LOGIN{
+    SIGNIN{
         {
-            this.command = new CmdLogin();
+            this.command = new CmdSignIn();
         }
     },
-    LOGOUT{
+    REGISTER{
         {
-            this.command = new CmdLogOut();
+            this.command = new CmdRegister();
         }
     },
-    ERROR{
+    INDEX{
         {
-            this.command = new CmdError();
+            this.command = new CmdIndex();
+        }
+    },
+    HOME{
+        {
+            this.command = new CmdHome();
+        }
+    },
+    SIGNOUT{
+        {
+            this.command = new CmdSignOut();
+        }
+    },
+    RESETDB{
+        {
+            this.command = new CmdResetDB();
         }
     };
 

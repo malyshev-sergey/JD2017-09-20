@@ -7,7 +7,7 @@
 
     <div class="container mycontainer">
     		<div class="tab-content">
-    			<span class="pageName">About project</span>
+    			<span class="pageName">HOME</span>
     		</div>
     		<p>${message}</p>
 <%@ include file="include/_end.jsp" %>
