@@ -1,5 +1,4 @@
-package by.it.likhanau.jd02_01;
-
+package by.it.likhanau.jd02_03;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Goods {
-  public static Map<String, Double> goods;
+    static Map<String, Double> goods;
     static List<String> goodsName;
 
     static {
