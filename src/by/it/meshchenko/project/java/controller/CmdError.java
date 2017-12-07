@@ -1,9 +1,11 @@
-package by.it.meshchenko.project.java.controller;
-
-class CmdError extends AbstractAction {
-    @Override
-    public ICommand execute() {
-        return null;
-    }
-
-}
+//package by.it.meshchenko.project.java.controller;
+//
+//import javax.servlet.http.HttpServletRequest;
+//
+//class CmdError extends AbstractAction {
+//    @Override
+//    public ICommand execute(HttpServletRequest req) {
+//        return null;
+//    }
+//
+//}

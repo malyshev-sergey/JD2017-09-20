@@ -22,13 +22,21 @@ public class FrontController extends HttpServlet {
 
     private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ICommand cmd = new ActionFactory().getCommand(req);
-        ICommand nextAction = cmd.execute();
+        ICommand nextAction = cmd.execute(req, resp);
         if(nextAction == null){
             RequestDispatcher disp = req.getRequestDispatcher(cmd.getJsp());
             disp.include(req, resp);
         }
         else {
             resp.sendRedirect(nextAction.getJsp());
+
         }
     }
 }
+//
+//<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+//<div class="container mycontainer">
+//        Lease rooms in shopping centers
+//</div>
+//
+//</nav>

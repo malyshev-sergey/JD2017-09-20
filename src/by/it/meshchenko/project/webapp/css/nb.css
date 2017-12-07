@@ -6,12 +6,40 @@ body {
 }
 .mycontainer{
 	margin-top: 10px;
-	height: 97%;
+	min-height: 97%;
 	color: #003360;
 	background-color: rgba(244, 244, 244, 1);
 }
+.tab-content{
+	min-height: 550px;
+}
 .navbar{
+	font-size: 14px;
+}
+.navbar-brand{
 	font-size: 20px;
+	line-height: 38px;
+	padding: 5px 15px;
+
+}
+.nav>li>a {
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+.navbar-nav{
+    margin: 10px 0 0 0;
+}
+@media(min-width:768px) {
+    body {
+        padding-top: 60px; /* Required padding for .navbar-fixed-top. Change if height of navigation changes. */
+	}
+
+    .navbar-fixed-top .navbar-brand {
+        padding: 5px 15px;
+    }
+}
+.nav > li > a {
+	padding: 5px 10px;
 }
 .mycontainer1{
 	max-width: 1200px;
@@ -39,37 +67,10 @@ body {
 .margin-bottom-8{
 	margin-bottom: 8px;
 }
-.navbar-fixed-top .nav {
-    padding: 5px 0;
-}
-
-.navbar-fixed-top .navbar-brand {
-    padding: 0 5px;
-}
-
-.navbar-inverse {
-    background-color: rgba(244, 244, 244, 1);
-    border-color: rgba(244, 244, 244, 1);
-
 footer {
     padding: 30px 0;
 }
 
-@media(min-width:768px) {
-    body {
-        padding-top: 60px; /* Required padding for .navbar-fixed-top. Change if height of navigation changes. */
-	}
-
-    .navbar-fixed-top .navbar-brand {
-        padding: 5px 0;
-    }
-}
-.navbar{
-	min-height: 50px;
-}
-.nav > li > a {
-	padding: 10px 10px;
-}
 .progress{
 	margin-bottom: 5px;
 }

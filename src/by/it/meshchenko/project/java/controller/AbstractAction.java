@@ -2,13 +2,17 @@ package by.it.meshchenko.project.java.controller;
 
 public abstract class AbstractAction implements ICommand {
 
-    @Override
-    public abstract ICommand execute();
+    public abstract String jsp();
 
     @Override
     public String getJsp() {
-        String cmdName = this.getClass().getSimpleName();
-        cmdName  = cmdName.replace("Cmd", "").toLowerCase();
-        return "/" + cmdName + ".jsp";
+        return this.jsp();
+    }
+
+    @Override
+    public String toString(){
+        return this.getClass().
+                getSimpleName().
+                replace("Cmd", "");
     }
 }

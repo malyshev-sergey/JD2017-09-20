@@ -9,7 +9,9 @@ class ActionFactory {
             Actions tmp = Actions.valueOf(strCommand);
             return tmp.command;
         } catch (IllegalArgumentException e) {
-            return Actions.ERROR.command;
+            //return Actions.ERROR.command;
+            e.printStackTrace();
         }
+        return null;
     }
 }
