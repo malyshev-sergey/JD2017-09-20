@@ -3,7 +3,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Hello, world!</title>
+    <title>Demo project</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -30,8 +30,8 @@
                 <li class="nav-item">
                     <a class="nav-link" href="do?command=CreateAd">CreateAd</a>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Active <span class="sr-only">(current)</span></a>
+                <li class="nav-item">
+                    <a class="nav-link" href="do?command=EditUsers">EditUsers</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" target="_blank" href="http://localhost:2080/phpmyadmin/">PHP MyAdmin</a>
@@ -47,7 +47,6 @@
                 <li class="nav-item">
                     <a class="nav-link" href="do?command=Profile">Profile</a>
                 </li>
-
             </ul>
         </div>
     </nav>
