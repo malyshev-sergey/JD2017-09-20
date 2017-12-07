@@ -1,14 +1,11 @@
 package by.it.ali.project.java.controller;
 
 
-public class CmdError implements ICommand {
-    @Override
-    public ICommand execute() {
-        return null;
-    }
+import javax.servlet.http.HttpServletRequest;
 
+public class CmdError extends AbstractAction {
     @Override
-    public String getJsp() {
-        return "error.jsp";
+    public ICommand execute(HttpServletRequest req) {
+        return null;
     }
 }

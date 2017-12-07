@@ -2,22 +2,41 @@ package by.it.ali.project.java.controller;
 
 
 public enum Actions {
+//    INDEX {
+//        {
+//            this.command = new CmdIndex();
+//        }
+//    },
     LOGIN {
         {
             this.command = new CmdLogin();
         }
     },
-    LOGOUT {
+    SIGNUP {
         {
-            this.command = new CmdLogout();
+            this.command = new CmdSignup();
         }
     },
-    ERROR {
+//    PROFILE{
+//        {
+//            this.command = new CmdProfile();
+//        }
+//    },
+//    RESETDB{
+//        {
+//            this.command = new CmdResetDB();
+//        }
+//    },
+    BUYTICKETS{
+        {
+            this.command = new CmdBuyTickets();
+        }
+    },
+    ERROR{
         {
             this.command = new CmdError();
         }
     };
-
 
     ICommand command;
 }
