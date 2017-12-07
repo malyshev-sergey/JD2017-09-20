@@ -15,7 +15,7 @@ public class RolesCRUD {
     public Roles create(Roles role) throws SQLException {
         role.setId(0);
 
-        String createUserSQL = String.format(
+        String createRolesSQL = String.format(
                 "insert into roles(role) values('%s');", role.getRole()
         );
         try (
@@ -25,7 +25,7 @@ public class RolesCRUD {
         ) {
             //выполняем добавление в базу, должна быть добавлена одна запись. Проверим это.
             //create(insert) update delete - это executeUpdate, а select это executeQuery
-            if (1 == statement.executeUpdate(createUserSQL, RETURN_GENERATED_KEYS)) {
+            if (1 == statement.executeUpdate(createRolesSQL, RETURN_GENERATED_KEYS)) {
                 ResultSet keys = statement.getGeneratedKeys();
                 if (keys.next()) {
                     int id = keys.getInt(1);
