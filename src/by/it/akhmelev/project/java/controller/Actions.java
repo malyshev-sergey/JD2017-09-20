@@ -7,6 +7,11 @@ enum Actions {
             this.command = new CmdIndex();
         }
     },
+    EDITUSERS {
+        {
+            this.command = new CmdEditUsers();
+        }
+    },
     LOGIN {
         {
             this.command = new CmdLogin();

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 
 <!doctype html>
@@ -16,7 +17,7 @@
 
 <div class="container">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="do?command=Index">Главная</a>
+        <a class="navbar-brand" href=".">Главная</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -24,7 +25,7 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a class="nav-link" href="do?command=ResetDB">ResetDB</a>
                 </li>
                 <li class="nav-item">
@@ -38,15 +39,21 @@
                 </li>
             </ul>
             <ul class="navbar-nav navbar-right">
-                <li class="nav-item">
-                    <a class="nav-link" href="do?command=SignUp">SignUp</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="do?command=Login">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="do?command=Profile">Profile</a>
-                </li>
+            <c:choose>
+                <c:when test="${user==null}">
+                    <li class="nav-item">
+                        <a class="nav-link" href="do?command=SignUp">SignUp</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="do?command=Login">Login</a>
+                    </li>
+                </c:when>
+                <c:otherwise>
+                    <li class="nav-item">
+                        <a class="nav-link" href="do?command=Profile">Profile</a>
+                    </li>
+                </c:otherwise>
+            </c:choose>
             </ul>
         </div>
     </nav>

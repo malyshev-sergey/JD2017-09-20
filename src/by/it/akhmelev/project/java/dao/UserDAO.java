@@ -60,8 +60,8 @@ public class UserDAO extends AbstractDAO implements InterfaceDAO<User>{
                 User tmpUser = new User(
                         resultSet.getInt("ID"),
                         resultSet.getString("Login"),
-                        resultSet.getString("Email"),
                         resultSet.getString("Password"),
+                        resultSet.getString("Email"),
                         resultSet.getInt("FK_roles"));
                 users.add(tmpUser);
             }

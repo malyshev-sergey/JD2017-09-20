@@ -5,14 +5,15 @@
          metadata-complete="false">
     <display-name>Сервлет FrontControllerServlet</display-name>
 
-    <servlet>
-        <servlet-name>FrontControllerServlet</servlet-name>
-        <servlet-class>by.it.akhmelev.project.java.controller.FrontController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>FrontControllerServlet</servlet-name>
-        <url-pattern>/do</url-pattern>
-    </servlet-mapping>
+    <!--<servlet>-->
+        <!--<servlet-name>FrontControllerServlet</servlet-name>-->
+        <!--<servlet-class>by.it.akhmelev.project.java.controller.FrontController</servlet-class>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>FrontControllerServlet</servlet-name>-->
+        <!--<url-pattern>/do</url-pattern>-->
+        <!--<url-pattern></url-pattern>-->
+    <!--</servlet-mapping>-->
 
 
     <!--<filter>-->

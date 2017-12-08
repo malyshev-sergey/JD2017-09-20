@@ -1,8 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ include file="include/begin-html.jsp" %>
 
-<p>${ads}</p>
-
 <div class="page-header">
     <h1>Все объявления</h1>
     <p class="lead">Пример макета для вывода данных в виде таблицы</p>
@@ -20,24 +18,18 @@
 </div>
 
 <br>
-<div class="row">
-    <div class="col-md-1">{ad.price} </div>
-    <div class="col-md-3">{ad.address} </div>
-    <div class="col-md-3">{ad.description} </div>
-    <div class="col-md-2">{ad.roomCount} </div>
-    <div class="col-md-1">{ad.area} </div>
-    <div class="col-md-1">{ad.floor} </div>
-    <div class="col-md-1">{ad.floors} </div>
-</div>
+
+<c:forEach items="${ads}" var="ad">
+    <div class="row">
+        <div class="col-md-1">${ad.price} </div>
+        <div class="col-md-3">${ad.address} </div>
+        <div class="col-md-3">${ad.description} </div>
+        <div class="col-md-2">${ad.roomCount} </div>
+        <div class="col-md-1">${ad.area} </div>
+        <div class="col-md-1">${ad.floor} </div>
+        <div class="col-md-1">${ad.floors} </div>
+    </div>
 <br>
-<div class="row">
-    <div class="col-md-1">{ad.price} </div>
-    <div class="col-md-3">{ad.address} </div>
-    <div class="col-md-3">{ad.description} </div>
-    <div class="col-md-2">{ad.roomCount} </div>
-    <div class="col-md-1">{ad.area} </div>
-    <div class="col-md-1">{ad.floor} </div>
-    <div class="col-md-1">{ad.floors} </div>
-</div>
+</c:forEach>
 
 <%@ include file="include/end-html.jsp" %>

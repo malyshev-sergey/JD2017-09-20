@@ -9,6 +9,7 @@
     <div class=col-md-2>Роль</div>
 </div>
 
+<c:forEach items="${users}" var="user">
 <form class="edit-user-${user.id}" action="do?command=EditUsers" method=POST>
     <div class="form-row">
         <input id="id" name="id" value="${user.id}" class="form-control input-md col-md-1" title="ID"/>
@@ -35,6 +36,7 @@
     </div>
 </form>
 <br>
+</c:forEach>
 
 <%@ include file="include/end-html.jsp" %>
 
