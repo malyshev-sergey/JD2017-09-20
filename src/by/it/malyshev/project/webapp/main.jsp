@@ -4,4 +4,5 @@
 
 <p>Main: ${message}</p>
 
+<%@ include file="include/middle-html.jsp" %>
 <%@ include file="include/end-html.jsp" %>

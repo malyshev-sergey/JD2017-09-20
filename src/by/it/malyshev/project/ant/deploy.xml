@@ -3,29 +3,33 @@
 Смотрите тут https://ant.apache.org/manual/
 -->
 
-<project name="Ant to MALYSHEV" default="10deploy" basedir="..">
+<project name="Ant to MALYSHEV" default="10_deploy" basedir="..">
     <!-- подключаем файл с настройками -->
     <property file="ant/deploy.properties"/>
     <!-- описываем classpath для копилятора -->
     <!-- каждый jar нужно описать отдельно (!),
          компилятор считает, что это как бы отдельный каталог -->
     <path id="classpath">
-        <fileset dir="${local.lib.dir}" includes="mysql-connector-java.jar" />
-        <fileset dir="${global.lib.dir}" includes="servlet-api.jar"/>
+<!-- <fileset dir="${local.lib.dir}" includes="mysql-connector-java.jar" /> -->
+        <fileset dir="${local.lib.dir}" includes="mysql-connector-java-8.0.13.jar" />
+        <fileset dir="${global.lib.dir}" includes="javax.servlet-api-4.0.1.jar"/>
+        <fileset dir="${local.lib.dir}" includes="javax.annotation-api-1.3.21.jar"/>
+        <fileset dir="${local.lib.dir}" includes="gson-2.8.5.jar"/>
+        <!--<fileset dir="${global.lib.dir}" includes="servlet-api.jar"/>-->
     </path>
 
     <!-- начинаем выполнять шаги (т.е. цели). -->
 
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - -  - - -  -->
     <!-- очистка рабочего каталога, тут будут собираться все файлы -->
-    <target name="01clean">
+    <target name="01_clean">
         <echo>Cleaning the ${build.dir}</echo>
         <delete dir="${build.dir}"/>
     </target>
 
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - -  - - -  -->
     <!-- пересоздание рабочего каталога для классов и библиотек -->
-    <target name="02init" depends="01clean">
+    <target name="02_init" depends="01_clean">
         <echo>Creating the build directory</echo>
         <mkdir dir="${build.dir}/WEB-INF/classes"/>
         <mkdir dir="${build.dir}/WEB-INF/lib"/>
@@ -33,16 +37,16 @@
 
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - -  - - -  -->
     <!-- компиляция файлов проекта -->
-    <target name="03compile" depends="02init">
+    <target name="03_compile" depends="02_init">
         <echo>Compile the source files</echo>
-        <javac srcdir="${src.dir}" destdir="${build.dir}/WEB-INF/classes" debug="true">
+        <javac srcdir="${src.dir}" destdir="${build.dir}/WEB-INF/classes" includeantruntime="false" debug="true">
             <classpath  refid="classpath" />
         </javac>
     </target>
 
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - -  - - -  -->
     <!-- копирование в рабочую директорию -->
-    <target name="04copy" depends="03compile">
+    <target name="04_copy" depends="03_compile">
         <!-- копирование кофигурации -->
         <copy todir="${build.dir}/WEB-INF">
             <fileset dir="${conf.dir}"/>
@@ -61,7 +65,7 @@
     <!-- формирование итоговой war-сборки (архивация)
         подробнее тут https://ru.wikipedia.org/wiki/WAR_(%D1%82%D0%B8%D0%BF_%D1%84%D0%B0%D0%B9%D0%BB%D0%B0)
     -->
-    <target name="05war" depends="04copy">
+    <target name="05_war" depends="04_copy">
         <echo>Building the war file</echo>
         <war destfile="${dist.dir}/${web.root}.war" webxml="${build.dir}/WEB-INF/web.xml">
             <fileset dir="${build.dir}"/>
@@ -70,7 +74,7 @@
 
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - -  - - -  -->
     <!-- повторная очистка рабочего каталога, все уже в архиве и более не нужно -->
-    <target name="06finalize" depends="05war">
+    <target name="06_finalize" depends="05_war">
         <echo>Cleaning the ${build.dir}</echo>
         <delete dir="${build.dir}"/>
     </target>
@@ -78,7 +82,7 @@
 
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - -  - - -  -->
     <!-- поиск tomcat т.е. ставим флаг has.tomcat -->
-    <target name="07if-has-tomcat" depends="06finalize">
+    <target name="07_if-has-tomcat" depends="06_finalize">
         <property environment="env"/>
         <condition property="has.tomcat">
             <!--<available file="${tomcat.home.dir}"/>-->
@@ -91,7 +95,7 @@
     <!-- проверка, есть ли старый вариант приложения в tomcat
     и если есть то приготовим среду для выполнения команд томката
     из ant -->
-    <target name="08check-if-deployed" depends="07if-has-tomcat" if="has.tomcat">
+    <target name="08_check-if-deployed" depends="07_if-has-tomcat" if="has.tomcat">
         <condition property="is.webapp.olddeployed">
             <http url="${tomcat.base.url}/${web.root}" />
         </condition>
@@ -126,7 +130,7 @@
     Удаляем старое приложение. Аналог кнопки undeploy в
     http://localhost:28080/manager/html/list
     -->
-    <target name="09undeploy" depends="07if-has-tomcat, 08check-if-deployed" if="is.webapp.olddeployed">
+    <target name="09_undeploy" depends="07_if-has-tomcat, 08_check-if-deployed" if="is.webapp.olddeployed">
         <!-- TOMCAT undeploy-->
         <echo>url=${tomcat.manager.url} login=${tomcat.user.name} password="${tomcat.user.password}" path="/${web.root}"</echo>
         <undeploy
@@ -142,7 +146,7 @@
     Вручную удаляем старое приложение. Аналог кнопки undeploy в
     http://localhost:28080/manager/html/list
     -->
-    <target name="10-Manual-Undeploy" depends="08check-if-deployed">
+    <target name="10_Manual-Undeploy" depends="08_check-if-deployed">
         <!-- TOMCAT undeploy-->
         <echo>Back bad deploy</echo>
         <undeploy
@@ -157,7 +161,7 @@
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - -  - - -  -->
     <!-- ставим новое приложение. Аналог кнопки deploy в
     http://localhost:28080/manager/html/list -->
-    <target name="10deploy" depends="09undeploy" if="has.tomcat">
+    <target name="10_deploy" depends="09_undeploy" if="has.tomcat">
         <echo>Deploy ${war.fullpath}</echo>
         <deploy
                 url="${tomcat.manager.url}"
@@ -165,6 +169,7 @@
                 password="${tomcat.user.password}"
                 path="/${web.root}"
                 war="${war.fullpath}"
+                update="true"
         />
         <condition property="is.webapp.ok.deployed">
             <http url="${tomcat.base.url}/${web.root}" />

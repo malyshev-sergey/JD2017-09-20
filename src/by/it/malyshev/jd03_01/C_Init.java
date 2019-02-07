@@ -1,6 +1,6 @@
 package by.it.malyshev.jd03_01;
 
-import com.sun.xml.internal.bind.v2.model.core.ID;
+//import com.sun.xml.internal.bind.v2.model.core.ID;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

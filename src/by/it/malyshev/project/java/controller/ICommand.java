@@ -1,8 +1,12 @@
 package by.it.malyshev.project.java.controller;
 
-interface ICommand {
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-    ICommand execute();
+interface ICommand {
+//    ICommand execute(HttpServletRequest req);
+    ICommand execute(HttpServletRequest req, HttpServletResponse resp);
     String getJsp();
+
 
 }

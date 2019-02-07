@@ -2,6 +2,7 @@ package by.it.malyshev.jd03_03.connection;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
@@ -11,15 +12,20 @@ public class ConnectionCreator {
     private static Properties dbSetting=new Properties();
 
     static {
+        Driver driver;
         try { //регистрируем драйвер
-            Class.forName("com.mysql.jdbc.Driver");
+//            Class.forName("com.mysql.cj.jdbc.Driver");
+            driver = new com.mysql.cj.jdbc.Driver();
+            DriverManager.registerDriver(driver);
+
             dbSetting.load(ConnectionCreator.class.getResourceAsStream("db_setting.ini"));
-        } catch (ClassNotFoundException | IOException e) {
+        } catch (IOException | SQLException e) {
             e.printStackTrace();
         }
     }
 
     public static Connection getConnection() throws SQLException {
+
         if (connection == null || connection.isClosed())
             connection = DriverManager.getConnection(
                     dbSetting.getProperty("URL_DB"),

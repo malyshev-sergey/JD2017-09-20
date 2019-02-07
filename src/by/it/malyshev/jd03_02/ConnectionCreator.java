@@ -1,22 +1,24 @@
 package by.it.malyshev.jd03_02;
 
-import com.mysql.fabric.jdbc.FabricMySQLDriver;
+// import com.mysql.fabric.jdbc.FabricMySQLDriver;
 
 import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+
 public class ConnectionCreator {
 
     static {
         Driver driver;
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            driver = new FabricMySQLDriver();
+//            Class.forName("com.mysql.jdbc.Driver");
+//            driver = new FabricMySQLDriver();
+            driver = new com.mysql.cj.jdbc.Driver();
             DriverManager.registerDriver(driver);
-        } catch (ClassNotFoundException e) {
-            System.out.println("Error loading driver: " + e);
+//        } catch (ClassNotFoundException e) {
+//            System.out.println("Error loading driver: " + e);
         } catch (SQLException e) {
             System.out.println("Error: not register driver: " + e);
         }
